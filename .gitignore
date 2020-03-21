@@ -22,5 +22,6 @@ yarn-error.log
 # BriceFab
 composer.lock
 symfony.lock
+yarn.lock
 *.log
 *.lock
