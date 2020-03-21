@@ -9,3 +9,4 @@ Composer
 
 ## Start
 .\bin\commands\start-server.cmd
+.\bin\commands\encore_dev.cmd
