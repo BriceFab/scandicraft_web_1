@@ -1,2 +1,5 @@
 twig:
-    default_path: '%kernel.project_dir%/templates'
+    default_path: "%kernel.project_dir%/templates"
+    globals:
+        server_name: "%server.name%"
+        site_copyright: "%site.copyright%"
