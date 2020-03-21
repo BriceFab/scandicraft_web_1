@@ -17,6 +17,8 @@
         <link href="{{ asset('theme/css/font-awesome.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('theme/css/lightbox.css') }}" rel="stylesheet"/>
         <link href="{{ asset('theme/css/tooltipster.css') }}" rel="stylesheet"/>
+
+        {{ encore_entry_link_tags('app') }}
         {% block stylesheets %}{% endblock %}
 
     </head>
@@ -47,6 +49,8 @@
         {# <script src="{{ asset('theme/js/form.js') }}"></script> TODO check #}
         <script src="{{ asset('theme/js/jquery.mixitup.min.js') }}"></script>
         <script src="{{ asset('theme/js/jquery.stellar.js') }}"></script>
+
+        {{ encore_entry_script_tags('app') }}
 
     </body>
 </html>
