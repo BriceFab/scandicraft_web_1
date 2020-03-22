@@ -21,15 +21,15 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Adresse e-mail',
+                'label' => 'input.email',
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'input.not_blank',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'input.min_length',
                         'max' => 256,
                     ]),
                 ],
@@ -39,11 +39,11 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'input.not_blank',
                     ]),
                     new Length([
                         'min' => 5,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'input.min_length',
                         'max' => 15,
                     ]),
                 ],
