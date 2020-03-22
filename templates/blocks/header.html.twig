@@ -10,13 +10,13 @@
 						<div class="top-ico">
 							<i class="fa fa-spinner fa-spin"></i>
 						</div>
-						<div class="txt-top">0 connectés</div>
+						<div class="txt-top">{{ user_service.count_online_users() }} connectés</div>
 					</li>
 					<li class="li-top m-space li-top-right">
 						<div class="top-ico">
 							<i class="fa fa-user"></i>
 						</div>
-						<div class="txt-top">0 inscrits</div>
+						<div class="txt-top">{{ user_service.count_register_users() }} inscrits</div>
 					</li>
 				</ul>
 			</div>
