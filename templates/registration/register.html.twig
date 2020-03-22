@@ -6,7 +6,7 @@
 {% block body %}
 
 	{% set links %}
-	<a href="/">Accueil</a>/<a href="/users/register">S'inscrire</a>
+	<a href="{{ path('accueil') }}">Accueil</a>/<a href="{{ path('app_register') }}">S'inscrire</a>
 	{% endset %}
 
 	{% include 'blocks/sub-banner.html.twig' with {
@@ -15,69 +15,71 @@
 		'links': links,
 	} %}
 
-	{{ form_start(registrationForm) }}
-	{{ form_row(registrationForm.email) }}
-	{{ form_row(registrationForm.plainPassword) }}
-	{{ form_row(registrationForm.agreeTerms) }}
-
-	<button class="btn">Register</button>
-	{{ form_end(registrationForm) }}
-
-	<section class="w-section section" style="margin-bottom: 100px;">
+	<section class="w-section section">
 		<div class="w-container">
 			<div class="w-row">
-				<div>
-					{# <?php echo $this->Session->flash(); ?> #}
+
+				<h2>S'inscrire</h2>
+				<div class="divider"></div>
+
+				{{ form_start(registrationForm) }}
+				<div class="row">
+					<div class="col">
+						{{ form_label(registrationForm.username) }}
+					</div>
+					<div class="col">
+						{{ form_label(registrationForm.email) }}
+					</div>
 				</div>
-				<form action="/users/register" method="post">
-					<div class="w-col w-col-4-5">
-						<div class="top-spc">
-							<div class="w-embed">
-								<h2>S'inscrire</h2>
-								<div class="divider" style="margin-bottom: 10px;"></div>
-
-								<label for="inputlogin">Pseudo</label>
-								<input type="text" id="inputlogin" name="login" value="" class="w-input">
-
-								<label for="inputpassword">Mot de passe</label>
-								<input type="password" id="inputpassword" name="password" value="" class="w-input">
-
-								<label for="inputpassword_conf">Confirmez le mot de passe</label>
-								<input type="password" id="inputpassword_conf" name="password_conf" value="" class="w-input">
-
-								<label for="inputemail">Adresse e-mail</label>
-								<input type="email" id="inputemail" name="email" value="" class="w-input">
-
-								<label for="inputemail_conf">Confirmez l'adresse e-mail</label>
-								<input type="email" id="inputemail_conf" name="email_conf" value="" class="w-input">
-							</div>
-						</div>
+				<div class="row">
+					<div class="col">
+						{{ form_errors(registrationForm.username) }}
 					</div>
-					<div class="w-col w-col-4-5">
-						<div class="top-spc">
-							<div class="w-embed">
-								<h2>&nbsp;</h2>
-								<div class="divider" style="margin-bottom: 10px;"></div>
-
-								<label for="inputsolution">Réponse secrète</label>
-								<input type="text" id="inputsolution" name="solution" value="" class="w-input">
-
-								<label for="inputcaptcha">Saisissez le CAPTCHA suivant
-								</label>
-								<img src="<?= $captcha; ?>" style="border-radius: 5px; margin-bottom: 7px;"/>
-
-								<label for="">&nbsp;</label>
-								<input type="text" id="inputcaptcha" name="captcha" value="" class="w-input">
-								<label for="">&nbsp;</label>
-								<button type="submit" class="button" name="Submit">
-									S'enregistrer
-								</button>
-							</div>
-						</div>
+					<div class="col">
+						{{ form_errors(registrationForm.email) }}
 					</div>
-				</form>
+				</div>
+				<div class="row">
+					<div class="col">
+						{{ form_widget(registrationForm.username, { 'attr': {'class': 'w-input'} }) }}
+					</div>
+					<div class="col">
+						{{ form_widget(registrationForm.email, { 'attr': {'class': 'w-input'} }) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						{{ form_label(registrationForm.plainPassword.first) }}
+					</div>
+					<div class="col">
+						{{ form_label(registrationForm.plainPassword.second) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						{{ form_errors(registrationForm.plainPassword.first) }}
+					</div>
+					<div class="col">
+						{{ form_errors(registrationForm.plainPassword.second) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						{{ form_widget(registrationForm.plainPassword.first, { 'attr': {'class': 'w-input'} }) }}
+					</div>
+					<div class="col">
+						{{ form_widget(registrationForm.plainPassword.second, { 'attr': {'class': 'w-input'} }) }}
+					</div>
+				</div>
+				<div class="row">
+					<button type="submit" class="button" name="Submit">
+						S'enregistrer
+					</button>
+				</div>
+				{{ form_end(registrationForm) }}
 
 			</div>
 		</div>
 	</section>
+
 {% endblock %}
