@@ -6,24 +6,14 @@
 {% block body %}
 
 	<section>
-		<div class="sub-banner">
-			<div class="w-container">
-				<div class="w-row">
-					<div class="w-col w-col-6">
-						<h4 class="title-bread">
-              Bienvenue sur notre site !
-							<span class="sub-title-lighter"> (version test)
-								<br></span>
-						</h4>
-					</div>
-					<div class="w-col w-col-6 col-right">
-						<div class="breadcrumbs">
-							<a href="{{ path('accueil') }}">Accueil</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+
+		{% set links %}<a href="{{ path('accueil') }}">Accueil</a>{% endset %}
+
+		{% include 'blocks/sub-banner.html.twig' with {
+			'title': 'Bienvenue sur notre site !',
+			'sub_title': '(version test)',
+			'links': links,
+		} %}
 
 		home page
 
