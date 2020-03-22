@@ -7,7 +7,7 @@ parameters:
     server.name: "ScandiCraft"
     site.copyright: "© Copyright ScandiCraft. Tous droits réservés."
     twitter.link: "twitter.fr/ScandiCraftServ"
-    youtube.link: "youtube.fr/BriceFab123"
+    youtube.link: "youtube.fr/BriceFab123/search?query=scandicraft"
     discord.link: "discord.gg/MCQZWh"
 
 services:
