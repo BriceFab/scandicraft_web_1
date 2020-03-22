@@ -11,12 +11,12 @@
         <link rel="apple-touch-icon" href="img/webclip.png">
 
         <!-- main css -->
-        <link href="{{ asset('theme/css/normalize.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('theme/css/base.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('theme/css/style.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('theme/css/font-awesome.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('theme/css/lightbox.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('theme/css/tooltipster.css') }}" rel="stylesheet"/>
+        <link type="text/css" href="{{ asset('theme/css/normalize.css') }}" rel="stylesheet"/>
+        <link type="text/css" href="{{ asset('theme/css/base.css') }}" rel="stylesheet"/>
+        <link type="text/css" href="{{ asset('theme/css/style.css') }}" rel="stylesheet"/>
+        <link type="text/css" href="{{ asset('theme/css/lightbox.css') }}" rel="stylesheet"/>
+        <link type="text/css" href="{{ asset('theme/css/tooltipster.css') }}" rel="stylesheet"/>
+        <link type="text/css" href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet"/>
 
         {{ encore_entry_link_tags('app') }}
         {% block stylesheets %}{% endblock %}
@@ -31,24 +31,23 @@
         
         {% block javascripts %}{% endblock %}
         <!-- main javascript -->
-        <script type="text/javascript" src="js/modernizr.js"></script>
+        <script type="text/javascript" src="theme/js/modernizr.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
         <script>
             WebFont.load({
-            google: {
-                families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
-            }
+                google: {
+                    families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
+                }
             });
         </script>
-        <script src="{{ asset('theme/js/jquery-1.11.3.min.js') }}"></script>
-        <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-        <script src="{{ asset('theme/js/jquery-moutheme.js') }}"></script>
-        <script src="{{ asset('theme/js/default.js') }}"></script>
-        <script src="{{ asset('theme/js/jquery.tooltipster.min.js') }}"></script>
-        <script src="{{ asset('theme/js/lightbox.min.js') }}"></script>
-        {# <script src="{{ asset('theme/js/form.js') }}"></script> TODO check #}
-        <script src="{{ asset('theme/js/jquery.mixitup.min.js') }}"></script>
-        <script src="{{ asset('theme/js/jquery.stellar.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/jquery-1.11.3.min.js') }}"></script>
+        <!--[if lte IE 9]><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+        <script type="text/javascript" src="{{ asset('theme/js/jquery-moutheme.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/default.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/jquery.tooltipster.min.js') }}"></script>
+        <script  type="text/javascript"src="{{ asset('theme/js/lightbox.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/jquery.mixitup.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/jquery.stellar.js') }}"></script>
 
         {{ encore_entry_script_tags('app') }}
 
