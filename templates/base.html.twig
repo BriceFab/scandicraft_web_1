@@ -4,11 +4,19 @@
         <meta charset="UTF-8">
         <title>{{ server_name }} - {% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="ScandiCraft est un serveur PvP / Faction / Moddé et MMORPG avec Launcher Obligatoire !" />
+		<meta name="keywords" content="scandicraft,minecraft,serveur,pvp,faction,mods,moddé,launcher,scandium,scandi,bricefab,brice" />
+		<meta name="author" content="ScandiCraft" />
+		<meta name="robots" content="index,follow" />
+
+        <meta property="og:title" content="{{ server_name }} - {{ block('title') }}" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="{{ app.request.uri }}" />
 
         <!-- FAVICON -->
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
         <!-- MOBILE ICON -->
-        <link rel="apple-touch-icon" href="img/webclip.png">
+        <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
 
         <!-- main css -->
         <link type="text/css" href="{{ asset('theme/css/normalize.css') }}" rel="stylesheet"/>
@@ -19,6 +27,7 @@
         <link type="text/css" href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet"/>
 
         {{ encore_entry_link_tags('app') }}
+
         {% block stylesheets %}{% endblock %}
 
     </head>
@@ -31,6 +40,15 @@
         
         {% block javascripts %}{% endblock %}
         <!-- main javascript -->
+        {{ encore_entry_script_tags('app') }}
+
+        <script type="text/javascript" src="{{ asset('theme/js/jquery-1.11.3.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/jquery-moutheme.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/default.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/jquery.tooltipster.min.js') }}"></script>
+        <script  type="text/javascript"src="{{ asset('theme/js/lightbox.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/jquery.mixitup.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/jquery.stellar.js') }}"></script>
         <script type="text/javascript" src="theme/js/modernizr.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
         <script>
@@ -40,16 +58,7 @@
                 }
             });
         </script>
-        <script type="text/javascript" src="{{ asset('theme/js/jquery-1.11.3.min.js') }}"></script>
         <!--[if lte IE 9]><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-        <script type="text/javascript" src="{{ asset('theme/js/jquery-moutheme.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('theme/js/default.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('theme/js/jquery.tooltipster.min.js') }}"></script>
-        <script  type="text/javascript"src="{{ asset('theme/js/lightbox.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('theme/js/jquery.mixitup.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('theme/js/jquery.stellar.js') }}"></script>
-
-        {{ encore_entry_script_tags('app') }}
 
     </body>
 </html>
