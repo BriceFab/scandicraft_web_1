@@ -3,3 +3,6 @@ twig:
     globals:
         server_name: "%server.name%"
         site_copyright: "%site.copyright%"
+        twitter_link: "%twitter.link%"
+        youtube_link: "%youtube.link%"
+        discord_link: "%discord.link%"
