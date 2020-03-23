@@ -1,0 +1,18 @@
+{# Display all form errors #}
+{% if not form.vars.valid %}
+	<div class="bt-alert bt-alert-danger">
+        <ul>
+            {% for child in form.children %}
+                {# {{ dump(child) }} #}
+                {%for error in child.vars.errors %}
+                    <li>
+                        {% if child.vars.label is not null %}
+                            <b>{{ child.vars.label|trans }}</b>: 
+                        {% endif %}
+                        {{error.message}}
+                    </li>
+                {%endfor%}
+            {%endfor%}
+        </ul>
+    </div>
+{%endif%}
