@@ -1,0 +1,5 @@
+{% if field.vars.errors|length > 0 %}
+	<div class="bt-alert bt-small-alert bt-alert-danger">
+		{{ form_errors(field) }}
+	</div>
+{% endif %}
