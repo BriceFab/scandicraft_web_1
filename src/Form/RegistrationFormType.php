@@ -52,8 +52,8 @@ class RegistrationFormType extends AbstractType
                 'type' => PasswordType::class,
                 'required' => true,
                 'mapped' => false,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'input.password'],
+                'second_options' => ['label' => 'input.password.repeated'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -72,7 +72,7 @@ class RegistrationFormType extends AbstractType
         //             'message' => 'You should agree to our terms.',
         //         ]),
         //     ],
-        // ])
+        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
