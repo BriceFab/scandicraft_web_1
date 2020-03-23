@@ -44,7 +44,7 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 5,
                         'minMessage' => 'input.min_length',
-                        'max' => 15,
+                        'max' => 20,
                     ]),
                 ],
             ])
@@ -52,14 +52,15 @@ class RegistrationFormType extends AbstractType
                 'type' => PasswordType::class,
                 'required' => true,
                 'mapped' => false,
-                'first_options'  => ['label' => 'input.password'],
-                'second_options' => ['label' => 'input.password.repeated'],
+                'first_options'  => ['label' => 'input.password', 'error_bubbling' => true],
+                'second_options' => ['label' => 'input.password.repeated', 'error_bubbling' => true],
+                'invalid_message' => 'The password fields must match.',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => 8,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         'max' => 256,
                     ]),
