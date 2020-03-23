@@ -53,6 +53,12 @@ Encore
     config.corejs = 3;
 })
 
+//https://symfony.com/doc/current/frontend/encore/babel.html
+.configureBabel(function(babelConfig) {
+    babelConfig.plugins.push("@babel/plugin-proposal-class-properties");
+    babelConfig.presets.push('@babel/preset-flow');
+})
+
 // enables Sass/SCSS support
 .enableSassLoader()
 
@@ -67,8 +73,8 @@ Encore
 .autoProvidejQuery()
 
 // uncomment if you use API Platform Admin (composer req api-admin)
-//.enableReactPreset()
-//.addEntry('admin', './assets/js/admin.js')
-;
+.enableReactPreset()
+    //.addEntry('admin', './assets/js/admin.js')
+    .addEntry('main_app', './assets/js/react/main.js');
 
 module.exports = Encore.getWebpackConfig();
