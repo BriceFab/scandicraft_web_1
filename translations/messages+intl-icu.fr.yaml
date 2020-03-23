@@ -2,3 +2,4 @@ input.email: Adresse e-mail
 input.password: Mot de passe
 input.password.repeated: Confirmer le mot de passe
 submit.register: S'enregister
+submit.login: Se connecter
