@@ -34,6 +34,11 @@
 
     </head>
     <body>
+        <!-- react app -->
+        <div id="main_app"></div>
+        {{ encore_entry_script_tags('main_app') }}
+        {{ encore_entry_script_tags('app') }}
+
         <!-- body -->
         {% include 'blocks/header.html.twig' %}
         {% block body %}{% endblock %}
@@ -42,8 +47,6 @@
         
         {% block javascripts %}{% endblock %}
         <!-- main javascript -->
-        {{ encore_entry_script_tags('app') }}
-
         <script type="text/javascript" src="{{ asset('theme/js/jquery-1.11.3.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('theme/js/jquery-moutheme.js') }}"></script>
         <script type="text/javascript" src="{{ asset('theme/js/default.js') }}"></script>

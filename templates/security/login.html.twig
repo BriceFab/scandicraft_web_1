@@ -23,7 +23,12 @@
 				<div class="divider"></div>
 
 				{% if error %}
-					<div class="bt-alert bt-alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					<div id="logo_error_data" data-login="{{ error.messageKey|trans(error.messageData, 'security') }}"></div>
+	        		<script type="text/javascript">
+						let data = document.querySelector('#logo_error_data');
+						toast.error(data.dataset.login);
+					</script>
+					{# <div class="bt-alert bt-alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div> #}
 				{% endif %}
 
 				<form method="post">
