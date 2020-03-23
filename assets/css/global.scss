@@ -42,3 +42,26 @@ html {
 .divider {
     margin-bottom: 25px;
 }
+
+// Alerts (bootstrap)
+.bt-alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-radius: .25rem;
+}
+
+.bt-small-alert {
+    padding: .30rem 1.0rem;
+}
+
+.bt-alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

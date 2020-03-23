@@ -26,24 +26,32 @@
 				<div class="row">
 					<div class="form-group col-12 col-md-6">
 						{{ form_label(registrationForm.username) }}
-						{{ form_errors(registrationForm.username) }}
+						{% include 'form/form_error.html.twig' with {
+							'field': registrationForm.username
+						} %}
 						{{ form_widget(registrationForm.username, { 'attr': {'class': 'w-input'} }) }}
 					</div>
 					<div class="form-group col-12 col-md-6">
 						{{ form_label(registrationForm.email) }}
-						{{ form_errors(registrationForm.email) }}
+						{% include 'form/form_error.html.twig' with {
+							'field': registrationForm.email
+						} %}
 						{{ form_widget(registrationForm.email, { 'attr': {'class': 'w-input'} }) }}
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-12 col-md-6">
 						{{ form_label(registrationForm.plainPassword.first) }}
-						{{ form_errors(registrationForm.plainPassword.first) }}
+						{% include 'form/form_error.html.twig' with {
+							'field': registrationForm.plainPassword.first
+						} %}
 						{{ form_widget(registrationForm.plainPassword.first, { 'attr': {'class': 'w-input'} }) }}
 					</div>
 					<div class="form-group col-12 col-md-6">
 						{{ form_label(registrationForm.plainPassword.second) }}
-						{{ form_errors(registrationForm.plainPassword.second) }}
+						{% include 'form/form_error.html.twig' with {
+							'field': registrationForm.plainPassword.second
+						} %}
 						{{ form_widget(registrationForm.plainPassword.second, { 'attr': {'class': 'w-input'} }) }}
 					</div>
 				</div>

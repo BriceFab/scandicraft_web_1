@@ -96,3 +96,4 @@ Error: Erreur
 'The CSRF token is invalid. Please try to resubmit the form.': 'Le jeton CSRF est invalide. Veuillez renvoyer le formulaire.'
 input.not_blank: Veuillez remplir ce champs
 input.min_length: Veuillez remplir au minimum {{ limit }} caractères
+There is already an account with this email: Il existe déjà un compte avec cet e-mail
