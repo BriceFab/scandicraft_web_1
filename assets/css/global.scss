@@ -4,8 +4,23 @@
 }
 
 .main-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+}
+
+body {
     position: relative;
-    padding-bottom: 120px;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+}
+
+html {
+    height: 100%;
 }
 
 .header-logo {
