@@ -24,50 +24,26 @@
 
 				{{ form_start(registrationForm) }}
 				<div class="row">
-					<div class="col">
+					<div class="form-group col-12 col-md-6">
 						{{ form_label(registrationForm.username) }}
-					</div>
-					<div class="col">
-						{{ form_label(registrationForm.email) }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col">
 						{{ form_errors(registrationForm.username) }}
-					</div>
-					<div class="col">
-						{{ form_errors(registrationForm.email) }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col">
 						{{ form_widget(registrationForm.username, { 'attr': {'class': 'w-input'} }) }}
 					</div>
-					<div class="col">
+					<div class="form-group col-12 col-md-6">
+						{{ form_label(registrationForm.email) }}
+						{{ form_errors(registrationForm.email) }}
 						{{ form_widget(registrationForm.email, { 'attr': {'class': 'w-input'} }) }}
 					</div>
 				</div>
 				<div class="row">
-					<div class="col">
+					<div class="form-group col-12 col-md-6">
 						{{ form_label(registrationForm.plainPassword.first) }}
-					</div>
-					<div class="col">
-						{{ form_label(registrationForm.plainPassword.second) }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col">
 						{{ form_errors(registrationForm.plainPassword.first) }}
-					</div>
-					<div class="col">
-						{{ form_errors(registrationForm.plainPassword.second) }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col">
 						{{ form_widget(registrationForm.plainPassword.first, { 'attr': {'class': 'w-input'} }) }}
 					</div>
-					<div class="col">
+					<div class="form-group col-12 col-md-6">
+						{{ form_label(registrationForm.plainPassword.second) }}
+						{{ form_errors(registrationForm.plainPassword.second) }}
 						{{ form_widget(registrationForm.plainPassword.second, { 'attr': {'class': 'w-input'} }) }}
 					</div>
 				</div>
