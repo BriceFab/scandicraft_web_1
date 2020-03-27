@@ -4,8 +4,12 @@ Site internet www.scandicraft-mc.fr
 ## Requirements
 PHP: 7.4.2
 Symfony cli
-MySQL
+MySQL (MariaDB)
 Composer
+
+## Setup
+composer install
+yarn install
 
 ## Start
 .\bin\commands\start-server.cmd
