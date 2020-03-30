@@ -12,16 +12,20 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\Signer\Key;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 class RegistrationController extends AbstractController
 {
     private $mailer;
     private $translator;
+    private $signer;
 
     public function __construct(TranslatorInterface $translator, \Swift_Mailer $mailer)
     {
         $this->translator = $translator;
         $this->mailer = $mailer;
+        $this->signer = new Sha256();
     }
 
     /**
@@ -70,6 +74,8 @@ class RegistrationController extends AbstractController
         if (!$token) throw $this->createNotFoundException('aucun token');
         $token = (new Parser())->parse((string) $token);
 
+        if(!$token->verify($this->signer, $_ENV['confirmation_key'])) throw $this->createAccessDeniedException('token invalide');
+
         $user_id = $token->getClaim('user_id');
         if (!$user_id) throw $this->createAccessDeniedException('token invalide');
 
@@ -117,7 +123,7 @@ class RegistrationController extends AbstractController
             ->issuedAt($time)
             ->expiresAt($time + (int) $_ENV['token_expiration'])
             ->withClaim('user_id', $user_id)
-            ->getToken();
+            ->getToken($this->signer, new Key($_ENV['confirmation_key']));
 
         return $token;
     }
