@@ -51,6 +51,14 @@
 			</script>
         {% endfor %}
 
+        {% for message in app.flashes('error') %}
+		    <div id="notification_error" data-message="{{ message|trans }}"></div>
+	        <script type="text/javascript">
+			    let data = document.querySelector('#notification_error');
+				toast.error(data.dataset.message);
+			</script>
+        {% endfor %}
+
         {% block body %}{% endblock %}
         {% include 'blocks/footer.html.twig' %}
         <!-- end body -->

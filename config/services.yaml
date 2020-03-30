@@ -9,6 +9,7 @@ parameters:
     twitter.link: "twitter.fr/ScandiCraftServ"
     youtube.link: "youtube.fr/BriceFab123/search?query=scandicraft"
     discord.link: "discord.gg/MCQZWh"
+    mail.sender: "scandicraft.minecraft@gmail.com"
 
 services:
     # default configuration for services in *this* file
