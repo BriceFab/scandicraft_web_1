@@ -94,9 +94,9 @@ Error: Erreur
 'This form should not contain extra fields.': 'Ce formulaire ne doit pas contenir des champs supplémentaires.'
 'The uploaded file was too large. Please try to upload a smaller file.': 'Le fichier téléchargé est trop volumineux. Merci d''essayer d''envoyer un fichier plus petit.'
 'The CSRF token is invalid. Please try to resubmit the form.': 'Le jeton CSRF est invalide. Veuillez renvoyer le formulaire.'
-input.not_blank: Veuillez remplir ce champs.
-input.min_length: Veuillez remplir au minimum {{ limit }} caractères.
-There is already an account with this email: Il existe déjà un compte avec cet e-mail.
-There is already an account with this username: Il existe déjà un compte avec ce pseudonyme.
-The password fields must match.: Les mot de passes ne correspondent pas.
-Your password should be at least {{ limit }} characters: Votre mot de passe doit contenir minimum {{ limit }} caractères.
+input.not_blank: 'Veuillez remplir ce champs.'
+input.min_length: 'Veuillez remplir au minimum {{ limit }} caractères.'
+'There is already an account with this email': 'Il existe déjà un compte avec cet e-mail.'
+'There is already an account with this username': 'Il existe déjà un compte avec ce pseudonyme.'
+'The password fields must match.': 'Les mot de passes ne correspondent pas.'
+'Your password should be at least {{ limit }} characters': 'Votre mot de passe doit contenir minimum {{ limit }} caractères.'

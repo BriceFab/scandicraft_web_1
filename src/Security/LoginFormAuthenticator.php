@@ -75,6 +75,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             }
         }
 
+        if (!$user->getHasConfirmEmail()) {
+            throw new CustomUserMessageAuthenticationException('error.must.confirm.email');
+        }
+
         return $user;
     }
 

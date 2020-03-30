@@ -1,0 +1,13 @@
+<h3>Confirmation du compte - ScandiCraft</h3>
+
+Bonjour {{ username }}! Merci de vous être enregistrer sur ScandiCraft. Veuillez confirmer le compte: <br />
+
+<a href="{{ app.request.getSchemeAndHttpHost() }}{{ path('register_confirm', {'token': token }) }}">Cliquez ici pour confirmer votre compte</a>
+
+Merci et bon jeu!
+
+<table>
+    <tr>
+        <td>ScandiCraft PvP/Faction/Launcher</td>
+    </tr>
+</table>
