@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}admin{% endblock %}
+
+{% block body %}<div id="scandicraft_admin"></div>{% endblock %}
+
+{% block javascripts %}
+    <script type="text/plain" id="api-entrypoint">{{ path('api_entrypoint') }}</script>
+    {{ encore_entry_script_tags('admin_app') }}
+{% endblock %}
