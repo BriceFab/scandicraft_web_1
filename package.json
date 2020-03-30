@@ -20,6 +20,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@api-platform/admin": "^2.1.0",
+        "jquery": "^3.4.1",
         "prop-types": "^15.7.2",
         "ra-data-json-server": "^3.3.3",
         "react": "^16.13.1",
