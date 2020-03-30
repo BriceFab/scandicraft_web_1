@@ -41,6 +41,16 @@
 
         <!-- body -->
         {% include 'blocks/header.html.twig' %}
+
+        <!-- notifications -->
+        {% for message in app.flashes('notice') %}
+		    <div id="notification_notice" data-message="{{ message|trans }}"></div>
+	        <script type="text/javascript">
+			    let data = document.querySelector('#notification_notice');
+				toast.success(data.dataset.message);
+			</script>
+        {% endfor %}
+
         {% block body %}{% endblock %}
         {% include 'blocks/footer.html.twig' %}
         <!-- end body -->
