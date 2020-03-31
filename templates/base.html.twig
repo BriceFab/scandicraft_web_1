@@ -24,8 +24,8 @@
         <link type="text/css" href="{{ asset('theme/css/lightbox.css') }}" rel="stylesheet"/>
         <link type="text/css" href="{{ asset('theme/css/tooltipster.css') }}" rel="stylesheet"/>
         <link type="text/css" href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet"/>
-        
         <link type="text/css" href="{{ asset('bootstrap/css/bootstrap-grid.min.css') }}" rel="stylesheet"/>
+        <link type="text/css" href="{{ asset('bootstrap/css/bootstrap-modal.css') }}" rel="stylesheet"/>
 
         {{ encore_entry_link_tags('app') }}
 
@@ -36,7 +36,6 @@
         <!-- react app -->
         <div id="main_app"></div>
         {{ encore_entry_script_tags('main_app') }}
-        {{ encore_entry_script_tags('app') }}
 
         <!-- body -->
         {% include 'blocks/header.html.twig' %}
@@ -64,6 +63,7 @@
         
         {% block javascripts %}{% endblock %}
         <!-- main javascript -->
+        {{ encore_entry_script_tags('app') }}
         <script type="text/javascript" src="{{ asset('theme/js/jquery-1.11.3.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('theme/js/jquery-moutheme.js') }}"></script>
         <script type="text/javascript" src="{{ asset('theme/js/default.js') }}"></script>
@@ -71,7 +71,7 @@
         <script type="text/javascript" src="{{ asset('theme/js/lightbox.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('theme/js/jquery.mixitup.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('theme/js/jquery.stellar.js') }}"></script>
-        <script type="text/javascript" src="theme/js/modernizr.js"></script>
+        <script type="text/javascript" src="{{ asset('theme/js/modernizr.js') }}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
         <script>
             WebFont.load({
@@ -81,6 +81,8 @@
             });
         </script>
         <!--[if lte IE 9]><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+        <script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap-modal.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/js/modal.js') }}"></script>
 
     </body>
 </html>
