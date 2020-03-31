@@ -95,7 +95,7 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
 
-    private function send_mail(User $user, \Swift_Mailer $mailer)
+    private function send_mail(User $user)
     {
         $token = $this->generateToken($user->getId());
 
@@ -113,7 +113,7 @@ class RegistrationController extends AbstractController
                 'text/html'
             );
 
-        $mailer->send($message);
+        $this->mailer->send($message);
     }
 
     private function generateToken($user_id)
