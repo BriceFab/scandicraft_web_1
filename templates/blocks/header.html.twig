@@ -10,37 +10,61 @@
 						<div class="top-ico">
 							<i class="fa fa-spinner fa-spin"></i>
 						</div>
-						<div class="txt-top">{{ user_service.count_online_users() }} connectés</div>
+						<div class="txt-top">{{ user_service.count_online_users() }}
+							connectés</div>
 					</li>
 					<li class="li-top m-space li-top-right">
 						<div class="top-ico">
 							<i class="fa fa-user"></i>
 						</div>
-						<div class="txt-top">{{ user_service.count_register_users() }} inscrits</div>
+						<div class="txt-top">{{ user_service.count_register_users() }}
+							inscrits</div>
 					</li>
 				</ul>
 			</div>
 			<div class="top-right">
 				<ul class="w-list-unstyled">
 					<li class="li-top">
-						<a href="{{ path('app_login') }}">
-							<div class="top-link">
-								<div class="top-ico">
-									<i class="fas fa-lock"></i>
+						{% if app.user %}
+							<a href="{{ path('app_login') }}">
+								<div class="top-link">
+									<div class="top-ico">
+										<i class="fas fa-user-circle"></i>
+									</div>
+									<div class="txt-top">Mon compte</div>
 								</div>
-								<div class="txt-top">Se connecter</div>
-							</div>
-						</a>
+							</a>
+						{% else %}
+							<a href="{{ path('app_login') }}">
+								<div class="top-link">
+									<div class="top-ico">
+										<i class="fas fa-lock"></i>
+									</div>
+									<div class="txt-top">Se connecter</div>
+								</div>
+							</a>
+						{% endif %}
 					</li>
 					<li class="li-top">
-						<a href="{{ path('app_register') }}">
-							<div class="top-link">
-								<div class="top-ico">
-									<i class="fas fa-sign-in-alt"></i>
+						{% if app.user %}
+							<a href="{{ path('app_logout') }}">
+								<div class="top-link">
+									<div class="top-ico">
+										<i class="fas fa-sign-out-alt"></i>
+									</div>
+									<div class="txt-top">Se déconnecter</div>
 								</div>
-								<div class="txt-top">S'enregister</div>
-							</div>
-						</a>
+							</a>
+						{% else %}
+							<a href="{{ path('app_register') }}">
+								<div class="top-link">
+									<div class="top-ico">
+										<i class="fas fa-sign-in-alt"></i>
+									</div>
+									<div class="txt-top">S'enregister</div>
+								</div>
+							</a>
+						{% endif %}
 					</li>
 				</ul>
 			</div>

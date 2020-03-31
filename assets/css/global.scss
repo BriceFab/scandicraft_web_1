@@ -1,4 +1,11 @@
+//### Variables
+$mainColor: #b30000; //violet: #781f6f
+
+//### Imports
+@import 'unikue-template/style.scss';
 // @import "~bootstrap/scss/bootstrap";
+
+//### ScandiCraft style
 .li-top-right {
     padding: 8px;
 }
@@ -74,4 +81,20 @@ html {
 .minecraft-head-skin {
     max-width: 50px;
     max-height: 50px;
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+    .login-logo {
+        max-width: 60%;
+        margin-bottom: -60px;
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+    .login-logo {
+        max-width: 45%;
+        margin-bottom: -60px;
+    }
 }
