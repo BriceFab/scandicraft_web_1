@@ -74,17 +74,19 @@ class RegistrationController extends AbstractController
         if (!$token) throw $this->createNotFoundException('aucun token');
         $token = (new Parser())->parse((string) $token);
 
-        if(!$token->verify($this->signer, $_ENV['confirmation_key'])) throw $this->createAccessDeniedException('token invalide');
+        if(!$token->verify($this->signer, $_ENV['jwt_sign_key'])) throw $this->createNotFoundException('token invalide');
 
         $user_id = $token->getClaim('user_id');
-        if (!$user_id) throw $this->createAccessDeniedException('token invalide');
+        if (!$user_id) throw $this->createNotFoundException('token invalide');
+
+        if ($token->getClaim('action') !== 'confirm_mail') throw $this->createNotFoundException('token invalide');
 
         $entityManager = $this->getDoctrine()->getManager();
         /** @var User $user */
         $user = $entityManager->getRepository(User::class)->find($user_id);
-        if (!$user) throw $this->createAccessDeniedException('Utilisateur introuvable');
+        if (!$user) throw $this->createNotFoundException('Utilisateur introuvable');
 
-        if ($user->getHasConfirmEmail()) throw $this->createAccessDeniedException('Utilisateur déjà confirmé');
+        if ($user->getHasConfirmEmail()) throw $this->createNotFoundException('Utilisateur déjà confirmé');
         $user->setHasConfirmEmail(true);
 
         $entityManager->persist($user);
@@ -97,7 +99,7 @@ class RegistrationController extends AbstractController
 
     private function send_mail(User $user)
     {
-        $token = $this->generateToken($user->getId());
+        $token = $this->generateToken($user->getId(), 'confirm_mail');
 
         $message = (new \Swift_Message('Confirmation compte - ScandiCraft'))
             ->setFrom($this->getParameter('mail.sender'))
@@ -116,14 +118,15 @@ class RegistrationController extends AbstractController
         $this->mailer->send($message);
     }
 
-    private function generateToken($user_id)
+    private function generateToken($user_id, $action)
     {
         $time = time();
         $token = (new Builder())
             ->issuedAt($time)
             ->expiresAt($time + (int) $_ENV['token_expiration'])
             ->withClaim('user_id', $user_id)
-            ->getToken($this->signer, new Key($_ENV['confirmation_key']));
+            ->withClaim('action', $action)
+            ->getToken($this->signer, new Key($_ENV['jwt_sign_key']));
 
         return $token;
     }
