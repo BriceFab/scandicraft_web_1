@@ -70,20 +70,19 @@ toast.error(data.dataset.login);
 		<div class="vertical-alignment-helper">
 			<div class="modal-dialog vertical-align-center">
 				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">&times;</span>
-							<span class="sr-only">Close</span>
-
-						</button>
-						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-
-					</div>
-					<div class="modal-body">...</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
+					<form action="{{ path('ask_reset_password') }}" method="post">
+						<div class="modal-header">
+							<h4 class="modal-title" id="myModalLabel">Vous voulez réinitialiser votre mot de passe ?</h4>
+						</div>
+						<div class="modal-body">
+							<label for="forgotPasswordEmail">{{ 'input.email'|trans }}</label>
+							<input type="email" name="forgot_email" id="forgotPasswordEmail" class="form-control w-input" required="true">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="button btn-active" data-dismiss="modal">Annuler</button>
+							<button type="submit" class="button">Envoyer</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

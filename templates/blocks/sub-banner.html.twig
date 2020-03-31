@@ -3,9 +3,11 @@
 		<div class="w-row">
 			<div class="w-col w-col-6">
 				<h4 class="title-bread">
-					{{ title }}
+					{% if title is defined %}
+						{{ title }}
+					{% endif %}
 					<span class="sub-title-lighter">
-						/ {{ sub_title }}
+						{% if title is defined %}/{% endif %} {{ sub_title }}
 						<br></span>
 				</h4>
 			</div>
