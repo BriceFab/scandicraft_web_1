@@ -70,14 +70,16 @@ class UserController extends AbstractController
         if (!$token) throw $this->createNotFoundException('aucun token');
         $token = (new Parser())->parse((string) $token);
 
-        if (!$token->verify($this->signer, $_ENV['confirmation_key'])) throw $this->createAccessDeniedException('token invalide');
+        if (!$token->verify($this->signer, $_ENV['jwt_sign_key'])) throw $this->createNotFoundException('token invalide');
 
         $user_id = $token->getClaim('user_id');
-        if (!$user_id) throw $this->createAccessDeniedException('token invalide');
+        if (!$user_id) throw $this->createNotFoundException('token invalide');
+
+        if ($token->getClaim('action') !== 'reset_password') throw $this->createNotFoundException('token invalide');
 
         /** @var User $user */
         $user = $this->em->getRepository(User::class)->find($user_id);
-        if (!$user) throw $this->createAccessDeniedException('Utilisateur introuvable');
+        if (!$user) throw $this->createNotFoundException('Utilisateur introuvable');
 
         //Display form
         $form = $this->createForm(ResetPasswordType::class, $user);
@@ -107,7 +109,7 @@ class UserController extends AbstractController
 
     private function send_mail(User $user)
     {
-        $token = $this->generateToken($user->getId());
+        $token = $this->generateToken($user->getId(), 'reset_password');
 
         $message = (new \Swift_Message('Réinitialisation du mot de passe - ScandiCraft'))
             ->setFrom($this->getParameter('mail.sender'))
@@ -126,14 +128,15 @@ class UserController extends AbstractController
         $this->mailer->send($message);
     }
 
-    private function generateToken($user_id)
+    private function generateToken($user_id, $action)
     {
         $time = time();
         $token = (new Builder())
             ->issuedAt($time)
             ->expiresAt($time + (int) $_ENV['token_expiration'])
             ->withClaim('user_id', $user_id)
-            ->getToken($this->signer, new Key($_ENV['confirmation_key']));
+            ->withClaim('action', $action)
+            ->getToken($this->signer, new Key($_ENV['jwt_sign_key']));
 
         return $token;
     }
