@@ -111,7 +111,7 @@ a {
     margin-left: 7px;
     padding: 11px 24px;
     border-radius: 4px;
-    background-color: #00aecd;
+    background-color: $mainColor;
     -webkit-transition: all 300ms ease-in-out;
     transition: all 300ms ease-in-out;
     color: white;
@@ -143,7 +143,7 @@ a {
 }
 
 .button.btn-active:hover {
-    background-color: #00aecd;
+    background-color: $mainColor;
 }
 
 .button.btn-gray {
@@ -152,7 +152,7 @@ a {
 }
 
 .button.btn-gray:hover {
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: white;
 }
 
@@ -208,7 +208,7 @@ a {
 }
 
 .li-menu:hover {
-    box-shadow: #00aecd 0px -2px 0px 0px;
+    box-shadow: $mainColor 0px -2px 0px 0px;
 }
 
 .link-menu {
@@ -220,8 +220,8 @@ a {
 }
 
 .link-menu.active {
-    box-shadow: #00aecd 0px -2px 0px 0px;
-    color: #00aecd;
+    box-shadow: $mainColor 0px -2px 0px 0px;
+    color: $mainColor;
 }
 
 .banner {
@@ -241,7 +241,7 @@ a {
     position: absolute;
     display: none;
     width: 200px;
-    background-color: #00aecd;
+    background-color: $mainColor;
 }
 
 .li-drop {
@@ -397,7 +397,7 @@ a {
 }
 
 .top-link.read-more:hover {
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: white;
 }
 
@@ -445,7 +445,7 @@ a {
 .section.parallax {
     padding-top: 180px;
     padding-bottom: 180px;
-    background-image: url('../images/1mZjm1I.jpg');
+    background-image: url('images/1mZjm1I.jpg');
     background-position: 50% 50%;
     background-attachment: fixed;
 }
@@ -482,7 +482,7 @@ a {
 }
 
 .service-ico.active {
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: white;
 }
 
@@ -639,7 +639,7 @@ a {
 }
 
 .portfolio-ico:hover {
-    background-color: #00aecd;
+    background-color: $mainColor;
 }
 
 .port-ic-wp {
@@ -665,7 +665,7 @@ a {
 }
 
 .portfolio-ico-zoom:hover {
-    background-color: #00aecd;
+    background-color: $mainColor;
 }
 
 .blog-tab {
@@ -728,7 +728,7 @@ a {
 }
 
 .last-title:hover {
-    color: #00aecd;
+    color: $mainColor;
 }
 
 .last-title.big-blog-title {
@@ -740,7 +740,7 @@ a {
     overflow-x: visible;
     overflow-y: visible;
     padding: 19px;
-    border-top: 1px solid #00aecd;
+    border-top: 1px solid $mainColor;
     background-color: #f3f2f5;
 }
 
@@ -759,7 +759,7 @@ a {
 }
 
 .second-carousel-arrow:hover {
-    background-color: #00aecd;
+    background-color: $mainColor;
 }
 
 .footer {
@@ -823,7 +823,7 @@ a {
     width: 200px;
     border: 1px solid #555;
     background-color: #333;
-    background-image: url('../images/search_adadad_100.png');
+    background-image: url('images/search_adadad_100.png');
     background-position: 93% 50%;
     background-size: 14px;
     background-repeat: no-repeat;
@@ -835,7 +835,7 @@ a {
 }
 
 .search:focus {
-    border-color: #00aecd;
+    border-color: $mainColor;
     color: white;
 }
 
@@ -877,7 +877,7 @@ a {
 }
 
 .rc-footer:hover {
-    border-color: #00aecd;
+    border-color: $mainColor;
 }
 
 .rc-footer.rc-ft-remove {
@@ -892,7 +892,7 @@ a {
 
 .square-box-wrp {
     position: relative;
-    border-right: 4px solid #00aecd;
+    border-right: 4px solid $mainColor;
     background-color: #f7f7f7;
     -webkit-transition: all 300ms ease-in-out;
     transition: all 300ms ease-in-out;
@@ -906,7 +906,7 @@ a {
     width: 110px;
     height: 117px;
     float: left;
-    background-color: #00aecd;
+    background-color: $mainColor;
     -webkit-transition: all 300ms ease-in-out;
     transition: all 300ms ease-in-out;
     color: white;
@@ -969,7 +969,7 @@ a {
 
 .meta-cs.mt-tg:hover {
     border-bottom-color: #028ba3;
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: white;
 }
 
@@ -982,7 +982,7 @@ a {
 
 .back {
     padding: 30px 30px 25px;
-    background-color: #00aecd;
+    background-color: $mainColor;
     text-align: center;
 }
 
@@ -1098,7 +1098,7 @@ a {
     width: 90%;
     height: 41px;
     padding: 10px 15px;
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: rgba(255, 255, 255, 0.8);
     font-size: 13px;
     font-weight: 300;
@@ -1202,7 +1202,7 @@ a {
 }
 
 .sm-lnk:hover {
-    color: #00aecd;
+    color: $mainColor;
 }
 
 .left-ph {
@@ -1244,7 +1244,7 @@ a {
 }
 
 .top-pricing.active {
-    background-color: #00aecd;
+    background-color: $mainColor;
 }
 
 .prc-title {
@@ -1345,7 +1345,7 @@ a {
 }
 
 .tab.w--current {
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: white;
 }
 
@@ -1400,7 +1400,7 @@ a {
 
 .highlight {
     padding: 3px 5px;
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: white;
 }
 
@@ -1416,7 +1416,7 @@ a {
     margin-top: 8px;
     margin-right: 13px;
     float: left;
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: white;
     font-size: 21px;
     line-height: 40px;
@@ -1452,7 +1452,7 @@ a {
 }
 
 .pagination:hover {
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: white;
 }
 
@@ -1462,11 +1462,11 @@ a {
 }
 
 .pagination.p-dark:hover {
-    background-color: #00aecd;
+    background-color: $mainColor;
 }
 
 .pagination.p-active {
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: white;
 }
 
@@ -1490,7 +1490,7 @@ a {
     height: 80px;
     margin-right: 15px;
     float: left;
-    background-image: url('../images/team1.jpg');
+    background-image: url('images/team1.jpg');
     background-position: 50% 50%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -1533,7 +1533,7 @@ a {
     height: 20px;
     margin-top: 10px;
     margin-left: -29px;
-    background-image: url('../images/comment-arrow.png');
+    background-image: url('images/comment-arrow.png');
     background-position: 50% 50%;
 }
 
@@ -1549,7 +1549,7 @@ a {
 }
 
 .link-comment {
-    color: #00aecd;
+    color: $mainColor;
 }
 
 .text-area {
@@ -1570,7 +1570,7 @@ a {
     height: 45px;
     float: right;
     background-color: #ececec;
-    background-image: url('../images/res.png');
+    background-image: url('images/res.png');
     background-position: 50% 50%;
     background-size: 25px;
     background-repeat: no-repeat;
@@ -1606,11 +1606,11 @@ a {
 }
 
 .arrow-big-sl:hover {
-    background-color: #00aecd;
+    background-color: $mainColor;
 }
 
 .slide-1 {
-    background-image: url('../images/slider-2.jpg');
+    background-image: url('images/slider-2.jpg');
     background-position: 50% 50%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -1652,7 +1652,7 @@ a {
 }
 
 .slide-2 {
-    background-image: url('../images/slider-1.jpg');
+    background-image: url('images/slider-1.jpg');
     background-position: 50% 50%;
     background-size: cover;
 }
@@ -1740,7 +1740,7 @@ a {
 
 .w-slider-arrow-left.arrow-car:hover,
 .w-slider-arrow-right.arrow-car:hover {
-    background-color: #00AECD;
+    background-color: $mainColor;
     transition: all 200ms ease-in-out;
     -webkit-transition: all 200ms ease-in-out;
 }
@@ -1756,12 +1756,12 @@ a {
 }
 
 .portfolio-wrapper:hover>.portfolio-bottom {
-    border-bottom-color: #00aecd;
-    color: #00aecd;
+    border-bottom-color: $mainColor;
+    color: $mainColor;
 }
 
 .service-wrapper:hover>.service-ico {
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: #fff;
 }
 
@@ -1770,7 +1770,7 @@ a {
 }
 
 .process-wraper:hover>.process-ico {
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: #fff;
 }
 
@@ -1804,7 +1804,7 @@ a {
 .ui-accordion .ui-accordion-header-active,
 .trigger.active a,
 .trigger.active a:hover {
-    background: #00aecd;
+    background: $mainColor;
     color: #fff;
     box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1)
 }
@@ -1823,7 +1823,7 @@ a {
 .toggle-icon:before {
     font-family: "FontAwesome";
     content: "";
-    color: #00aecd;
+    color: $mainColor;
     font-size: 18px;
     display: block;
     float: left;
@@ -1916,7 +1916,7 @@ a {
 
 .filter.active {
     border-bottom: 1px solid #049BB6;
-    background-color: #00aecd;
+    background-color: $mainColor;
     color: white;
 }
 
@@ -2048,7 +2048,7 @@ html.w-mod-js *[data-ix="slide-mascot"] {
         padding: 17px 0px;
     }
     .link-menu:hover {
-        color: #00aecd;
+        color: $mainColor;
     }
     .link-menu.active {
         box-shadow: #fff 0px 0px 0px 0px;
