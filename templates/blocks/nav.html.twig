@@ -5,19 +5,65 @@
 		<a class="w-inline-block brand-logo" href="{{ path('accueil') }}">
 			<img class="tooltip header-logo" src="{{ asset('assets/img/header-logo.png') }}" title="ScandiCraft - PvP / Faction / Launcher" alt="ScandiCraft logo">
 		</a>
+
 		<!-- Navigation -->
 		<nav class="navigation">
 			<ul class="w-list-unstyled">
+				<!--
 				<li class="li-menu" data-ix="show-dropdown">
-					<a class="w-inline-block link-menu active" href="{{ path('accueil') }}">
+					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['accueil'] ? 'active' : '' }}" href="{{ path('accueil') }}">
 						<div>Accueil</div>
+					</a>
+				</li>
+				-->
+				<li class="li-menu" data-ix="show-dropdown">
+					<a class="w-inline-block link-menu" href="#">
+						<div><i class="fas fa-play-circle scandicraft-play"></i> Nous rejoindre</div>
 					</a>
 				</li>
 				<li class="li-menu" data-ix="show-dropdown">
 					<a class="w-inline-block link-menu" href="#">
-						<div>Changelog</div>
+						<div>Boutique</div>
 					</a>
 				</li>
+				<li class="li-menu" data-ix="show-dropdown">
+					<a class="w-inline-block link-menu" href="#">
+						<div>Voter</div>
+					</a>
+				</li>
+				<li class="li-menu" data-ix="show-dropdown">
+					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['wiki', 'sondages', 'support', 'staff', 'remerciements'] ? 'active' : '' }}" href="#">
+						<div>Aide</div>
+					</a>
+					<ul class="w-list-unstyled dropdown-menu" style="display: none;">
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['wiki'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Wiki</div>
+							</a>
+						</li>
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['sondages'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Sondages</div>
+							</a>
+						</li>
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['support'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Support</div>
+							</a>
+						</li>
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['staff'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Staff</div>
+							</a>
+						</li>
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['remerciements'] ? 'w--current' : '' }}" href="{{ path('remerciements') }}" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Remerciements</div>
+							</a>
+						</li>
+					</ul>
+				</li>
+
 				<li class="li-social">
 					<div class="w-clearfix social-wrapper">
 						<a class="w-inline-block social-ico twitter tooltip-2" href="//{{ twitter_link }}" title="Twitter" target="_blank">
