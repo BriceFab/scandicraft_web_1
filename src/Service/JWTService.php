@@ -70,7 +70,7 @@ class JWTService
 
         /** @var User $user */
         $user = $this->em->getRepository(User::class)->find($user_id);
-        if (!$user) throw new HttpException('user invalide');
+        if (!$user) throw new HttpException(500, 'user invalide');
 
         return $user;
     }

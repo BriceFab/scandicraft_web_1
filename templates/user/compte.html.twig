@@ -22,12 +22,108 @@
 				<div class="w-row">
 
 					<h3>
-						{{ user.username }}
+						<div class="d-flex justify-content-between mb-3">
+							<div class="p-2">{{ user.username }}</div>
+							<div class="p-2">
+								<a href="#">
+									<span class="badge badge-account-pbs">PBS: 5000</span>
+									<span class="badge badge-account-credit">
+										<i class="fas fa-coins"></i>
+										Créditer</span>
+								</a>
+							</div>
+						</div>
 					</h3>
 
-					<div class="divider" style="margin-bottom: 10px;"></div>
+					<div class="divider" style="margin-bottom: 15px;"></div>
 
-<h1>Example heading <span class="badge badge-secondary">New</span></h1>
+					<div class="w-tabs" data-duration-in="300" data-duration-out="100">
+						<div class="w-tab-menu">
+							<a class="w-tab-link w-inline-block tab w--current" data-w-tab="Tab 1">
+								<div>Informations</div>
+							</a>
+							<a class="w-tab-link w-inline-block tab" data-w-tab="Tab 2">
+								<div>Récompenses
+									<span class="badge badge-account-award">0</span>
+								</div>
+							</a>
+							<a class="w-tab-link w-inline-block tab" data-w-tab="Tab 3">
+								<div>Historique</div>
+							</a>
+						</div>
+						<div
+							class="w-tab-content tab-content">
+							<!-- Tab1 -->
+							<div class="w-tab-pane w--tab-active" data-w-tab="Tab 1" style="opacity: 1; transition: opacity 300ms ease 0s;">
+								<div class="row" style="align-items: center;">
+									<div class="col-12 col-md-6">
+										Inscrit le:
+									</div>
+									<div class="col-6 col-md-4">
+										{{ user.createdAt|date("d.m.Y") }}
+										à
+										{{ user.createdAt|date("H:i") }}
+									</div>
+								</div>
+								<div class="divider" style="margin-bottom: 15px;margin-top: 15px;"></div>
+								<div class="row" style="align-items: center;">
+									<div class="col-12 col-md-6">
+										{{ 'input.email'|trans }}:
+									</div>
+									<div class="col-6 col-md-4">
+										{{ user.email }}
+									</div>
+									<div class="col-6 col-md-2">
+										<a class="button btn-active btn-extra-small" href="#" style="float: right;">Modifier</a>
+									</div>
+								</div>
+								<div class="divider" style="margin-bottom: 15px;margin-top: 15px;"></div>
+								<div class="row" style="align-items: center;">
+									<div class="col-12 col-md-6">
+										Mot de passe:
+									</div>
+									<div class="col-6 col-md-4">
+										********
+									</div>
+									<div class="col-6 col-md-2">
+										<a class="button btn-active btn-extra-small" href="#" style="float: right;">Modifier</a>
+									</div>
+								</div>
+								<div class="divider" style="margin-bottom: 15px;margin-top: 15px;"></div>
+								<div class="row" style="align-items: center;">
+									<div class="col-12 col-md-6">
+										Grade:
+									</div>
+									<div class="col-6 col-md-4">
+										Scandinave
+									</div>
+									<div class="col-6 col-md-2">
+										<a class="button btn-active btn-extra-small" href="#" style="float: right;">Boutique</a>
+									</div>
+								</div>
+								<div class="divider" style="margin-bottom: 15px;margin-top: 15px;"></div>
+								<div class="row" style="align-items: center;">
+									<div class="col-12 col-md-6">
+										Vote:
+									</div>
+									<div class="col-6 col-md-4">
+										0
+									</div>
+									<div class="col-6 col-md-2">
+										<a class="button btn-active btn-extra-small" href="#" style="float: right;">Voter</a>
+									</div>
+								</div>
+							</div>
+							<!-- Tab2 -->
+							<div class="w-tab-pane" data-w-tab="Tab 2">
+								En cours de développement
+							</div>
+							<!-- Tab3 -->
+							<div class="w-tab-pane" data-w-tab="Tab 3">
+								En cours de développement
+							</div>
+						</div>
+					</div>
 
 				</div>
 			</div>

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -45,6 +46,16 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $hasConfirmEmail = false;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->setCreatedAt(new DateTime('now'));
+    }
 
     public function getId(): ?int
     {
@@ -113,6 +124,7 @@ class User implements UserInterface
     public function getSalt()
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
+        return 'Y2vb}7km(TX!8j^P6LqEp5Q&P!b}4Xv2na%H7K8uUXiB>$Bz%z62[)444wzX5;94@TY7xQ$p:;Gs*L>eW6%8b5Ms?DGNX$Tu5v!3w32>4f%Dx.^t52+-F:hGh3z9;49V';
     }
 
     /**
@@ -120,8 +132,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function setUsername(string $username): self
@@ -139,6 +150,18 @@ class User implements UserInterface
     public function setHasConfirmEmail(bool $hasConfirmEmail): self
     {
         $this->hasConfirmEmail = $hasConfirmEmail;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

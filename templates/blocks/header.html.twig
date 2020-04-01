@@ -45,34 +45,44 @@
 							</a>
 						{% endif %}
 					</li>
-					<li class="li-top">
-						{% if app.user %}
-							<a href="{{ path('app_logout') }}">
+					{% if app.user %}
+						<li class="li-top">
+							<a href="{{ path('compte') }}">
 								<div class="top-link">
 									<div class="top-ico">
-										<i class="fas fa-sign-out-alt"></i>
+										<i class="fas fa-coins"></i>
 									</div>
-									<div class="txt-top">Se déconnecter</div>
+									<div class="txt-top">Créditer</div>
 								</div>
 							</a>
-						{% else %}
-							<a href="{{ path('app_register') }}">
-								<div class="top-link">
-									<div class="top-ico">
-										<i class="fas fa-sign-in-alt"></i>
-									</div>
-									<div class="txt-top">S'enregister</div>
+						</li>
+					{% endif %}
+				</li>
+				<li class="li-top">
+					{% if app.user %}
+						<a href="{{ path('app_logout') }}">
+							<div class="top-link">
+								<div class="top-ico">
+									<i class="fas fa-sign-out-alt"></i>
 								</div>
-							</a>
-						{% endif %}
-					</li>
-				</ul>
-			</div>
+								<div class="txt-top">Se déconnecter</div>
+							</div>
+						</a>
+					{% else %}
+						<a href="{{ path('app_register') }}">
+							<div class="top-link">
+								<div class="top-ico">
+									<i class="fas fa-sign-in-alt"></i>
+								</div>
+								<div class="txt-top">S'enregister</div>
+							</div>
+						</a>
+					{% endif %}
+				</li>
+			</ul>
 		</div>
 	</div>
-	<!-- End Top Header -->
+</div>
+<!-- End Top Header -->
 
-	{% include 'blocks/nav.html.twig' %}
-
-</header>
-<!-- END HEADER -->
+{% include 'blocks/nav.html.twig' %}</header><!-- END HEADER -->
