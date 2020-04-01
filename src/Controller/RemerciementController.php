@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RemerciementController extends AbstractController
 {
     /**
-     * @Route("/remerciements", name="remerciement")
+     * @Route("/remerciements", name="remerciements")
      */
     public function index()
     {
