@@ -25,7 +25,6 @@
         <link type="text/css" href="{{ asset('theme/css/tooltipster.css') }}" rel="stylesheet"/>
         <link type="text/css" href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet"/>
         <link type="text/css" href="{{ asset('bootstrap/css/bootstrap-grid.min.css') }}" rel="stylesheet"/>
-        <link type="text/css" href="{{ asset('bootstrap/css/bootstrap-modal.min.css') }}" rel="stylesheet"/>
 
         {{ encore_entry_link_tags('app') }}
 
@@ -61,7 +60,6 @@
         {% include 'blocks/footer.html.twig' %}
         <!-- end body -->
         
-        {% block javascripts %}{% endblock %}
         <!-- main javascript -->
         {{ encore_entry_script_tags('app') }}
         <script type="text/javascript" src="{{ asset('theme/js/jquery-1.11.3.min.js') }}"></script>
@@ -81,8 +79,7 @@
             });
         </script>
         <!--[if lte IE 9]><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-        <script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap-modal.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/js/modal.js') }}"></script>
+        {% block javascripts %}{% endblock %}
 
     </body>
 </html>

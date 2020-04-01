@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte
+{% endblock %}
+
+{% block body %}
+
+	<section>
+
+		{% set links %}<a href="{{ path('accueil') }}">Accueil</a>
+		{% endset %}
+
+		{% include 'blocks/sub-banner.html.twig' with {
+			'title': 'Mon compte',
+			'sub_title': 'Informations',
+			'links': links,
+		} %}
+
+
+		<section class="w-section section">
+			<div class="w-container">
+				<div class="w-row">
+
+					<h3>
+						{{ user.username }}
+					</h3>
+
+					<div class="divider" style="margin-bottom: 10px;"></div>
+
+<h1>Example heading <span class="badge badge-secondary">New</span></h1>
+
+				</div>
+			</div>
+		</section>
+
+
+	</section>
+
+{% endblock %}
+
+{% block stylesheets %}
+	<link type="text/css" href="{{ asset('bootstrap/css/bootstrap-badge.min.css') }}" rel="stylesheet"/>
+	<link type="text/css" href="{{ asset('bootstrap/css/bootstrap-theme-badge.min.css') }}" rel="stylesheet"/>
+{% endblock %}
