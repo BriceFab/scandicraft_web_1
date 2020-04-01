@@ -89,3 +89,12 @@ toast.error(data.dataset.login);
 	</div>
 
 {% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap-modal.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/modal.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+	<link type="text/css" href="{{ asset('bootstrap/css/bootstrap-modal.min.css') }}" rel="stylesheet"/>
+{% endblock %}
