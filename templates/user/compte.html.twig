@@ -86,7 +86,7 @@
 										********
 									</div>
 									<div class="col-6 col-md-2">
-										<a class="button btn-active btn-extra-small" href="#" style="float: right;">Modifier</a>
+										<a class="button btn-active btn-extra-small" href="#" style="float: right;" data-toggle="modal" data-target="#reset_password">Modifier</a>
 									</div>
 								</div>
 								<div class="divider" style="margin-bottom: 15px;margin-top: 15px;"></div>
@@ -132,9 +132,17 @@
 
 	</section>
 
+	{% include 'security/reset_password_modal.html.twig' with {'email': user.email} %}
+
 {% endblock %}
 
 {% block stylesheets %}
 	<link type="text/css" href="{{ asset('bootstrap/css/bootstrap-badge.min.css') }}" rel="stylesheet"/>
 	<link type="text/css" href="{{ asset('bootstrap/css/bootstrap-theme-badge.min.css') }}" rel="stylesheet"/>
+	<link type="text/css" href="{{ asset('bootstrap/css/bootstrap-modal.min.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap-modal.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/modal.js') }}"></script>
 {% endblock %}
