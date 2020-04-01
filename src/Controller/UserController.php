@@ -4,15 +4,13 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ResetPasswordType;
+use App\Service\JWTService;
+use App\Service\TokenAction;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Parser;
-use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
@@ -20,13 +18,14 @@ class UserController extends AbstractController
     private $urlGenerator;
     private $em;
     private $mailer;
+    private $JWTService;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, \Swift_Mailer $mailer)
+    public function __construct(EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator, \Swift_Mailer $mailer, JWTService $JWTService)
     {
-        $this->em = $entityManager;
+        $this->em = $em;
         $this->urlGenerator = $urlGenerator;
-        $this->signer = new Sha256();
         $this->mailer = $mailer;
+        $this->JWTService = $JWTService;
     }
 
     /**
@@ -67,19 +66,7 @@ class UserController extends AbstractController
      */
     public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, $token)
     {
-        if (!$token) throw $this->createNotFoundException('aucun token');
-        $token = (new Parser())->parse((string) $token);
-
-        if (!$token->verify($this->signer, $_ENV['jwt_sign_key'])) throw $this->createNotFoundException('token invalide');
-
-        $user_id = $token->getClaim('user_id');
-        if (!$user_id) throw $this->createNotFoundException('token invalide');
-
-        if ($token->getClaim('action') !== 'reset_password') throw $this->createNotFoundException('token invalide');
-
-        /** @var User $user */
-        $user = $this->em->getRepository(User::class)->find($user_id);
-        if (!$user) throw $this->createNotFoundException('Utilisateur introuvable');
+        $user = $this->JWTService->verifyToken($token, TokenAction::RESET_PASSWORD);
 
         //Display form
         $form = $this->createForm(ResetPasswordType::class, $user);
@@ -109,7 +96,7 @@ class UserController extends AbstractController
 
     private function send_mail(User $user)
     {
-        $token = $this->generateToken($user->getId(), 'reset_password');
+        $token = $this->JWTService->generateToken($user, TokenAction::RESET_PASSWORD);
 
         $message = (new \Swift_Message('Réinitialisation du mot de passe - ScandiCraft'))
             ->setFrom($this->getParameter('mail.sender'))
@@ -126,18 +113,5 @@ class UserController extends AbstractController
             );
 
         $this->mailer->send($message);
-    }
-
-    private function generateToken($user_id, $action)
-    {
-        $time = time();
-        $token = (new Builder())
-            ->issuedAt($time)
-            ->expiresAt($time + (int) $_ENV['token_expiration'])
-            ->withClaim('user_id', $user_id)
-            ->withClaim('action', $action)
-            ->getToken($this->signer, new Key($_ENV['jwt_sign_key']));
-
-        return $token;
     }
 }

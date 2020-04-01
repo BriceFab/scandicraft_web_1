@@ -4,28 +4,29 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Service\JWTService;
+use App\Service\TokenAction;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Parser;
-use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 class RegistrationController extends AbstractController
 {
+    private $em;
     private $mailer;
     private $translator;
-    private $signer;
+    private $JWTService;
 
-    public function __construct(TranslatorInterface $translator, \Swift_Mailer $mailer)
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, \Swift_Mailer $mailer, JWTService $JWTService)
     {
+        $this->em = $em;
         $this->translator = $translator;
         $this->mailer = $mailer;
-        $this->signer = new Sha256();
+        $this->JWTService = $JWTService;
     }
 
     /**
@@ -50,9 +51,8 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->em->persist($user);
+            $this->em->flush();
 
             //Send email
             $this->addFlash('notice', $this->translator->trans('notif.confirm.email', ['email' => $user->getEmail()]));
@@ -71,26 +71,13 @@ class RegistrationController extends AbstractController
      */
     public function confirmation(Request $request, $token): Response
     {
-        if (!$token) throw $this->createNotFoundException('aucun token');
-        $token = (new Parser())->parse((string) $token);
-
-        if(!$token->verify($this->signer, $_ENV['jwt_sign_key'])) throw $this->createNotFoundException('token invalide');
-
-        $user_id = $token->getClaim('user_id');
-        if (!$user_id) throw $this->createNotFoundException('token invalide');
-
-        if ($token->getClaim('action') !== 'confirm_mail') throw $this->createNotFoundException('token invalide');
-
-        $entityManager = $this->getDoctrine()->getManager();
-        /** @var User $user */
-        $user = $entityManager->getRepository(User::class)->find($user_id);
-        if (!$user) throw $this->createNotFoundException('Utilisateur introuvable');
+        $user = $this->JWTService->verifyToken($token, TokenAction::REGISTER_CONFIRMATION);
 
         if ($user->getHasConfirmEmail()) throw $this->createNotFoundException('Utilisateur déjà confirmé');
         $user->setHasConfirmEmail(true);
 
-        $entityManager->persist($user);
-        $entityManager->flush();
+        $this->em->persist($user);
+        $this->em->flush();
 
         $this->addFlash('notice', 'success.confirm.email');
 
@@ -99,7 +86,7 @@ class RegistrationController extends AbstractController
 
     private function send_mail(User $user)
     {
-        $token = $this->generateToken($user->getId(), 'confirm_mail');
+        $token = $this->JWTService->generateToken($user, TokenAction::REGISTER_CONFIRMATION);
 
         $message = (new \Swift_Message('Confirmation compte - ScandiCraft'))
             ->setFrom($this->getParameter('mail.sender'))
@@ -118,16 +105,4 @@ class RegistrationController extends AbstractController
         $this->mailer->send($message);
     }
 
-    private function generateToken($user_id, $action)
-    {
-        $time = time();
-        $token = (new Builder())
-            ->issuedAt($time)
-            ->expiresAt($time + (int) $_ENV['token_expiration'])
-            ->withClaim('user_id', $user_id)
-            ->withClaim('action', $action)
-            ->getToken($this->signer, new Key($_ENV['jwt_sign_key']));
-
-        return $token;
-    }
 }
