@@ -10,20 +10,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
-    private $urlGenerator;
     private $em;
     private $mailer;
     private $JWTService;
 
-    public function __construct(EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator, \Swift_Mailer $mailer, JWTService $JWTService)
+    public function __construct(EntityManagerInterface $em, \Swift_Mailer $mailer, JWTService $JWTService)
     {
         $this->em = $em;
-        $this->urlGenerator = $urlGenerator;
         $this->mailer = $mailer;
         $this->JWTService = $JWTService;
     }
@@ -33,6 +30,11 @@ class UserController extends AbstractController
      */
     public function index()
     {
+        if (!$this->getUser() || $this->getUser() == null) {
+            $this->addFlash('error', 'Vous devez être connecté pour accéder à cette page !');
+            return $this->redirectToRoute('accueil');
+        }
+
         return $this->render('user/compte.html.twig', [
             'user' => $this->getUser(),
         ]);

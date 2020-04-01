@@ -1,5 +1,7 @@
 //### Variables
 $mainColor: #b30000; //violet: #781f6f
+$secondaryColor: #333333; //gray
+$thirdColor: #f3f2f5; //light gray
 
 //### Imports
 @import 'unikue-template/style.scss';
@@ -128,4 +130,25 @@ $blur_px: 2px;
     /* To center horizontally */
     margin: 0 auto;
     pointer-events: all;
+}
+
+.badge-account-pbs {
+    font-size: 18px !important;
+    background-color: $mainColor !important;
+}
+
+.badge-account-credit {
+    font-size: 18px !important;
+    background-color: $secondaryColor !important;
+    border-radius: 3px !important;
+}
+
+.badge-account-award {
+    font-size: 14px !important;
+    background-color: $secondaryColor !important;
+}
+
+.btn-extra-small {
+    padding: 6px 10px;
+    font-size: 13px;
 }
