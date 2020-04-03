@@ -32,7 +32,7 @@ class UserController extends AbstractController
     {
         if (!$this->getUser() || $this->getUser() == null) {
             $this->addFlash('error', 'Vous devez être connecté pour accéder à cette page !');
-            return $this->redirectToRoute('accueil');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('user/compte.html.twig', [
