@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{# Test: http://localhost:8000/index.php/_error/404 #}
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+	{% set links %}
+		<a href="{{ path('accueil') }}">Accueil</a>
+	{% endset %}
+
+	{% include 'blocks/sub-banner.html.twig' with {
+			'sub_title': 'Erreur 404',
+			'links': links,
+		} %}
+
+	<section class="w-section section">
+		<div class="w-container">
+			<div class="w-row">
+
+				<h1>Page introuvable</h1>
+
+				<p style="font-size: 16px;">
+					La page que vous demandez est introuvable !
+					<br/>
+					<a class="button" href="{{ path('accueil') }}">Accueil</a>
+				</p>
+
+			</div>
+		</div>
+	</section>
+{% endblock %}

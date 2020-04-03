@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{# All other HTML errors (including 500) #}
+{# Test: http://localhost:8000/index.php/_error/403 #}
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+	{% set links %}
+		<a href="{{ path('accueil') }}">Accueil</a>
+	{% endset %}
+
+	{% include 'blocks/sub-banner.html.twig' with {
+			'sub_title': 'Erreur 404',
+			'links': links,
+		} %}
+
+	<section class="w-section section">
+		<div class="w-container">
+			<div class="w-row">
+
+				<h1>Erreur</h1>
+
+				<p style="font-size: 16px;">
+					Une erreur est survenue ! Si celle-ci persiste, consulter le support.
+					<br/>
+					{# <a class="button" href="{{ path('support') }}">Support</a> #}
+                    <a class="button" href="{{ path('accueil') }}">Accueil</a>
+				</p>
+
+			</div>
+		</div>
+	</section>
+{% endblock %}
