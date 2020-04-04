@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {# Test: http://localhost:8000/index.php/_error/403 #}
-{% block title %}Erreur{% endblock %}
+{% block title %}Erreur
+{% endblock %}
 
 {% block body %}
 	{% set links %}
-		<a href="{{ path('accueil') }}">Accueil</a>
+	<a href="{{ path('accueil') }}">Accueil</a>
 	{% endset %}
 
 	{% include 'blocks/sub-banner.html.twig' with {
@@ -17,14 +18,26 @@
 		<div class="w-container">
 			<div class="w-row">
 
-				<h1>Interdit</h1>
+				<div class="w-col w-col-6">
 
-				<p style="font-size: 16px;">
-					Vous n'êtes pas autorisé à consulter cette page !
-					<br/>
-					<a class="button" href="{{ path('accueil') }}">Accueil</a>
-				</p>
+					<h1>Interdit</h1>
 
+					<p style="font-size: 16px;">
+						Vous n'êtes pas autorisé à consulter cette page !
+						<br/>
+						<a class="button" href="{{ path('accueil') }}">Accueil</a>
+					</p>
+
+				</div>
+				{#
+				{% if status_text is defined %}
+					<div class="w-col w-col-6" style="font-size:11px;margin-top:50px;border:1px solid;padding:50px;border-color:lightgray;">
+						<code>
+							{{ status_text }}
+						</code>
+					</div>
+				{% endif %}
+				#}
 			</div>
 		</div>
 	</section>
