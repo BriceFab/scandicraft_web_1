@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -58,6 +59,7 @@ class Survey
     {
         $this->surveyAnswers = new ArrayCollection();
         $this->answers_list = new ArrayCollection();
+        $this->setCreatedAt(new DateTime('now'));
     }
 
     public function getId(): ?int
@@ -89,7 +91,10 @@ class Survey
         return $this;
     }
 
-    public function getAnswersList(): ?array
+    /**
+     * @return Collection|SurveyAnswers[]
+     */
+    public function getAnswersList(): Collection
     {
         return $this->answers_list;
     }
@@ -146,6 +151,8 @@ class Survey
 
     public function addAnswersList(SurveyAnswerList $answersList): self
     {
+        dump($this->answers_list);
+
         if (!$this->answers_list->contains($answersList)) {
             $this->answers_list[] = $answersList;
         }
@@ -184,5 +191,20 @@ class Survey
         $this->description = $description;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
+    public function countAnswers(): int
+    {
+        return count($this->getSurveyAnswers());
+    }
+
+    public function getLimitDate(): ?\DateTimeInterface
+    {
+        return $this->getCreatedAt()->modify("+{$this->getAnswerDelay()} hours"); #TODO: c'est bugé
     }
 }

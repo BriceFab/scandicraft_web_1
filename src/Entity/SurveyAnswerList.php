@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SurveyAnswerListRepository")
+ * @UniqueEntity(fields={"answer"}, message="Il existe déjà la même réponse")
  */
 class SurveyAnswerList
 {
@@ -19,7 +22,7 @@ class SurveyAnswerList
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=30, unique=true)
      */
     private $answer;
 
@@ -42,6 +45,7 @@ class SurveyAnswerList
     public function __construct()
     {
         $this->surveys = new ArrayCollection();
+        $this->setCreatedAt(new DateTime('now'));
     }
 
     public function getId(): ?int
@@ -111,5 +115,10 @@ class SurveyAnswerList
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getAnswer();
     }
 }
