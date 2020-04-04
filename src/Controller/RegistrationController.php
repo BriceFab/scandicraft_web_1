@@ -86,7 +86,7 @@ class RegistrationController extends AbstractController
 
     private function send_mail(User $user)
     {
-        $token = $this->JWTService->generateToken($user, TokenAction::REGISTER_CONFIRMATION);
+        $token = $this->JWTService->generateToken($user, TokenAction::REGISTER_CONFIRMATION, -1);
 
         $message = (new \Swift_Message('Confirmation compte - ScandiCraft'))
             ->setFrom($this->getParameter('mail.sender'))
