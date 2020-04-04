@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -57,9 +59,27 @@ class User implements UserInterface
      */
     private $last_login;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Survey", mappedBy="user")
+     */
+    private $surveys;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SurveyAnswerList", mappedBy="createdBy")
+     */
+    private $surveyAnswerLists;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SurveyAnswers", mappedBy="user")
+     */
+    private $surveyAnswers;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
+        $this->surveys = new ArrayCollection();
+        $this->surveyAnswerLists = new ArrayCollection();
+        $this->surveyAnswers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -184,6 +204,99 @@ class User implements UserInterface
     public function setLastLogin(?\DateTimeInterface $last_login): self
     {
         $this->last_login = $last_login;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Survey[]
+     */
+    public function getSurveys(): Collection
+    {
+        return $this->surveys;
+    }
+
+    public function addSurvey(Survey $survey): self
+    {
+        if (!$this->surveys->contains($survey)) {
+            $this->surveys[] = $survey;
+            $survey->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSurvey(Survey $survey): self
+    {
+        if ($this->surveys->contains($survey)) {
+            $this->surveys->removeElement($survey);
+            // set the owning side to null (unless already changed)
+            if ($survey->getUser() === $this) {
+                $survey->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SurveyAnswerList[]
+     */
+    public function getSurveyAnswerLists(): Collection
+    {
+        return $this->surveyAnswerLists;
+    }
+
+    public function addSurveyAnswerList(SurveyAnswerList $surveyAnswerList): self
+    {
+        if (!$this->surveyAnswerLists->contains($surveyAnswerList)) {
+            $this->surveyAnswerLists[] = $surveyAnswerList;
+            $surveyAnswerList->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSurveyAnswerList(SurveyAnswerList $surveyAnswerList): self
+    {
+        if ($this->surveyAnswerLists->contains($surveyAnswerList)) {
+            $this->surveyAnswerLists->removeElement($surveyAnswerList);
+            // set the owning side to null (unless already changed)
+            if ($surveyAnswerList->getCreatedBy() === $this) {
+                $surveyAnswerList->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SurveyAnswers[]
+     */
+    public function getSurveyAnswers(): Collection
+    {
+        return $this->surveyAnswers;
+    }
+
+    public function addSurveyAnswer(SurveyAnswers $surveyAnswer): self
+    {
+        if (!$this->surveyAnswers->contains($surveyAnswer)) {
+            $this->surveyAnswers[] = $surveyAnswer;
+            $surveyAnswer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSurveyAnswer(SurveyAnswers $surveyAnswer): self
+    {
+        if ($this->surveyAnswers->contains($surveyAnswer)) {
+            $this->surveyAnswers->removeElement($surveyAnswer);
+            // set the owning side to null (unless already changed)
+            if ($surveyAnswer->getUser() === $this) {
+                $surveyAnswer->setUser(null);
+            }
+        }
 
         return $this;
     }
