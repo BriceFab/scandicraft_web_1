@@ -1,0 +1,21 @@
+easy_admin:
+  design:
+    menu:
+      - label: "Utilisateurs" #user_banned, user_money
+        icon: "users-cog"
+        children: [{ entity: "User", label: "Joueurs" }] #échange pbs
+      - { label: "liens" }
+      - { label: "Retour", url: "/", icon: "chevron-left", target: "_self" }
+      #Boutique (items, history, paiement)
+      #News
+      #Sondage
+      #Vote (site, vote_history?)
+      #IP (historique de 5 max)
+      #Support
+  list:
+    max_results: 50
+  formats:
+    datetime: 'd/m/Y à H\hi'
+    date: d/m/Y
+    time: 'H\hi e'
+    number: "%.3f"

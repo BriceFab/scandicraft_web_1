@@ -1,0 +1,20 @@
+easy_admin:
+  entities:
+    User:
+      class: App\Entity\User
+      list:
+        title: "Liste des joueurs inscrits"
+        actions:
+          [
+            { name: "show", label: "Détail", icon: "search" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            { property: "id", label: "Id" },
+            { property: "username", label: "Pseudonyme" },
+            { property: "email", label: "input.email" },
+            { property: "createdAt", label: "Créer le" },
+            { property: "last_login", label: "Dernière connexion le" },
+          ]

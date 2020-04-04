@@ -54,6 +54,18 @@
 							</a>
 						</li>
 					{% endif %}
+					{% if app.user and is_granted('ROLE_PANEL_ADMIN') %}
+						<li class="li-top" style="font-weight:bold;background-color:#70db70;border-radius:6px;">
+							<a href="{{ path('easyadmin') }}">
+								<div class="top-link">
+									<div class="top-ico">
+										<i class="fas fa-cogs" style="color:white;"></i>
+									</div>
+									<div class="txt-top" style="color:white;">Panel Admin</div>
+								</div>
+							</a>
+						</li>
+					{% endif %}
 					<li class="li-top">
 						{% if app.user %}
 							<a href="{{ path('app_logout') }}">
