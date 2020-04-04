@@ -1,0 +1,5 @@
+imports:
+- { resource: User.yaml }
+- { resource: Survey.yaml }
+- { resource: SurveyAnswerList.yaml }
+- { resource: SurveyAnswers.yaml }

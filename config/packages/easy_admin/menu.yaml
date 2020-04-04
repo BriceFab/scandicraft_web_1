@@ -4,6 +4,14 @@ easy_admin:
       - label: "Utilisateurs" #user_banned, user_money, news_letter_on
         icon: "users-cog"
         children: [{ entity: "User", label: "Joueurs" }] #échange pbs
+      - label: "Sondages"
+        icon: "poll-h"
+        children:
+          [
+            { entity: "Survey", label: "Sondages" },
+            { entity: "SurveyAnswerList", label: "Listes réponses" },
+            { entity: "SurveyAnswers", label: "Réponses" },
+          ]
       - { label: "liens" }
       - { label: "Retour", url: "/", icon: "chevron-left", target: "_self" }
       #Boutique (items, history, paiement)
@@ -13,10 +21,13 @@ easy_admin:
       #IP (historique de 5 max)
       #Support
       #Forum
+    assets:
+      css:
+        - "build/easy_admin.css"
   list:
     max_results: 50
   formats:
-    datetime: 'd/m/Y à H\hi'
+    datetime: 'd/m/Y à H:i'
     date: d/m/Y
-    time: 'H\hi e'
+    time: 'H:i'
     number: "%.3f"
