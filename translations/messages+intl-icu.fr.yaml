@@ -7,3 +7,5 @@ notif.confirm.email: 'Veuillez confirmer votre adresse email ! (Cliquez sur le l
 success.confirm.email: 'Compte confirmé avec succès, vous pouvez vous connecter !'
 error.already.logged: 'Vous êtes déjà connecté !'
 login.button.reset_password: 'Mot de passe oublié ?'
+ROLE_USER: "Rôle utilisateur"
+ROLE_ADMIN: "Administrateur"

@@ -2,6 +2,7 @@ easy_admin:
   entities:
     User:
       class: App\Entity\User
+      disabled_actions: ["new"]
       list:
         title: "Liste des joueurs inscrits"
         actions:
@@ -12,9 +13,51 @@ easy_admin:
           ]
         fields:
           [
-            { property: "id", label: "Id" },
             { property: "username", label: "Pseudonyme" },
             { property: "email", label: "input.email" },
             { property: "createdAt", label: "Créer le" },
             { property: "last_login", label: "Dernière connexion le" },
+          ]
+      show:
+        title: "Information sur l'utilisateur"
+        fields:
+          [
+            { property: "id", label: "Identification" },
+            { property: "username", label: "Pseudonyme" },
+            { property: "email", label: "input.email" },
+            {
+              property: "has_confirm_email",
+              label: "Email confirmé ?",
+              type: "boolean",
+            },
+            {
+              property: "roles",
+              label: "Roles",
+              template: "easy_admin/fields/display_roles.html.twig",
+            },
+            { property: "createdAt", label: "Créer le" },
+            { property: "last_login", label: "Dernière connexion le" },
+          ]
+      form:
+        title: "Modifier l'utilisateur"
+        fields:
+          [
+            { property: "username", label: "Pseudonyme" },
+            { property: "email", label: "input.email" },
+            {
+              property: "roles",
+              label: "Roles",
+              type: "choice",
+              type_options:
+                {
+                  expanded: true,
+                  mapped: true,
+                  multiple: true,
+                  choices:
+                    {
+                      "Rôle utilisateur": "ROLE_USER",
+                      "Administrateur": "ROLE_ADMIN",
+                    },
+                },
+            },
           ]

@@ -4,16 +4,16 @@ easy_admin:
       - label: "Utilisateurs" #user_banned, user_money, news_letter_on
         icon: "users-cog"
         children: [{ entity: "User", label: "Joueurs" }] #échange pbs
-      - label: "Sondages"
-        icon: "poll-h"
-        children:
-          [
-            { entity: "Survey", label: "Sondages" },
-            { entity: "SurveyAnswerList", label: "Listes réponses" },
-            { entity: "SurveyAnswers", label: "Réponses" },
-          ]
-      - { label: "liens" }
-      - { label: "Retour", url: "/", icon: "chevron-left", target: "_self" }
+      #- label: "Sondages"
+      #  icon: "poll-h"
+      #  children:
+      #    [
+      #      { entity: "Survey", label: "Sondages" },
+      #      { entity: "SurveyAnswerList", label: "Listes réponses" },
+      #      { entity: "SurveyAnswers", label: "Réponses" },
+      #    ]
+      #- { label: "liens" }
+      #- { label: "Retour", url: "/", icon: "chevron-left", target: "_self" }
       #Boutique (items, history, paiement)
       #News
       #Sondage
