@@ -101,7 +101,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         //update last_login
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $request->request->get('username')]);
         if (!$user) {
-            $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $request->request->get['username']]);
+            $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $request->request->get('username')]);
         }
 
         if ($user) {
