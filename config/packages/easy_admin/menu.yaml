@@ -4,6 +4,9 @@ easy_admin:
       - label: "Utilisateurs" #user_banned, user_money, news_letter_on
         icon: "users-cog"
         children: [{ entity: "User", label: "Joueurs" }] #échange pbs
+      - label: "Maintenance"
+        icon: "tools"
+        children: [{ entity: "DevProgression", label: "Progressions" }]
       #- label: "Sondages"
       #  icon: "poll-h"
       #  children:

@@ -1,0 +1,29 @@
+<div class="w-col col-spc">
+
+	<div>
+		<div class="top-title">
+			<div class="title-txt">
+				<h2>Progression du développement</h2>
+			</div>
+			<div class="divider"></div>
+		</div>
+		<div>
+
+			{% for maintenance in maintenances %}
+
+				<div class="fun-wrapper">
+					<span>{{ maintenance.nom }}:
+						<b>{{ maintenance.pourcentage }}%</b>
+					</span>
+					<div class="fine-line">
+						<div class="fine-line-content" style="width: {{ maintenance.pourcentage }}%;">
+							<div></div>
+						</div>
+					</div>
+				</div>
+
+			{% endfor %}
+
+		</div>
+	</div>
+</div>

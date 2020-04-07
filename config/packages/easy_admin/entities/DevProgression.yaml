@@ -1,0 +1,27 @@
+easy_admin:
+  entities:
+    DevProgression:
+      class: App\Entity\DevProgression
+      disabled_actions: ["show", "new", "delete"]
+      list:
+        title: "Liste des maintenances"
+        actions:
+          [
+            { name: "show", label: "Détail", icon: "search" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            { property: "nom", label: "Nom" },
+            { property: "pourcentage", label: "Pourcentage", template: "easy_admin/fields/pourcentage.html.twig" },
+            { property: "under_maintenance", label: "En maintenance ?" },
+          ]
+      form:
+        title: "Modifier la maintenance"
+        fields:
+          [
+            { property: "nom", label: "Nom" },
+            { property: "pourcentage", label: "Pourcentage" },
+            { property: "under_maintenance", label: "En maintenance ?" },
+          ]

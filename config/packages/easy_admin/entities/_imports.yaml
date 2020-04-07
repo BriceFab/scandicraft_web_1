@@ -1,5 +1,6 @@
 imports:
 - { resource: User.yaml }
+- { resource: DevProgression.yaml }
 - { resource: Survey.yaml }
 - { resource: SurveyAnswerList.yaml }
 - { resource: SurveyAnswers.yaml }
