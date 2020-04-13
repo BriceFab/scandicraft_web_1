@@ -23,3 +23,5 @@ yarn.lock
 *.log
 *.lock
 _backup.env.local
+public/upload/skins/
+public/upload/capes/
