@@ -2,11 +2,19 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{{ server_name }} - {% block title %}{% endblock %}</title>
+        <title>{{ server_name }} - {% block title %}{% endblock %} Minecraft PvP Faction Launcher Moddé</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="ScandiCraft est un serveur PvP / Faction / Moddé et MMORPG avec Launcher Obligatoire !" />
-		<meta name="keywords" content="scandicraft,minecraft,mc,serveur,pvp,faction,mods,moddé,launcher,scandium,scandi,bricefab,brice" />
+        {% if block("description") is defined %}
+            <meta name="description" content="{{ block('description') }}" />
+		    <meta property="og:description" content="{{ block('description') }}" />
+        {% else %}
+            <meta name="description" content="ScandiCraft est un serveur Minecraft PvP / Faction / Moddé et MMORPG avec Launcher Obligatoire !" />
+		    <meta property="og:description" content="ScandiCraft est un serveur Minecraft PvP / Faction / Moddé et MMORPG avec Launcher Obligatoire !" />
+        {% endif %}
+		<meta name="keywords" content="scandicraft,minecraft,mc,serveur,pvp,faction,mods,moddé,launcher,scandium,scandi,bricefab,bricefab123,minijeux,minigames" />
 		<meta name="author" content="ScandiCraft" />
+        <meta name="author" content="BriceFab" />
+		<meta name="author" content="Fabrice Riva" />
 		<meta name="robots" content="index,follow" />
 
         <meta property="og:title" content="{{ server_name }} - {{ block('title') }}" />
