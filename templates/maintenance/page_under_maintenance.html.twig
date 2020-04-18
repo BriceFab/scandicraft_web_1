@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page en maintenance
+{% endblock %}
+{% block description %}Page non disponible dû à une maintenance en cours..
+{% endblock %}
+
+{% block body %}
+	<section class="w-section section">
+		<div class="w-container">
+			<div class="w-row">
+
+				<h1>Cette page est en maintenance</h1>
+
+				<p style="font-size: 16px;">
+					La page que vous demandez est en cours de création ou en maintenance !
+					<br/>
+                    Veuillez réessayer dans quelques jours.
+                    </br />
+					<a class="button" href="{{ path('accueil') }}">Accueil</a>
+				</p>
+
+			</div>
+		</div>
+	</section>
+{% endblock %}

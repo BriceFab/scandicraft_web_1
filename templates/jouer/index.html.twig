@@ -11,50 +11,58 @@
 		<div class="w-container">
 			<div class="w-row">
 
-				<h1>Rejoins-nous !</h1>
-				<p>Sélectionne ton système d'exploitation (windows, mac ou linux) et viens jouer avec nous !</p>
+				<h1>Joue avec nous !</h1>
+				<p class="p_jouer">Sélectionne ton système d'exploitation (windows, mac ou linux) et viens jouer avec nous !</p>
 
 				<div class="container" style="text-align:center;">
 					<div class="row">
 						<div class="col-12 col-sm-4">
-							<a href="{{ path('maintenance') }}">
+							<a href="{{ path('maintenances') }}">
 								<i class="fab fa-windows download_system" style="padding:25px 33px 25px 32px;margin-bottom:25px;"></i>
 							</a>
 						</div>
 						<div class="col-12 col-sm-4">
-							<a href="{{ path('maintenance') }}">
+							<a href="{{ path('maintenances') }}">
 								<i class="fab fa-apple download_system" style="padding:25px 40px 25px 40px;margin-bottom:25px;"></i>
 							</a>
 						</div>
 						<div class="col-12 col-sm-4">
-							<a href="{{ path('maintenance') }}">
+							<a href="{{ path('maintenances') }}">
 								<i class="fab fa-linux download_system" style="padding:25px 32px 25px 33px;margin-bottom:25px;"></i>
 							</a>
 						</div>
 					</div>
 				</div>
 
+				{% if maintenance_service.count_maintenances() > 0 %}
+					<p>
+						Certains de nos services sont en maintenance: <a href="{{ path('maintenances') }}" class="link_maintenances">voir plus de détails</a>.
+					</p>
+				{% endif %}
+
+				<h1 style="margin-top: 45px;">Rejoins-nous !</h1>
+				<p>Disscutez avec la communauté de ScandiCraft et suivez les actualités.</p>
+				<li class="li-social jouer">
+					<div class="w-clearfix social-wrapper">
+						<a class="w-inline-block social-ico twitter tooltip-2 jouer_social" href="//{{ twitter_link }}" title="Twitter" target="_blank">
+							<div class="w-embed jouer_social_content">
+								<i class="fab fa-twitter"></i>
+							</div>
+						</a>
+						<a class="w-inline-block social-ico discord tooltip-2 jouer_social" href="//{{ discord_link }}" title="Discord" target="_blank">
+							<div class="w-embed jouer_social_content">
+								<i class="fab fa-discord"></i>
+							</div>
+						</a>
+						<a class="w-inline-block social-ico youtube tooltip-2 jouer_social" href="//{{ youtube_link }}" title="Youtube" target="_blank">
+							<div class="w-embed jouer_social_content">
+								<i class="fab fa-youtube"></i>
+							</div>
+						</a>
+					</div>
+				</li>
 			</div>
 		</div>
-
-
-		<!--
-																<section class="w-section section">
-																	<div class="w-container">
-																		<div class="w-row">
-														
-																			<div class="w-col col-spc" style="color: gray;">
-																				<h4>Le site est en cours de développement. C'est tout à fait normal que certaines fonctionnalités ne sont pas encore disponible !</h4>
-																				<h4>Si vous êtes un ancien joueur, vous devez vous
-																					<b style="color: #b30000;">réinscrire</b>!</h4>
-																			</div>
-														
-																			{ include 'maintenance/pourcentage.html.twig' %}
-														
-																		</div>
-																	</div>
-																</section>
-														-->
 
 	</section>
 

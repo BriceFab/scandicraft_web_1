@@ -34,6 +34,9 @@ services:
     user_service:
         class: App\Service\UserService
         arguments: ["@doctrine.orm.entity_manager"]
+    maintenance_service:
+        class: App\Service\MaintenanceService
+        arguments: ["@doctrine.orm.entity_manager"]
 
     App\EventListener\DoctrineListener:
         tags:
