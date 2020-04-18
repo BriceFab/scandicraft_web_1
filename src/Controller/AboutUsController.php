@@ -12,9 +12,7 @@ class AboutUsController extends AbstractController
      */
     public function showRemerciements()
     {
-        return $this->render('remerciement/index.html.twig', [
-            'controller_name' => 'RemerciementController',
-        ]);
+        return $this->render('remerciement/index.html.twig');
     }
 
     /**
