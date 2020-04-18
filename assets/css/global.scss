@@ -3,6 +3,12 @@ $mainColor: #b30000; //violet: #781f6f
 $secondaryColor: #333333; //gray
 $thirdColor: #f3f2f5; //light gray
 
+$menuFontSize: 16px;
+$menuTopFontSize: 14px;
+$subMenuFontSize: 16px;
+$download_system_size: 120px;
+$copyrightFontSize: 15px;
+
 //### Imports
 @import 'unikue-template/style.scss';
 // @import "~bootstrap/scss/bootstrap";
@@ -30,6 +36,7 @@ body {
 
 html {
     height: 100%;
+    font-size: 16px;
 }
 
 .header-logo {
@@ -155,4 +162,134 @@ $blur_px: 2px;
 
 .scandicraft-play {
     color: $mainColor;
+}
+
+.download_system {
+    font-size: $download_system_size;
+    border: 1px #333333 solid;
+    border-radius: 15px;
+}
+
+.fa-windows:hover {
+    color: white;
+    background-color: #3891d6;
+    border: none;
+}
+
+.fa-apple:hover {
+    color: white;
+    background-color: #8e949a;
+    border: none;
+}
+
+.fa-linux:hover {
+    color: white;
+    background-color: #f7cf1b;
+    border: none;
+}
+
+.navigation-left {
+    float: left;
+    text-align: right;
+}
+
+.navigation-right {
+    float: right;
+}
+
+.nav_logo {
+    position: absolute;
+    z-index: 2;
+    width: 35%;
+	left: 40px;
+	right: 0;
+    margin-left: auto;
+	margin-right: auto;
+    top: 24px;
+}
+
+.nav_logo:hover {
+    transform: scale(1.1);
+}
+
+//Nav
+.navigation.top-left {
+    margin-left: -15px;
+}
+
+.navigation.top-right {
+    margin-right: -10px;
+}
+
+.display_if_no_logo {
+    visibility: hidden;
+}
+
+.marge_if_logo {
+    padding-top: 100px;
+}
+
+@media (max-width: 1180px) {
+    @media (min-width: 978px) {
+        .navigation.top-left {
+            float: left !important;
+        }
+    
+        .navigation.top-right {
+          float: right !important;
+        }
+
+        .navigation {
+            width: 47% !important;
+        }
+
+        .w-container {
+            max-width: none;
+            margin-left: 10px;
+            margin-right: 10px
+        }
+
+        .top-fix-right {
+            float: right;
+        }
+    }
+
+    .display_if_no_logo {
+        visibility: visible;
+    }
+
+    .marge_if_logo {
+        padding-top: 0px;
+    }
+
+      .nav_logo {
+          display: none;
+      }
+
+      .navigation {
+          width: 100%;
+          margin-left: 10px !important;
+      }
+
+      .hamburger {
+          z-index: 100;
+      }
+
+      .header-v1 {
+        padding-right: 0px;
+        padding-left: 0px;
+      }
+
+      .navigation.top-left {
+          float: none;
+          margin-left: 0px;
+          top: -25px;
+      }
+
+      .navigation.top-right {
+        float: none;
+        margin-right: 0px;
+        margin-top: 0px;
+        top: -25px;
+      }
 }

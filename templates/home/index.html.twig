@@ -2,36 +2,193 @@
 
 {% block title %}Accueil
 {% endblock %}
-{% block description %}ScandiCraft est un serveur Minecraft PvP / Faction / Moddé et MMORPG avec Launcher Obligatoire ! (Bientôt mini-jeux).{% endblock %}
+{% block description %}ScandiCraft est un serveur Minecraft PvP / Faction / Moddé et MMORPG avec Launcher Obligatoire ! (Bientôt mini-jeux).
+{% endblock %}
 
 {% block body %}
 
 	<section>
 
-		{% set links %}<a href="{{ path('accueil') }}">Accueil</a>
-		{% endset %}
+		<div class="banner">
+			<div class="w-slider big-slider" data-animation="cross" data-duration="500" data-infinite="1" data-nav-spacing="5">
+				<div class="w-slider-mask">
+					<div class="w-slide slide-1" style="transform: translateX(0px); opacity: 1; z-index: 9;">
+						<div class="video-overlay">
+							<div class="w-container cont-slider in-video">
+								<div class="alg-center">
+									<h1 class="big-slider-title big-white" width="10000" data-ix="slide-big-title" style="opacity: 1; transform: translateX(0px) translateY(0px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Bienvenue</h1>
+									<h3 class="slider-sub-txt" data-ix="slide-sub-title" style="opacity: 1; transform: translateX(0px) translateY(0px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Rejoins-nous dès maintenant !</h3>
+									<div class="slider-spc" data-ix="slide-spc" style="opacity: 1; transform: translateX(0px) translateY(0px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+										<a class="button no-lft-mrg" href="{{ path('app_register') }}">S'inscrire</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="w-slide slide-2" style="transform: translateX(0px); opacity: 1; z-index: 7; visibility: hidden;">
+						<div class="video-wrapper">
+							<div class="w-embed embed-video"></div>
+							<div class="video-overlay">
+								<div class="w-container cont-slider in-video">
+									<div class="alg-center">
+										<h1 class="big-slider-title big-white" width="10000" data-ix="slide-big-title" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Boutique</h1>
+										<h3 class="slider-sub-txt" data-ix="slide-sub-title" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Soutenez-nous avec notre boutique automatique</h3>
+										<div class="slider-spc" data-ix="slide-spc" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+											<a class="button no-lft-mrg" href="#">Notre boutique</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="w-slide slide-3" style="transform: translateX(0px); opacity: 1; z-index: 8; visibility: hidden;">
+						<div class="video-wrapper">
+							<div class="w-embed embed-video"></div>
+							<div class="video-overlay">
+								<div class="w-container cont-slider in-video">
+									<div class="alg-center">
+										<h1 class="big-slider-title big-white" width="10000" data-ix="slide-big-title" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Voter</h1>
+										<h3 class="slider-sub-txt" data-ix="slide-sub-title" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Votez régulièrement et gagnez beaucoup de cadeaux !</h3>
+										<div class="slider-spc" data-ix="slide-spc" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+											<a class="button no-lft-mrg" href="#">Voter pour le serveur</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="w-slider-arrow-left arrow-big-sl">
+					<div class="w-icon-slider-left"></div>
+				</div>
+				<div class="w-slider-arrow-right arrow-big-sl">
+					<div class="w-icon-slider-right"></div>
+				</div>
+			</div>
+		</div>
+		<div class="welc-hero">
+			<div class="w-container">
+				<div class="w-row">
+					<div class="w-col w-col-8 w-col-stack">
+						<font>
+							<h3>
+								N'attendez plus ! - Rejoignez-nous dès maintenant !
+							</h3>
+						</font>
+					</div>
+					<font>
 
-		{% include 'blocks/sub-banner.html.twig' with {
-			'title': 'Bienvenue sur notre site !',
-			'sub_title': '(version développement)',
-			'links': links,
-		} %}
+						<div class="w-col w-col-4 w-col-stack alg-right">
+							<a class="button btn-large" href="{{ path('jouer') }}">Nous rejoindre</a>
+						</div>
+					</font>
+				</div>
+				<font></font>
+			</div>
+			<font></font>
+		</div>
 
 		<section class="w-section section">
 			<div class="w-container">
-				<div class="w-row">
+				<div class="big-spc-bottom">
+					<div class="w-row">
+						<div class="w-col w-col-4">
+							<div class="flip-container">
+								<div class="flipper" ontouchstart="this.classList.toggle('hover');">
+									<div class="front">
+										<div class="ico-flip">
+											<i class="fa fa-shopping-cart"></i>
+										</div>
+										<div class="div-spc">
+											<h5>Une boutique</h5>
+											<p>100% automatique avec différentes offres disponibles.</p>
+										</div>
+									</div>
+									<div class="back">
+										<div>
+											<h5 class="white-orignal">Une boutique</h5>
+											<p class="white-orignal">De nombreux élements sont disponibles à l'achat sur notre site internet, vous pouvez vous procurez des items, ou bien des rangs privilégiés</p>
+										</div>
+										<div class="div-spc">
+											<a class="button btn-transparent" style="margin-top: 50px;" href="#">Accéder à la boutique</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-					<div class="w-col col-spc" style="color: gray;">
-						<h4>Le site est en cours de développement. C'est tout à fait normal que certaines fonctionnalités ne sont pas encore disponible !</h4>
-						<h4>Si vous êtes un ancien joueur, vous devez vous <b style="color: #b30000;">réinscrire</b>!</h4>
+						<div class="w-col w-col-4">
+							<div class="flip-container">
+								<div class="flipper" ontouchstart="this.classList.toggle('hover');">
+									<div class="front">
+										<div class="ico-flip">
+											<i class="fa fa-laptop"></i>
+										</div>
+										<div class="div-spc">
+											<h5>Une optimisation maximale</h5>
+											<p>Tout a été pensé et conçu afin de vous faire gagner le max d'FPS possible.</p>
+										</div>
+									</div>
+									<div class="back">
+										<div>
+											<h5 class="white-orignal">Une optimisation maximale</h5>
+											<p class="white-orignal">De plus notre communauté est très active sur le jeu, sur le forum et sur le serveur teamspeak ; vous vous ferez surement de nombreux amis en jouant !</p>
+										</div>
+										<div class="div-spc">
+											<a class="button btn-transparent" style="margin-top: 50px;" href="{{ path('jouer') }}">Débute l'aventure maintenant !</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="w-col w-col-4">
+							<div class="flip-container">
+								<div class="flipper" ontouchstart="this.classList.toggle('hover');">
+									<div class="front">
+										<div class="ico-flip">
+											<i class="fa fa-lock"></i>
+										</div>
+										<div class="div-spc">
+											<h5>Haute sécurité</h5>
+											<p>Un site fluide et sécurisé ! Que demandez de mieux ?</p>
+										</div>
+									</div>
+									<div class="back">
+										<div>
+											<h5 class="white-orignal">Sûr et sécurisé</h5>
+											<p class="white-orignal">Profitez de services vous offrant une sécurité optimale et vous permettant de naviguer fiablement sur le site du serveur !</p>
+										</div>
+										<div class="div-spc">
+											<a class="button btn-transparent" style="margin-top: 50px;" href="{{ path('app_register') }}">Inscrivez-vous dès maintenant !</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-
-					{% include 'maintenance/pourcentage.html.twig' %}
-
 				</div>
 			</div>
 		</section>
 
+
+		<!--
+				<section class="w-section section">
+					<div class="w-container">
+						<div class="w-row">
+		
+							<div class="w-col col-spc" style="color: gray;">
+								<h4>Le site est en cours de développement. C'est tout à fait normal que certaines fonctionnalités ne sont pas encore disponible !</h4>
+								<h4>Si vous êtes un ancien joueur, vous devez vous
+									<b style="color: #b30000;">réinscrire</b>!</h4>
+							</div>
+		
+							{% include 'maintenance/pourcentage.html.twig' %}
+		
+						</div>
+					</div>
+				</section>
+		-->
 
 	</section>
 
