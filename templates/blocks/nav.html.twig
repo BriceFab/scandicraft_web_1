@@ -12,6 +12,11 @@
 		<!-- Navigation left -->
 		<nav class="navigation top-left">
 			<ul class="w-list-unstyled">
+				<li class="li-menu nav_accueil" data-ix="show-dropdown">
+					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['accueil'] ? 'active' : '' }}" href="{{ path('accueil') }}">
+						<div>Accueil</div>
+					</a>
+				</li>
 				<li class="li-menu" data-ix="show-dropdown">
 					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['jouer'] ? 'active' : '' }}" href="{{ path('jouer') }}">
 						<div>
