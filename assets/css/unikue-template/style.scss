@@ -192,7 +192,8 @@ a {
 
 .bottom-header {
     position: relative;
-    background-color: white;
+    background-color: #fafafa;
+    border-bottom: 1px solid #efefef;
 }
 
 .navigation {
@@ -214,7 +215,7 @@ a {
 .link-menu {
     padding: 31px 21px;
     color: #282828;
-    font-size: 13px;
+    font-size: $menuFontSize;
     font-weight: 700;
     text-transform: uppercase;
 }
@@ -368,12 +369,12 @@ a {
 .txt-top {
     display: inline-block;
     color: #919191;
-    font-size: 13px;
+    font-size: $menuTopFontSize;
 }
 
 .txt-top.txt-last {
     color: #717171;
-    font-size: 12px;
+    font-size: $menuTopFontSize;
 }
 
 .top-link {
@@ -413,7 +414,7 @@ a {
     -webkit-transition: all 300ms ease-in-out;
     transition: all 300ms ease-in-out;
     color: white;
-    font-size: 12px;
+    font-size: $subMenuFontSize;
     font-weight: 600;
 }
 
@@ -887,7 +888,7 @@ a {
 .copyright {
     margin-top: 7px;
     margin-bottom: 0px;
-    font-size: 12px;
+    font-size: $copyrightFontSize;
 }
 
 .square-box-wrp {
@@ -1564,7 +1565,7 @@ a {
 
 .hamburger {
     position: relative;
-    top: 20px;
+    // top: 20px;
     display: none;
     width: 45px;
     height: 45px;
@@ -1610,7 +1611,7 @@ a {
 }
 
 .slide-1 {
-    background-image: url('images/slider-2.jpg');
+    background-image: url('images/scandicraft/slide1.png');
     background-position: 50% 50%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -1644,15 +1645,23 @@ a {
 }
 
 .slider-sub-txt {
-    color: #a0a0a0;
+    color: white;
     font-size: 26px;
     line-height: 36px;
     font-weight: 300;
     text-transform: uppercase;
+    opacity: 0.8;
+    font-weight: bold;
 }
 
 .slide-2 {
-    background-image: url('images/slider-1.jpg');
+    background-image: url('images/scandicraft/slide2.png');
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+.slide-3 {
+    background-image: url('images/scandicraft/slide3.png');
     background-position: 50% 50%;
     background-size: cover;
 }
@@ -1703,7 +1712,7 @@ a {
     bottom: 0px;
     z-index: 2;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .slider-spc {

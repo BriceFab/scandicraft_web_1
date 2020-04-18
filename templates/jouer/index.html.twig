@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jouer
+{% endblock %}
+{% block description %}Téléchargez le launcher pour pouvoir jouer et rejoindre ScandiCraft
+{% endblock %}
+
+{% block body %}
+
+	<section class="w-section section">
+		<div class="w-container">
+			<div class="w-row">
+
+				<h1>Rejoins-nous !</h1>
+				<p>Sélectionne ton système d'exploitation (windows, mac ou linux) et viens jouer avec nous !</p>
+
+				<div class="container" style="text-align:center;">
+					<div class="row">
+						<div class="col-12 col-sm-4">
+							<a href="{{ path('maintenance') }}">
+								<i class="fab fa-windows download_system" style="padding:25px 33px 25px 32px;margin-bottom:25px;"></i>
+							</a>
+						</div>
+						<div class="col-12 col-sm-4">
+							<a href="{{ path('maintenance') }}">
+								<i class="fab fa-apple download_system" style="padding:25px 40px 25px 40px;margin-bottom:25px;"></i>
+							</a>
+						</div>
+						<div class="col-12 col-sm-4">
+							<a href="{{ path('maintenance') }}">
+								<i class="fab fa-linux download_system" style="padding:25px 32px 25px 33px;margin-bottom:25px;"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<!--
+																<section class="w-section section">
+																	<div class="w-container">
+																		<div class="w-row">
+														
+																			<div class="w-col col-spc" style="color: gray;">
+																				<h4>Le site est en cours de développement. C'est tout à fait normal que certaines fonctionnalités ne sont pas encore disponible !</h4>
+																				<h4>Si vous êtes un ancien joueur, vous devez vous
+																					<b style="color: #b30000;">réinscrire</b>!</h4>
+																			</div>
+														
+																			{ include 'maintenance/pourcentage.html.twig' %}
+														
+																		</div>
+																	</div>
+																</section>
+														-->
+
+	</section>
+
+{% endblock %}

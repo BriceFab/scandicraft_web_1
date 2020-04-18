@@ -15,8 +15,8 @@ easy_admin:
       #      { entity: "SurveyAnswerList", label: "Listes réponses" },
       #      { entity: "SurveyAnswers", label: "Réponses" },
       #    ]
-      #- { label: "liens" }
-      #- { label: "Retour", url: "/", icon: "chevron-left", target: "_self" }
+      - { label: "liens" }
+      - { label: "Retour", url: "/", icon: "chevron-circle-left", target: "_self" }
       #Boutique (items, history, paiement)
       #News
       #Sondage

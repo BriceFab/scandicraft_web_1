@@ -6,16 +6,6 @@
 
 {% block body %}
 
-	{% set links %}
-	<a href="{{ path('accueil') }}">Accueil</a>/<a href="{{ path('app_register') }}">S'inscrire</a>
-	{% endset %}
-
-	{% include 'blocks/sub-banner.html.twig' with {
-		'title': 'Inscription',
-		'sub_title': 'Inscrivez-vous sur notre site',
-		'links': links,
-	} %}
-
 	<section class="w-section section">
 		<div class="w-container">
 			<div class="w-row">

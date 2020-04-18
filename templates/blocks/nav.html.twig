@@ -1,35 +1,84 @@
 <!-- Start Bottom Header -->
+<a href="{{ path('accueil') }}">
+	<div class="row justify-content-center nav_logo">
+		<img class="login-logo" src="{{ asset('assets/img/main-logo.png') }}" alt="ScandiCraft logo">
+	</div>
+</a>
 <div class="bottom-header">
 	<div class="w-container">
-		<a class="w-inline-block hamburger" href="#" data-ix="show-navigation-menu"></a>
-		<a class="w-inline-block brand-logo" href="{{ path('accueil') }}">
-			<img class="tooltip header-logo" src="{{ asset('assets/img/header-logo.png') }}" title="ScandiCraft - PvP / Faction / Launcher" alt="ScandiCraft logo">
-		</a>
 
-		<!-- Navigation -->
-		<nav class="navigation">
+		<a class="w-inline-block hamburger" href="#" data-ix="show-navigation-menu"></a>
+
+		<!-- Navigation left -->
+		<nav class="navigation top-left">
 			<ul class="w-list-unstyled">
-				<!--
 				<li class="li-menu" data-ix="show-dropdown">
-					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['accueil'] ? 'active' : '' }}" href="{{ path('accueil') }}">
-						<div>Accueil</div>
-					</a>
-				</li>
-				-->
-				<li class="li-menu" data-ix="show-dropdown">
-					<a class="w-inline-block link-menu" href="#">
-						<div><i class="fas fa-play-circle scandicraft-play"></i> Nous rejoindre</div>
+					<a class="w-inline-block link-menu" href="{{ path('jouer') }}">
+						<div>
+							<i class="fas fa-play-circle scandicraft-play"></i>
+							Nous rejoindre</div>
 					</a>
 				</li>
 				<li class="li-menu" data-ix="show-dropdown">
-					<a class="w-inline-block link-menu" href="#">
-						<div>Boutique</div>
+					<a class="w-inline-block link-menu" href="{{ path('jouer') }}">
+						<div>
+							Voter</div>
 					</a>
 				</li>
 				<li class="li-menu" data-ix="show-dropdown">
-					<a class="w-inline-block link-menu" href="#">
-						<div>Voter</div>
+					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['wiki', 'sondages', 'support', 'staff', 'remerciements'] ? 'active' : '' }}" href="#">
+						<div>Communauté</div>
 					</a>
+					<ul class="w-list-unstyled dropdown-menu" style="display: none;">
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['wiki'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Forum</div>
+							</a>
+						</li>
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['sondages'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Nouveautés</div>
+							</a>
+						</li>
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['support'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Sondages</div>
+							</a>
+						</li>
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['support'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Maintenances</div>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+		<!-- End Navigation -->
+		<!-- Navigation right -->
+		<nav class="navigation top-right">
+			<ul class="w-list-unstyled top-fix-right">
+				<li class="li-menu" data-ix="show-dropdown">
+					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['wiki', 'sondages', 'support', 'staff', 'remerciements'] ? 'active' : '' }}" href="#">
+						<div>Qui sommes nous ?</div>
+					</a>
+					<ul class="w-list-unstyled dropdown-menu" style="display: none;">
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['wiki'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Présentation</div>
+							</a>
+						</li>
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['sondages'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Staff</div>
+							</a>
+						</li>
+						<li class="li-drop">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['support'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+								<div class="dd-txt">Remerciements</div>
+							</a>
+						</li>
+					</ul>
 				</li>
 				<li class="li-menu" data-ix="show-dropdown">
 					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['wiki', 'sondages', 'support', 'staff', 'remerciements'] ? 'active' : '' }}" href="#">
@@ -43,49 +92,21 @@
 						</li>
 						<li class="li-drop">
 							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['sondages'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
-								<div class="dd-txt">Sondages</div>
-							</a>
-						</li>
-						<li class="li-drop">
-							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['support'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
 								<div class="dd-txt">Support</div>
-							</a>
-						</li>
-						<li class="li-drop">
-							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['staff'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
-								<div class="dd-txt">Staff</div>
-							</a>
-						</li>
-						<li class="li-drop">
-							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['remerciements'] ? 'w--current' : '' }}" href="{{ path('remerciements') }}" data-ix="move-txt-dropdown">
-								<div class="dd-txt">Remerciements</div>
 							</a>
 						</li>
 					</ul>
 				</li>
-
-				<li class="li-social">
-					<div class="w-clearfix social-wrapper">
-						<a class="w-inline-block social-ico twitter tooltip-2" href="//{{ twitter_link }}" title="Twitter" target="_blank">
-							<div class="w-embed">
-								<i class="fab fa-twitter"></i>
-							</div>
-						</a>
-						<a class="w-inline-block social-ico discord tooltip-2" href="//{{ discord_link }}" title="Discord" target="_blank">
-							<div class="w-embed">
-								<i class="fab fa-discord"></i>
-							</div>
-						</a>
-						<a class="w-inline-block social-ico youtube tooltip-2" href="//{{ youtube_link }}" title="Youtube" target="_blank">
-							<div class="w-embed">
-								<i class="fab fa-youtube"></i>
-							</div>
-						</a>
-					</div>
+				<li class="li-menu" data-ix="show-dropdown">
+					<a class="w-inline-block link-menu" href="#">
+						<div>Boutique
+						</div>
+					</a>
 				</li>
 			</ul>
 		</nav>
 		<!-- End Navigation -->
+
 	</div>
 </div>
 <!-- End Bottom Header -->
