@@ -234,6 +234,10 @@ $blur_px: 2px;
     padding-top: 100px;
 }
 
+.nav_accueil {
+    display: none;
+}
+
 @media (max-width: 1180px) {
     @media (min-width: 978px) {
         .navigation.top-left {
@@ -257,6 +261,10 @@ $blur_px: 2px;
         .top-fix-right {
             float: right;
         }
+    }
+
+    .nav_accueil {
+        display: inline-block;
     }
 
     .display_if_no_logo {
@@ -288,14 +296,14 @@ $blur_px: 2px;
       .navigation.top-left {
           float: none;
           margin-left: 0px;
-          top: -25px;
+          top: -45px;
       }
 
       .navigation.top-right {
         float: none;
         margin-right: 0px;
         margin-top: 0px;
-        top: -25px;
+        top: -45px;
       }
 }
 
