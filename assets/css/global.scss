@@ -8,12 +8,17 @@ $menuTopFontSize: 14px;
 $subMenuFontSize: 16px;
 $download_system_size: 120px;
 $copyrightFontSize: 15px;
+$pFontSize: 16px;
 
 //### Imports
 @import 'unikue-template/style.scss';
 // @import "~bootstrap/scss/bootstrap";
 
 //### ScandiCraft style
+p {
+    font-size: $pFontSize;
+}
+
 .li-top-right {
     padding: 8px;
 }
@@ -292,4 +297,34 @@ $blur_px: 2px;
         margin-top: 0px;
         top: -25px;
       }
+}
+
+.jouer_social {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 40px !important;
+    float: none !important;
+}
+
+.jouer_social_content {
+    margin-top: 20px;
+}
+
+.p_jouer {
+    margin-bottom: 36px;
+}
+
+.link_maintenances {
+    color: $mainColor;
+    :hover {
+        color: $secondaryColor;
+    }
+}
+
+.link_maintenances:hover {
+    color: $secondaryColor;
+}
+
+.li-social.jouer {
+    display: block;
 }

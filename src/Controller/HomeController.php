@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\DevProgression;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,11 +20,7 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        return $this->render('home/index.html.twig', [
-            'maintenances' => $this->em->getRepository(DevProgression::class)->findBy([], [
-                'pourcentage' => 'desc'
-            ]),
-        ]);
+        return $this->render('home/index.html.twig');
     }
 
     /**
@@ -35,10 +30,4 @@ class HomeController extends AbstractController
         return $this->render('jouer/index.html.twig');
     }
 
-    /**
-     * @Route("/maintenance", name="maintenance")
-    */
-    public function maintenance() {
-        return $this->render('home/maintenance.html.twig');
-    }
 }

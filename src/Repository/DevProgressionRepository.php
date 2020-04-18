@@ -19,6 +19,17 @@ class DevProgressionRepository extends ServiceEntityRepository
         parent::__construct($registry, DevProgression::class);
     }
 
+    public function countMaintenances()
+    {
+        $qb = $this->createQueryBuilder('m');
+        return $qb
+            ->select('count(m.id)')
+            ->andWhere('m.under_maintenance = :isUnderMaintenance')
+            ->setParameter('isUnderMaintenance', true)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     // /**
     //  * @return DevProgression[] Returns an array of DevProgression objects
     //  */

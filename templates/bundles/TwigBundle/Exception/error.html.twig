@@ -6,14 +6,6 @@ Erreur
 {% endblock %}
 
 	{% block body %}
-	{% set links %}<a href="{{ path('accueil') }}"> Accueil</a>
-	{% endset %}
-
-	{% include 'blocks/sub-banner.html.twig' with {
-			'sub_title': 'Erreur',
-			'links': links,
-		} %}
-
 	<section class="w-section section">
 		<div class="w-container">
 			<div class="w-row">
