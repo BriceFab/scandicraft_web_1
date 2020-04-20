@@ -7,14 +7,14 @@ easy_admin:
       - label: "Maintenance"
         icon: "tools"
         children: [{ entity: "DevProgression", label: "Progressions" }]
-      #- label: "Sondages"
-      #  icon: "poll-h"
-      #  children:
-      #    [
-      #      { entity: "Survey", label: "Sondages" },
-      #      { entity: "SurveyAnswerList", label: "Listes réponses" },
-      #      { entity: "SurveyAnswers", label: "Réponses" },
-      #    ]
+      - label: "Sondages"
+        icon: "poll-h"
+        children:
+          [
+            { entity: "Survey", label: "Sondages" },
+            { entity: "SurveyAnswerList", label: "Listes réponses" },
+            { entity: "SurveyAnswers", label: "Réponses" },
+          ]
       - { label: "liens" }
       - { label: "Retour", url: "/", icon: "chevron-circle-left", target: "_self" }
       #Boutique (items, history, paiement)

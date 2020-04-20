@@ -37,7 +37,7 @@ class CommunityController extends AbstractController
      */
     public function showSondages()
     {
-        return $this->render('maintenance/page_under_maintenance.html.twig');
+        return $this->render('survey/list.html.twig');
     }
 
     /**
