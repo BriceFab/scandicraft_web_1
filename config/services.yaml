@@ -6,9 +6,6 @@
 parameters:
     server.name: "ScandiCraft"
     site.copyright: "© ScandiCraft. Serveur Minecraft PvP / Faction / Launcher / Moddé / MMORPG."
-    twitter.link: "twitter.com/ScandiCraftServ"
-    youtube.link: "youtube.com/BriceFab123/search?query=scandicraft"
-    discord.link: "discord.gg/vPbY5gp"
     mail.sender: "scandicraft.minecraft@gmail.com"
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
@@ -37,6 +34,9 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
     maintenance_service:
         class: App\Service\MaintenanceService
+        arguments: ["@doctrine.orm.entity_manager"]
+    scandicraft_service:
+        class: App\Service\ScandiCraftService
         arguments: ["@doctrine.orm.entity_manager"]
 
     App\EventListener\DoctrineListener:

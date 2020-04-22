@@ -6,3 +6,5 @@ imports:
 - { resource: SurveyAnswers.yaml }
 - { resource: Thanks.yaml }
 - { resource: ThanksCategory.yaml }
+- { resource: SocialmediaType.yaml }
+- { resource: MySocialmedia.yaml }

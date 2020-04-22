@@ -14,27 +14,27 @@ easy_admin:
         fields:
           [
             { property: "name", label: "Nom" },
-            { property: "title", label: "Titlre" },
+            { property: "title", label: "Titre" },
             { property: "subtitle", label: "Sous-titre" },
             { property: "description", label: "Description" },
           ]
       show:
-        title: "Information sur l'utilisateur"
+        title: "Information sur la catégorie"
         fields:
           [
             { property: "name", label: "Nom" },
             { property: "name", label: "Nom" },
-            { property: "title", label: "Titlre" },
+            { property: "title", label: "Titre" },
             { property: "subtitle", label: "Sous-titre" },
             { property: "description", label: "Description" },
           ]
       form:
-        title: "Ajout du remerciement"
+        title: "Ajout du la catégorie"
         fields:
           [
             { property: "name", label: "Nom" },
             { property: "name", label: "Nom" },
-            { property: "title", label: "Titlre" },
+            { property: "title", label: "Titre" },
             { property: "subtitle", label: "Sous-titre" },
             { property: "description", label: "Description", type: "textarea" },
           ]

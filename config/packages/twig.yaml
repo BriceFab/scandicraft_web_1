@@ -4,11 +4,9 @@ twig:
         # Variables
         server_name: "%server.name%"
         site_copyright: "%site.copyright%"
-        twitter_link: "%twitter.link%"
-        youtube_link: "%youtube.link%"
-        discord_link: "%discord.link%"
-        # Service
+        # Services
         user_service: "@user_service"
         maintenance_service: "@maintenance_service"
+        scandicraft_service: "@scandicraft_service"
         # Google Recaptcha v3
         RECAPTCHA3_SITE_KEY: "%env(RECAPTCHA3_SITE_KEY)%"

@@ -97,4 +97,9 @@ class SocialmediaType
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

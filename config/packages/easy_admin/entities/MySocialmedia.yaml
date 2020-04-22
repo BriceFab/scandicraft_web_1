@@ -1,0 +1,29 @@
+easy_admin:
+  entities:
+    MySocialmedia:
+      class: App\Entity\MySocialmedia
+      list:
+        title: "Liste des résaux sociaux de ScandiCraft"
+        actions:
+          [
+            { name: "new", label: "Ajouter" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            { property: "url", label: "Lien" },
+            { property: "socialmedia_type.name", label: "Type" },
+          ]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+            { property: "url", label: "Lien" },
+            {
+              property: "socialmedia_type",
+              label: "Type",
+              type: "entity",
+              type_options: { class: 'App\Entity\SocialmediaType' },
+            },
+          ]
