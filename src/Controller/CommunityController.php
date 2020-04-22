@@ -46,7 +46,7 @@ class CommunityController extends AbstractController
     public function showMaintenances()
     {
         return $this->render('maintenance/show_maintenances.html.twig', [
-            'maintenances' => $this->em->getRepository(DevProgression::class)->findBy([], [
+            'maintenances' => $this->em->getRepository(DevProgression::class)->findBy(['under_maintenance' => true], [
                 'pourcentage' => 'desc'
             ]),
         ]);

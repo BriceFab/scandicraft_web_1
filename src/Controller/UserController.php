@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\UserSocialmedia;
 use App\Form\ResetPasswordType;
+use App\Form\UserSocialmediaType;
 use App\Service\JWTService;
 use App\Service\TokenAction;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,9 +37,31 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
+        //Forms
+        $network = new UserSocialmedia();
+        $form_network = $this->createForm(UserSocialmediaType::class, $network);
+
         return $this->render('user/compte.html.twig', [
             'user' => $this->getUser(),
+            'form_network' => $form_network->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/compte/add_network", name="compte_add_network", methods={"POST"})
+     */
+    public function addNetwork(Request $request) {
+        $network = new UserSocialmedia();
+
+        $form_network = $this->createForm(UserSocialmediaType::class, $network);
+
+        $form_network->handleRequest($request);
+
+        if ($form_network->isSubmitted() && $form_network->isValid()) {
+            // ... do your form processing, like saving the Task and Tag entities
+        }
+
+        return $this->index();
     }
 
     /**

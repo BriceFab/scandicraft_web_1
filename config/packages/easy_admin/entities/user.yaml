@@ -60,4 +60,5 @@ easy_admin:
                     },
                 },
             },
+            { property: "has_confirm_email", type: "checkbox", label: "Email confirmé" }
           ]

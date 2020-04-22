@@ -1,9 +1,10 @@
-<!-- Start Bottom Header -->
-<a href="{{ path('accueil') }}">
+<a href="{{ path('accueil') }}" id="#nav_bar_logo">
 	<div class="row justify-content-center nav_logo">
 		<img class="login-logo" src="{{ asset('assets/img/main-logo.png') }}" alt="ScandiCraft logo">
 	</div>
 </a>
+
+<!-- Start Bottom Header -->
 <div class="bottom-header">
 	<div class="w-container">
 
@@ -50,11 +51,13 @@
 								<div class="dd-txt">Sondages</div>
 							</a>
 						</li>
-						<li class="li-drop">
-							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['maintenances'] ? 'w--current' : '' }}" href="{{ path('maintenances') }}" data-ix="move-txt-dropdown">
-								<div class="dd-txt">Maintenances ({{ maintenance_service.count_maintenances() }})</div>
-							</a>
-						</li>
+						{% if maintenance_service.count_maintenances() > 0 %}
+							<li class="li-drop">
+								<a class="w-inline-block dd-link {{ app.request.get('_route') in ['maintenances'] ? 'w--current' : '' }}" href="{{ path('maintenances') }}" data-ix="move-txt-dropdown">
+									<div class="dd-txt">Maintenances ({{ maintenance_service.count_maintenances() }})</div>
+								</a>
+							</li>
+						{% endif %}
 					</ul>
 				</li>
 			</ul>
@@ -120,3 +123,16 @@
 	</div>
 </div>
 <!-- End Bottom Header -->
+
+<script>
+    var ua = window.navigator.userAgent;
+    var isIE = /MSIE|Trident/.test(ua);
+
+	if (isIE) {
+		let logo = document.getElementById("#nav_bar_logo");
+		if (logo) {
+			logo.style.display = "none";
+			logo.style.visibility = "hidden";
+		}
+	}
+</script>

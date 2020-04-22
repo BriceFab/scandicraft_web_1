@@ -13,3 +13,10 @@ import '../css/ReactToastify.css';
 import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
+
+//cannot call from html
+export default function isIE() {
+    var ua = window.navigator.userAgent;
+    var isIE = /MSIE|Trident/.test(ua);
+    return isIE;
+}

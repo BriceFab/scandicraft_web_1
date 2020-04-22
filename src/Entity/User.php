@@ -74,12 +74,18 @@ class User implements UserInterface
      */
     private $surveyAnswers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserSocialmedia", mappedBy="user")
+     */
+    private $userSocialmedia;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
         $this->surveys = new ArrayCollection();
         $this->surveyAnswerLists = new ArrayCollection();
         $this->surveyAnswers = new ArrayCollection();
+        $this->userSocialmedia = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -295,6 +301,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($surveyAnswer->getUser() === $this) {
                 $surveyAnswer->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserSocialmedia[]
+     */
+    public function getUserSocialmedia(): Collection
+    {
+        return $this->userSocialmedia;
+    }
+
+    public function addUserSocialmedia(UserSocialmedia $userSocialmedia): self
+    {
+        if (!$this->userSocialmedia->contains($userSocialmedia)) {
+            $this->userSocialmedia[] = $userSocialmedia;
+            $userSocialmedia->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSocialmedia(UserSocialmedia $userSocialmedia): self
+    {
+        if ($this->userSocialmedia->contains($userSocialmedia)) {
+            $this->userSocialmedia->removeElement($userSocialmedia);
+            // set the owning side to null (unless already changed)
+            if ($userSocialmedia->getUser() === $this) {
+                $userSocialmedia->setUser(null);
             }
         }
 

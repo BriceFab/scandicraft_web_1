@@ -1,22 +1,21 @@
 easy_admin:
   entities:
-    User:
-      class: App\Entity\User
-      disabled_actions: ["new"]
+    Thanks:
+      class: App\Entity\Thanks
       list:
-        title: "Liste des joueurs inscrits"
+        title: "Liste des remerciements"
         actions:
           [
+            { name: "new", label: "Ajouter un remerciement" },
             { name: "show", label: "Détail", icon: "search" },
             { name: "edit", label: "Modifier", icon: "edit" },
             { name: "delete", label: "Supprimer", icon: "trash" },
           ]
         fields:
           [
-            { property: "username", label: "Pseudonyme" },
-            { property: "email", label: "input.email" },
-            { property: "createdAt", label: "Créer le" },
-            { property: "last_login", label: "Dernière connexion le" },
+            { property: "user.username", label: "Pseudonyme" },
+            { property: "thanks_category.name", label: "Catégorie" },
+            { property: "createdAt", label: "Depuis le" },
           ]
       show:
         title: "Information sur l'utilisateur"
@@ -39,26 +38,34 @@ easy_admin:
             { property: "last_login", label: "Dernière connexion le" },
           ]
       form:
-        title: "Modifier l'utilisateur"
+        title: "Ajout du remerciement"
         fields:
           [
-            { property: "username", label: "Pseudonyme" },
-            { property: "email", label: "input.email" },
             {
-              property: "roles",
-              label: "Roles",
-              type: "choice",
+              property: "user",
+              label: "Utilisateur",
+              type: "entity",
+              type_options: { class: 'App\Entity\User' },
+            },
+            {
+              property: "presentation",
+              label: "Présentation",
+              type: "textarea",
+            },
+            {
+              property: "thanks_category",
+              label: "Catégorie",
+              type: "entity",
+              type_options: { class: 'App\Entity\ThanksCategory' },
+            },
+            {
+              property: "socialmedia",
+              label: "Réseaux sociaux",
+              type: "collection",
               type_options:
                 {
-                  expanded: true,
-                  mapped: true,
-                  multiple: true,
-                  choices:
-                    {
-                      "Rôle utilisateur": "ROLE_USER",
-                      "Administrateur": "ROLE_ADMIN",
-                    },
+                  entry_type: 'App\Form\UserSocialmediaType',
+                  allow_delete: true,
                 },
             },
-            { property: "has_confirm_email", type: "checkbox", label: "Email confirmé" }
           ]
