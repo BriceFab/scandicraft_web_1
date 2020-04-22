@@ -1,0 +1,24 @@
+easy_admin:
+  entities:
+    SocialmediaType:
+      class: App\Entity\SocialmediaType
+      list:
+        title: "Liste des résaux sociaux disponible"
+        actions:
+          [
+            { name: "new", label: "Ajouter" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            { property: "name", label: "Nom" },
+            { property: "enable", label: "Activé ?" },
+          ]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+            { property: "name", label: "Nom" },
+            { property: "enable", label: "Activé ?" },
+          ]

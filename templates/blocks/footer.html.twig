@@ -9,21 +9,7 @@
 				<div class="w-col w-col-2 w-col-stack" style="text-align:right;">
 					<div>
 						<div class="w-clearfix social-wrapper s-footer">
-							<a class="w-inline-block social-ico social-footer twitter tooltip-2" href="//{{ twitter_link }}" title="Twitter" target="_blank">
-								<div class="w-embed">
-									<i class="fab fa-twitter"></i>
-								</div>
-							</a>
-							<a class="w-inline-block social-ico social-footer discord tooltip-2" href="//{{ discord_link }}" title="Discord" target="_blank">
-								<div class="w-embed">
-									<i class="fab fa-discord"></i>
-								</div>
-							</a>
-							<a class="w-inline-block social-ico social-footer youtube tooltip-2" href="//{{ youtube_link }}" title="Youtube" target="_blank">
-								<div class="w-embed">
-									<i class="fab fa-youtube"></i>
-								</div>
-							</a>
+							{% include "blocks/social_media.html.twig" with { 'a_class': 'social-footer' } %}
 						</div>
 					</div>
 				</div>

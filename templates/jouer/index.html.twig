@@ -36,7 +36,8 @@
 
 				{% if maintenance_service.count_maintenances() > 0 %}
 					<p>
-						Certains de nos services sont en maintenance: <a href="{{ path('maintenances') }}" class="link_maintenances">voir plus de détails</a>.
+						Certains de nos services sont en maintenance:
+						<a href="{{ path('maintenances') }}" class="link_maintenances">voir plus de détails</a>.
 					</p>
 				{% endif %}
 
@@ -44,21 +45,7 @@
 				<p>Disscutez avec la communauté de ScandiCraft et suivez les actualités.</p>
 				<li class="li-social jouer">
 					<div class="w-clearfix social-wrapper">
-						<a class="w-inline-block social-ico twitter tooltip-2 jouer_social" href="//{{ twitter_link }}" title="Twitter" target="_blank">
-							<div class="w-embed jouer_social_content">
-								<i class="fab fa-twitter"></i>
-							</div>
-						</a>
-						<a class="w-inline-block social-ico discord tooltip-2 jouer_social" href="//{{ discord_link }}" title="Discord" target="_blank">
-							<div class="w-embed jouer_social_content">
-								<i class="fab fa-discord"></i>
-							</div>
-						</a>
-						<a class="w-inline-block social-ico youtube tooltip-2 jouer_social" href="//{{ youtube_link }}" title="Youtube" target="_blank">
-							<div class="w-embed jouer_social_content">
-								<i class="fab fa-youtube"></i>
-							</div>
-						</a>
+						{% include "blocks/social_media.html.twig" with { 'a_class': 'jouer_social', 'embed_class': 'jouer_social_content' } %}
 					</div>
 				</li>
 			</div>

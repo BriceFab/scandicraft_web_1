@@ -1,9 +1,9 @@
 easy_admin:
   design:
     menu:
-      - label: "Utilisateurs" #user_banned, user_money, news_letter_on
+      - label: "Utilisateurs"
         icon: "users-cog"
-        children: [{ entity: "User", label: "Joueurs" }] #échange pbs
+        children: [{ entity: "User", label: "Joueurs" }]
       - label: "Maintenance"
         icon: "tools"
         children: [{ entity: "DevProgression", label: "Progressions" }]
@@ -20,7 +20,14 @@ easy_admin:
         children:
           [
             { entity: "Thanks", label: "Remerciements" },
-            { entity: "ThanksCategory", label: "Remerciements Catégories" },
+            { entity: "ThanksCategory", label: "Remerciements catégories" },
+          ]
+      - label: "Réseaux sociaux"
+        icon: "network-wired"
+        children:
+          [
+            { entity: "SocialmediaType", label: "Liste" },
+            { entity: "MySocialmedia", label: "ScandiCraft" },
           ]
       - { label: "liens" }
       - {
