@@ -17,12 +17,6 @@ class UserSocialmedia
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userSocialmedia")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\SocialmediaType", inversedBy="userSocialmedia")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -34,25 +28,13 @@ class UserSocialmedia
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Thanks", inversedBy="socialmedia")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Thanks", inversedBy="social_media")
      */
     private $thanks;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     public function getSocialmediaType(): ?SocialmediaType
@@ -90,4 +72,5 @@ class UserSocialmedia
 
         return $this;
     }
+
 }

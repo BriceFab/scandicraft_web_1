@@ -34,11 +34,6 @@ class ThanksCategory
     private $thanks;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $subtitle;
@@ -110,18 +105,6 @@ class ThanksCategory
 
     public function __toString() {
         return $this->getName();
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function getSubtitle(): ?string

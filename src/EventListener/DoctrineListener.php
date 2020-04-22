@@ -3,6 +3,7 @@
 namespace App\EventListener;
 
 use App\Entity\Survey;
+use App\Entity\Thanks;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Security;
 

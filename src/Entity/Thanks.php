@@ -42,14 +42,19 @@ class Thanks
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserSocialmedia", mappedBy="thanks")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserSocialmedia", mappedBy="thanks", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $socialmedia;
+    private $social_media;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $head_link;
 
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
-        $this->socialmedia = new ArrayCollection();
+        $this->social_media = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,38 +110,50 @@ class Thanks
         return $this;
     }
 
+    public function __toString() {
+        return "Remerciement pour " . $this->getUser()->getUsername();
+    }
+
     /**
      * @return Collection|UserSocialmedia[]
      */
     public function getSocialmedia(): Collection
     {
-        return $this->socialmedia;
+        return $this->social_media;
     }
 
-    public function addSocialmedia(UserSocialmedia $socialmedia): self
+    public function addSocialMedium(UserSocialmedia $socialMedium): self
     {
-        if (!$this->socialmedia->contains($socialmedia)) {
-            $this->socialmedia[] = $socialmedia;
-            $socialmedia->setThanks($this);
+        if (!$this->social_media->contains($socialMedium)) {
+            $this->social_media[] = $socialMedium;
+            $socialMedium->setThanks($this);
         }
 
         return $this;
     }
 
-    public function removeSocialmedia(UserSocialmedia $socialmedia): self
+    public function removeSocialMedium(UserSocialmedia $socialMedium): self
     {
-        if ($this->socialmedia->contains($socialmedia)) {
-            $this->socialmedia->removeElement($socialmedia);
+        if ($this->social_media->contains($socialMedium)) {
+            $this->social_media->removeElement($socialMedium);
             // set the owning side to null (unless already changed)
-            if ($socialmedia->getThanks() === $this) {
-                $socialmedia->setThanks(null);
+            if ($socialMedium->getThanks() === $this) {
+                $socialMedium->setThanks(null);
             }
         }
 
         return $this;
     }
 
-    public function __toString() {
-        return "Remerciement pour " . $this->getUser()->getUsername();
+    public function getHeadLink(): ?string
+    {
+        return $this->head_link;
+    }
+
+    public function setHeadLink(string $head_link): self
+    {
+        $this->head_link = $head_link;
+
+        return $this;
     }
 }

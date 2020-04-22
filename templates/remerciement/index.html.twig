@@ -2,171 +2,129 @@
 
 {% block title %}Remerciements
 {% endblock %}
-{% block description %}Remerciements à tous les buileurs, designeurs, graphistes volontaires sur ScandiCraft !{% endblock %}
+{% block description %}Remerciements à tous les buileurs, designeurs, graphistes volontaires sur ScandiCraft !
+{% endblock %}
 
 {% block body %}
 
 	<section class="w-section section">
-		<div class="w-container">
-			<div class="top-title">
-				<div class="title-txt">
-					<h5>Buildeurs
-						<span class="sub-title-lighter">/ constructeurs volontaires</span>
-					</h5>
-				</div>
-				<div class="divider"></div>
-			</div>
-			<div>
-				<p>
-					Ci-dessous vous retrouverez tout les buildeurs de la communauté ScandiCraft qui se sont portés volontaires pour aider notre serveur à se développer. Un grand remerciement à tous pour leur magnifique constructions !
-				</p>
-			</div>
-			<div class="top-spc">
-				<div class="w-row">
-					<div class="w-col w-col-3">
-						<div class="team-wrapper">
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<h5 class="tm-title">Fowlann</h5>
-										<div class="sub-title-lighter">Builder</div>
-									</div>
-									<div class="col">
-										<img src="https://crafatar.com/avatars/948fc377-5ac9-482d-b942-182d6ca58357" class="minecraft-head-skin">
-									</div>
-								</div>
-							</div>
-							<div class="div-spc">
-								<div class="line-team"></div>
-								<p>
-									Ancien joueur PvP/Faction qui reprend goût au mode de jeu.
-								</p>
-								<div class="line-team"></div>
-								<div class="w-clearfix social-wrapper no-dwn">
-									<a class="w-inline-block social-ico twitter tooltip-2" href="//twitter.com/Fowlann_" target="_blank" title="Twitter" rel="nofollow">
-										<div class="w-embed">
-											<i class="fab fa-twitter"></i>
-										</div>
-									</a>
-								</div>
-							</div>
+		{% for category in categories|sort((a, b) => a.thanks < b.thanks) %}
+			{% if category.thanks|length > 0 %}
+				<div class="w-container">
+					<div class="top-title">
+						<div class="title-txt">
+							<h5>{{ category.name }}
+								<span class="sub-title-lighter">/
+									{{ category.subtitle }}</span>
+							</h5>
 						</div>
+						<div class="divider"></div>
 					</div>
-					<div class="w-col w-col-3">
-						<div class="team-wrapper">
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<h5 class="tm-title">Manu_</h5>
-										<div class="sub-title-lighter">Builder</div>
-									</div>
-									<div class="col">
-										<img src="https://crafatar.com/avatars/5146cf0f-e60a-41e3-9571-1a1396d13b18" class="minecraft-head-skin">
-									</div>
-								</div>
-							</div>
-							<div class="div-spc">
-								<div class="line-team"></div>
-								<p>
-									Manu_ est un joueur multigaming mais aussi un builder minecraft à ses temps perdu.
-								</p>
-								<div class="line-team"></div>
-								<div class="w-clearfix social-wrapper no-dwn">
-									<a class="w-inline-block social-ico twitter tooltip-2" href="//twitter.com/Manu33045643" target="_blank" title="Twitter" rel="nofollow">
-										<div class="w-embed">
-											<i class="fab fa-twitter"></i>
-										</div>
-									</a>
-									<a class="w-inline-block social-ico youtube tooltip-2" href="//youtube.com/channel/UClAPlOCIB8hJbTIJnlr8Dkw" target="_blank" title="Youtube" rel="nofollow">
-										<div class="w-embed">
-											<i class="fab fa-youtube"></i>
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
+					<div>
+						<p>
+							{{ category.description }}
+						</p>
 					</div>
-					<div class="w-col w-col-3">
-						<div class="team-wrapper">
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<h5 class="tm-title">Art3m0s_</h5>
-										<div class="sub-title-lighter">Builder</div>
-									</div>
-									<div class="col">
-										<img src="https://crafatar.com/avatars/9af36882-c317-4a28-a6f0-45a89e7acd5e" class="minecraft-head-skin">
-									</div>
-								</div>
-							</div>
-							<div class="div-spc">
-								<div class="line-team"></div>
-								<p>
-									Artemos est un builder et un joueur PvP / Faction.
-								</p>
-								<div class="line-team"></div>
-								<div class="w-clearfix social-wrapper no-dwn">
-									<a class="w-inline-block social-ico twitter tooltip-2" href="//twitter.com/Artem0s_" target="_blank" title="Twitter" rel="nofollow">
-										<div class="w-embed">
-											<i class="fab fa-twitter"></i>
+					<div class="top-spc">
+						<div class="w-row">
+							{% for thank in category.thanks %}
+								<div class="w-col w-col-3">
+									<div class="team-wrapper">
+										<div class="container">
+											<div class="row">
+												<div class="col">
+													<h5 class="tm-title">{{ thank.user.username }}</h5>
+													{% set cat_length = category.name|length %}
+													<div class="sub-title-lighter">{{ category.name|trim|slice(0, cat_length - 1) }}</div>
+												</div>
+												<div class="col">
+													<img src="{{ thank.getHeadLink() }}" class="minecraft-head-skin">
+												</div>
+											</div>
 										</div>
-									</a>
+										<div class="div-spc">
+											<div class="line-team"></div>
+											<p>
+												{{ thank.presentation }}
+											</p>
+											<div class="line-team"></div>
+											<div class="w-clearfix social-wrapper no-dwn">
+												{% for network in thank.getSocialmedia() %}
+													{% set network_name = network.getSocialmediaType().name|lower %}
+													<a class="w-inline-block social-ico {{ network_name }} tooltip-2" href="//{{ network.url }}" target="_blank" title="{{ network_name|capitalize }}" rel="nofollow">
+														<div class="w-embed">
+															<i class="fab fa-{{ network_name }}"></i>
+														</div>
+													</a>
+												{% endfor %}
+											</div>
+										</div>
+									</div>
 								</div>
-							</div>
+							{% endfor %}
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<br/>
-		<div class="w-container">
-			<div class="top-title">
-				<div class="title-txt">
-					<h5>Graphistes
-						<span class="sub-title-lighter">/ designeurs volontaires</span>
-					</h5>
-				</div>
-				<div class="divider"></div>
-			</div>
-			<div>
-				<p>
-					Ci-dessous vous retrouverez tout les graphistes et designeurs de la communauté ScandiCraft qui se sont portés volontaires pour aider notre serveur à se développer. Un grand remerciement à tous pour leur magnifique conceptions !
-				</p>
-			</div>
-			<div class="top-spc">
-				<div class="w-row">
-					<div class="w-col w-col-3">
-						<div class="team-wrapper">
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<h5 class="tm-title">Hisøka</h5>
-										<div class="sub-title-lighter">Logo maker</div>
-									</div>
-									<div class="col">
-										<img src="https://crafatar.com/avatars/984dfe95-2e69-447e-b47f-ea45d3edf571" class="minecraft-head-skin">
-									</div>
-								</div>
-							</div>
-							<div class="div-spc">
-								<div class="line-team"></div>
-								<p>
-									Salut moi c'est Issoka, je suis Graphiste, Pack Maker. Je fais un peu de tout en ce qui concerne le graphisme. Je dessine sur tablette graphique depuis plus d'un an et demi en plus de mes horaires de travail IRL le dessin pour moi ne reste qu'une passion avant tous.
-								</p>
-								<div class="line-team"></div>
-								<div class="w-clearfix social-wrapper no-dwn">
-									<a class="w-inline-block social-ico discord tooltip-2" href="//discord.gg/Ru7wxvH" target="_blank" title="Discord" rel="nofollow">
-										<div class="w-embed">
-											<i class="fab fa-discord"></i>
+				<br/>
+			{% else %}
+				<div class="w-container">
+					<div class="top-title">
+						<div class="title-txt">
+							<h5>{{ category.name }}
+								<span class="sub-title-lighter">/
+									{{ category.subtitle }}</span>
+							</h5>
+						</div>
+						<div class="divider"></div>
+					</div>
+					<div>
+						<p>
+							{{ category.description }}
+						</p>
+					</div>
+					<div class="top-spc">
+						<div class="w-row">
+							{% for thank in category.thanks %}
+								<div class="w-col w-col-3">
+									<div class="team-wrapper">
+										<div class="container">
+											<div class="row">
+												<div class="col">
+													<h5 class="tm-title">{{ thank.user.username }}</h5>
+													{% set cat_length = category.name|length %}
+													<div class="sub-title-lighter">{{ category.name|trim|slice(0, cat_length - 1) }}</div>
+												</div>
+												<div class="col">
+													<img src="https://crafatar.com/avatars/948fc377-5ac9-482d-b942-182d6ca58357" class="minecraft-head-skin">
+												</div>
+											</div>
 										</div>
-									</a>
+										<div class="div-spc">
+											<div class="line-team"></div>
+											<p>
+												{{ thank.presentation }}
+											</p>
+											<div class="line-team"></div>
+											<div class="w-clearfix social-wrapper no-dwn">
+												{% for network in thank.getSocialmedia() %}
+													{% set network_name = network.getSocialmediaType().name|lower %}
+													<a class="w-inline-block social-ico {{ network_name }} tooltip-2" href="//{{ network.url }}" target="_blank" title="{{ network_name|capitalize }}" rel="nofollow">
+														<div class="w-embed">
+															<i class="fab fa-{{ network_name }}"></i>
+														</div>
+													</a>
+												{% endfor %}
+											</div>
+										</div>
+									</div>
 								</div>
-							</div>
+							{% endfor %}
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</section>
+				<br/>
+			{% endif %}
+		{% endfor %}
 
+	</section>
 {% endblock %}

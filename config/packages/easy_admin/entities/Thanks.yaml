@@ -7,7 +7,6 @@ easy_admin:
         actions:
           [
             { name: "new", label: "Ajouter un remerciement" },
-            { name: "show", label: "Détail", icon: "search" },
             { name: "edit", label: "Modifier", icon: "edit" },
             { name: "delete", label: "Supprimer", icon: "trash" },
           ]
@@ -16,26 +15,6 @@ easy_admin:
             { property: "user.username", label: "Pseudonyme" },
             { property: "thanks_category.name", label: "Catégorie" },
             { property: "createdAt", label: "Depuis le" },
-          ]
-      show:
-        title: "Information sur l'utilisateur"
-        fields:
-          [
-            { property: "id", label: "Identification" },
-            { property: "username", label: "Pseudonyme" },
-            { property: "email", label: "input.email" },
-            {
-              property: "has_confirm_email",
-              label: "Email confirmé ?",
-              type: "boolean",
-            },
-            {
-              property: "roles",
-              label: "Roles",
-              template: "easy_admin/fields/display_roles.html.twig",
-            },
-            { property: "createdAt", label: "Créer le" },
-            { property: "last_login", label: "Dernière connexion le" },
           ]
       form:
         title: "Ajout du remerciement"
@@ -58,6 +37,7 @@ easy_admin:
               type: "entity",
               type_options: { class: 'App\Entity\ThanksCategory' },
             },
+            { property: "head_link", label: "Lien de la tête (skin)" },
             {
               property: "socialmedia",
               label: "Réseaux sociaux",
@@ -66,6 +46,8 @@ easy_admin:
                 {
                   entry_type: 'App\Form\UserSocialmediaType',
                   allow_delete: true,
+                  allow_add: true,
+                  by_reference: false,
                 },
             },
           ]
