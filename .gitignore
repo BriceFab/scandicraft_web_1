@@ -3,7 +3,6 @@
 /public/bundles/
 /var/
 /vendor/
-.env.local
 
 # symfony/phpunit-bridge
 .phpunit
@@ -22,6 +21,5 @@ symfony.lock
 yarn.lock
 *.log
 *.lock
-_backup.env.local
 public/upload/skins/
 public/upload/capes/

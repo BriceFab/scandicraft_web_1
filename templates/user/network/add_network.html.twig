@@ -1,0 +1,10 @@
+{{ form_start(form_network) }}
+    {{ form_row(form_network.description) }}
+
+    <h3>Tags</h3>
+    <ul class="tags">
+        {% for tag in form_network.tags %}
+            <li>{{ form_row(tag.name) }}</li>
+        {% endfor %}
+    </ul>
+{{ form_end(form_network) }}

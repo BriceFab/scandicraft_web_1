@@ -15,22 +15,27 @@ easy_admin:
             { entity: "SurveyAnswerList", label: "Listes réponses" },
             { entity: "SurveyAnswers", label: "Réponses" },
           ]
+      - label: "Équipe"
+        icon: "user-tie"
+        children:
+          [
+            { entity: "Thanks", label: "Remerciements" },
+            { entity: "ThanksCategory", label: "Remerciements Catégories" },
+          ]
       - { label: "liens" }
-      - { label: "Retour", url: "/", icon: "chevron-circle-left", target: "_self" }
-      #Boutique (items, history, paiement)
-      #News
-      #Sondage
-      #Vote (site, vote_history?)
-      #IP (historique de 5 max)
-      #Support
-      #Forum
+      - {
+          label: "Retour",
+          url: "/",
+          icon: "chevron-circle-left",
+          target: "_self",
+        }
     assets:
       css:
         - "build/easy_admin.css"
   list:
     max_results: 50
   formats:
-    datetime: 'd/m/Y à H:i'
+    datetime: "d/m/Y à H:i"
     date: d/m/Y
-    time: 'H:i'
+    time: "H:i"
     number: "%.3f"

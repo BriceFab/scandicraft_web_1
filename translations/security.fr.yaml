@@ -14,4 +14,4 @@
 'Account is disabled.': 'Le compte est désactivé.'
 'Account is locked.': 'Le compte est bloqué.'
 'Email or username could not be found.': 'Identifiants invalides'
-error.must.confirm.email: Vous devez confirmer votre adresse email
+error.must.confirm.email: Vous devez confirmer votre adresse email. (Pensez à regarder votre dossier SPAM) !
