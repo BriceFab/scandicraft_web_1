@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\DevProgression;
+use App\Entity\Survey;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 class CommunityController extends AbstractController
 {
@@ -35,9 +38,19 @@ class CommunityController extends AbstractController
     /**
      * @Route("/sondages", name="sondages")
      */
-    public function showSondages()
+    public function showSondages(Request $request, PaginatorInterface $paginator)
     {
-        return $this->render('survey/list.html.twig');
+        $data = $this->getDoctrine()->getRepository(Survey::class)->findBy([], ['createdAt' => 'ASC']);
+
+        $sondages = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            1 // Nombre de résultats par page
+        );
+
+        return $this->render('survey/list.html.twig', [
+            'sondages' => $sondages
+        ]);
     }
 
     /**

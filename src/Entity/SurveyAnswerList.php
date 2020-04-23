@@ -27,11 +27,6 @@ class SurveyAnswerList
     private $answer;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="surveyAnswerLists")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -45,7 +40,6 @@ class SurveyAnswerList
     public function __construct()
     {
         $this->surveys = new ArrayCollection();
-        $this->setCreatedAt(new DateTime('now'));
     }
 
     public function getId(): ?int
@@ -61,18 +55,6 @@ class SurveyAnswerList
     public function setAnswer(string $answer): self
     {
         $this->answer = $answer;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }

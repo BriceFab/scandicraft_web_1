@@ -3,18 +3,18 @@ easy_admin:
     SurveyAnswerList:
       class: App\Entity\SurveyAnswerList
       list:
-        title: "Liste réponses possibles pour les sondages"
+        title: "Liste de réponses possibles pour les sondages"
         actions:
           [
-            { name: "show", label: "Détail", icon: "search" },
             { name: "edit", label: "Modifier", icon: "edit" },
             { name: "delete", label: "Supprimer", icon: "trash" },
+            { name: "new", label: "Ajouter" },
           ]
         fields:
           [
-            { property: "id", label: "Id" },
-            { property: "username", label: "Pseudonyme" },
-            { property: "email", label: "input.email" },
-            { property: "createdAt", label: "Créer le" },
-            { property: "last_login", label: "Dernière connexion le" },
+            { property: "createdBy.username", label: "Créer par" },
+            { property: "answer", label: "Réponse" },
           ]
+      form:
+        title: "Ajouter/Modifier"
+        fields: [{ property: "answer", label: "Réponse" }]

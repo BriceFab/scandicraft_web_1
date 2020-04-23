@@ -18,8 +18,8 @@ easy_admin:
             { property: "user", label: "Créer par" },
             { property: "countAnswers", label: "Nombre de réponses" },
           ]
-      form: #create and edit
-        title: "Liste des sondages"
+      form:
+        title: "Aouter/Modifier le sondage"
         fields:
           [
             { property: "title", label: "Titre" },
@@ -39,4 +39,23 @@ easy_admin:
               label: "Créer le",
               type_options: { disabled: true },
             },
+          ]
+      show:
+        title: "Détail du sondage"
+        fields:
+          [
+            { property: "title", label: "Titre" },
+            { property: "description", label: "Description" },
+            {
+              property: "answer_delay",
+              label: "Temps de réponses maximale (en heures)",
+            },
+            {
+              property: "answers_list",
+              label: "Réponses possibles",
+              type: "entity",
+              type_options: { class: App\Entity\SurveyAnswerList },
+            },
+            { property: "createdAt", label: "Créer le" },
+            { property: "countAnswers", label: "Nombre de réponses", type: "string" },
           ]
