@@ -8,7 +8,7 @@
 {% block body %}
 
 	<section class="w-section section">
-		{% for category in categories|sort((a, b) => a.thanks < b.thanks) %}
+		{% for category in categories %}
 			{% if category.thanks|length > 0 %}
 				<div class="w-container">
 					<div class="top-title">

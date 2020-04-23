@@ -22,7 +22,7 @@ class AboutUsController extends AbstractController
      */
     public function showRemerciements()
     {
-        $remerciements_categories = $this->em->getRepository(ThanksCategory::class)->findAll();
+        $remerciements_categories = $this->em->getRepository(ThanksCategory::class)->findBy([], ['name' => 'ASC']);
         return $this->render('remerciement/index.html.twig', ['categories' => $remerciements_categories]);
     }
 
