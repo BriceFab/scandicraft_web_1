@@ -1,0 +1,35 @@
+easy_admin:
+  entities:
+    StaffCategory:
+      class: App\Entity\StaffCategory
+      list:
+        title: "Liste des fonctions du Staff"
+        actions:
+          [
+            { name: "new", label: "Ajouter une fonction" },
+            { name: "show", label: "Détail", icon: "search" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            { property: "name", label: "Nom" },
+            { property: "subtitle", label: "Sous-titre" },
+            { property: "description", label: "Description" },
+          ]
+      show:
+        title: "Information sur la fonction"
+        fields:
+          [
+            { property: "name", label: "Nom" },
+            { property: "subtitle", label: "Sous-titre" },
+            { property: "description", label: "Description" },
+          ]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+            { property: "name", label: "Nom" },
+            { property: "subtitle", label: "Sous-titre" },
+            { property: "description", label: "Description", type: "textarea" },
+          ]

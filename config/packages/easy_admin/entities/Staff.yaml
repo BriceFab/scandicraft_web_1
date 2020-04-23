@@ -1,20 +1,20 @@
 easy_admin:
   entities:
-    Thanks:
-      class: App\Entity\Thanks
+    Staff:
+      class: App\Entity\Staff
       list:
-        title: "Liste des remerciements"
+        title: "Liste des membres du Staff"
         actions:
           [
-            { name: "new", label: "Ajouter un remerciement" },
+            { name: "new", label: "Ajouter un membre" },
             { name: "edit", label: "Modifier", icon: "edit" },
             { name: "delete", label: "Supprimer", icon: "trash" },
           ]
         fields:
           [
             { property: "user.username", label: "Pseudonyme" },
-            { property: "thanks_category.name", label: "Catégorie" },
-            { property: "createdAt", label: "Depuis le" },
+            { property: "category.name", label: "Fonction" },
+            { property: "since", label: "Depuis le" },
           ]
       form:
         title: "Ajouter/Modifier"
@@ -32,12 +32,15 @@ easy_admin:
               type: "textarea",
             },
             {
-              property: "thanks_category",
-              label: "Catégorie",
+              property: "category",
+              label: "Fonction",
               type: "entity",
-              type_options: { class: 'App\Entity\ThanksCategory' },
+              type_options: { class: 'App\Entity\StaffCategory' },
             },
             { property: "head_link", label: "Lien de la tête (skin)" },
+            {
+              property: "since", label: "Depuis le"
+            },
             {
               property: "socialmedia",
               label: "Réseaux sociaux",

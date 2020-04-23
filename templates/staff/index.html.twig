@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}L'équipe
+{% endblock %}
+{% block description %}Voici l'équipe du serveur ScandiCraft ! Vous retrouverrez les membres du Staff actuels, Fondateurs, Administrateur, Modérateur et Helpeurs.
+{% endblock %}
+
+{% block body %}
+
+	<section class="w-section section">
+		{% for category in categories %}
+			{% if category.staff|length > 0 %}
+				<div class="w-container">
+					<div class="top-title">
+						<div class="title-txt">
+							<h5>{{ category.name }}
+								<span class="sub-title-lighter">/
+									{{ category.subtitle }}</span>
+							</h5>
+						</div>
+						<div class="divider"></div>
+					</div>
+					<div>
+						<p>
+							{{ category.description }}
+						</p>
+					</div>
+					<div class="top-spc">
+						<div class="w-row">
+							{% for membre in category.staff %}
+								<div class="w-col w-col-3">
+									<div class="team-wrapper">
+										<div class="container">
+											<div class="row">
+												<div class="col">
+													<h5 class="tm-title">{{ membre.user.username }}</h5>
+													{% set cat_length = category.name|length %}
+													<div class="sub-title-lighter">{{ category.name|trim|slice(0, cat_length - 1) }}</div>
+												</div>
+												<div class="col">
+													<img src="{{ membre.getHeadLink() }}" class="minecraft-head-skin">
+												</div>
+											</div>
+										</div>
+										<div class="div-spc">
+											<div class="line-team"></div>
+											<p>
+												{{ membre.presentation }}
+											</p>
+											<div class="line-team"></div>
+											<div class="w-clearfix social-wrapper no-dwn">
+												{% for network in membre.getSocialmedia() %}
+													{% set network_name = network.getSocialmediaType().name|lower %}
+													<a class="w-inline-block social-ico {{ network_name }} tooltip-2" href="//{{ network.url }}" target="_blank" title="{{ network_name|capitalize }}" rel="nofollow">
+														<div class="w-embed">
+															<i class="fab fa-{{ network_name }}"></i>
+														</div>
+													</a>
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				<br/>
+			{% else %}
+				<div class="w-container">
+					<div class="top-title">
+						<div class="title-txt">
+							<h5>{{ category.name }}
+								<span class="sub-title-lighter">/
+									{{ category.subtitle }}</span>
+							</h5>
+						</div>
+						<div class="divider"></div>
+					</div>
+					<div>
+						<p>
+							{{ category.description }}
+						</p>
+					</div>
+					<div class="top-spc">
+						<p>
+							Aucun personne pour le moment.
+						</p>
+					</div>
+				</div>
+				<br/>
+			{% endif %}
+		{% endfor %}
+
+	</section>
+{% endblock %}

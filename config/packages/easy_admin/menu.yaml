@@ -19,7 +19,9 @@ easy_admin:
         icon: "user-tie"
         children:
           [
+            { entity: "Staff", label: "Staff" },
             { entity: "Thanks", label: "Remerciements" },
+            { entity: "StaffCategory", label: "Staff catégories" },
             { entity: "ThanksCategory", label: "Remerciements catégories" },
           ]
       - label: "Réseaux sociaux"
