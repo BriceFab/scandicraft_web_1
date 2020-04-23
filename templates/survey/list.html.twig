@@ -11,17 +11,30 @@
 		<div class="w-container">
 			<div class="w-row">
 
+				<h1>Liste des sondages actifs ({{ sondages|length }})</h1>
+				{% for sondage in sondages %}
 
+					<div>
+						<div class="top-title">
+							<div class="title-txt">
+								<h3>{{ sondage.title }}</h3>
+							</div>
+							<div class="divider"></div>
+						</div>
+						<div class="info-box">
+							<p>
+								{{ sondage.description }}
+							</p>
+							<div class="div-spc">
+								{% for answer in sondage.getSurveyAnswers() %}
+									<a class="button no-spc" href="#">Some Button</a>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
 
-
-
-   <h1>Liste des sondages</h1>
-    {% for sondage in sondages %}
-        <h2>{{ sondage.title }}</h2>
-    {% endfor %}
-    {{ knp_pagination_render(sondages) }}
-
-
+				{% endfor %}
+				{{ knp_pagination_render(sondages) }}
 
 			</div>
 		</div>

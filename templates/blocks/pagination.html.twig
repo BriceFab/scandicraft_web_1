@@ -1,0 +1,50 @@
+{# Pagination #}
+{% if pageCount > 1 %}
+	<div class="divider d-v2"></div>
+
+	<div class="w-clearfix pagination-wrapper">
+		{% if first is defined and current != first %}
+			<a class="w-inline-block pagination p-dark" href="{{ path(route, query|merge({(pageParameterName): first})) }}">
+				<div class="w-embed">
+					<i class="fas fa-angle-double-left"></i>
+				</div>
+			</a>
+		{% endif %}
+
+		{% if previous is defined %}
+			<a class="w-inline-block pagination p-dark" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
+				<div class="w-embed">
+					<i class="fas fa-angle-left"></i>
+				</div>
+			</a>
+		{% endif %}
+
+		{% for page in pagesInRange %}
+			{% if page != current %}
+				<a class="w-inline-block pagination" href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+					<div>{{ page }}</div>
+				</a>
+			{% else %}
+				<a class="w-inline-block pagination p-active" href="#">
+					<div>{{ page }}</div>
+				</a>
+			{% endif %}
+		{% endfor %}
+
+		{% if next is defined %}
+			<a class="w-inline-block pagination p-dark" href="{{ path(route, query|merge({(pageParameterName): next})) }}">
+				<div class="w-embed">
+					<i class="fas fa-angle-right"></i>
+				</div>
+			</a>
+		{% endif %}
+
+		{% if last is defined and current != last %}
+			<a class="w-inline-block pagination p-dark" href="{{ path(route, query|merge({(pageParameterName): last})) }}">
+				<div class="w-embed">
+					<i class="fas fa-angle-double-right"></i>
+				</div>
+			</a>
+		{% endif %}
+	</div>
+{% endif %}

@@ -207,4 +207,9 @@ class Survey
     {
         return $this->getCreatedAt()->modify("+{$this->getAnswerDelay()} hours"); #TODO: c'est bugé
     }
+
+    public function isEnable()
+    {
+        return $this->getLimitDate() > new DateTime('now');
+    }
 }
