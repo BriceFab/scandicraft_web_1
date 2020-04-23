@@ -32,7 +32,7 @@ class SurveyAnswers
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $commment;
+    private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Survey", inversedBy="surveyAnswers")
@@ -80,14 +80,14 @@ class SurveyAnswers
         return $this;
     }
 
-    public function getCommment(): ?string
+    public function getComment(): ?string
     {
-        return $this->commment;
+        return $this->comment;
     }
 
-    public function setCommment(?string $commment): self
+    public function setComment(?string $comment): self
     {
-        $this->commment = $commment;
+        $this->comment = $comment;
 
         return $this;
     }

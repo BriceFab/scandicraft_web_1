@@ -12,8 +12,8 @@ easy_admin:
         children:
           [
             { entity: "Survey", label: "Sondages" },
-            { entity: "SurveyAnswerList", label: "Listes réponses" },
             { entity: "SurveyAnswers", label: "Réponses" },
+            { entity: "SurveyAnswerList", label: "Listes réponses" },
           ]
       - label: "Équipe"
         icon: "user-tie"

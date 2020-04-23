@@ -3,6 +3,7 @@
 namespace App\EventListener;
 
 use App\Entity\Survey;
+use App\Entity\SurveyAnswerList;
 use App\Entity\Thanks;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Security;
@@ -22,6 +23,8 @@ class DoctrineListener
 
         if ($entity instanceof Survey) {
             $entity->setUser($this->security->getUser());
+        } elseif ($entity instanceof SurveyAnswerList) {
+            $entity->setCreatedBy($this->security->getUser());
         }
     }
 }
