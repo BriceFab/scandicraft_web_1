@@ -8,3 +8,5 @@ imports:
 - { resource: ThanksCategory.yaml }
 - { resource: SocialmediaType.yaml }
 - { resource: MySocialmedia.yaml }
+- { resource: Staff.yaml }
+- { resource: StaffCategory.yaml }

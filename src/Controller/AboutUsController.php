@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\StaffCategory;
 use App\Entity\Thanks;
 use App\Entity\ThanksCategory;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,7 +32,8 @@ class AboutUsController extends AbstractController
      */
     public function showEquipe()
     {
-        return $this->render('maintenance/page_under_maintenance.html.twig');
+        $staff_categories = $this->em->getRepository(StaffCategory::class)->findBy([], ['name' => 'ASC']);
+        return $this->render('staff/index.html.twig', ['categories' => $staff_categories]);
     }
 
     /**

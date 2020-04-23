@@ -32,6 +32,11 @@ class UserSocialmedia
      */
     private $thanks;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Staff", inversedBy="social_media")
+     */
+    private $staff;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class UserSocialmedia
     public function setThanks(?Thanks $thanks): self
     {
         $this->thanks = $thanks;
+
+        return $this;
+    }
+
+    public function getStaff(): ?Staff
+    {
+        return $this->staff;
+    }
+
+    public function setStaff(?Staff $staff): self
+    {
+        $this->staff = $staff;
 
         return $this;
     }
