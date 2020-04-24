@@ -14,9 +14,15 @@ import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
 
+//import web js
+import './web/survey.js';
+
 //cannot call from html
 export default function isIE() {
     var ua = window.navigator.userAgent;
     var isIE = /MSIE|Trident/.test(ua);
     return isIE;
 }
+
+//export to dom
+window.isIE = isIE;

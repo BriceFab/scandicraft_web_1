@@ -29,7 +29,7 @@
 							</p>
 							<div class="div-spc">
 								{% for answer in sondage.getAnswersList() %}
-									<a class="button no-spc" href="#">{{ answer.answer }}</a>
+									<a class="button no-spc" href="#" onclick="onSurveyAnswerClick('{{ app.request.getSchemeAndHttpHost() }}', {{ answer.id }}, {{ sondage.id }}, {{ app.user.id }})">{{ answer.answer }}</a>
 								{% endfor %}
 							</div>
 						</div>
