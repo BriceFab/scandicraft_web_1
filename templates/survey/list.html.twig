@@ -12,6 +12,9 @@
 			<div class="w-row">
 
 				<h1>Liste des sondages actifs ({{ sondages|length }})</h1>
+				<p>Vous n'avez pas répondu à 2 sondages en cours..</p>
+				<div style="margin-bottom: 48px;"></div>
+
 				{% for sondage in sondages %}
 
 					<div>
@@ -19,18 +22,64 @@
 							<div class="title-txt">
 								<h3>{{ sondage.title }}</h3>
 							</div>
-							<div class="divider"></div>
 						</div>
 						<div class="info-box">
 							<p>
 								{{ sondage.description }}
 							</p>
 							<div class="div-spc">
-								{% for answer in sondage.getSurveyAnswers() %}
-									<a class="button no-spc" href="#">Some Button</a>
+								{% for answer in sondage.getAnswersList() %}
+									<a class="button no-spc" href="#">{{ answer.answer }}</a>
 								{% endfor %}
 							</div>
 						</div>
+
+						<div class="meta-tag">
+							<ul class="w-list-unstyled">
+								<li class="li-top m-space">
+									<div class="meta-cs">
+										<div class="top-ico top-darker">
+											<div class="w-embed">
+												<i class="fa fa-comment"></i>
+											</div>
+										</div>
+										<div class="txt-top txt-last">0 Comments</div>
+									</div>
+								</li>
+								<li class="li-top m-space">
+									<div class="meta-cs">
+										<div class="top-ico top-darker">
+											<div class="w-embed">
+												<i class="fa fa-clock-o"></i>
+											</div>
+										</div>
+										<div class="txt-top txt-last">March 09, 2015</div>
+									</div>
+								</li>
+								<li class="li-top m-space">
+									<div class="meta-cs">
+										<div class="top-ico top-darker">
+											<div class="w-embed">
+												<i class="fa fa-user"></i>
+											</div>
+										</div>
+										<div class="txt-top txt-last">admin</div>
+									</div>
+								</li>
+								<li class="li-top m-space">
+									<div class="meta-cs">
+										<div class="top-ico top-darker">
+											<div class="w-embed">
+												<i class="fa fa-eye"></i>
+											</div>
+										</div>
+										<div class="txt-top txt-last">0 Views</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+
+						<div class="divider" style="margin-top:15px;"></div>
 					</div>
 
 				{% endfor %}

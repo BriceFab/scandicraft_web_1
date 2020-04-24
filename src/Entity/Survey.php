@@ -22,7 +22,7 @@ class Survey
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private $fromTheDate;
 
     /**
      * @ORM\Column(type="integer")
@@ -59,7 +59,7 @@ class Survey
     {
         $this->surveyAnswers = new ArrayCollection();
         $this->answers_list = new ArrayCollection();
-        $this->setCreatedAt(new DateTime('now'));
+        $this->setFromTheDate(new DateTime('now'));
     }
 
     public function getId(): ?int
@@ -67,14 +67,14 @@ class Survey
         return $this->id;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getFromTheDate(): ?\DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->fromTheDate;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setFromTheDate(\DateTimeInterface $fromTheDate): self
     {
-        $this->createdAt = $createdAt;
+        $this->fromTheDate = $fromTheDate;
 
         return $this;
     }
@@ -97,6 +97,10 @@ class Survey
     public function getAnswersList(): Collection
     {
         return $this->answers_list;
+    }
+
+    public function countAnswersList() {
+        return $this->getAnswersList()->count();
     }
 
     public function setAnswersList(array $answers_list): self
@@ -205,7 +209,10 @@ class Survey
 
     public function getLimitDate(): ?\DateTimeInterface
     {
-        return $this->getCreatedAt()->modify("+{$this->getAnswerDelay()} hours"); #TODO: c'est bugé
+        $date_created = clone $this->getFromTheDate();
+        $date_limit = $date_created->modify("+{$this->getAnswerDelay()} hours");
+
+        return $date_limit;
     }
 
     public function isEnable()

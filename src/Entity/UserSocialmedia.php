@@ -37,6 +37,24 @@ class UserSocialmedia
      */
     private $staff;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userSocialmedia")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user;
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,5 +107,4 @@ class UserSocialmedia
 
         return $this;
     }
-
 }
