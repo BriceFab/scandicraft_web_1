@@ -6,6 +6,7 @@ easy_admin:
         title: "Liste des réponses aux sondages"
         actions:
           [
+            { name: "new", label: "Ajouter" },
             { name: "show", label: "Détail", icon: "search" },
             { name: "edit", label: "Modifier", icon: "edit" },
             { name: "delete", label: "Supprimer", icon: "trash" },

@@ -40,7 +40,7 @@ class CommunityController extends AbstractController
      */
     public function showSondages(Request $request, PaginatorInterface $paginator)
     {
-        $data = $this->getDoctrine()->getRepository(Survey::class)->findBy([], ['createdAt' => 'ASC']);
+        $data = $this->getDoctrine()->getRepository(Survey::class)->findBy([], ['fromTheDate' => 'ASC']);
         $data = array_filter($data, function ($val) {
             return $val->isEnable();
         });
@@ -48,7 +48,7 @@ class CommunityController extends AbstractController
         $sondages = $paginator->paginate(
             $data,
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            2 // Nombre de résultats par page
+            3 // Nombre de résultats par page
         );
 
         return $this->render('survey/list.html.twig', [

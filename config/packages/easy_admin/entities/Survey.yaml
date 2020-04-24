@@ -6,6 +6,7 @@ easy_admin:
         title: "Liste des sondages"
         actions:
           [
+            { name: "new", label: "Ajouter" },
             { name: "show", label: "Détail", icon: "search" },
             { name: "edit", label: "Modifier", icon: "edit" },
             { name: "delete", label: "Supprimer", icon: "trash" },
@@ -13,10 +14,11 @@ easy_admin:
         fields:
           [
             { property: "title", label: "Titre" },
-            { property: "createdAt", label: "Créer le" },
+            { property: "fromTheDate", label: "Disponible dès le" },
             { property: "getLimitDate", label: "Jusqu'au", type: "datetime" },
+            { property: "isEnable", label: "Actif ?", type: "boolean" },
             { property: "user", label: "Créer par" },
-            { property: "countAnswers", label: "Nombre de réponses" },
+            { property: "countAnswers", label: "Réponses" },
           ]
       form:
         title: "Aouter/Modifier le sondage"
@@ -34,11 +36,7 @@ easy_admin:
               type: "entity",
               type_options: { class: App\Entity\SurveyAnswerList },
             },
-            {
-              property: "createdAt",
-              label: "Créer le",
-              type_options: { disabled: true },
-            },
+            { property: "fromTheDate", label: "Disponible dès le" },
           ]
       show:
         title: "Détail du sondage"
@@ -51,11 +49,20 @@ easy_admin:
               label: "Temps de réponses maximale (en heures)",
             },
             {
-              property: "answers_list",
-              label: "Réponses possibles",
-              type: "entity",
-              type_options: { class: App\Entity\SurveyAnswerList },
+              property: "fromTheDate",
+              label: "Disponible dès le",
+              type: "datetime",
             },
-            { property: "createdAt", label: "Créer le" },
-            { property: "countAnswers", label: "Nombre de réponses", type: "string" },
+            { property: "getLimitDate", label: "Jusqu'au", type: "datetime" },
+            { property: "isEnable", label: "Actif ?", type: "boolean" },
+            {
+              property: "countAnswersList",
+              label: "Réponses possibles",
+              type: "string",
+            },
+            {
+              property: "countAnswers",
+              label: "Nombre de réponses",
+              type: "string",
+            },
           ]
