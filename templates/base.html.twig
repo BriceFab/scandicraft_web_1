@@ -41,6 +41,9 @@
         <!-- Google ads -->
         <script data-ad-client="ca-pub-1457190527508329" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
+        <!-- app javascript -->
+        {{ encore_entry_script_tags('app') }}
+
     </head>
     <body>
         <!-- react app -->
@@ -72,7 +75,6 @@
         <!-- end body -->
         
         <!-- main javascript -->
-        {{ encore_entry_script_tags('app') }}
         <script type="text/javascript" src="{{ asset('theme/js/jquery-1.11.3.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('theme/js/jquery-moutheme.js') }}"></script>
         <script type="text/javascript" src="{{ asset('theme/js/default.js') }}"></script>
