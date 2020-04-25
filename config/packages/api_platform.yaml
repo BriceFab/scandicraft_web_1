@@ -9,4 +9,5 @@ api_platform:
         versions: [3]
     formats:
         jsonapi: ["application/vnd.api+json"]
+        json: ["application/json"]
         html:     ['text/html']

@@ -3,12 +3,19 @@
 namespace App\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SurveyAnswersRepository")
+ * @ApiResource(
+ *     normalizationContext={"groups"={"survey_answer:read"}},
+ *     denormalizationContext={"groups"={"survey_answer:write"}},
+ * )
  */
 class SurveyAnswers
 {
@@ -26,23 +33,29 @@ class SurveyAnswers
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("survey_answer:write")
      */
     private $answer;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("survey_answer:write")
+     * @Assert\NotBlank
      */
     private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Survey", inversedBy="surveyAnswers")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("survey_answer:write")
+
      */
     private $survey;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="surveyAnswers")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("survey_answer:write")
      */
     private $user;
 
