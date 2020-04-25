@@ -2,6 +2,7 @@
 $mainColor: #b30000; //violet: #781f6f
 $secondaryColor: #333333; //gray
 $thirdColor: #f3f2f5; //light gray
+$fontColor: #717171; //gray
 
 $menuFontSize: 16px;
 $menuTopFontSize: 14px;
@@ -11,7 +12,7 @@ $copyrightFontSize: 17px;
 $pFontSize: 20px;
 
 //### Imports
-@import 'unikue-template/style.scss';
+@import "unikue-template/style.scss";
 // @import "~bootstrap/scss/bootstrap";
 
 //### ScandiCraft style
@@ -72,18 +73,18 @@ html {
 // Alerts (bootstrap)
 .bt-alert {
     position: relative;
-    padding: .75rem 1.25rem;
+    padding: 0.75rem 1.25rem;
     margin-bottom: 1rem;
     border: 1px solid transparent;
     border-top-color: transparent;
     border-right-color: transparent;
     border-bottom-color: transparent;
     border-left-color: transparent;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
 }
 
 .bt-small-alert {
-    padding: .30rem 1.0rem;
+    padding: 0.3rem 1rem;
 }
 
 .bt-alert-danger {
@@ -98,7 +99,7 @@ html {
 }
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) { 
+@media (min-width: 576px) {
     .login-logo {
         max-width: 60%;
         margin-bottom: -75px;
@@ -106,7 +107,7 @@ html {
 }
 
 // Medium devices (tablets, 768px and up)
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
     .login-logo {
         max-width: 45%;
         margin-bottom: -75px;
@@ -123,22 +124,22 @@ $blur_px: 2px;
 }
 
 .vertical-alignment-helper {
-    display:table;
+    display: table;
     height: 100%;
     width: 100%;
-    pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
+    pointer-events: none; /* This makes sure that we can still click outside of the modal to close it */
 }
 .vertical-align-center {
     /* To center vertically */
     display: table-cell;
     vertical-align: middle;
-    pointer-events:none;
+    pointer-events: none;
 }
 .modal-content {
     /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
-    width:inherit;
-    max-width:inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
-    height:inherit;
+    width: inherit;
+    max-width: inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
+    height: inherit;
     /* To center horizontally */
     margin: 0 auto;
     pointer-events: all;
@@ -207,10 +208,10 @@ $blur_px: 2px;
     z-index: 2;
     width: 35%;
     height: 54%;
-	left: 40px;
-	right: 0;
+    left: 40px;
+    right: 0;
     margin-left: auto;
-	margin-right: auto;
+    margin-right: auto;
     top: 24px;
 }
 
@@ -244,9 +245,9 @@ $blur_px: 2px;
         .navigation.top-left {
             float: left !important;
         }
-    
+
         .navigation.top-right {
-          float: right !important;
+            float: right !important;
         }
 
         .navigation {
@@ -256,7 +257,7 @@ $blur_px: 2px;
         .w-container {
             max-width: none;
             margin-left: 10px;
-            margin-right: 10px
+            margin-right: 10px;
         }
 
         .top-fix-right {
@@ -276,36 +277,36 @@ $blur_px: 2px;
         padding-top: 0px;
     }
 
-      .nav_logo {
-          display: none;
-      }
+    .nav_logo {
+        display: none;
+    }
 
-      .navigation {
-          width: 100%;
-          margin-left: 10px !important;
-      }
+    .navigation {
+        width: 100%;
+        margin-left: 10px !important;
+    }
 
-      .hamburger {
-          z-index: 100;
-      }
+    .hamburger {
+        z-index: 100;
+    }
 
-      .header-v1 {
+    .header-v1 {
         padding-right: 0px;
         padding-left: 0px;
-      }
+    }
 
-      .navigation.top-left {
-          float: none;
-          margin-left: 0px;
-          top: -45px;
-      }
+    .navigation.top-left {
+        float: none;
+        margin-left: 0px;
+        top: -45px;
+    }
 
-      .navigation.top-right {
+    .navigation.top-right {
         float: none;
         margin-right: 0px;
         margin-top: 0px;
         top: -45px;
-      }
+    }
 }
 
 .jouer_social {
@@ -336,4 +337,25 @@ $blur_px: 2px;
 
 .li-social.jouer {
     display: block;
+}
+
+.scandicraft_error {
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    margin-bottom: 1rem;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.disabled {
+    opacity: 0.65;
+    cursor: not-allowed !important;
+}
+
+.text {
+    font-size: $pFontSize;
+    color: $fontColor;
+    line-height: 1.4;
 }
