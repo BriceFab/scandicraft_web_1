@@ -15,6 +15,21 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login:
+            pattern: ^/api/login
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            pattern: ^/api(?!/docs)
+            stateless: true
+            anonymous: false
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         main:
             anonymous: lazy
             provider: app_user_provider
@@ -25,15 +40,12 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
-            json_login:
-                check_path: api_login
-                username_path: security.credentials.login
-                password_path: security.credentials.password
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
+
     role_hierarchy:
         ROLE_PANEL_ADMIN: ROLE_USER
         ROLE_ADMIN: ROLE_PANEL_ADMIN
@@ -42,6 +54,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: '^/L2kM|qb3.2W5:;Mb', roles: ROLE_PANEL_ADMIN }  #Panel admin
+        - { path: "^/L2kM|qb3.2W5:;Mb", roles: ROLE_PANEL_ADMIN } #Panel admin
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/docs, roles: ROLE_ADMIN }
         - { path: ^/api, roles: ROLE_ADMIN }

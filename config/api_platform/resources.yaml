@@ -1,1 +1,2 @@
-resources: []
+resources:
+    App\Entity\User: ~
