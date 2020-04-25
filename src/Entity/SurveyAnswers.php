@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SurveyAnswersRepository")
@@ -24,11 +25,6 @@ class SurveyAnswers
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $answer;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups("survey_answer:read")
      */
@@ -37,15 +33,23 @@ class SurveyAnswers
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Survey", inversedBy="surveyAnswers")
      * @ORM\JoinColumn(nullable=false)
-
+     * @Assert\NotBlank
      */
     private $survey;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="surveyAnswers")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\SurveyAnswerList", inversedBy="surveyAnswers")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank
+     */
+    private $answer;
 
     public function __construct()
     {
@@ -65,18 +69,6 @@ class SurveyAnswers
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getAnswer(): ?string
-    {
-        return $this->answer;
-    }
-
-    public function setAnswer(string $answer): self
-    {
-        $this->answer = $answer;
 
         return $this;
     }
@@ -120,5 +112,17 @@ class SurveyAnswers
     public function __toString()
     {
         return "Answers #" . $this->getUser()->getUsername();
+    }
+
+    public function getAnswer(): ?SurveyAnswerList
+    {
+        return $this->answer;
+    }
+
+    public function setAnswer(?SurveyAnswerList $answer): self
+    {
+        $this->answer = $answer;
+
+        return $this;
     }
 }
