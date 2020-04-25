@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SurveyAnswersRepository")
@@ -29,6 +30,7 @@ class SurveyAnswers
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("survey_answer:read")
      */
     private $comment;
 
