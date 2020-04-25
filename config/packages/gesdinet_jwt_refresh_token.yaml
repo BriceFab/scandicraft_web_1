@@ -1,0 +1,7 @@
+gesdinet_jwt_refresh_token:
+    ttl: 172800 #2 jours
+    user_identity_field: username
+    firewall: api
+    token_parameter_name: refresh_token
+    single_use: true
+    ttl_update: true

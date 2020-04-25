@@ -23,6 +23,10 @@ security:
                 check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        refresh:
+            pattern:  ^/api/token/refresh
+            stateless: true
+            anonymous: true
         api:
             pattern: ^/api(?!/docs)
             stateless: true
@@ -56,6 +60,7 @@ security:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "^/L2kM|qb3.2W5:;Mb", roles: ROLE_PANEL_ADMIN } #Panel admin
         - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/docs, roles: ROLE_ADMIN }
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: ROLE_ADMIN }
