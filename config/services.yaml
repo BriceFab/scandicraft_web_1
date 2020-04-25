@@ -51,7 +51,10 @@ services:
                 # you can also restrict listeners to a specific Doctrine connection
                 connection: 'default'
 
-    #DataPersister for API
-    App\DataPersister\SurveyDataPersister:
-        tags: [ 'api_platform.data_persister' ]
-        arguments: ["@doctrine.orm.entity_manager"]
+    #Normalizer for API
+    App\Normalizer\EntityNormalizer:
+        public: false
+        autowire: true
+        autoconfigure: true
+        tags:
+        - { name: serializer.normalizer }
