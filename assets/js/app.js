@@ -14,8 +14,7 @@ import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
 
-//import web js
-import './web/survey.js';
+import './web/survey';
 
 //cannot call from html
 export default function isIE() {

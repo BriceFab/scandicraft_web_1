@@ -28,9 +28,28 @@
 								{{ sondage.description }}
 							</p>
 							<div class="div-spc">
-								{% for answer in sondage.getAnswersList() %}
-									<a class="button no-spc" href="#" onclick="onSurveyAnswerClick('{{ app.request.getSchemeAndHttpHost() }}', {{ answer.id }}, {{ sondage.id }}, {{ app.user.id }})">{{ answer.answer }}</a>
-								{% endfor %}
+								{% if sondage.countUserAnswers(app.user.getId()) == 0 %}
+									<form action="{{ path('post_survey_answer') }}" method="POST">
+										<input type="hidden" name="survey" value="{{ sondage.id }}">
+										{% for answer in sondage.getAnswersList() %}
+											<button class="button no-spc {{ app.user ? '' : 'disabled tooltip-2' }}" {{ app.user ? '' : 'title="Connecte-toi !" disabled="true"' }} type="submit" name="answer" value="{{ answer.id }}">{{ answer.answer }}</button>
+										{% endfor %}
+									</form>
+								{% else %}
+									<div class="divider" style="margin-top:10px;margin-bottom:20px;"></div>
+									<div class="text" style="font-size:18px;">
+										<div>
+											{% for answer in sondage.getAnswersList() %}
+												<b>{{ answer.answer }}</b>: {{ answer.countAnswers }}
+											{% endfor %}
+										</div>
+										<div>
+											<i class="fa fa-chart-bar"></i>
+											Réponses totales:
+											<b>{{ sondage.countAnswers }}</b>
+										</div>
+									</div>
+								{% endif %}
 							</div>
 						</div>
 
@@ -40,20 +59,23 @@
 									<div class="meta-cs">
 										<div class="top-ico top-darker">
 											<div class="w-embed">
-												<i class="fa fa-comment"></i>
+												<i class="fa fa-calendar-week"></i>
 											</div>
 										</div>
-										<div class="txt-top txt-last">0 Comments</div>
+										<div class="txt-top txt-last">Depuis:
+											{{ sondage.getFromTheDate()|date("d/m/Y à h:s") }}</div>
 									</div>
 								</li>
 								<li class="li-top m-space">
 									<div class="meta-cs">
 										<div class="top-ico top-darker">
 											<div class="w-embed">
-												<i class="fa fa-clock-o"></i>
+												<i class="fa fa-clock"></i>
 											</div>
 										</div>
-										<div class="txt-top txt-last">March 09, 2015</div>
+										<div class="txt-top txt-last">Jusqu'au:
+											<b>{{ sondage.getLimitDate()|date("d/m/Y à h:s") }}</b>
+										</div>
 									</div>
 								</li>
 								<li class="li-top m-space">
@@ -63,17 +85,18 @@
 												<i class="fa fa-user"></i>
 											</div>
 										</div>
-										<div class="txt-top txt-last">admin</div>
+										<div class="txt-top txt-last">par
+											{{ sondage.getUser().getUsername() }}</div>
 									</div>
 								</li>
 								<li class="li-top m-space">
 									<div class="meta-cs">
 										<div class="top-ico top-darker">
 											<div class="w-embed">
-												<i class="fa fa-eye"></i>
+												<i class="fa fa-comment"></i>
 											</div>
 										</div>
-										<div class="txt-top txt-last">0 Views</div>
+										<div class="txt-top txt-last">0 Commentaires</div>
 									</div>
 								</li>
 							</ul>

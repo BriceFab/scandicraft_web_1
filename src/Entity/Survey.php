@@ -62,6 +62,17 @@ class Survey
         $this->setFromTheDate(new DateTime('now'));
     }
 
+    public function countUserAnswers($user_id)
+    {
+        $nbr = 0;
+        foreach ($this->getSurveyAnswers() as $answer) {
+            if ($answer->getUser()->getId() == $user_id) {
+                $nbr++;
+            }
+        }
+        return $nbr;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -99,7 +110,8 @@ class Survey
         return $this->answers_list;
     }
 
-    public function countAnswersList() {
+    public function countAnswersList()
+    {
         return $this->getAnswersList()->count();
     }
 
@@ -155,8 +167,6 @@ class Survey
 
     public function addAnswersList(SurveyAnswerList $answersList): self
     {
-        dump($this->answers_list);
-
         if (!$this->answers_list->contains($answersList)) {
             $this->answers_list[] = $answersList;
         }

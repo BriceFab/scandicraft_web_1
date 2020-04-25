@@ -48,6 +48,10 @@ class SurveyAnswerList
         $this->surveyAnswers = new ArrayCollection();
     }
 
+    public function countAnswers() {
+        return count($this->getSurveyAnswers());
+    }
+
     public function getId(): ?int
     {
         return $this->id;

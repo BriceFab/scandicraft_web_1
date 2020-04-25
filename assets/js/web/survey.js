@@ -1,7 +1,15 @@
-import axios from 'axios';
+import axios from "./libs/axios";
 
-function onSurveyAnswerClick(base_path, answer_list_id, survey_id, user_id) {
-    alert("answer " + base_path + " " + answer_list_id + " " + survey_id + " " + user_id);
+function onSurveyAnswerClick(answer_list_id, survey_id, user_id) {
+    axios.post('survey_answer', {
+        "answer": answer_list_id,
+        "survey": survey_id,
+        "user": user_id
+    }).then((success) => {
+        alert('success');
+    }).catch((error) => {
+        alert('error');
+    });
 }
 
 //export fonction to window dom
