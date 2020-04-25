@@ -50,3 +50,8 @@ services:
                 priority: 500
                 # you can also restrict listeners to a specific Doctrine connection
                 connection: 'default'
+
+    #DataPersister for API
+    App\DataPersister\SurveyDataPersister:
+        tags: [ 'api_platform.data_persister' ]
+        arguments: ["@doctrine.orm.entity_manager"]
