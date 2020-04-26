@@ -19,6 +19,10 @@
 							<b>{{ nbr_not_answer }}</b>
 							sondages..</p>
 					{% endif %}
+					
+					{% if archived_sondages|length > 0 %}
+						<a href="{{ path('archived_sondages') }}" class="button btn-active btn-small" style="margin-left:0px;">Voir les sondages archivés</a>
+					{% endif %}
 
 					{% for sondage in enabled_sondages %}
 
@@ -33,7 +37,7 @@
 						Il n'y a aucun sondage en cours !<br/>
 						{% if archived_sondages|length > 0 %}
 							Cependant, vous pouvez consulter la liste des archives:<br/><br/>
-							<a class="button" href="#">Visiter les archives ({{ archived_sondages|length }})</a>
+							<a class="button" href="{{ path('archived_sondages') }}">Visiter les archives ({{ archived_sondages|length }})</a>
 						{% else %}
 							Et aucune archive disponible pour le moment.
 						{% endif %}

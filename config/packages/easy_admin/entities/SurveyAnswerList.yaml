@@ -12,7 +12,7 @@ easy_admin:
           ]
         fields:
           [
-            { property: "createdBy.username", label: "Créer par" },
+            { property: "createdBy", label: "Créer par" },
             { property: "answer", label: "Réponse" },
           ]
       form:

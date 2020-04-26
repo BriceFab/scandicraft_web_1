@@ -12,8 +12,8 @@ easy_admin:
           ]
         fields:
           [
-            { property: "user.username", label: "Pseudonyme" },
-            { property: "thanks_category.name", label: "Catégorie" },
+            { property: "user", label: "Utilisateur" },
+            { property: "thanks_category", label: "Catégorie" },
             { property: "createdAt", label: "Depuis le" },
           ]
       form:

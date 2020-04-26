@@ -100,16 +100,37 @@ class SurveyController extends AbstractController
      * @Route("/sondage/{slug}", name="survey_comments")
      * @ParamConverter("survey")
      */
-    public function showSondageComments(Request $request, Survey $survey)
+    public function showSondageComments(Survey $survey)
     {
         $has_answer = false;
         if ($this->getUser()) {
             $has_answer = $survey->countUserAnswers($this->getUser()->getId()) > 0;
         }
 
+        if (!$survey->isEnable()) {
+            $this->addFlash('error', 'Ce sondage n\'est pas actif.');
+            return $this->redirectToRoute('sondages');
+        }
+
         return $this->render('survey/show.html.twig', [
             'sondage' => $survey,
             'has_answer' => $has_answer
+        ]);
+    }
+
+    /**
+     * @Route("/sondage/archive/{slug}", name="survey_archived_comments")
+     * @ParamConverter("survey")
+     */
+    public function showArchivedSondageComments(Survey $survey)
+    {
+        if ($survey->isEnable()) {
+            $this->addFlash('error', 'Ce sondage n\'est pas archivé.');
+            return $this->redirectToRoute('sondages');
+        }
+
+        return $this->render('survey/show_archived.html.twig', [
+            'sondage' => $survey
         ]);
     }
 
@@ -201,6 +222,29 @@ class SurveyController extends AbstractController
         }
 
         return $this->retirectToPreviousRoute($request, $defaultRoute);
+    }
+
+    /**
+     * @Route("/sondages/archive", name="archived_sondages")
+     */
+    public function showArchivedSondages(Request $request, PaginatorInterface $paginator, SurveyRepository $surveyRepository)
+    {
+        $data = $surveyRepository->findBy([], ['fromTheDate' => 'ASC']);
+
+        $archived_sondages = array_filter($data, function ($val) {
+            return !$val->isEnable();
+        });
+
+        $sondages = $paginator->paginate(
+            $archived_sondages,
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            5 // Nombre de résultats par page
+        );
+
+        return $this->render('survey/list_archive.html.twig', [
+            'archived_sondages' => $sondages,
+            'total_archived_sondages' => count($archived_sondages),
+        ]);
     }
 
     private function retirectToPreviousRoute(Request $request, $defaultRoute)

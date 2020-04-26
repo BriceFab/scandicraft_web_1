@@ -16,7 +16,7 @@
 			{{ sondage.description }}
 		</p>
 		<div class="div-spc">
-			{% if not app.user or sondage.countUserAnswers(app.user.getId()) == 0 %}
+			{% if (not app.user or sondage.countUserAnswers(app.user.getId()) == 0) and sondage.isEnable() %}
 				<form action="{{ path('post_survey_answer') }}" method="POST">
 					<input type="hidden" name="survey" value="{{ sondage.id }}">
 					{% for answer in sondage.getAnswersList() %}
@@ -85,7 +85,8 @@
 							<i class="fa fa-comment"></i>
 						</div>
 					</div>
-					<div class="txt-top txt-last">{{ sondage.getSurveyComments()|length }} Commentaires</div>
+					<div class="txt-top txt-last">{{ sondage.getSurveyComments()|length }}
+						Commentaires</div>
 				</div>
 			</li>
 			{% if canArgument %}
@@ -94,6 +95,17 @@
 						<div style="color: white;">
 							<div class="txt-last">
 								<b>Argumenter</b>
+							</div>
+						</div>
+					</li>
+				</a>
+			{% endif %}
+			{% if not sondage.isEnable() and canShowComment is defined and canShowComment %}
+				<a href="{{ path('survey_archived_comments', { 'slug': sondage.slug }) }}">
+					<li class="li-top m-space button" style="float:right;margin-right:0px;margin-top:-5px;padding:10px;">
+						<div style="color: white;">
+							<div class="txt-last">
+								<b>Voir les commentaires</b>
 							</div>
 						</div>
 					</li>

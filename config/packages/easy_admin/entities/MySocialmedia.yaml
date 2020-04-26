@@ -13,7 +13,7 @@ easy_admin:
         fields:
           [
             { property: "url", label: "Lien" },
-            { property: "socialmedia_type.name", label: "Type" },
+            { property: "socialmedia_type", label: "Type" },
           ]
       form:
         title: "Ajouter/Modifier"

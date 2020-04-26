@@ -4,6 +4,7 @@ imports:
 - { resource: Survey.yaml }
 - { resource: SurveyAnswerList.yaml }
 - { resource: SurveyAnswers.yaml }
+- { resource: SurveyComments.yaml }
 - { resource: Thanks.yaml }
 - { resource: ThanksCategory.yaml }
 - { resource: SocialmediaType.yaml }

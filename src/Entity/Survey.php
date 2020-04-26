@@ -57,6 +57,7 @@ class Survey
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\SurveyComments", mappedBy="survey", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"commentAt" = "DESC"})
      */
     private $surveyComments;
 
@@ -71,6 +72,11 @@ class Survey
         $this->answers_list = new ArrayCollection();
         $this->setFromTheDate(new DateTime('now'));
         $this->surveyComments = new ArrayCollection();
+    }
+
+    public function countTotalComments()
+    {
+        return count($this->getSurveyComments());
     }
 
     public function countUserAnswers($user_id)
@@ -279,7 +285,7 @@ class Survey
 
     public function setSlug(string $slug): self
     {
-        $this->slug = $slug . '-' . $this->getId();
+        $this->slug = $slug;
 
         return $this;
     }
