@@ -48,8 +48,15 @@ class SurveyAnswerList
         $this->surveyAnswers = new ArrayCollection();
     }
 
-    public function countAnswers() {
-        return count($this->getSurveyAnswers());
+    public function countAnswers($survey, $answer)
+    {
+        $total = 0;
+        foreach ($survey->getSurveyAnswers() as $value) {
+            if ($value->getAnswer()->getId() == $answer->getId()) {
+                $total++;
+            }
+        }
+        return $total;
     }
 
     public function getId(): ?int

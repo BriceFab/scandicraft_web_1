@@ -29,7 +29,7 @@
 					<div class="col-12 col-md-6">
 						{% for answer in sondage.getAnswersList() %}
 							<b>{{ answer.answer }}</b>:
-							{{ answer.countAnswers }}
+							{{ answer.countAnswers(sondage, answer) }}
 						{% endfor %}
 					</div>
 					<div class="col-12 col-md-6" style="text-align:right;">
