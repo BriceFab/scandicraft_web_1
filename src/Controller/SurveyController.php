@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Survey;
 use App\Entity\SurveyAnswers;
-use App\Repository\SurveyAnswersRepository;
+use App\Entity\SurveyComments;
+use App\Repository\SurveyCommentsRepository;
 use App\Repository\SurveyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -12,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SurveyController extends AbstractController
 {
@@ -49,15 +52,17 @@ class SurveyController extends AbstractController
      * @Route("/post/survey_answer", name="post_survey_answer", methods={"POST"})
      * @IsGranted("ROLE_USER")
      */
-    public function postSurveyAnswer(Request $request, EntityManagerInterface $em, SurveyRepository $surveyRepository, SurveyAnswersRepository $surveyAnswersRepository)
+    public function postSurveyAnswer(Request $request, EntityManagerInterface $em, SurveyRepository $surveyRepository)
     {
+        $defaultRoute = 'sondages';
+
         try {
             //check survey
             $survey_id = $request->get('survey');
             $survey = $surveyRepository->findOneBy(['id' => $survey_id]);
-            if (!$survey->isEnable()) {
+            if (!$survey || !$survey->isEnable()) {
                 $this->addFlash('error', 'Le sondage a expiré !');
-                return $this->redirectToRoute('sondages');
+                return $this->retirectToPreviousRoute($request, $defaultRoute);
             }
 
             //check answer
@@ -65,14 +70,14 @@ class SurveyController extends AbstractController
             $answer_list = $this->getAnswerList($survey, $answer_id);
             if (!$answer_list) {
                 $this->addFlash('error', 'Cette réponse n\'existe pas !');
-                return $this->redirectToRoute('sondages');
+                return $this->retirectToPreviousRoute($request, $defaultRoute);
             }
 
             //check if has already answer
             $user_nbr_answers = $survey->countUserAnswers($this->getUser()->getId());
             if ($user_nbr_answers > 0) {
                 $this->addFlash('error', 'Vous avez déjà répondu à ce sondage..');
-                return $this->redirectToRoute('sondages');
+                return $this->retirectToPreviousRoute($request, $defaultRoute);
             }
 
             $answer = new SurveyAnswers();
@@ -88,7 +93,124 @@ class SurveyController extends AbstractController
             $this->addFlash('error', 'Une erreur est survenue..');
         }
 
-        return $this->redirectToRoute('sondages');
+        return $this->retirectToPreviousRoute($request, $defaultRoute);
+    }
+
+    /**
+     * @Route("/sondage/{slug}", name="survey_comments")
+     * @ParamConverter("survey")
+     */
+    public function showSondageComments(Request $request, Survey $survey)
+    {
+        $has_answer = false;
+        if ($this->getUser()) {
+            $has_answer = $survey->countUserAnswers($this->getUser()->getId()) > 0;
+        }
+
+        return $this->render('survey/show.html.twig', [
+            'sondage' => $survey,
+            'has_answer' => $has_answer
+        ]);
+    }
+
+    /**
+     * @Route("/post/survey_comment", name="post_survey_comment", methods={"POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function postSurveyComment(Request $request, EntityManagerInterface $em, SurveyRepository $surveyRepository, ValidatorInterface $validator)
+    {
+        $defaultRoute = 'sondages';
+
+        try {
+            //check survey
+            $survey_id = $request->get('survey');
+            $survey = $surveyRepository->findOneBy(['id' => $survey_id]);
+            if (!$survey || !$survey->isEnable()) {
+                $this->addFlash('error', 'Le sondage a expiré !');
+                return $this->retirectToPreviousRoute($request, $defaultRoute);
+            }
+
+            //check if user has answer
+            $has_answer = false;
+            if ($this->getUser()) {
+                $has_answer = $survey->countUserAnswers($this->getUser()->getId()) > 0;
+            }
+            if (!$has_answer) {
+                $this->addFlash('error', 'Vous devez d\'abord répondre au sondage (voter) !');
+                return $this->retirectToPreviousRoute($request, $defaultRoute);
+            }
+
+            $comment = new SurveyComments();
+            $comment->setUser($this->getUser());
+            $comment->setComment($request->get('comment'));
+            $comment->setSurvey($survey);
+
+            //validate entity
+            $errors = $validator->validate($comment);
+            if (count($errors) > 0) {
+                $this->addFlash('error', $errors[0]->getMessage());
+                return $this->retirectToPreviousRoute($request, $defaultRoute);
+            }
+
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash('notice', 'Merci pour votre commentaire !');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Une erreur est survenue..');
+        }
+
+        return $this->retirectToPreviousRoute($request, $defaultRoute);
+    }
+
+    /**
+     * @Route("/delete/survey_comment/{survey_id}/{comment_id}", name="delete_survey_comment", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function deleteSurveyComment(Request $request, $comment_id, $survey_id, EntityManagerInterface $em, SurveyRepository $surveyRepository, SurveyCommentsRepository $commentsRepository)
+    {
+        $defaultRoute = 'sondages';
+
+        try {
+            //check survey
+            $survey = $surveyRepository->findOneBy(['id' => $survey_id]);
+            if (!$survey || !$survey->isEnable()) {
+                $this->addFlash('error', 'Le sondage a expiré !');
+                return $this->retirectToPreviousRoute($request, $defaultRoute);
+            }
+
+            //check comment
+            $comment = $commentsRepository->findOneBy(['id' => $comment_id]);
+            if (!$comment) {
+                $this->addFlash('error', 'Cette commentaire n\'existe pas..');
+                return $this->retirectToPreviousRoute($request, $defaultRoute);
+            }
+
+            //check user owner comment
+            if ($comment->getUser()->getId() !== $this->getUser()->getId()) {
+                $this->addFlash('error', 'Vous ne pouvez pas supprimer ce commentaire.');
+                return $this->retirectToPreviousRoute($request, $defaultRoute);
+            }
+
+            $em->remove($comment);
+            $em->flush();
+
+            $this->addFlash('notice', 'Votre commentaire a été supprimé !');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Une erreur est survenue..');
+        }
+
+        return $this->retirectToPreviousRoute($request, $defaultRoute);
+    }
+
+    private function retirectToPreviousRoute(Request $request, $defaultRoute)
+    {
+        $previous = $request->headers->get('referer');
+        if ($previous) {
+            return $this->redirect($previous);
+        } else {
+            return $this->redirectToRoute($defaultRoute);
+        }
     }
 
     private function countSurveysNotAnswer($surveys)

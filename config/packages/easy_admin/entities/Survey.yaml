@@ -25,6 +25,7 @@ easy_admin:
         fields:
           [
             { property: "title", label: "Titre" },
+            { property: "slug", label: "Slug", help: "Url explicite pour le lien et SEO" },
             { property: "description", label: "Description" },
             {
               property: "answer_delay",
@@ -43,6 +44,7 @@ easy_admin:
         fields:
           [
             { property: "title", label: "Titre" },
+            { property: "slug", label: "Slug" },
             { property: "description", label: "Description" },
             {
               property: "answer_delay",

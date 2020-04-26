@@ -359,3 +359,13 @@ $blur_px: 2px;
     color: $fontColor;
     line-height: 1.4;
 }
+
+.text-area {
+    resize: block;
+    max-height: 300px;
+    font-size: 16px;
+}
+
+.arrow-coment {
+    margin-top: 0px;
+}

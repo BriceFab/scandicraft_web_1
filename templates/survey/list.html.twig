@@ -2,7 +2,7 @@
 
 {% block title %}Sondages
 {% endblock %}
-{% block description %}Liste des sondages dont les joueurs de ScandiCraft peuvent participer pour donner leur avis sur les futurs nouveautés du serveur.
+{% block description %}Liste des sondages dont les joueurs de ScandiCraft peuvent participer pour donner leur avis sur les futurs nouveautés du serveur Minecraft PvP Faction.
 {% endblock %}
 
 {% block body %}
@@ -21,107 +21,8 @@
 					{% endif %}
 
 					{% for sondage in enabled_sondages %}
-						<div style="margin-top: 50px;"></div>
 
-						<div>
-							<div class="top-title">
-								<div class="title-txt">
-									<h3>{{ loop.index }}
-										-
-										{{ sondage.title }}</h3>
-								</div>
-							</div>
-							<div class="info-box">
-								<p>
-									{{ sondage.description }}
-								</p>
-								<div class="div-spc">
-									{% if not app.user or sondage.countUserAnswers(app.user.getId()) == 0 %}
-										<form action="{{ path('post_survey_answer') }}" method="POST">
-											<input type="hidden" name="survey" value="{{ sondage.id }}">
-											{% for answer in sondage.getAnswersList() %}
-												<button class="button no-spc {{ app.user ? '' : 'disabled tooltip-2' }}" {{ app.user ? '' : 'title="Connecte-toi !" disabled="true"' }} type="submit" name="answer" value="{{ answer.id }}">{{ answer.answer }}</button>
-											{% endfor %}
-										</form>
-									{% else %}
-										<div class="divider" style="margin-top:10px;margin-bottom:20px;"></div>
-										<div class="row text" style="font-size:18px;">
-											<div class="col-12 col-md-6">
-												{% for answer in sondage.getAnswersList() %}
-													<b>{{ answer.answer }}</b>:
-													{{ answer.countAnswers }}
-												{% endfor %}
-											</div>
-											<div class="col-12 col-md-6" style="text-align:right;">
-												<i class="fa fa-chart-bar"></i>
-												Réponses totales:
-												<b>{{ sondage.countAnswers }}</b>
-											</div>
-										</div>
-									{% endif %}
-								</div>
-							</div>
-
-							<div class="meta-tag">
-								<ul class="w-list-unstyled">
-									<li class="li-top m-space">
-										<div class="meta-cs">
-											<div class="top-ico top-darker">
-												<div class="w-embed">
-													<i class="fa fa-calendar-week"></i>
-												</div>
-											</div>
-											<div class="txt-top txt-last">Depuis:
-												{{ sondage.getFromTheDate()|date("d/m/Y à h:i") }}</div>
-										</div>
-									</li>
-									<li class="li-top m-space">
-										<div class="meta-cs">
-											<div class="top-ico top-darker">
-												<div class="w-embed">
-													<i class="fa fa-clock"></i>
-												</div>
-											</div>
-											<div class="txt-top txt-last">Jusqu'au:
-												<b>{{ sondage.getLimitDate()|date("d/m/Y à h:i") }}</b>
-											</div>
-										</div>
-									</li>
-									<li class="li-top m-space">
-										<div class="meta-cs">
-											<div class="top-ico top-darker">
-												<div class="w-embed">
-													<i class="fa fa-user"></i>
-												</div>
-											</div>
-											<div class="txt-top txt-last">par
-												{{ sondage.getUser().getUsername() }}</div>
-										</div>
-									</li>
-									<li class="li-top m-space">
-										<div class="meta-cs">
-											<div class="top-ico top-darker">
-												<div class="w-embed">
-													<i class="fa fa-comment"></i>
-												</div>
-											</div>
-											<div class="txt-top txt-last">0 Commentaires</div>
-										</div>
-									</li>
-									<a href="#">
-										<li class="li-top m-space button" style="float:right;margin-right:0px;margin-top:-5px;padding:10px;">
-											<div style="color: white;">
-												<div class="txt-last">
-													<b>Argumenter</b>
-												</div>
-											</div>
-										</li>
-									</a>
-								</ul>
-							</div>
-
-							<div class="divider" style="margin-top:15px;"></div>
-						</div>
+						{% include "survey/survey.html.twig" with {'sondage': sondage, 'index': loop.index, 'canArgument': true} %}
 
 					{% endfor %}
 					{{ knp_pagination_render(enabled_sondages) }}

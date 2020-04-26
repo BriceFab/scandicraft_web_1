@@ -60,6 +60,11 @@ class Survey
      */
     private $surveyComments;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->surveyAnswers = new ArrayCollection();
@@ -263,6 +268,18 @@ class Survey
                 $surveyComment->setSurvey(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug . '-' . $this->getId();
 
         return $this;
     }
