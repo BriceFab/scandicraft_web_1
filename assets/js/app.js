@@ -14,8 +14,6 @@ import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
 
-import './web/survey';
-
 //cannot call from html
 export default function isIE() {
     var ua = window.navigator.userAgent;
