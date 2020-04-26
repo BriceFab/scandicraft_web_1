@@ -25,12 +25,6 @@ class SurveyAnswers
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("survey_answer:read")
-     */
-    private $comment;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Survey", inversedBy="surveyAnswers")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank
@@ -69,18 +63,6 @@ class SurveyAnswers
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?string $comment): self
-    {
-        $this->comment = $comment;
 
         return $this;
     }

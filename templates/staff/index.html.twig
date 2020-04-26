@@ -28,23 +28,26 @@
 					<div class="top-spc">
 						<div class="w-row">
 							{% for membre in category.staff %}
-								<div class="w-col w-col-3">
+								<div class="w-col w-col-4">
 									<div class="team-wrapper">
 										<div class="container">
 											<div class="row">
-												<div class="col">
+												<div class="col-8">
 													<h5 class="tm-title">{{ membre.user.username }}</h5>
-													{% set cat_length = category.name|length %}
-													<div class="sub-title-lighter">{{ category.name|trim|slice(0, cat_length - 1) }}</div>
+													<div class="sub-title-lighter">
+														<i class="fa fa-calendar-week"></i>
+														Depuis le
+														{{ membre.getSince()|date("d/m/Y") }}
+													</div>
 												</div>
-												<div class="col">
+												<div class="col-4" style="text-align:right;">
 													<img src="{{ membre.getHeadLink() }}" class="minecraft-head-skin">
 												</div>
 											</div>
 										</div>
 										<div class="div-spc">
 											<div class="line-team"></div>
-											<p>
+											<p style="text-align:justify;">
 												{{ membre.presentation }}
 											</p>
 											<div class="line-team"></div>
