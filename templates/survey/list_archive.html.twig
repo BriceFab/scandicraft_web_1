@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sondages
+{% endblock %}
+{% block description %}Liste des sondages dont les joueurs de ScandiCraft peuvent participer pour donner leur avis sur les futurs nouveautés du serveur Minecraft PvP Faction.
+{% endblock %}
+
+{% block body %}
+
+	<section class="w-section section">
+		<div class="w-container">
+			<div class="w-row">
+
+				{% if archived_sondages|length > 0 %}
+
+					<h1>Liste des sondages archivés ({{ total_archived_sondages }})</h1>
+
+					{% for sondage in archived_sondages %}
+
+						{% include "survey/survey.html.twig" with {'sondage': sondage, 'index': loop.index, 'canArgument': false, 'canShowComment': true} %}
+
+					{% endfor %}
+					{{ knp_pagination_render(archived_sondages) }}
+
+				{% else %}
+					<h1>Il n'y a aucun sondage archivé.</h1>
+				{% endif %}
+
+			</div>
+		</div>
+
+	</section>
+
+{% endblock %}

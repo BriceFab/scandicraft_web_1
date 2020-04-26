@@ -19,13 +19,18 @@ easy_admin:
             { property: "isEnable", label: "Actif ?", type: "boolean" },
             { property: "user", label: "Créer par" },
             { property: "countAnswers", label: "Réponses" },
+            { property: "countTotalComments", label: "Commentaires" },
           ]
       form:
         title: "Aouter/Modifier le sondage"
         fields:
           [
             { property: "title", label: "Titre" },
-            { property: "slug", label: "Slug", help: "Url explicite pour le lien et SEO" },
+            {
+              property: "slug",
+              label: "Slug",
+              help: "Url explicite pour le lien et SEO",
+            },
             { property: "description", label: "Description" },
             {
               property: "answer_delay",
@@ -65,6 +70,11 @@ easy_admin:
             {
               property: "countAnswers",
               label: "Nombre de réponses",
+              type: "string",
+            },
+            {
+              property: "countTotalComments",
+              label: "Commentaires",
               type: "string",
             },
           ]

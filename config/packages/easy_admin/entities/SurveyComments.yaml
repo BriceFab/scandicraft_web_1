@@ -1,10 +1,10 @@
 easy_admin:
   entities:
-    SurveyAnswers:
-      class: App\Entity\SurveyAnswers
+    SurveyComments:
+      class: App\Entity\SurveyComments
       disabled_actions: ["new"]
       list:
-        title: "Liste des réponses aux sondages"
+        title: "Liste des commentaires des sondages"
         actions:
           [
             { name: "edit", label: "Modifier", icon: "edit" },
@@ -14,6 +14,6 @@ easy_admin:
           [
             { property: "survey", label: "Sondage" },
             { property: "user", label: "Utilisateur" },
-            { property: "answer", label: "Réponse" },
-            { property: "date", label: "Répondu le" },
+            { property: "comment", label: "Commentaire" },
+            { property: "commentAt", label: "Commenté le" },
           ]
