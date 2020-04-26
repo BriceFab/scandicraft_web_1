@@ -36,7 +36,7 @@ class Survey
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SurveyAnswers", mappedBy="survey")
+     * @ORM\OneToMany(targetEntity="App\Entity\SurveyAnswers", mappedBy="survey", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $surveyAnswers;
 
@@ -55,11 +55,17 @@ class Survey
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SurveyComments", mappedBy="survey", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $surveyComments;
+
     public function __construct()
     {
         $this->surveyAnswers = new ArrayCollection();
         $this->answers_list = new ArrayCollection();
         $this->setFromTheDate(new DateTime('now'));
+        $this->surveyComments = new ArrayCollection();
     }
 
     public function countUserAnswers($user_id)
@@ -228,5 +234,36 @@ class Survey
     public function isEnable()
     {
         return $this->getLimitDate() > new DateTime('now');
+    }
+
+    /**
+     * @return Collection|SurveyComments[]
+     */
+    public function getSurveyComments(): Collection
+    {
+        return $this->surveyComments;
+    }
+
+    public function addSurveyComment(SurveyComments $surveyComment): self
+    {
+        if (!$this->surveyComments->contains($surveyComment)) {
+            $this->surveyComments[] = $surveyComment;
+            $surveyComment->setSurvey($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSurveyComment(SurveyComments $surveyComment): self
+    {
+        if ($this->surveyComments->contains($surveyComment)) {
+            $this->surveyComments->removeElement($surveyComment);
+            // set the owning side to null (unless already changed)
+            if ($surveyComment->getSurvey() === $this) {
+                $surveyComment->setSurvey(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -11,102 +11,133 @@
 		<div class="w-container">
 			<div class="w-row">
 
-				<h1>Liste des sondages actifs ({{ sondages|length }})</h1>
-				<p>Vous n'avez pas répondu à 2 sondages en cours..</p>
-				<div style="margin-bottom: 48px;"></div>
+				{% if enabled_sondages|length > 0 %}
 
-				{% for sondage in sondages %}
+					<h1>Liste des sondages actifs ({{ total_enabled_sondages }})</h1>
+					{% if nbr_not_answer > 0 %}
+						<p>Vous n'avez pas répondu à
+							<b>{{ nbr_not_answer }}</b>
+							sondages..</p>
+					{% endif %}
 
-					<div>
-						<div class="top-title">
-							<div class="title-txt">
-								<h3>{{ sondage.title }}</h3>
+					{% for sondage in enabled_sondages %}
+						<div style="margin-top: 50px;"></div>
+
+						<div>
+							<div class="top-title">
+								<div class="title-txt">
+									<h3>{{ loop.index }}
+										-
+										{{ sondage.title }}</h3>
+								</div>
 							</div>
-						</div>
-						<div class="info-box">
-							<p>
-								{{ sondage.description }}
-							</p>
-							<div class="div-spc">
-								{% if sondage.countUserAnswers(app.user.getId()) == 0 %}
-									<form action="{{ path('post_survey_answer') }}" method="POST">
-										<input type="hidden" name="survey" value="{{ sondage.id }}">
-										{% for answer in sondage.getAnswersList() %}
-											<button class="button no-spc {{ app.user ? '' : 'disabled tooltip-2' }}" {{ app.user ? '' : 'title="Connecte-toi !" disabled="true"' }} type="submit" name="answer" value="{{ answer.id }}">{{ answer.answer }}</button>
-										{% endfor %}
-									</form>
-								{% else %}
-									<div class="divider" style="margin-top:10px;margin-bottom:20px;"></div>
-									<div class="text" style="font-size:18px;">
-										<div>
+							<div class="info-box">
+								<p>
+									{{ sondage.description }}
+								</p>
+								<div class="div-spc">
+									{% if not app.user or sondage.countUserAnswers(app.user.getId()) == 0 %}
+										<form action="{{ path('post_survey_answer') }}" method="POST">
+											<input type="hidden" name="survey" value="{{ sondage.id }}">
 											{% for answer in sondage.getAnswersList() %}
-												<b>{{ answer.answer }}</b>: {{ answer.countAnswers }}
+												<button class="button no-spc {{ app.user ? '' : 'disabled tooltip-2' }}" {{ app.user ? '' : 'title="Connecte-toi !" disabled="true"' }} type="submit" name="answer" value="{{ answer.id }}">{{ answer.answer }}</button>
 											{% endfor %}
+										</form>
+									{% else %}
+										<div class="divider" style="margin-top:10px;margin-bottom:20px;"></div>
+										<div class="row text" style="font-size:18px;">
+											<div class="col-12 col-md-6">
+												{% for answer in sondage.getAnswersList() %}
+													<b>{{ answer.answer }}</b>:
+													{{ answer.countAnswers }}
+												{% endfor %}
+											</div>
+											<div class="col-12 col-md-6" style="text-align:right;">
+												<i class="fa fa-chart-bar"></i>
+												Réponses totales:
+												<b>{{ sondage.countAnswers }}</b>
+											</div>
 										</div>
-										<div>
-											<i class="fa fa-chart-bar"></i>
-											Réponses totales:
-											<b>{{ sondage.countAnswers }}</b>
-										</div>
-									</div>
-								{% endif %}
+									{% endif %}
+								</div>
 							</div>
+
+							<div class="meta-tag">
+								<ul class="w-list-unstyled">
+									<li class="li-top m-space">
+										<div class="meta-cs">
+											<div class="top-ico top-darker">
+												<div class="w-embed">
+													<i class="fa fa-calendar-week"></i>
+												</div>
+											</div>
+											<div class="txt-top txt-last">Depuis:
+												{{ sondage.getFromTheDate()|date("d/m/Y à h:i") }}</div>
+										</div>
+									</li>
+									<li class="li-top m-space">
+										<div class="meta-cs">
+											<div class="top-ico top-darker">
+												<div class="w-embed">
+													<i class="fa fa-clock"></i>
+												</div>
+											</div>
+											<div class="txt-top txt-last">Jusqu'au:
+												<b>{{ sondage.getLimitDate()|date("d/m/Y à h:i") }}</b>
+											</div>
+										</div>
+									</li>
+									<li class="li-top m-space">
+										<div class="meta-cs">
+											<div class="top-ico top-darker">
+												<div class="w-embed">
+													<i class="fa fa-user"></i>
+												</div>
+											</div>
+											<div class="txt-top txt-last">par
+												{{ sondage.getUser().getUsername() }}</div>
+										</div>
+									</li>
+									<li class="li-top m-space">
+										<div class="meta-cs">
+											<div class="top-ico top-darker">
+												<div class="w-embed">
+													<i class="fa fa-comment"></i>
+												</div>
+											</div>
+											<div class="txt-top txt-last">0 Commentaires</div>
+										</div>
+									</li>
+									<a href="#">
+										<li class="li-top m-space button" style="float:right;margin-right:0px;margin-top:-5px;padding:10px;">
+											<div style="color: white;">
+												<div class="txt-last">
+													<b>Argumenter</b>
+												</div>
+											</div>
+										</li>
+									</a>
+								</ul>
+							</div>
+
+							<div class="divider" style="margin-top:15px;"></div>
 						</div>
 
-						<div class="meta-tag">
-							<ul class="w-list-unstyled">
-								<li class="li-top m-space">
-									<div class="meta-cs">
-										<div class="top-ico top-darker">
-											<div class="w-embed">
-												<i class="fa fa-calendar-week"></i>
-											</div>
-										</div>
-										<div class="txt-top txt-last">Depuis:
-											{{ sondage.getFromTheDate()|date("d/m/Y à h:s") }}</div>
-									</div>
-								</li>
-								<li class="li-top m-space">
-									<div class="meta-cs">
-										<div class="top-ico top-darker">
-											<div class="w-embed">
-												<i class="fa fa-clock"></i>
-											</div>
-										</div>
-										<div class="txt-top txt-last">Jusqu'au:
-											<b>{{ sondage.getLimitDate()|date("d/m/Y à h:s") }}</b>
-										</div>
-									</div>
-								</li>
-								<li class="li-top m-space">
-									<div class="meta-cs">
-										<div class="top-ico top-darker">
-											<div class="w-embed">
-												<i class="fa fa-user"></i>
-											</div>
-										</div>
-										<div class="txt-top txt-last">par
-											{{ sondage.getUser().getUsername() }}</div>
-									</div>
-								</li>
-								<li class="li-top m-space">
-									<div class="meta-cs">
-										<div class="top-ico top-darker">
-											<div class="w-embed">
-												<i class="fa fa-comment"></i>
-											</div>
-										</div>
-										<div class="txt-top txt-last">0 Commentaires</div>
-									</div>
-								</li>
-							</ul>
-						</div>
+					{% endfor %}
+					{{ knp_pagination_render(enabled_sondages) }}
 
-						<div class="divider" style="margin-top:15px;"></div>
-					</div>
-
-				{% endfor %}
-				{{ knp_pagination_render(sondages) }}
+				{% else %}
+					<h1>Aucun sondage actuellement</h1>
+					<p>
+						Il n'y a aucun sondage en cours !<br/>
+						{% if archived_sondages|length > 0 %}
+							Cependant, vous pouvez consulter la liste des archives:<br/><br/>
+							<a class="button" href="#">Visiter les archives ({{ archived_sondages|length }})</a>
+						{% else %}
+							Et aucune archive disponible pour le moment.
+						{% endif %}
+					</p>
+				{% endif %}
 
 			</div>
 		</div>
