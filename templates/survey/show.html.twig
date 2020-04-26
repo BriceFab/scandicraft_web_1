@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sondage -
+	{{ sondage.title }}
+{% endblock %}
+{% block description %}Sondage Minecraft Faction:
+	{{ sondage.description }}
+{% endblock %}
+
+{% block body %}
+
+	<section class="w-section section">
+		<div class="w-container">
+			<div class="w-row">
+
+				{% include "survey/survey.html.twig" with {'sondage': sondage, 'canArgument': false} %}
+
+				{% if app.user %}
+					{% if has_answer %}
+						<form action="{{ path('post_survey_comment') }}" method="POST">
+							<input type="hidden" name="survey" value="{{ sondage.id }}"/>
+							<textarea class="w-input text-area" id="comment" placeholder="Ton commentaire..." name="comment" data-name="comment"></textarea>
+							<input class="w-button button no-spc" type="submit" value="Commenter" data-wait="Veuillez attendre...">
+						</form>
+					{% else %}
+						<div class="scandicraft_error">Vous devez avoir répondu au sondage pour pouvoir commenter.</div>
+					{% endif %}
+				{% else %}
+					<div class="scandicraft_error">Connectez-vous pour pouvoir commenter.</div>
+				{% endif %}
+
+				<div style="padding-top: 50px;"></div>
+				{% if sondage.getSurveyComments()|length > 0 %}
+
+					<h5>Commentaires&nbsp;<span class="lighter">({{ sondage.getSurveyComments()|length }})</span>
+					</h5>
+					{% for comment in sondage.getSurveyComments() %}
+						<div class="w-clearfix comment">
+							<div class="avatar"><img class="minecraft-head-skin" src="https://crafatar.com/avatars/b8ffc3d3-7dbf-4827-8f69-475f6690aabd">
+							</div>
+							<div class="comment-dess">
+								<div class="arrow-coment"></div>
+								<div class="w-clearfix comment-by">
+									<h5 class="name">{{ comment.getUser().getUsername() }}</h5>
+									<div class="date">Le
+										{{ comment.getCommentAt()|date("d/m/Y à h:i") }}
+										{% if comment.getUser().getId() == app.user.id %}
+											<a class="link-comment" href="{{ path('delete_survey_comment', {'comment_id': comment.id, 'survey_id': sondage.id }) }}">Supprimer</a>
+										{% endif %}
+										{# / <a class="link-comment" href="#">Répondre</a> #}
+										&nbsp;</div>
+								</div>
+								<p>
+									{{ comment.comment }}
+								</p>
+							</div>
+						</div>
+					{% endfor %}
+
+				{% else %}
+					<p>Aucun commentaire</p>
+				{% endif %}
+
+			</div>
+		</div>
+
+	</section>
+
+{% endblock %}

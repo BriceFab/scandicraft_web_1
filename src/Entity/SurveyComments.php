@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SurveyCommentsRepository")
@@ -30,8 +32,24 @@ class SurveyComments
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 250,
+     *      allowEmptyString = false,
+     * )
      */
     private $comment;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $commentAt;
+
+    public function __construct()
+    {
+        $this->setCommentAt(new DateTime('now'));
+    }
 
     public function getId(): ?int
     {
@@ -70,6 +88,18 @@ class SurveyComments
     public function setComment(string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getCommentAt(): ?\DateTimeInterface
+    {
+        return $this->commentAt;
+    }
+
+    public function setCommentAt(\DateTimeInterface $commentAt): self
+    {
+        $this->commentAt = $commentAt;
 
         return $this;
     }
