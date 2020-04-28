@@ -369,3 +369,17 @@ $blur_px: 2px;
 .arrow-coment {
     margin-top: 0px;
 }
+
+.badge_nav {
+    font-size: 18px !important;
+    color: white;
+    background-color: $secondaryColor !important;
+    border-radius: 18px;
+    padding-right: 6.55px;
+    padding-left: 6px;
+    padding-top: 0px;
+    padding-bottom: 1.35px;
+    margin-top: 9px;
+    position: absolute;
+    margin-left: 1px;
+}

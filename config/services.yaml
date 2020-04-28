@@ -37,8 +37,8 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
     scandicraft_service:
         class: App\Service\ScandiCraftService
-        arguments: ["@doctrine.orm.entity_manager"]
-
+        autowire: true
+        
     App\EventListener\DoctrineListener:
         tags:
             -
