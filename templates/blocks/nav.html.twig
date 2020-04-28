@@ -110,7 +110,7 @@
 					</a>
 					<ul class="w-list-unstyled dropdown-menu" style="display: none;">
 						<li class="li-drop">
-							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['wiki'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['wiki'] ? 'w--current' : '' }}" href="{{ path('wiki') }}" data-ix="move-txt-dropdown">
 								<div class="dd-txt">Wiki</div>
 							</a>
 						</li>
