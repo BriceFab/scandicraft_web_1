@@ -7,6 +7,7 @@ use App\Entity\SurveyAnswers;
 use App\Entity\SurveyComments;
 use App\Repository\SurveyCommentsRepository;
 use App\Repository\SurveyRepository;
+use App\Service\ScandiCraftService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,7 @@ class SurveyController extends AbstractController
     /**
      * @Route("/sondages", name="sondages")
      */
-    public function showSondages(Request $request, PaginatorInterface $paginator, SurveyRepository $surveyRepository)
+    public function showSondages(Request $request, PaginatorInterface $paginator, SurveyRepository $surveyRepository, ScandiCraftService $service)
     {
         $data = $surveyRepository->findBy([], ['fromTheDate' => 'ASC']);
         $enabled_sondages = array_filter($data, function ($val) {
@@ -38,7 +39,7 @@ class SurveyController extends AbstractController
             5 // Nombre de résultats par page
         );
 
-        $nbr_not_answer = $this->countSurveysNotAnswer($data);
+        $nbr_not_answer = $service->countSurveysNotAnswer($data);
 
         return $this->render('survey/list.html.twig', [
             'enabled_sondages' => $sondages,
@@ -255,18 +256,6 @@ class SurveyController extends AbstractController
         } else {
             return $this->redirectToRoute($defaultRoute);
         }
-    }
-
-    private function countSurveysNotAnswer($surveys)
-    {
-        $count = 0;
-        if (!$this->getUser()) return 0;
-        foreach ($surveys as $value) {
-            if ($value->countUserAnswers($this->getUser()->getId()) == 0) {
-                $count++;
-            }
-        }
-        return $count;
     }
 
     private function getAnswerList($survey, $answer_id)
