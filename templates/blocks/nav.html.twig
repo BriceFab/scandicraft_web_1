@@ -35,13 +35,16 @@
 					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['forum', 'nouveautes', 'sondages', 'maintenances'] ? 'active' : '' }}" href="#">
 						<div>
 							Communauté
-							<span class="badge_nav">
-							{% if scandicraft_service.countTotalSurvey() >= 9 %}
-							9+
-							{% else %}
-								{{ scandicraft_service.countTotalSurvey() }}
+							{% if scandicraft_service.countTotalSurvey() > 0 %}
+								<span class="badge_nav">
+
+									{% if scandicraft_service.countTotalSurvey() >= 9 %}
+										9+
+									{% else %}
+										{{ scandicraft_service.countTotalSurvey() }}
+									{% endif %}
+								</span>
 							{% endif %}
-							</span>
 						</div>
 					</a>
 					<ul class="w-list-unstyled dropdown-menu" style="display: none;">
@@ -57,7 +60,11 @@
 						</li>
 						<li class="li-drop">
 							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['sondages'] ? 'w--current' : '' }}" href="{{ path('sondages') }}" data-ix="move-txt-dropdown">
-								<div class="dd-txt">Sondages ({{ scandicraft_service.countTotalSurvey() }})</div>
+								<div class="dd-txt">Sondages
+									{% if scandicraft_service.countTotalSurvey() > 0 %}
+										({{ scandicraft_service.countTotalSurvey() }})
+									{% endif %}
+								</div>
 							</a>
 						</li>
 						{% if maintenance_service.count_maintenances() > 0 %}
@@ -135,10 +142,10 @@
 
 <script>
 	if (isIE()) {
-		let logo = document.getElementById("#nav_bar_logo");
-		if (logo) {
-			logo.style.display = "none";
-			logo.style.visibility = "hidden";
-		}
-	}
+let logo = document.getElementById("#nav_bar_logo");
+if (logo) {
+logo.style.display = "none";
+logo.style.visibility = "hidden";
+}
+}
 </script>
