@@ -17,4 +17,13 @@ class HelpController extends AbstractController
             'faqs' => $repo->findAll()
         ]);
     }
+
+    /**
+     * @Route("/wiki", name="wiki")
+     */
+    public function showWiki(FaqRepository $repo)
+    {
+        return $this->render('help/wiki.html.twig');
+    }
+
 }
