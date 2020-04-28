@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FAQ
+{% endblock %}
+{% block description %}Retrouver toutes les réponses aux questions courantes dans la foire aux questions de ScandiCraft !
+{% endblock %}
+
+{% block body %}
+	<section class="w-section section">
+
+		<div class="w-container">
+			<h1>Les réponses à vos questions courantes</h1>
+
+			{% if faqs|length == 0 %}
+				<p>Aucune FAQ.</p>
+			{% endif %}
+
+			<div
+				class="accordion ui-accordion ui-widget ui-helper-reset">
+				<!-- Accordion item -->
+				{% for item in faqs %}
+					<h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+						<span class="ui-accordion-header-icon ui-icon ui-accordion-icon"></span>
+						{{ item.question }}</h3>
+					<div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style="display: none;">
+						<p>
+							{{ item.answer|raw }}
+						</p>
+					</div>
+				{% endfor %}
+			</div>
+
+		</div>
+
+	</section>
+{% endblock %}

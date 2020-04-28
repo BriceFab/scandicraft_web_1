@@ -25,6 +25,12 @@ easy_admin:
             { entity: "StaffCategory", label: "Staff catégories" },
             { entity: "ThanksCategory", label: "Remerciements catégories" },
           ]
+      - label: "Aide"
+        icon: "hands-helping"
+        children:
+          [
+            { entity: "FAQ", label: "FAQ" },
+          ]
       - label: "Réseaux sociaux"
         icon: "network-wired"
         children:
