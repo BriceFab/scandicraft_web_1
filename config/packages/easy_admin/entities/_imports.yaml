@@ -11,3 +11,4 @@ imports:
 - { resource: MySocialmedia.yaml }
 - { resource: Staff.yaml }
 - { resource: StaffCategory.yaml }
+- { resource: FAQ.yaml }

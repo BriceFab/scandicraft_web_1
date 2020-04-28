@@ -1,0 +1,24 @@
+easy_admin:
+  entities:
+    FAQ:
+      class: App\Entity\Faq
+      list:
+        title: "Liste des FAQ"
+        actions:
+          [
+            { name: "new", label: "Ajouter" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            { property: "question", label: "Question" },
+            { property: "answer", label: "Réponse" },
+          ]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+            { property: "question", label: "Question", type: "text" },
+            { property: "answer", label: "Réponse", type: "fos_ckeditor" },
+          ]
