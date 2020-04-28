@@ -13,7 +13,7 @@
 	</div>
 	<div class="info-box">
 		<p>
-			{{ sondage.description }}
+			{{ sondage.description|raw }}
 		</p>
 		<div class="div-spc">
 			{% if (not app.user or sondage.countUserAnswers(app.user.getId()) == 0) and sondage.isEnable() %}
@@ -52,7 +52,7 @@
 						</div>
 					</div>
 					<div class="txt-top txt-last">Depuis:
-						{{ sondage.getFromTheDate()|date("d/m/Y à h:i") }}</div>
+						{{ sondage.getFromTheDate()|date("d/m/Y à H:i") }}</div>
 				</div>
 			</li>
 			<li class="li-top m-space">
@@ -63,7 +63,7 @@
 						</div>
 					</div>
 					<div class="txt-top txt-last">Jusqu'au:
-						<b>{{ sondage.getLimitDate()|date("d/m/Y à h:i") }}</b>
+						<b>{{ sondage.getLimitDate()|date("d/m/Y à H:i") }}</b>
 					</div>
 				</div>
 			</li>

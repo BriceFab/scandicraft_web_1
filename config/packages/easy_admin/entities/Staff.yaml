@@ -29,7 +29,7 @@ easy_admin:
             {
               property: "presentation",
               label: "Présentation",
-              type: "textarea",
+              type: "fos_ckeditor",
             },
             {
               property: "category",

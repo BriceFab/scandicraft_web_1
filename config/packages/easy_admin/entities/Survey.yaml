@@ -22,7 +22,7 @@ easy_admin:
             { property: "countTotalComments", label: "Commentaires" },
           ]
       form:
-        title: "Aouter/Modifier le sondage"
+        title: "Ajouter/Modifier le sondage"
         fields:
           [
             { property: "title", label: "Titre" },
@@ -31,7 +31,7 @@ easy_admin:
               label: "Slug",
               help: "Url explicite pour le lien et SEO",
             },
-            { property: "description", label: "Description" },
+            { property: "description", label: "Description", type: "fos_ckeditor" },
             {
               property: "answer_delay",
               label: "Temps de réponses maximale (en heures)",
