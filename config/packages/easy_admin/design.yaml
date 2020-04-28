@@ -1,4 +1,12 @@
 easy_admin:
     site_name: "ScandiCraft"
+    formats:
+        datetime: 'd/m/Y à H\hi'
+        date: d/m/Y
+        time: 'H\hi e'
+        number: '%.4f'
     design:
         brand_color: "#b30000" #bleu: 3385ff
+        form_theme:
+            - '@EasyAdmin/form/bootstrap_4.html.twig'
+            - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
