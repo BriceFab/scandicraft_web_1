@@ -9,7 +9,7 @@
 
 	<section class="w-section section">
 		{% for category in categories %}
-			{% if category.staff|length > 0 %}
+			{% if category.getEnableStaffs()|length > 0 %}
 				<div class="w-container">
 					<div class="top-title">
 						<div class="title-txt">
@@ -27,7 +27,7 @@
 					</div>
 					<div class="top-spc">
 						<div class="w-row">
-							{% for membre in category.staff %}
+							{% for membre in category.getEnableStaffs() %}
 								<div class="w-col w-col-4">
 									<div class="team-wrapper">
 										<div class="container">
@@ -69,6 +69,7 @@
 					</div>
 				</div>
 				<br/>
+			{#
 			{% else %}
 				<div class="w-container">
 					<div class="top-title">
@@ -92,6 +93,7 @@
 					</div>
 				</div>
 				<br/>
+			#}
 			{% endif %}
 		{% endfor %}
 

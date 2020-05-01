@@ -14,6 +14,7 @@ easy_admin:
           [
             { property: "user", label: "Utilisateur" },
             { property: "category", label: "Fonction" },
+            { property: "enable", label: "Actif ?" },
             { property: "since", label: "Depuis le" },
           ]
       form:
@@ -37,10 +38,9 @@ easy_admin:
               type: "entity",
               type_options: { class: 'App\Entity\StaffCategory' },
             },
+            { property: "enable", label: "Activé ?", type: "checkbox" },
             { property: "head_link", label: "Lien de la tête (skin)" },
-            {
-              property: "since", label: "Depuis le"
-            },
+            { property: "since", label: "Depuis le" },
             {
               property: "socialmedia",
               label: "Réseaux sociaux",

@@ -80,6 +80,18 @@ class ThanksCategory
         return $this->thanks;
     }
 
+    /**
+     * @return Collection|Thanks[]
+     */
+    public function getEnableThanks()
+    {
+        $items = [];
+        foreach($this->getThanks() as $key => $item) {
+            if ($item->getEnable()) $items[] = $item;
+        }
+        return $items;
+    }
+
     public function addThank(Thanks $thank): self
     {
         if (!$this->thanks->contains($thank)) {

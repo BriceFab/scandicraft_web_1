@@ -51,6 +51,11 @@ class Thanks
      */
     private $head_link;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $enable;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -153,6 +158,18 @@ class Thanks
     public function setHeadLink(string $head_link): self
     {
         $this->head_link = $head_link;
+
+        return $this;
+    }
+
+    public function getEnable(): ?bool
+    {
+        return $this->enable;
+    }
+
+    public function setEnable(bool $enable): self
+    {
+        $this->enable = $enable;
 
         return $this;
     }
