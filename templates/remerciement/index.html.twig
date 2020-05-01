@@ -9,7 +9,7 @@
 
 	<section class="w-section section">
 		{% for category in categories %}
-			{% if category.thanks|length > 0 %}
+			{% if category.getEnableThanks()|length > 0 %}
 				<div class="w-container">
 					<div class="top-title">
 						<div class="title-txt">
@@ -27,7 +27,7 @@
 					</div>
 					<div class="top-spc">
 						<div class="w-row">
-							{% for thank in category.thanks %}
+							{% for thank in category.getEnableThanks() %}
 								<div class="w-col w-col-3">
 									<div class="team-wrapper">
 										<div class="container">
@@ -66,6 +66,10 @@
 					</div>
 				</div>
 				<br/>
+		
+		
+		
+			{#
 			{% else %}
 				<div class="w-container">
 					<div class="top-title">
@@ -89,11 +93,12 @@
 					</div>
 				</div>
 				<br/>
+			#}
 			{% endif %}
 		{% endfor %}
 
 		<!-- thanks -->
-		<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1457190527508329" data-ad-slot="7087151634" data-ad-format="auto" data-full-width-responsive="true"></ins>
+		<ins class="adsbygoogle" style="display:block;text-align:center;" data-ad-client="ca-pub-1457190527508329" data-ad-slot="7087151634" data-ad-format="auto" data-full-width-responsive="true"></ins>
 		<script>
 			(adsbygoogle = window.adsbygoogle || []).push({});
 		</script>

@@ -43,6 +43,18 @@ class StaffCategory
         $this->staff = new ArrayCollection();
     }
 
+    /**
+     * @return Collection|Staff[]
+     */
+    public function getEnableStaffs()
+    {
+        $items = [];
+        foreach($this->getStaff() as $key => $item) {
+            if ($item->getEnable()) $items[] = $item;
+        }
+        return $items;
+    }
+
     public function __toString() {
         return $this->getName();
     }

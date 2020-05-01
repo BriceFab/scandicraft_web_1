@@ -14,6 +14,7 @@ easy_admin:
           [
             { property: "user", label: "Utilisateur" },
             { property: "thanks_category", label: "Catégorie" },
+            { property: "enable", label: "Actif ?" },
             { property: "createdAt", label: "Depuis le" },
           ]
       form:
@@ -29,7 +30,7 @@ easy_admin:
             {
               property: "presentation",
               label: "Présentation",
-              type: 'fos_ckeditor',
+              type: "fos_ckeditor",
             },
             {
               property: "thanks_category",
@@ -37,6 +38,7 @@ easy_admin:
               type: "entity",
               type_options: { class: 'App\Entity\ThanksCategory' },
             },
+            { property: "enable", label: "Activé ?", type: "checkbox" },
             { property: "head_link", label: "Lien de la tête (skin)" },
             {
               property: "socialmedia",

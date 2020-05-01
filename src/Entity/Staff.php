@@ -51,6 +51,11 @@ class Staff
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $enable;
+
     public function __construct()
     {
         $this->social_media = new ArrayCollection();
@@ -153,6 +158,18 @@ class Staff
     public function setCategory(?StaffCategory $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getEnable(): ?bool
+    {
+        return $this->enable;
+    }
+
+    public function setEnable(bool $enable): self
+    {
+        $this->enable = $enable;
 
         return $this;
     }
