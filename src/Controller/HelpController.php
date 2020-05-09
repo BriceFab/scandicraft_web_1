@@ -19,9 +19,9 @@ class HelpController extends AbstractController
     }
 
     /**
-     * @Route("/wiki", name="wiki")
+     * @Route("/wiki-et-nouveautes", name="wiki")
      */
-    public function showWiki(FaqRepository $repo)
+    public function showWiki()
     {
         return $this->render('help/wiki.html.twig');
     }
