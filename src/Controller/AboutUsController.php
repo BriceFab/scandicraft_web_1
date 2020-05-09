@@ -23,7 +23,7 @@ class AboutUsController extends AbstractController
      */
     public function showRemerciements()
     {
-        $remerciements_categories = $this->em->getRepository(ThanksCategory::class)->findBy([], ['name' => 'ASC']);
+        $remerciements_categories = $this->em->getRepository(ThanksCategory::class)->findBy([], ['priority' => 'ASC']);
         return $this->render('remerciement/index.html.twig', ['categories' => $remerciements_categories]);
     }
 
@@ -32,7 +32,7 @@ class AboutUsController extends AbstractController
      */
     public function showEquipe()
     {
-        $staff_categories = $this->em->getRepository(StaffCategory::class)->findBy([], ['name' => 'ASC']);
+        $staff_categories = $this->em->getRepository(StaffCategory::class)->findBy([], ['priority' => 'ASC']);
         return $this->render('staff/index.html.twig', ['categories' => $staff_categories]);
     }
 
