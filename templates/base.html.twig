@@ -5,8 +5,9 @@
         <title>{% block title %}{% endblock %} - {{ server_name }} Minecraft Serveur PvP Faction Launcher Moddé !</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% if block("description") is defined %}
-            <meta name="description" content="{{ block('description') }}" />
-		    <meta property="og:description" content="{{ block('description') }}" />
+            {% set desc = block('description')|striptags|trim|replace({'\n': '', '\r': ' ', '&lt;': '', '&gt;': '', 'h1': '', 'h2': '', 'p': '', '/': ''})|raw|easyadmin_truncate(140, true, '...') %}
+            <meta name="description" content="{{ desc }}" />
+		    <meta property="og:description" content="{{ desc }}" />
         {% else %}
             <meta name="description" content="ScandiCraft est un serveur Minecraft PvP / Faction / Moddé et MMORPG avec Launcher Obligatoire !" />
 		    <meta property="og:description" content="ScandiCraft est un serveur Minecraft PvP / Faction / Moddé et MMORPG avec Launcher Obligatoire !" />
@@ -14,7 +15,6 @@
 		<meta name="keywords" content="scandicraft,minecraft,mc,serveur,pvp,faction,mods,moddé,launcher,scandi,bricefab,bricefab123,minijeux,minigames,jouer,mmorpg,scandi,forge,vanilla" />
 		<meta name="author" content="ScandiCraft" />
         <meta name="author" content="BriceFab" />
-		<meta name="author" content="Fabrice Riva" />
 		<meta name="robots" content="index,follow" />
 
         <meta property="og:title" content="{{ server_name }} - {{ block('title') }}" />

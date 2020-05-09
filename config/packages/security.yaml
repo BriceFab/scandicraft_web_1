@@ -24,7 +24,7 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         refresh:
-            pattern:  ^/api/token/refresh
+            pattern: ^/api/token/refresh
             stateless: true
             anonymous: true
         api:
@@ -44,7 +44,10 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
-
+            remember_me:
+                secret: "%kernel.secret%"
+                lifetime: 604800 # 1 week in seconds
+                path: /
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
             # https://symfony.com/doc/current/security/impersonating_user.html

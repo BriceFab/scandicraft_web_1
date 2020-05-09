@@ -38,6 +38,11 @@ class ThanksCategory
      */
     private $subtitle;
 
+    /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+    private $priority;
+
     public function __construct()
     {
         $this->thanks = new ArrayCollection();
@@ -127,6 +132,18 @@ class ThanksCategory
     public function setSubtitle(?string $subtitle): self
     {
         $this->subtitle = $subtitle;
+
+        return $this;
+    }
+
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(?int $priority): self
+    {
+        $this->priority = $priority;
 
         return $this;
     }

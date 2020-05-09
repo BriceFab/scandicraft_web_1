@@ -16,6 +16,11 @@ easy_admin:
             { property: "name", label: "Nom" },
             { property: "subtitle", label: "Sous-titre" },
             { property: "description", label: "Description" },
+            {
+              property: "priority",
+              label: "Priorité/Ordre",
+              template: "easy_admin/fields/integer.html.twig",
+            },
           ]
       show:
         title: "Information sur la catégorie"
@@ -32,4 +37,9 @@ easy_admin:
             { property: "name", label: "Nom" },
             { property: "subtitle", label: "Sous-titre" },
             { property: "description", label: "Description", type: "textarea" },
+            {
+              property: "priority",
+              label: "Priorité/Ordre",
+              template: "easy_admin/fields/integer.html.twig",
+            },
           ]

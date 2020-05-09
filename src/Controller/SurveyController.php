@@ -109,8 +109,8 @@ class SurveyController extends AbstractController
         }
 
         if (!$survey->isEnable()) {
-            $this->addFlash('error', 'Ce sondage n\'est pas actif.');
-            return $this->redirectToRoute('sondages');
+            $this->addFlash('error', 'Ce sondage n\'est pas actif, voici l\'archive.');
+            return $this->redirectToRoute('survey_archived_comments', ['slug' => $survey->getSlug()]);
         }
 
         return $this->render('survey/show.html.twig', [

@@ -38,6 +38,11 @@ class StaffCategory
      */
     private $staff;
 
+    /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+    private $priority;
+
     public function __construct()
     {
         $this->staff = new ArrayCollection();
@@ -127,6 +132,18 @@ class StaffCategory
                 $staff->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(?int $priority): self
+    {
+        $this->priority = $priority;
 
         return $this;
     }
