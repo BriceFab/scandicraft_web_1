@@ -27,3 +27,4 @@ public/upload/capes/
 # /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
 .env.local
+public/launcher/update
