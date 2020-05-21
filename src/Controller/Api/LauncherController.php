@@ -22,6 +22,7 @@ class LauncherController extends AbstractController
     private const unauthorized_message = "ScandiCraft est en maintenance. Et vous ne faites pas parti des joueurs autorisés à lancer le launcher !";
     private const launcher_role = "ROLE_LAUNCHER";
     private const launcher_files = "\\launcher\\files\\";
+    private const zip_name = "scandicraft_download.zip";
 
     private $security;
 
@@ -31,7 +32,7 @@ class LauncherController extends AbstractController
     }
 
     /**
-     * @Route("/launcher/download", name="launcher_download_files")
+     * @Route("/api/launcher/download", name="launcher_download_files")
      * @Method("POST")
      */
     public function downloadFile(Request $request)
@@ -39,45 +40,59 @@ class LauncherController extends AbstractController
         $data = json_decode($request->getContent(), true);
         $launcher_files = $this->getParameter('kernel.project_dir') . LauncherController::launcher_files;
 
-        if (isset($data['files'])) {
-            dd("data files");
+        $this->createZipFile($launcher_files, isset($data['files']) ? $data['files'] : []);
 
-            //TODO Json files array, if null = download all
-            //TODO Pack in zip files
+        return $this->file(LauncherController::zip_name, LauncherController::zip_name, ResponseHeaderBag::DISPOSITION_INLINE);
+    }
 
-            // $this->checkIsAuthorized();
+    private function createZipFile($launcher_files, $need_download_files)
+    {
+        $zip = new \ZipArchive();
+        $zip->open(LauncherController::zip_name,  \ZipArchive::CREATE);
 
-            // $filePath = $this->getParameter('kernel.project_dir') . LauncherController::launcher_files . $file;
+        $finder = new Finder();
+        $finder->files()->in($launcher_files);
 
-            // $filesystem = new Filesystem();
+        if ($finder->hasResults()) {
+            foreach ($finder as $file) {
+                $absoluteFilePath = $file->getRealPath();
+                $fileNameWithExtension = $file->getRelativePathname();
 
-            // if (!$filesystem->exists($filePath)) {
-            //     throw new JsonException("Le fichier n'existe pas " . $filePath, HttpStatusCode::NO_CONTENT);
-            // }
-
-            // return $this->file($filePath, $file, ResponseHeaderBag::DISPOSITION_INLINE);
-        } else {
-            // download all files
-            // dd("download all files");
-            $zip = new \ZipArchive();
-            $zipName = 'all.zip';
-            $zip->open($zipName,  \ZipArchive::CREATE);
-
-            $finder = new Finder();
-            $finder->files()->in($launcher_files);
-
-            if ($finder->hasResults()) {
-                foreach ($finder as $file) {
-                    $absoluteFilePath = $file->getRealPath();
-                    $fileNameWithExtension = $file->getRelativePathname();
-
+                if (!isset($need_download_files) || in_array($fileNameWithExtension, $need_download_files)) {
                     $zip->addFromString($fileNameWithExtension,  file_get_contents($absoluteFilePath));
                 }
             }
-            $zip->close();
-
-            return $this->file($zipName, $zipName, ResponseHeaderBag::DISPOSITION_INLINE);
         }
+        $zip->close();
+    }
+
+    /**
+     * @Route("/api/launcher/checksum", name="launcher_files_checksum")
+     * @Method("GET")
+     */
+    public function getChecksum()
+    {
+        $files_checksum = [];
+
+        $launcher_files = $this->getParameter('kernel.project_dir') . LauncherController::launcher_files;
+
+        $finder = new Finder();
+        $finder->files()->in($launcher_files);
+
+        if ($finder->hasResults()) {
+            foreach ($finder as $file) {
+                $absoluteFilePath = $file->getRealPath();
+                $fileNameWithExtension = $file->getRelativePathname();
+
+                array_push($files_checksum, [
+                    "name" => $fileNameWithExtension,
+                    "size" => filesize($absoluteFilePath),
+                    "hash" => hash_file('sha1', $absoluteFilePath)
+                ]);
+            }
+        }
+
+        return $this->json($files_checksum, HttpStatusCode::OK);
     }
 
     /**
