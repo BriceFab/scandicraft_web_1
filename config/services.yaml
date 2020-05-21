@@ -38,7 +38,7 @@ services:
     scandicraft_service:
         class: App\Service\ScandiCraftService
         autowire: true
-        
+
     App\EventListener\DoctrineListener:
         tags:
             -

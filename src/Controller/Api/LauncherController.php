@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\Exception\JsonException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Security\Core\Security;
@@ -22,7 +23,6 @@ class LauncherController extends AbstractController
     private const unauthorized_message = "ScandiCraft est en maintenance. Et vous ne faites pas parti des joueurs autorisés à lancer le launcher !";
     private const launcher_role = "ROLE_LAUNCHER";
     private const launcher_files = "\\launcher\\files\\";
-    private const zip_name = "scandicraft_download.zip";
 
     private $security;
 
@@ -37,18 +37,26 @@ class LauncherController extends AbstractController
      */
     public function downloadFile(Request $request)
     {
+        $this->checkIsAuthorized();
+
+        $zip_name = "scandicraft_download" . uniqid() . ".zip";
+
         $data = json_decode($request->getContent(), true);
         $launcher_files = $this->getParameter('kernel.project_dir') . LauncherController::launcher_files;
 
-        $this->createZipFile($launcher_files, isset($data['files']) ? $data['files'] : []);
+        $this->createZipFile($zip_name, $launcher_files, isset($data['files']) ? $data['files'] : []);
 
-        return $this->file(LauncherController::zip_name, LauncherController::zip_name, ResponseHeaderBag::DISPOSITION_INLINE);
+        $response = new BinaryFileResponse($zip_name);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, $zip_name);
+        $response->deleteFileAfterSend();
+
+        return $response;
     }
 
-    private function createZipFile($launcher_files, $need_download_files)
+    private function createZipFile($zip_name, $launcher_files, $need_download_files)
     {
         $zip = new \ZipArchive();
-        $zip->open(LauncherController::zip_name,  \ZipArchive::CREATE);
+        $zip->open($zip_name,  \ZipArchive::CREATE);
 
         $finder = new Finder();
         $finder->files()->in($launcher_files);
@@ -72,6 +80,8 @@ class LauncherController extends AbstractController
      */
     public function getChecksum()
     {
+        $this->checkIsAuthorized();
+
         $files_checksum = [];
 
         $launcher_files = $this->getParameter('kernel.project_dir') . LauncherController::launcher_files;
