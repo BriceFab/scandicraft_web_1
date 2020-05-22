@@ -28,3 +28,4 @@ public/upload/capes/
 ###< lexik/jwt-authentication-bundle ###
 .env.local
 launcher/
+public/*.zip
