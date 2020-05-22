@@ -2,15 +2,14 @@
 
 namespace App\Controller\Api;
 
-use HttpStatusCode;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\Exception\JsonException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Security\Core\Security;
 
@@ -102,21 +101,22 @@ class LauncherController extends AbstractController
             }
         }
 
-        return $this->json($files_checksum, HttpStatusCode::OK);
+        return $this->json($files_checksum, Response::HTTP_OK);
     }
 
     /**
-     * @Route("/launcher/installer", name="launcher_installer")
+     * @Route("/launcher/installer/{os}", name="launcher_installer")
      */
-    public function downloadInstaller()
+    public function downloadInstaller($os)
     {
+        //download last from version
         return $this->json("test");
     }
 
     private function checkIsAuthorized()
     {
         if (!$this->security->isGranted(LauncherController::launcher_role)) {
-            throw new JsonException(LauncherController::unauthorized_message, HttpStatusCode::UNAUTHORIZED);
+            throw new JsonException(LauncherController::unauthorized_message, Response::HTTP_UNAUTHORIZED);
         }
     }
 }

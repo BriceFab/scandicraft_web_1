@@ -57,6 +57,7 @@ easy_admin:
                     {
                       "Rôle utilisateur": "ROLE_USER",
                       "Administrateur": "ROLE_ADMIN",
+                      "Launcher": "ROLE_LAUNCHER",
                     },
                 },
             },
