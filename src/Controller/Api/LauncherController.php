@@ -119,6 +119,16 @@ class LauncherController extends AbstractController
         return $this->file($installers . $latest['path']);
     }
 
+    /**
+     * @Route("/launcher/update/{file}", name="launcher_update")
+     */
+    public function updateLauncher($file)
+    {
+        $installers = $this->getParameter('kernel.project_dir') . LauncherController::launcher_installers;
+
+        return $this->file($installers . $file);
+    }
+
     private function checkIsAuthorized()
     {
         if (!$this->security->isGranted(LauncherController::launcher_role)) {
