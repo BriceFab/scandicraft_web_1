@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Yaml\Yaml;
 
 /*
 https://symfony.com/blog/new-in-symfony-3-2-file-controller-helper
@@ -21,7 +22,8 @@ class LauncherController extends AbstractController
 {
     private const unauthorized_message = "ScandiCraft est en maintenance. Et vous ne faites pas parti des joueurs autorisés à lancer le launcher !";
     private const launcher_role = "ROLE_LAUNCHER";
-    private const launcher_files = "\\launcher\\files\\";
+    private const launcher_files = "/launcher/files/";
+    private const launcher_installers = "/launcher/installer/";
 
     private $security;
 
@@ -109,8 +111,12 @@ class LauncherController extends AbstractController
      */
     public function downloadInstaller($os)
     {
-        //download last from version
-        return $this->json("test");
+        //TODO os platform
+        $installers = $this->getParameter('kernel.project_dir') . LauncherController::launcher_installers;
+
+        $latest = Yaml::parseFile($installers . 'latest.yml');
+
+        return $this->file($installers . $latest['path']);
     }
 
     private function checkIsAuthorized()
