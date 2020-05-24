@@ -111,12 +111,26 @@ class LauncherController extends AbstractController
      */
     public function downloadInstaller($os)
     {
-        //TODO os platform
         $installers = $this->getParameter('kernel.project_dir') . LauncherController::launcher_installers;
 
-        $latest = Yaml::parseFile($installers . 'latest.yml');
+        $latestFile = Yaml::parseFile($installers . $this->getLatestBuild($os));
 
-        return $this->file($installers . $latest['path']);
+        return $this->file($installers . $latestFile['path']);
+    }
+
+    private function getLatestBuild($os)
+    {
+        switch ($os) {
+            case 'win':
+                return 'latest.yml';
+            case 'mac':
+                return 'latest-mac.yml';
+            case 'linux':
+                return 'latest-linux.yml';
+            default:
+                //default = windows
+                return 'latest.yml';
+        }
     }
 
     /**
