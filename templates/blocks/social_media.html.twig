@@ -1,6 +1,6 @@
 {% for social_media in scandicraft_service.getSocialmedia() %}
 	{% set name = social_media.getSocialmediaType().name|lower %}
-	<a class="w-inline-block social-ico {{ name }}-ico {{ a_class }} {{ name }} tooltip-2" href="//{{ social_media.url }}" title="{{ name|capitalize }}" target="_blank">
+	<a class="w-inline-block social-ico {{ name }}-ico {{ a_class }} {{ name }} tooltip-2" href="//{{ social_media.url }}" title="{{ name|capitalize }}" target="_blank" rel="external">
 		{% if embed_class is defined %}
 		    <div class="w-embed {{ embed_class }}">
 		{% else %}
