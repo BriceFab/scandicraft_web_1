@@ -8,6 +8,7 @@
             {% set desc = block('description')|striptags|trim|replace({'\n': '', '\r': ' ', '&lt;': '', '&gt;': '', 'h1': '', 'h2': '', 'p': '', '/': ''})|raw|easyadmin_truncate(160, true, '..') %}
             <meta name="description" content="{{ desc }}" />
 		    <meta property="og:description" content="{{ desc }}" />
+            <meta name="twitter:description" content="{{ desc }}">
         {% else %}
             <meta name="description" content="ScandiCraft est un serveur Minecraft PvP / Faction / Moddé et MMORPG avec Launcher Obligatoire !" />
 		    <meta property="og:description" content="ScandiCraft est un serveur Minecraft PvP / Faction / Moddé et MMORPG avec Launcher Obligatoire !" />
@@ -17,9 +18,18 @@
         <meta name="author" content="BriceFab" />
 		<meta name="robots" content="index,follow" />
 
-        <meta property="og:title" content="{{ server_name }} - {{ block('title') }}" />
-		<meta property="og:type" content="website" />
+        <meta property="og:title" content="{{ block('title') }} - {{ server_name }}" />
+        <meta name="twitter:title" content="{{ block('title') }} - {{ server_name }}">
+        <meta property="og:locale" content="fr_FR">
+		<meta property="og:type" content="game" />
 		<meta property="og:url" content="{{ app.request.uri }}" />
+        <link rel="canonical" href="{{ app.request.uri }}">
+        <meta name="twitter:card" content="summary_large_image">
+        
+        <link rel="manifest" href="/manifest.webmanifest.json">
+        <meta name="theme-color" content="#b30000">
+        <link rel="dns-prefetch" href="//www.google.fr">
+        <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
 
         <!-- FAVICON -->
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
