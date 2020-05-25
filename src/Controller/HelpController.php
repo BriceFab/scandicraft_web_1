@@ -25,5 +25,4 @@ class HelpController extends AbstractController
     {
         return $this->render('help/wiki.html.twig');
     }
-
 }

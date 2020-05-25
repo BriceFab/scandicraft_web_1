@@ -26,7 +26,7 @@
 					</a>
 				</li>
 				<li class="li-menu" data-ix="show-dropdown">
-					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['voter'] ? 'active' : '' }}" href="{{ path('jouer') }}">
+					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['voter'] ? 'active' : '' }}" href="{{ path('voter') }}">
 						<div>
 							Voter</div>
 					</a>
@@ -83,7 +83,7 @@
 		<nav class="navigation top-right">
 			<ul class="w-list-unstyled top-fix-right">
 				<li class="li-menu" data-ix="show-dropdown">
-					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['presentation', 'staff', 'remerciements'] ? 'active' : '' }}" href="#">
+					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['presentation', 'equipe', 'remerciements'] ? 'active' : '' }}" href="#">
 						<div>Qui sommes nous ?</div>
 					</a>
 					<ul class="w-list-unstyled dropdown-menu" style="display: none;">
@@ -105,7 +105,7 @@
 					</ul>
 				</li>
 				<li class="li-menu" data-ix="show-dropdown">
-					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['wiki', 'support'] ? 'active' : '' }}" href="#">
+					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['wiki', 'support', 'faq'] ? 'active' : '' }}" href="#">
 						<div>Aide</div>
 					</a>
 					<ul class="w-list-unstyled dropdown-menu" style="display: none;">
@@ -115,7 +115,7 @@
 							</a>
 						</li>
 						<li class="li-drop">
-							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['support'] ? 'w--current' : '' }}" href="#" data-ix="move-txt-dropdown">
+							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['support'] ? 'w--current' : '' }}" href="{{ path('support') }}" data-ix="move-txt-dropdown">
 								<div class="dd-txt">Support</div>
 							</a>
 						</li>
@@ -127,9 +127,8 @@
 					</ul>
 				</li>
 				<li class="li-menu" data-ix="show-dropdown">
-					<a class="w-inline-block link-menu" href="#">
-						<div>Boutique
-						</div>
+					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['boutique'] ? 'active' : '' }}" href="{{ path('store') }}">
+						<div>Boutique</div>
 					</a>
 				</li>
 			</ul>
