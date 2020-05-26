@@ -3,6 +3,7 @@
 namespace App\EventListener;
 
 use App\Entity\ExceptionLog;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -44,6 +45,7 @@ class LogException implements EventSubscriberInterface
         }
         $log->setExceptionMessage($exception->getMessage());
         $log->setExceptionCode($exception->getCode());
+        $log->setCreatedAt(new DateTime('now'));
 
         $this->em->persist($log);
         $this->em->flush();

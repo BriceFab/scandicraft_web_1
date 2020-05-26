@@ -11,8 +11,22 @@ easy_admin:
       disabled_actions: ["new", "edit"]
       list:
         title: "Historiques des erreurs"
+        filters: [{ property: "method", label: "Méthode", type: "text", mapped: false }]
         actions:
           [
             { name: "show", label: "Détail", icon: "search" },
             { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            {
+              property: "exception_code",
+              label: "Code",
+              type: "integer",
+              template: "easy_admin/fields/integer.html.twig",
+            },
+            { property: "created_at", label: "Apparue le", type: "date" },
+            { property: "method", label: "Méthode" },
+            { property: "uri" },
+            { property: "user" },
           ]

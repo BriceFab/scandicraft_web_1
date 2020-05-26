@@ -41,6 +41,11 @@ class ExceptionLog
      */
     private $exceptionCode;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class ExceptionLog
     public function setExceptionCode(?int $exceptionCode): self
     {
         $this->exceptionCode = $exceptionCode;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
