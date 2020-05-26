@@ -45,6 +45,14 @@ easy_admin:
             { entity: "SocialmediaType", label: "Liste", permission: "ROLE_ADMIN" },
             { entity: "MySocialmedia", label: "ScandiCraft", permission: "ROLE_ADMIN" },
           ]
+      - label: "Logs"
+        icon: "history"
+        permission: "ROLE_ADMIN"
+        children:
+          [
+            { entity: "ActionLog", label: "Actions", permission: "ROLE_ADMIN" },
+            { entity: "ExceptionLog", label: "Exceptions", permission: "ROLE_ADMIN" },
+          ]
       - { label: "liens" }
       - {
           label: "Retour",

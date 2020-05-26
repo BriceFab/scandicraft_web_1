@@ -14,6 +14,11 @@ class LogAction implements EventSubscriberInterface
 {
     private $em;
     private $tokenStorage;
+    private $unlogUri = [
+        '/api/login_check',
+        '/connexion',
+        '/inscription'
+    ];
 
     public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage)
     {
@@ -31,17 +36,24 @@ class LogAction implements EventSubscriberInterface
     public function onKernelResponse(ResponseEvent $event)
     {
         $method = $event->getRequest()->getMethod();
-        if (strtoupper($event->getRequest()->getMethod()) !== 'GET') {
+        $uri = $event->getRequest()->getRequestUri();
+        if (strtoupper($event->getRequest()->getMethod()) !== 'GET' && $this->mustLogsUri($uri)) {
             $log = new ActionLog();
             $log->setMethod($method);
-            $log->setUri($event->getRequest()->getRequestUri());
-            $log->setUsername($this->tokenStorage->getToken()->getUsername());
-            $log->setRequestAt(new DateTime());
+            $log->setUri($uri);
+            if ($this->tokenStorage->getToken() !== null) {
+                $log->setUser($this->tokenStorage->getToken()->getUser());
+            }
+            $log->setRequestAt(new DateTime('now'));
             $log->setResponseCode($event->getResponse()->getStatusCode());
             $log->setIp($event->getRequest()->getClientIp());
 
             $this->em->persist($log);
             $this->em->flush();
         }
+    }
+
+    private function mustLogsUri($uri) {
+        return !in_array($uri, $this->unlogUri);
     }
 }
