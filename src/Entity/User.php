@@ -100,6 +100,11 @@ class User implements UserInterface
      */
     private $exceptionLogs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserIp", mappedBy="user")
+     */
+    private $userIps;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -111,6 +116,7 @@ class User implements UserInterface
         $this->forumCategories = new ArrayCollection();
         $this->actionLogs = new ArrayCollection();
         $this->exceptionLogs = new ArrayCollection();
+        $this->userIps = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -485,5 +491,41 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|UserIp[]
+     */
+    public function getUserIps(): Collection
+    {
+        return $this->userIps;
+    }
+
+    public function addUserIp(UserIp $userIp): self
+    {
+        if (!$this->userIps->contains($userIp)) {
+            $this->userIps[] = $userIp;
+            $userIp->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserIp(UserIp $userIp): self
+    {
+        if ($this->userIps->contains($userIp)) {
+            $this->userIps->removeElement($userIp);
+            // set the owning side to null (unless already changed)
+            if ($userIp->getUser() === $this) {
+                $userIp->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function countIPs()
+    {
+        return count($this->userIps);
     }
 }

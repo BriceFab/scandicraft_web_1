@@ -67,3 +67,8 @@ services:
         autoconfigure: true
         tags:
         - { name: serializer.normalizer }
+
+    # Security login listener
+    App\EventListener\LoginListener:
+        tags:
+            - { name: 'kernel.event_listener', event: 'security.interactive_login' }

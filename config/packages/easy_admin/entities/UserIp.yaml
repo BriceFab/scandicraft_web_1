@@ -1,0 +1,20 @@
+easy_admin:
+  entities:
+    UserIp:
+      class: App\Entity\UserIp
+      disabled_actions: ["new", "edit", "show"]
+      permissions:
+        delete: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+      list:
+        title: "Historique des IPs de connexion"
+        fields:
+          [
+            { property: "ip", label: "IP" },
+            { property: "user", label: "Joueur" },
+            { property: "login_at", label: "Depuis le" },
+          ]
+        search:
+          fields: ['user.email', 'user.username', 'ip']

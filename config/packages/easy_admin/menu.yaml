@@ -3,11 +3,22 @@ easy_admin:
     menu:
       - label: "Utilisateurs"
         icon: "users-cog"
-        children: [{ entity: "User", label: "Joueurs" }]
+        children:
+          [
+            { entity: "User", label: "Joueurs" },
+            { entity: "UserIp", label: "Historique IPs" },
+          ]
       - label: "Maintenance"
         icon: "tools"
         permission: "ROLE_ADMIN"
-        children: [{ entity: "DevProgression", label: "Progressions", permission: "ROLE_ADMIN" }]
+        children:
+          [
+            {
+              entity: "DevProgression",
+              label: "Progressions",
+              permission: "ROLE_ADMIN",
+            },
+          ]
       - label: "Forum"
         icon: "comments"
         permission: "ROLE_ADMIN"
@@ -31,7 +42,11 @@ easy_admin:
           [
             { entity: "Staff", label: "Staff", permission: "ROLE_ADMIN" },
             { entity: "Thanks", label: "Remerciements" },
-            { entity: "StaffCategory", label: "Staff catégories", permission: "ROLE_ADMIN" },
+            {
+              entity: "StaffCategory",
+              label: "Staff catégories",
+              permission: "ROLE_ADMIN",
+            },
             { entity: "ThanksCategory", label: "Remerciements catégories" },
           ]
       - label: "Aide"
@@ -42,8 +57,16 @@ easy_admin:
         permission: "ROLE_ADMIN"
         children:
           [
-            { entity: "SocialmediaType", label: "Liste", permission: "ROLE_ADMIN" },
-            { entity: "MySocialmedia", label: "ScandiCraft", permission: "ROLE_ADMIN" },
+            {
+              entity: "SocialmediaType",
+              label: "Liste",
+              permission: "ROLE_ADMIN",
+            },
+            {
+              entity: "MySocialmedia",
+              label: "ScandiCraft",
+              permission: "ROLE_ADMIN",
+            },
           ]
       - label: "Logs"
         icon: "history"
@@ -51,7 +74,11 @@ easy_admin:
         children:
           [
             { entity: "ActionLog", label: "Actions", permission: "ROLE_ADMIN" },
-            { entity: "ExceptionLog", label: "Exceptions", permission: "ROLE_ADMIN" },
+            {
+              entity: "ExceptionLog",
+              label: "Exceptions",
+              permission: "ROLE_ADMIN",
+            },
           ]
       - { label: "liens" }
       - {

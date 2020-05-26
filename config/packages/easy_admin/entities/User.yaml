@@ -4,8 +4,8 @@ easy_admin:
       class: App\Entity\User
       disabled_actions: ["new"]
       permissions:
-        delete:  ['ROLE_ADMIN']
-        edit:  ['ROLE_ADMIN']
+        delete: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
       list:
         title: "Liste des joueurs inscrits"
         filters: [{ property: "roles", type: "array", label: "Roles" }]
@@ -18,10 +18,19 @@ easy_admin:
         fields:
           [
             { property: "username", label: "Pseudonyme" },
-            { property: "email", label: "input.email", permission: 'ROLE_ADMIN' },
+            {
+              property: "email",
+              label: "input.email",
+              permission: "ROLE_ADMIN",
+            },
             { property: "createdAt", label: "Créer le" },
             { property: "last_login", label: "Dernière connexion le" },
-            { property: "has_confirm_email", label: "Email confirmée ?", type: "boolean" },
+            {
+              property: "has_confirm_email",
+              label: "Email confirmée ?",
+              type: "boolean",
+            },
+            { property: "countIPs", label: "Nombre d'IPs" },
           ]
       show:
         title: "Information sur l'utilisateur"
@@ -29,7 +38,11 @@ easy_admin:
           [
             { property: "id", label: "Identification" },
             { property: "username", label: "Pseudonyme" },
-            { property: "email", label: "input.email", permission: 'ROLE_ADMIN' },
+            {
+              property: "email",
+              label: "input.email",
+              permission: "ROLE_ADMIN",
+            },
             {
               property: "has_confirm_email",
               label: "Email confirmé ?",
@@ -42,9 +55,10 @@ easy_admin:
             },
             { property: "createdAt", label: "Créer le" },
             { property: "last_login", label: "Dernière connexion le" },
+            { property: "userIps", label: "Historique d'IPs" },
           ]
       form:
-        item_permission: 'ROLE_ADMIN'
+        item_permission: "ROLE_ADMIN"
         title: "Modifier l'utilisateur"
         fields:
           [
