@@ -24,7 +24,7 @@ class SurveyController extends AbstractController
      */
     public function showSondages(Request $request, PaginatorInterface $paginator, SurveyRepository $surveyRepository, ScandiCraftService $service)
     {
-        $data = $surveyRepository->findBy([], ['fromTheDate' => 'ASC']);
+        $data = $surveyRepository->findBy([], ['fromTheDate' => 'DESC']);
         $enabled_sondages = array_filter($data, function ($val) {
             return $val->isEnable();
         });

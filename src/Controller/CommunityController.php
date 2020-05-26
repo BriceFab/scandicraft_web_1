@@ -20,14 +20,6 @@ class CommunityController extends AbstractController
     }
 
     /**
-     * @Route("/forum", name="forum")
-     */
-    public function forum()
-    {
-        return $this->render('maintenance/page_under_maintenance.html.twig');
-    }
-
-    /**
      * @Route("/nouveautes", name="nouveautes")
      */
     public function showNews()
