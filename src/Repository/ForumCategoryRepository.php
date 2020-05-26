@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\ForumCategory;
+use App\Entity\ForumSubCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,32 +20,12 @@ class ForumCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, ForumCategory::class);
     }
 
-    // /**
-    //  * @return ForumCategory[] Returns an array of ForumCategory objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getMainCategories($type)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('c')
+            ->where('TYPE(c) = :type')
+            ->setParameter('type', $type)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?ForumCategory
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

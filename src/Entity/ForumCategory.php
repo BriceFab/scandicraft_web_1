@@ -7,8 +7,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\InheritanceType("JOINED")
+ * 
  * @ORM\Entity(repositoryClass="App\Repository\ForumCategoryRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="entity_type", type="string")
+ * @ORM\DiscriminatorMap({"forumcategory" = "ForumCategory", "forumsubcategory" = "ForumSubCategory"})
  */
 class ForumCategory
 {
@@ -183,6 +186,11 @@ class ForumCategory
         }
 
         return $this;
+    }
+
+    public function countSubCategories()
+    {
+        return count($this->forumSubCategories);
     }
 
     public function __toString()

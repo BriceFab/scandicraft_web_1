@@ -11,7 +11,7 @@ easy_admin:
       list:
         # dql_filter: "entity.dtype = 'forumcategory'"
         # title: "Liste des catégories principales"
-        filters: [{ property: 'id', type: 'integer' }]
+        filters: [{ property: "id", type: "integer" }]
         actions:
           [
             { name: "new", label: "Ajouter" },
