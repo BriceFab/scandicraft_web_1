@@ -13,10 +13,11 @@ class ForumController extends AbstractController
      */
     public function showCategories(ForumCategoryRepository $repo)
     {
-        $categories = $repo->getMainCategories('forumcategory');
+        // $categories = $repo->getMainCategories('forumcategory');
 
-        return $this->render('forum/show_categories.html.twig', [
-            'categories' => $categories
-        ]);
+        // return $this->render('forum/show_categories.html.twig', [
+        //     'categories' => $categories
+        // ]);
+        return $this->render('maintenance/page_under_maintenance.html.twig');
     }
 }

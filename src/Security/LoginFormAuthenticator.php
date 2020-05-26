@@ -3,7 +3,6 @@
 namespace App\Security;
 
 use App\Entity\User;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -102,12 +101,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $request->request->get('username')]);
         if (!$user) {
             $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $request->request->get('username')]);
-        }
-
-        if ($user) {
-            $user->setLastLogin(new DateTime());
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
         }
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
