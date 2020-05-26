@@ -12,3 +12,5 @@ php bin/console doctrine:migrations:version --add --all rem attention !If you do
 php bin/console doctrine:migrations:status --show-versions
 
 APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
+
+REM Si problème avec migration: 1) prendre la bdd prod en local et faire php bin/console doctrine:migrations:migrate puis executer
