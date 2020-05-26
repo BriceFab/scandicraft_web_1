@@ -3,6 +3,12 @@ easy_admin:
     DevProgression:
       class: App\Entity\DevProgression
       disabled_actions: ["show"]
+      permissions:
+        list: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
       list:
         title: "Liste des maintenances"
         actions:

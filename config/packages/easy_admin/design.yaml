@@ -6,7 +6,7 @@ easy_admin:
         time: 'H\hi e'
         number: '%.4f'
     design:
-        brand_color: "#b30000" #bleu: 3385ff
+        brand_color: "#6174d1" #rouge: b30000
         form_theme:
             - '@EasyAdmin/form/bootstrap_4.html.twig'
             - '@FOSCKEditor/Form/ckeditor_widget.html.twig'

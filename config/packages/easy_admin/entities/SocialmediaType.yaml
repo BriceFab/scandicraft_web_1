@@ -2,6 +2,12 @@ easy_admin:
   entities:
     SocialmediaType:
       class: App\Entity\SocialmediaType
+      permissions:
+        list: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
       list:
         title: "Liste des résaux sociaux disponible"
         actions:

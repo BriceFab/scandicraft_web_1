@@ -12,3 +12,5 @@ imports:
 - { resource: Staff.yaml }
 - { resource: StaffCategory.yaml }
 - { resource: FAQ.yaml }
+- { resource: ForumCategory.yaml }
+- { resource: ForumSubCategory.yaml }

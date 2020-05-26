@@ -2,6 +2,12 @@ easy_admin:
   entities:
     Staff:
       class: App\Entity\Staff
+      permissions:
+        list: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
       list:
         title: "Liste des membres du Staff"
         actions:
