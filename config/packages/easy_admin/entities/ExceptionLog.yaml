@@ -1,0 +1,18 @@
+easy_admin:
+  entities:
+    ExceptionLog:
+      class: App\Entity\ExceptionLog
+      permissions:
+        list: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+      disabled_actions: ["new", "edit"]
+      list:
+        title: "Historiques des erreurs"
+        actions:
+          [
+            { name: "show", label: "Détail", icon: "search" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]

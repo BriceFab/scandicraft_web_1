@@ -14,3 +14,5 @@ imports:
 - { resource: FAQ.yaml }
 - { resource: ForumCategory.yaml }
 - { resource: ForumSubCategory.yaml }
+- { resource: ActionLog.yaml }
+- { resource: ExceptionLog.yaml }

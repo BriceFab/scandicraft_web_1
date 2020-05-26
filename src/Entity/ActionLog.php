@@ -17,17 +17,12 @@ class ActionLog
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $username;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $method;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $uri;
 
@@ -46,21 +41,14 @@ class ActionLog
      */
     private $responseCode;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="actionLogs")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
     }
 
     public function getMethod(): ?string
@@ -119,6 +107,18 @@ class ActionLog
     public function setResponseCode(int $responseCode): self
     {
         $this->responseCode = $responseCode;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

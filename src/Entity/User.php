@@ -95,6 +95,11 @@ class User implements UserInterface
      */
     private $actionLogs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ExceptionLog", mappedBy="user")
+     */
+    private $exceptionLogs;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -105,6 +110,7 @@ class User implements UserInterface
         $this->surveyComments = new ArrayCollection();
         $this->forumCategories = new ArrayCollection();
         $this->actionLogs = new ArrayCollection();
+        $this->exceptionLogs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -444,6 +450,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($actionLog->getUser() === $this) {
                 $actionLog->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ExceptionLog[]
+     */
+    public function getExceptionLogs(): Collection
+    {
+        return $this->exceptionLogs;
+    }
+
+    public function addExceptionLog(ExceptionLog $exceptionLog): self
+    {
+        if (!$this->exceptionLogs->contains($exceptionLog)) {
+            $this->exceptionLogs[] = $exceptionLog;
+            $exceptionLog->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExceptionLog(ExceptionLog $exceptionLog): self
+    {
+        if ($this->exceptionLogs->contains($exceptionLog)) {
+            $this->exceptionLogs->removeElement($exceptionLog);
+            // set the owning side to null (unless already changed)
+            if ($exceptionLog->getUser() === $this) {
+                $exceptionLog->setUser(null);
             }
         }
 
