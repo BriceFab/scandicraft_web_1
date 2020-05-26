@@ -11,8 +11,23 @@ easy_admin:
       disabled_actions: ["new", "edit"]
       list:
         title: "Historiques des actions (sauf GET)"
+        filters: [{ property: "method", label: "Méthode", type: "text", mapped: false }]
         actions:
           [
             { name: "show", label: "Détail", icon: "search" },
             { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            {
+              property: "response_code",
+              label: "Code",
+              type: "integer",
+              template: "easy_admin/fields/integer.html.twig",
+            },
+            { property: "request_at", label: "Demandé le", type: "date" },
+            { property: "method", label: "Méthode" },
+            { property: "uri" },
+            { property: "ip" },
+            { property: "user" },
           ]

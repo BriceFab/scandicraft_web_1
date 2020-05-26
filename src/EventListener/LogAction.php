@@ -17,7 +17,9 @@ class LogAction implements EventSubscriberInterface
     private $unlogUri = [
         '/api/login_check',
         '/connexion',
-        '/inscription'
+        '/inscription',
+        'ActionLog',
+        'ExceptionLog'
     ];
 
     public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage)
@@ -53,7 +55,18 @@ class LogAction implements EventSubscriberInterface
         }
     }
 
-    private function mustLogsUri($uri) {
-        return !in_array($uri, $this->unlogUri);
+    private function mustLogsUri($uri)
+    {
+        if (in_array($uri, $this->unlogUri)) {
+            return false;
+        } else {
+            foreach ($this->unlogUri as $key => $value) {
+                if (strpos($uri, $value) !== false) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
