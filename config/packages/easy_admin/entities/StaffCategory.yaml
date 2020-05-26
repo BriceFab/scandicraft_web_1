@@ -2,6 +2,12 @@ easy_admin:
   entities:
     StaffCategory:
       class: App\Entity\StaffCategory
+      permissions:
+        list: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
       list:
         title: "Liste des fonctions du Staff"
         actions:

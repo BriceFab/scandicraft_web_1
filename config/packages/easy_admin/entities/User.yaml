@@ -3,8 +3,12 @@ easy_admin:
     User:
       class: App\Entity\User
       disabled_actions: ["new"]
+      permissions:
+        delete:  ['ROLE_ADMIN']
+        edit:  ['ROLE_ADMIN']
       list:
         title: "Liste des joueurs inscrits"
+        filters: [{ property: "roles", type: "array", label: "Roles" }]
         actions:
           [
             { name: "show", label: "Détail", icon: "search" },
@@ -14,9 +18,10 @@ easy_admin:
         fields:
           [
             { property: "username", label: "Pseudonyme" },
-            { property: "email", label: "input.email" },
+            { property: "email", label: "input.email", permission: 'ROLE_ADMIN' },
             { property: "createdAt", label: "Créer le" },
             { property: "last_login", label: "Dernière connexion le" },
+            { property: "has_confirm_email", label: "Email confirmée ?", type: "boolean" },
           ]
       show:
         title: "Information sur l'utilisateur"
@@ -24,7 +29,7 @@ easy_admin:
           [
             { property: "id", label: "Identification" },
             { property: "username", label: "Pseudonyme" },
-            { property: "email", label: "input.email" },
+            { property: "email", label: "input.email", permission: 'ROLE_ADMIN' },
             {
               property: "has_confirm_email",
               label: "Email confirmé ?",
@@ -39,6 +44,7 @@ easy_admin:
             { property: "last_login", label: "Dernière connexion le" },
           ]
       form:
+        item_permission: 'ROLE_ADMIN'
         title: "Modifier l'utilisateur"
         fields:
           [
@@ -57,9 +63,14 @@ easy_admin:
                     {
                       "Rôle utilisateur": "ROLE_USER",
                       "Administrateur": "ROLE_ADMIN",
+                      "Panel admin": "ROLE_PANEL_ADMIN",
                       "Launcher": "ROLE_LAUNCHER",
                     },
                 },
             },
-            { property: "has_confirm_email", type: "checkbox", label: "Email confirmé" }
+            {
+              property: "has_confirm_email",
+              type: "checkbox",
+              label: "Email confirmé",
+            },
           ]

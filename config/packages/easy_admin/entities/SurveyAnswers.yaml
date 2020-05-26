@@ -3,6 +3,11 @@ easy_admin:
     SurveyAnswers:
       class: App\Entity\SurveyAnswers
       disabled_actions: ["new"]
+      permissions:
+        delete: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
       list:
         title: "Liste des réponses aux sondages"
         actions:

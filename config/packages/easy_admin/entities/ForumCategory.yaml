@@ -1,0 +1,22 @@
+easy_admin:
+  entities:
+    ForumCategory:
+      class: App\Entity\ForumCategory
+      permissions:
+        list: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+      list:
+        # dql_filter: "entity.dtype = 'forumcategory'"
+        # title: "Liste des catégories principales"
+        filters: [{ property: 'id', type: 'integer' }]
+        actions:
+          [
+            { name: "new", label: "Ajouter" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+      form:
+        title: "Ajouter/Modifier"

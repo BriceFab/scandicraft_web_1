@@ -2,6 +2,9 @@ easy_admin:
   entities:
     SurveyAnswerList:
       class: App\Entity\SurveyAnswerList
+      permissions:
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
       list:
         title: "Liste de réponses possibles pour les sondages"
         actions:

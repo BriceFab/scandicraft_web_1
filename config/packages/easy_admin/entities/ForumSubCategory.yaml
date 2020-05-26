@@ -1,0 +1,20 @@
+easy_admin:
+  entities:
+    ForumSubCategory:
+      class: App\Entity\ForumSubCategory
+      permissions:
+        list: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+      list:
+        title: "Liste des catégories principales"
+        actions:
+          [
+            { name: "new", label: "Ajouter" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+      form:
+        title: "Ajouter/Modifier"

@@ -2,6 +2,10 @@ easy_admin:
   entities:
     FAQ:
       class: App\Entity\Faq
+      permissions:
+        new: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
       list:
         title: "Liste des FAQ"
         actions:

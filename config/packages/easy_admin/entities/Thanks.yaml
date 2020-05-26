@@ -2,6 +2,9 @@ easy_admin:
   entities:
     Thanks:
       class: App\Entity\Thanks
+      permissions:
+        show: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
       list:
         title: "Liste des remerciements"
         actions:

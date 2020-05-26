@@ -85,6 +85,11 @@ class User implements UserInterface
      */
     private $surveyComments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ForumCategory", mappedBy="createdBy")
+     */
+    private $forumCategories;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -93,6 +98,7 @@ class User implements UserInterface
         $this->surveyAnswers = new ArrayCollection();
         $this->userSocialmedia = new ArrayCollection();
         $this->surveyComments = new ArrayCollection();
+        $this->forumCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -370,6 +376,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($surveyComment->getUser() === $this) {
                 $surveyComment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ForumCategory[]
+     */
+    public function getForumCategories(): Collection
+    {
+        return $this->forumCategories;
+    }
+
+    public function addForumCategory(ForumCategory $forumCategory): self
+    {
+        if (!$this->forumCategories->contains($forumCategory)) {
+            $this->forumCategories[] = $forumCategory;
+            $forumCategory->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeForumCategory(ForumCategory $forumCategory): self
+    {
+        if ($this->forumCategories->contains($forumCategory)) {
+            $this->forumCategories->removeElement($forumCategory);
+            // set the owning side to null (unless already changed)
+            if ($forumCategory->getCreatedBy() === $this) {
+                $forumCategory->setCreatedBy(null);
             }
         }
 

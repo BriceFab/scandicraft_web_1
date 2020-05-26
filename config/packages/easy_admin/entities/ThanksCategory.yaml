@@ -2,6 +2,10 @@ easy_admin:
   entities:
     ThanksCategory:
       class: App\Entity\ThanksCategory
+      permissions:
+        new: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
       list:
         title: "Liste des catégories de remerciements"
         actions:

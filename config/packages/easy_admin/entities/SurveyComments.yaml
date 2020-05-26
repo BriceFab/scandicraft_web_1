@@ -3,6 +3,11 @@ easy_admin:
     SurveyComments:
       class: App\Entity\SurveyComments
       disabled_actions: ["new"]
+      permissions:
+        delete: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
       list:
         title: "Liste des commentaires des sondages"
         actions:

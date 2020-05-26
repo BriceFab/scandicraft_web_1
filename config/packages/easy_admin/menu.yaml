@@ -6,7 +6,16 @@ easy_admin:
         children: [{ entity: "User", label: "Joueurs" }]
       - label: "Maintenance"
         icon: "tools"
-        children: [{ entity: "DevProgression", label: "Progressions" }]
+        permission: "ROLE_ADMIN"
+        children: [{ entity: "DevProgression", label: "Progressions", permission: "ROLE_ADMIN" }]
+      - label: "Forum"
+        icon: "comments"
+        permission: "ROLE_ADMIN"
+        children:
+          [
+            { entity: "ForumCategory", label: "Categories" },
+            { entity: "ForumSubCategory", label: "Sous-categories" },
+          ]
       - label: "Sondages"
         icon: "poll-h"
         children:
@@ -20,23 +29,21 @@ easy_admin:
         icon: "user-tie"
         children:
           [
-            { entity: "Staff", label: "Staff" },
+            { entity: "Staff", label: "Staff", permission: "ROLE_ADMIN" },
             { entity: "Thanks", label: "Remerciements" },
-            { entity: "StaffCategory", label: "Staff catégories" },
+            { entity: "StaffCategory", label: "Staff catégories", permission: "ROLE_ADMIN" },
             { entity: "ThanksCategory", label: "Remerciements catégories" },
           ]
       - label: "Aide"
         icon: "hands-helping"
-        children:
-          [
-            { entity: "FAQ", label: "FAQ" },
-          ]
+        children: [{ entity: "FAQ", label: "FAQ" }]
       - label: "Réseaux sociaux"
         icon: "network-wired"
+        permission: "ROLE_ADMIN"
         children:
           [
-            { entity: "SocialmediaType", label: "Liste" },
-            { entity: "MySocialmedia", label: "ScandiCraft" },
+            { entity: "SocialmediaType", label: "Liste", permission: "ROLE_ADMIN" },
+            { entity: "MySocialmedia", label: "ScandiCraft", permission: "ROLE_ADMIN" },
           ]
       - { label: "liens" }
       - {
