@@ -90,6 +90,11 @@ class User implements UserInterface
      */
     private $forumCategories;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ActionLog", mappedBy="user")
+     */
+    private $actionLogs;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -99,6 +104,7 @@ class User implements UserInterface
         $this->userSocialmedia = new ArrayCollection();
         $this->surveyComments = new ArrayCollection();
         $this->forumCategories = new ArrayCollection();
+        $this->actionLogs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -407,6 +413,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($forumCategory->getCreatedBy() === $this) {
                 $forumCategory->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ActionLog[]
+     */
+    public function getActionLogs(): Collection
+    {
+        return $this->actionLogs;
+    }
+
+    public function addActionLog(ActionLog $actionLog): self
+    {
+        if (!$this->actionLogs->contains($actionLog)) {
+            $this->actionLogs[] = $actionLog;
+            $actionLog->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActionLog(ActionLog $actionLog): self
+    {
+        if ($this->actionLogs->contains($actionLog)) {
+            $this->actionLogs->removeElement($actionLog);
+            // set the owning side to null (unless already changed)
+            if ($actionLog->getUser() === $this) {
+                $actionLog->setUser(null);
             }
         }
 
