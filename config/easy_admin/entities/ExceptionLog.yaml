@@ -28,5 +28,6 @@ easy_admin:
             { property: "created_at", label: "Apparue le", type: "date" },
             { property: "method", label: "Méthode" },
             { property: "uri" },
+            { property: "ip" },
             { property: "user" },
           ]
