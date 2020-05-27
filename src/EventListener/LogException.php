@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Throwable;
 
 class LogException implements EventSubscriberInterface
 {
@@ -44,7 +45,8 @@ class LogException implements EventSubscriberInterface
             $log->setUser($this->tokenStorage->getToken()->getUser());
         }
         $log->setExceptionMessage($exception->getMessage());
-        $log->setExceptionCode($exception->getCode());
+        $log->setExceptionCode($exception->getStatusCode());
+        $log->setIp($event->getRequest()->getClientIp());
         $log->setCreatedAt(new DateTime('now'));
 
         if ($this->em->isOpen()) {

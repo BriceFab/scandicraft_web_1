@@ -19,7 +19,8 @@ class LogAction implements EventSubscriberInterface
         '/connexion',
         '/inscription',
         'ActionLog',
-        'ExceptionLog'
+        'ExceptionLog',
+        'survey'
     ];
 
     public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage)
