@@ -437,3 +437,26 @@ $blur_px: 2px;
     font-weight: bold;
     font-size: $pFontSize;
 }
+
+.forum-categorie-icon {
+    color: $mainColor;
+    font-size: 36px;
+}
+
+.forum-categorie-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.forum-container p {
+    margin: 0px;
+    padding: 0px;
+    line-height: 26px;
+}
+
+@media (max-width: 576px) {
+    .forum-flex-mobile-right {
+        justify-content: flex-end !important;
+        text-align: end !important;
+    }
+}

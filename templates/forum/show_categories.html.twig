@@ -8,7 +8,7 @@
 {% block body %}
 	<section class="w-section section">
 
-		<div class="w-container" style="padding-top: 35px;">
+		<div class="w-container forum-container" style="padding-top: 35px;">
 
 			{% for categorie in categories %}
 
@@ -17,7 +17,39 @@
 						{{ categorie.name }}
 					</div>
 					{% for sub_categorie in categorie.forumSubCategories %}
-						<a href="#" class="list-group-item list-group-item-action">{{ sub_categorie.name }}</a>
+						<a href="#" class="list-group-item list-group-item-action">
+							<div class="container" style="padding-left: 0px;">
+								<div class="row">
+									<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
+										<span class="forum-categorie-icon">
+											<i class="fas fa-comments"></i>
+										</span>
+									</div>
+									<div class="col-9 col-md-8">
+										{% if sub_categorie.description|length > 0 %}
+											<div class="row justify-content-start forum-flex-mobile-right">
+												<div class="forum-categorie-title">{{ sub_categorie.name }}</div>
+											</div>
+											<div class="row justify-content-start forum-flex-mobile-right">
+												<p style="font-size: 17px;">{{ sub_categorie.description }}</p>
+											</div>
+										{% else %}
+											<div class="row d-flex justify-content-start forum-flex-mobile-right">
+												<div class="forum-categorie-title">{{ sub_categorie.name }}</div>
+											</div>
+										{% endif %}
+									</div>
+									<div class="col-12 col-md-3 d-none d-sm-block">
+										<div class="row justify-content-end">
+											<p style="font-size: 15px;">Discussions: 0</p>
+										</div>
+										<div class="row justify-content-end">
+											<p style="font-size: 15px;">Messages: 0</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</a>
 					{% endfor %}
 				</div>
 
