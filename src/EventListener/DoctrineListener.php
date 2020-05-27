@@ -2,6 +2,8 @@
 
 namespace App\EventListener;
 
+use App\Entity\ForumCategory;
+use App\Entity\ForumSubCategory;
 use App\Entity\Survey;
 use App\Entity\SurveyAnswerList;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +28,8 @@ class DoctrineListener
         if ($entity instanceof Survey) {
             $entity->setUser($this->security->getUser());
         } elseif ($entity instanceof SurveyAnswerList) {
+            $entity->setCreatedBy($this->security->getUser());
+        } elseif ($entity instanceof ForumCategory || $entity instanceof ForumSubCategory) {
             $entity->setCreatedBy($this->security->getUser());
         }
     }

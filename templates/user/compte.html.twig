@@ -122,14 +122,3 @@
 	{% include 'security/reset_password_modal.html.twig' with {'email': user.email} %}
 
 {% endblock %}
-
-{% block stylesheets %}
-	<link type="text/css" href="{{ asset('bootstrap/css/bootstrap-badge.min.css') }}" rel="stylesheet"/>
-	<link type="text/css" href="{{ asset('bootstrap/css/bootstrap-theme-badge.min.css') }}" rel="stylesheet"/>
-	<link type="text/css" href="{{ asset('bootstrap/css/bootstrap-modal.min.css') }}" rel="stylesheet"/>
-{% endblock %}
-
-{% block javascripts %}
-	<script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap-modal.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/modal.js') }}"></script>
-{% endblock %}

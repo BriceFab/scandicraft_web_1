@@ -47,7 +47,9 @@ class LogException implements EventSubscriberInterface
         $log->setExceptionCode($exception->getCode());
         $log->setCreatedAt(new DateTime('now'));
 
-        $this->em->persist($log);
-        $this->em->flush();
+        if ($this->em->isOpen()) {
+            $this->em->persist($log);
+            $this->em->flush();
+        }
     }
 }
