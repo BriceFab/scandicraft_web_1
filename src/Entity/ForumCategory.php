@@ -24,7 +24,7 @@ class ForumCategory
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     protected $name;
 
@@ -53,11 +53,6 @@ class ForumCategory
      * @ORM\Column(type="string", length=255)
      */
     protected $slug;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $description;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ForumSubCategory", mappedBy="category", cascade={"persist"})
@@ -143,18 +138,6 @@ class ForumCategory
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
 
         return $this;
     }
