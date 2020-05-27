@@ -15,14 +15,29 @@
 		<div class="w-container forum-container" style="padding-top: 35px;">
 
 			<div class="list-group" style="padding-bottom: 35px;">
-				<div class="list-group-item list-group-item-action active">
-					{{ forumCategory.name }}
-					-
-					{{ forumSubCategory.name }}
+				<div class="list-group-item list-group-item-action active" style="padding-right: 5px;">
+					<div class="container">
+						<div class="row">
+							<div class="col-12 col-md-6 d-flex align-items-center">
+								{{ forumCategory.name }}
+								-
+								{{ forumSubCategory.name }}
+							</div>
+							<div class="col-12 col-md-6 d-flex justify-content-end" style="padding-right:0px;">
+								{% if forumSubCategory.writable %}
+									<a href="#" class="button button btn-second btn-small btn-rouned">
+										<i class="fas fa-plus-square"></i>
+										Discussion
+									</a>
+								{% endif %}
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="list-group-item">
 					{{ forumSubCategory.description }}
 				</div>
+				{# create discussion #}
 				{# foreach discussion #}
 			</div>
 

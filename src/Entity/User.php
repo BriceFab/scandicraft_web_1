@@ -105,6 +105,11 @@ class User implements UserInterface
      */
     private $userIps;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ForumDiscussion", mappedBy="createdBy")
+     */
+    private $forumDiscussions;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -117,6 +122,7 @@ class User implements UserInterface
         $this->actionLogs = new ArrayCollection();
         $this->exceptionLogs = new ArrayCollection();
         $this->userIps = new ArrayCollection();
+        $this->forumDiscussions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -527,5 +533,36 @@ class User implements UserInterface
     public function countIPs()
     {
         return count($this->userIps);
+    }
+
+    /**
+     * @return Collection|ForumDiscussion[]
+     */
+    public function getForumDiscussions(): Collection
+    {
+        return $this->forumDiscussions;
+    }
+
+    public function addForumDiscussion(ForumDiscussion $forumDiscussion): self
+    {
+        if (!$this->forumDiscussions->contains($forumDiscussion)) {
+            $this->forumDiscussions[] = $forumDiscussion;
+            $forumDiscussion->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeForumDiscussion(ForumDiscussion $forumDiscussion): self
+    {
+        if ($this->forumDiscussions->contains($forumDiscussion)) {
+            $this->forumDiscussions->removeElement($forumDiscussion);
+            // set the owning side to null (unless already changed)
+            if ($forumDiscussion->getCreatedBy() === $this) {
+                $forumDiscussion->setCreatedBy(null);
+            }
+        }
+
+        return $this;
     }
 }

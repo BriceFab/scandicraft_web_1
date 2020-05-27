@@ -460,3 +460,16 @@ $blur_px: 2px;
         text-align: end !important;
     }
 }
+
+.btn-second {
+    background-color: $secondaryColor;
+    font-weight: 600;
+}
+
+.btn-second:hover {
+    opacity: 0.9;
+}
+
+.btn-rouned {
+    border-radius: 30px;
+}
