@@ -128,6 +128,10 @@ html {
         max-width: 60%;
         margin-bottom: -75px;
     }
+    .section {
+        // background-color: red;
+        padding: 30px 10px;
+    }
 }
 
 // Medium devices (tablets, 768px and up)
@@ -135,6 +139,21 @@ html {
     .login-logo {
         max-width: 45%;
         margin-bottom: -75px;
+    }
+    .section {
+        // background-color: royalblue;
+        padding: 80px 10px;
+    }
+}
+
+@media (max-width: 529px) {
+    .login-logo {
+        max-width: 45%;
+        margin-bottom: -75px;
+    }
+    .section {
+        // background-color: rebeccapurple;
+        padding: 20px 10px;
     }
 }
 
@@ -410,4 +429,11 @@ $blur_px: 2px;
     margin-top: 9px;
     position: absolute;
     margin-left: 1px;
+}
+
+.list-group-item-action.active {
+    background-color: $mainColor;
+    border: none;
+    font-weight: bold;
+    font-size: $pFontSize;
 }
