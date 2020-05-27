@@ -19,7 +19,6 @@ easy_admin:
         fields:
           [
             { property: "name", label: "Nom" },
-            { property: "description", label: "Description" },
             {
               property: "priority",
               label: "Ordre",
@@ -34,7 +33,6 @@ easy_admin:
         fields:
           [
             { property: "name", label: "Nom" },
-            { property: "description", label: "Description" },
             { property: "priority", label: "Ordre" },
             { property: "active", label: "Activé ?" },
             {
