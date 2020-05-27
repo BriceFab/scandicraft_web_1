@@ -24,7 +24,6 @@ class TwigExtension extends AbstractExtension
         if ($limit > 0) {
             $meta_string = $this->truncate($meta_string, $limit);
         }
-        dump($meta_string);
         return $meta_string;
     }
 

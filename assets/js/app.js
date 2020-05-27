@@ -15,9 +15,6 @@ window.jQuery = $;
 //Bootstrap js
 import '../../node_modules/bootstrap/js/dist/modal';
 
-// Theme js
-// import '../unikue-template/_global';
-
 //Other app function
 import './modal_blur';
 
