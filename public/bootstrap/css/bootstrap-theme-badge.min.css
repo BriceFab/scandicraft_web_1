@@ -1,7 +1,0 @@
-.btn-default .badge, .btn-primary .badge, .btn-success .badge, .btn-info .badge, .btn-warning .badge, .btn-danger .badge {
-  text-shadow: none;
-}
-
-.list-group-item.active .badge, .list-group-item.active:hover .badge, .list-group-item.active:focus .badge {
-  text-shadow: none;
-}

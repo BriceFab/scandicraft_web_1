@@ -9,10 +9,16 @@
 import '../css/global.scss';
 import '../css/ReactToastify.css';
 
+//Bootstrap js
+import '../../node_modules/bootstrap/js/dist/modal';
+
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
+
+//Other app function
+import './modal_blur';
 
 //cannot call from html
 export default function isIE() {

@@ -13,10 +13,14 @@
 			Forum
 			{% for categorie in categories %}
 
-				<div>{{ categorie.name }}</div>
-				{% for sub_categorie in categorie.forumSubCategories %}
-					<div>{{ sub_categorie.name }}</div>
-				{% endfor %}
+				<div class="list-group">
+					<a href="#" class="list-group-item list-group-item-action active">
+						{{ categorie.name }}
+					</a>
+					{% for sub_categorie in categorie.forumSubCategories %}
+						<a href="#" class="list-group-item list-group-item-action">{{ sub_categorie.name }}</a>
+					{% endfor %}
+				</div>
 
 			{% endfor %}
 
