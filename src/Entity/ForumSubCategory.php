@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,17 @@ class ForumSubCategory extends ForumCategory
      * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ForumDiscussion", mappedBy="sub_category")
+     */
+    private $forumDiscussions;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->forumDiscussions = new ArrayCollection();
+    }
 
     public function getDescription(): ?string
     {
@@ -76,5 +89,36 @@ class ForumSubCategory extends ForumCategory
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection|ForumDiscussion[]
+     */
+    public function getForumDiscussions(): Collection
+    {
+        return $this->forumDiscussions;
+    }
+
+    public function addForumDiscussion(ForumDiscussion $forumDiscussion): self
+    {
+        if (!$this->forumDiscussions->contains($forumDiscussion)) {
+            $this->forumDiscussions[] = $forumDiscussion;
+            $forumDiscussion->setSubCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeForumDiscussion(ForumDiscussion $forumDiscussion): self
+    {
+        if ($this->forumDiscussions->contains($forumDiscussion)) {
+            $this->forumDiscussions->removeElement($forumDiscussion);
+            // set the owning side to null (unless already changed)
+            if ($forumDiscussion->getSubCategory() === $this) {
+                $forumDiscussion->setSubCategory(null);
+            }
+        }
+
+        return $this;
     }
 }
