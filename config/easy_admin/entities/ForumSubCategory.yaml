@@ -36,7 +36,18 @@ easy_admin:
         fields:
           [
             { property: "name", label: "Nom" },
-            { property: "category", label: "Catégorie parente" },
+            {
+              property: "category",
+              label: "Catégorie parente",
+              type: "entity",
+              type_options:
+                {
+                  class: 'App\Entity\ForumCategory',
+                  required: true,
+                  multiple: false,
+                  query_builder: 'App\Repository\ForumCategoryRepository::getMainCategoriesFromAdmin',
+                },
+            },
             { property: "description", label: "Description" },
             { property: "priority", label: "Ordre" },
             { property: "active", label: "Activé ?" },

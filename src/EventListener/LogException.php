@@ -5,6 +5,7 @@ namespace App\EventListener;
 use App\Entity\ExceptionLog;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Error;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -45,7 +46,13 @@ class LogException implements EventSubscriberInterface
             $log->setUser($this->tokenStorage->getToken()->getUser());
         }
         $log->setExceptionMessage($exception->getMessage());
-        $log->setExceptionCode($exception->getStatusCode());
+        $code = null;
+        if (property_exists($exception, 'statusCode')) {
+            $code = $exception->getStatusCode();
+        } else {
+            $code = $exception->getCode();
+        }
+        $log->setExceptionCode($code);
         $log->setIp($event->getRequest()->getClientIp());
         $log->setCreatedAt(new DateTime('now'));
 

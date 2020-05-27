@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\ForumCategory;
 use App\Entity\ForumSubCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -24,8 +25,17 @@ class ForumCategoryRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->where('TYPE(c) = :type')
+            ->andWhere('c.active = true')
             ->setParameter('type', $type)
             ->getQuery()
             ->getResult();
+    }
+
+    public static function getMainCategoriesFromAdmin(EntityRepository $repo)
+    {
+        return $repo->createQueryBuilder('c')
+            ->where('TYPE (c) = :type')
+            ->setParameter('type', 'forumcategory')
+            ->orderBy('c.name', 'ASC');
     }
 }

@@ -8,15 +8,14 @@
 {% block body %}
 	<section class="w-section section">
 
-		<div class="w-container">
+		<div class="w-container" style="padding-top: 35px;">
 
-			Forum
 			{% for categorie in categories %}
 
-				<div class="list-group">
-					<a href="#" class="list-group-item list-group-item-action active">
+				<div class="list-group" style="padding-bottom: 35px;">
+					<div class="list-group-item list-group-item-action active">
 						{{ categorie.name }}
-					</a>
+					</div>
 					{% for sub_categorie in categorie.forumSubCategories %}
 						<a href="#" class="list-group-item list-group-item-action">{{ sub_categorie.name }}</a>
 					{% endfor %}
