@@ -13,7 +13,7 @@ $pFontSize: 20px;
 
 //### Imports
 // Themplate
-@import "unikue-template/style.scss";
+@import "../unikue-template/global";
 
 // Bootstrap required
 // @import "~bootstrap/scss/bootstrap";
@@ -32,6 +32,12 @@ $pFontSize: 20px;
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootstrap/scss/mixins";
 @import "../../node_modules/bootstrap/scss/forms";
+
+// Fontawesome
+@import "../fontawesome/css/all.css";
+
+//React Toastify
+@import "../../node_modules/react-toastify/dist/ReactToastify.css";
 
 //### ScandiCraft style
 p {

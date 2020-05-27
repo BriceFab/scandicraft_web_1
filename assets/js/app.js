@@ -4,18 +4,19 @@
  * We recommend including the built version of this JavaScript file
  * (and its CSS file) in your base layout (base.html.twig).
  */
-
-// any CSS you import will output into a single css file (app.css in this case)
+// Global css
 import '../css/global.scss';
-import '../css/ReactToastify.css';
+
+// Jquery
+import $ from 'jquery';
+window.$ = $;
+window.jQuery = $;
 
 //Bootstrap js
 import '../../node_modules/bootstrap/js/dist/modal';
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-import $ from 'jquery';
-window.$ = $;
-window.jQuery = $;
+// Theme js
+// import '../unikue-template/_global';
 
 //Other app function
 import './modal_blur';
