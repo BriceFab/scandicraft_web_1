@@ -48,4 +48,19 @@ class ScandiCraftService
         }
         return $count;
     }
+
+    public function generateSlug($string)
+    {
+        $slug = \Transliterator::createFromRules(
+            ':: Any-Latin;'
+                . ':: NFD;'
+                . ':: [:Nonspacing Mark:] Remove;'
+                . ':: NFC;'
+                . ':: [:Punctuation:] Remove;'
+                . ':: Lower();'
+                . '[:Separator:] > \'-\''
+        )->transliterate($string);
+
+        return $slug;
+    }
 }

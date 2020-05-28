@@ -1,0 +1,36 @@
+{% include 'form/form_errors.html.twig' with {
+	'form': form,
+	'alert_style': 'margin-right:15px;margin-left:15px;margin-top:10px;'
+} %}
+
+<div class="container">
+
+	{{ form_start(form, {'method': 'POST'}) }}
+	<div class="row">
+
+		<div class="form-group col-12 col-md-12">
+			{{ form_label(form.title) }}
+			{{ form_widget(form.title, { 'attr': {'class': 'w-input'} }) }}
+		</div>
+		<div class="form-group col-12 col-md-12">
+			{{ form_label(form.message) }}
+			{{ form_widget(form.message, { 'attr': {'class': 'w-input w-textarea'} }) }}
+		</div>
+
+		{% if form.staff_only is defined %}
+			<div class="form-group row" style="padding-left:30px;padding-bottom:8px;">
+				{{ form_widget(form.staff_only, { 'attr': { 'style': 'margin-right:10px' } }) }}
+				{{ form_label(form.staff_only) }}
+			</div>
+		{% endif %}
+
+	</div>
+	{{ form_rest(form) }}
+	<div class="row">
+		<button type="submit" class="button" name="Submit">
+			{{ 'submit.register'|trans }}
+		</button>
+	</div>
+	{{ form_end(form) }}
+
+</div>

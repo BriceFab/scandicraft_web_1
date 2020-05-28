@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\ForumDiscussion;
+use App\Entity\ForumSubCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,32 +20,12 @@ class ForumDiscussionRepository extends ServiceEntityRepository
         parent::__construct($registry, ForumDiscussion::class);
     }
 
-    // /**
-    //  * @return ForumDiscussion[] Returns an array of ForumDiscussion objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllFromCategory(ForumSubCategory $sub_cat)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('d')
+            ->where('d.sub_category = :sub_cat_id')
+            ->setParameter('sub_cat_id', $sub_cat->getId())
             ->getQuery()
-            ->getResult()
-        ;
+            ->execute();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?ForumDiscussion
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

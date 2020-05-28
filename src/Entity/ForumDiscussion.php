@@ -27,12 +27,12 @@ class ForumDiscussion
     private $message;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=false, options={"default": false})
      */
     private $pin;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=false, options={"default": false})
      */
     private $archive;
 
@@ -52,7 +52,7 @@ class ForumDiscussion
     private $sub_category;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=false, options={"default": false})
      */
     private $staff_only;
 
