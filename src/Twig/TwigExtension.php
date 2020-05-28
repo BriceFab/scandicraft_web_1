@@ -2,8 +2,10 @@
 
 namespace App\Twig;
 
+use Mobile_Detect;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 class TwigExtension extends AbstractExtension
 {
@@ -13,6 +15,28 @@ class TwigExtension extends AbstractExtension
             new TwigFilter('seo_format', [$this, 'seo_format']),
             new TwigFilter('truncate', [$this, 'truncate']),
         ];
+    }
+
+    public function getFunctions()
+    {
+        return [
+            new TwigFunction('mobileDetect', [$this, 'mobileDetect'])
+        ];
+    }
+
+    public function mobileDetect($type = 'mobile')
+    {
+        $detect = new Mobile_Detect();
+        switch ($type) {
+            case 'mobile':
+                return $detect->isMobile();
+            case 'tablet':
+                return $detect->isTablet();
+            case 'pc':
+                return !$detect->isMobile() && !$detect->isTablet();
+            default:
+                return false;
+        }
     }
 
     public function seo_format($meta_string, $limit = -1)

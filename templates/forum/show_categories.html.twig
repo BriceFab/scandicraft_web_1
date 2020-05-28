@@ -32,14 +32,14 @@
 											<div class="col-9 col-md-8" style="margin-top:5px;">
 												{% if sub_categorie.description|length > 0 %}
 													<div class="row justify-content-start forum-flex-mobile-right">
-														<div class="forum-categorie-title">{{ sub_categorie.name }}</div>
+														<div class="forum-categorie-title">{{ sub_categorie.name|truncate(mobileDetect('mobile') ? 40 : 80) }}</div>
 													</div>
 													<div class="row justify-content-start forum-flex-mobile-right">
-														<p style="font-size: 17px;">{{ sub_categorie.description }}</p>
+														<p style="font-size: 17px;">{{ sub_categorie.description|truncate(mobileDetect('mobile') ? 30 : 100) }}</p>
 													</div>
 												{% else %}
 													<div class="row d-flex justify-content-start forum-flex-mobile-right">
-														<div class="forum-categorie-title">{{ sub_categorie.name }}</div>
+														<div class="forum-categorie-title">{{ sub_categorie.name|truncate(mobileDetect('mobile') ? 40 : 80)}}</div>
 													</div>
 												{% endif %}
 											</div>

@@ -69,7 +69,7 @@ class ForumController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $discussion = $form->getData();
 
-            $em->persist($forumSubCategory);
+            $em->persist($discussion);
             $em->flush();
 
             $this->addFlash('notice', 'Discussion créer avec succès');

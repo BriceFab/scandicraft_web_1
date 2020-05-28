@@ -37,7 +37,7 @@
 				</div>
 				{% if forumSubCategory.description|length > 0 %}
 					<div class="list-group-item forum-subcat-desc">
-						<p>{{ forumSubCategory.description }}</p>
+						<p style="overflow-wrap:break-word;">{{ forumSubCategory.description }}</p>
 					</div>
 				{% endif %}
 
@@ -99,15 +99,13 @@
 									<div class="row">
 
 										<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
-											<span class="forum-discu-pin">
-												<i class="fas fa-thumbtack"></i>
-											</span>
+											<img src="https://crafatar.com/avatars/948fc377-5ac9-482d-b942-182d6ca58357" class="minecraft-head-skin" alt="Forum Joueur {{ discussion.createdBy.username }}">
 										</div>
 
 										<div class="col-9 col-md-8" style="margin-top:5px;">
 											<div class="row justify-content-start forum-flex-mobile-right">
 												<div class="forum-discussion-title">
-													{{ discussion.title|truncate(40) }}
+													{{ discussion.title|truncate(mobileDetect('mobile') ? 40 : 80) }}
 												</div>
 											</div>
 											<div class="row justify-content-start forum-flex-mobile-right">
