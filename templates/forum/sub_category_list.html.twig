@@ -25,7 +25,8 @@
 							</div>
 							<div class="col-12 col-md-6 d-flex justify-content-end" style="padding-right:0px;">
 								{% if forumSubCategory.writable %}
-									<a href="#" class="button button btn-second btn-small btn-rouned">
+									{# create discussion #}
+									<a href="{{ path('add_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) }}" class="button button btn-second btn-small btn-rouned">
 										<i class="fas fa-plus-square"></i>
 										Discussion
 									</a>
@@ -34,11 +35,112 @@
 						</div>
 					</div>
 				</div>
-				<div class="list-group-item">
-					{{ forumSubCategory.description }}
-				</div>
-				{# create discussion #}
+				{% if forumSubCategory.description|length > 0 %}
+					<div class="list-group-item forum-subcat-desc">
+						<p>{{ forumSubCategory.description }}</p>
+					</div>
+				{% endif %}
+
 				{# foreach discussion #}
+				{% set pin_discus = forumSubCategory.forumDiscussions|filter(disc => disc.pin == true) %}
+				{% set not_pin_discus = forumSubCategory.forumDiscussions|filter(disc => disc.pin == false) %}
+
+				{# pin discussions #}
+				{% if pin_discus|length > 0 %}
+					<div class="forum-discussion-pin">
+						{% for discussion in pin_discus %}
+							<a href="#" class="list-group-item list-group-item-action">
+								<div class="container" style="padding-left: 0px;">
+									<div class="row">
+
+										<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
+											<span class="forum-discu-pin">
+												<i class="fas fa-thumbtack"></i>
+											</span>
+										</div>
+
+										<div class="col-9 col-md-8" style="margin-top:5px;">
+											<div class="row justify-content-start forum-flex-mobile-right">
+												<div class="forum-discussion-title">
+													{{ discussion.title }}
+												</div>
+											</div>
+											<div class="row justify-content-start forum-flex-mobile-right">
+												<p style="font-size: 17px;">
+													Par
+													{{ discussion.createdBy.username }}
+												</p>
+											</div>
+
+										</div>
+
+										<div class="col-12 col-md-3 d-none d-sm-block">
+											<div class="row justify-content-end">
+												<p style="font-size: 15px;">Messages: 0</p>
+											</div>
+											<div class="row justify-content-end">
+												<p style="font-size: 15px;">Affichage: 0</p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</a>
+						{% endfor %}
+					</div>
+				{% endif %}
+
+				{# not pin discussions #}
+				{% if not_pin_discus|length > 0 %}
+					<div class="forum-discussion-not-pin">
+						{% for discussion in not_pin_discus %}
+							<a href="#" class="list-group-item list-group-item-action">
+								<div class="container" style="padding-left: 0px;">
+									<div class="row">
+
+										<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
+											<span class="forum-discu-pin">
+												<i class="fas fa-thumbtack"></i>
+											</span>
+										</div>
+
+										<div class="col-9 col-md-8" style="margin-top:5px;">
+											<div class="row justify-content-start forum-flex-mobile-right">
+												<div class="forum-discussion-title">
+													{{ discussion.title|truncate(40) }}
+												</div>
+											</div>
+											<div class="row justify-content-start forum-flex-mobile-right">
+												<p style="font-size: 17px;">
+													Par
+													{{ discussion.createdBy.username }}
+												</p>
+											</div>
+
+										</div>
+
+										<div class="col-12 col-md-3 d-none d-sm-block">
+											<div class="row justify-content-end">
+												<p style="font-size: 15px;">Messages: 0</p>
+											</div>
+											<div class="row justify-content-end">
+												<p style="font-size: 15px;">Affichage: 0</p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</a>
+						{% endfor %}
+					</div>
+				{% elseif (pin_discus|length == 0) %}
+					<div class="forum-discussion-not-pin">
+						<a href="{{ path('add_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) }}" class="list-group-item list-group-item-action">
+							<p>Aucune discussion</p>
+						</a>
+					</div>
+				{% endif %}
+
 			</div>
 
 		</div>

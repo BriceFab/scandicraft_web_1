@@ -10,55 +10,60 @@
 
 		<div class="w-container forum-container" style="padding-top: 35px;">
 
-			{% for categorie in categories %}
+			{% if categories|length > 0 %}
 
-				<div class="list-group" style="padding-bottom: 35px;">
-					<div class="list-group-item list-group-item-action active">
-						{{ categorie.name }}
-					</div>
-					{% if categorie.forumSubCategories|length > 0 %}
-						{% for sub_categorie in categorie.forumSubCategories %}
-							<a href="{{ path('forum_sub_category_list', { 'main_slug': categorie.slug, 'sub_slug': sub_categorie.slug }) }}" class="list-group-item list-group-item-action">
-								<div class="container" style="padding-left: 0px;">
-									<div class="row">
-										<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
-											<span class="forum-categorie-icon">
-												<i class="fas fa-comments"></i>
-											</span>
-										</div>
-										<div class="col-9 col-md-8">
-											{% if sub_categorie.description|length > 0 %}
-												<div class="row justify-content-start forum-flex-mobile-right">
-													<div class="forum-categorie-title">{{ sub_categorie.name }}</div>
-												</div>
-												<div class="row justify-content-start forum-flex-mobile-right">
-													<p style="font-size: 17px;">{{ sub_categorie.description }}</p>
-												</div>
-											{% else %}
-												<div class="row d-flex justify-content-start forum-flex-mobile-right">
-													<div class="forum-categorie-title">{{ sub_categorie.name }}</div>
-												</div>
-											{% endif %}
-										</div>
-										<div class="col-12 col-md-3 d-none d-sm-block">
-											<div class="row justify-content-end">
-												<p style="font-size: 15px;">Discussions: 0</p>
+
+				{% for categorie in categories %}
+
+					<div class="list-group" style="padding-bottom: 35px;">
+						<div class="list-group-item list-group-item-action active">
+							{{ categorie.name }}
+						</div>
+						{% if categorie.forumSubCategories|length > 0 %}
+							{% for sub_categorie in categorie.forumSubCategories|filter((cat) => cat.active) %}
+								<a href="{{ path('forum_sub_category_list', { 'main_slug': categorie.slug, 'sub_slug': sub_categorie.slug }) }}" class="list-group-item list-group-item-action">
+									<div class="container" style="padding-left: 0px;">
+										<div class="row">
+											<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
+												<span class="forum-categorie-icon">
+													<i class="fas fa-comments"></i>
+												</span>
 											</div>
-											<div class="row justify-content-end">
-												<p style="font-size: 15px;">Messages: 0</p>
+											<div class="col-9 col-md-8" style="margin-top:5px;">
+												{% if sub_categorie.description|length > 0 %}
+													<div class="row justify-content-start forum-flex-mobile-right">
+														<div class="forum-categorie-title">{{ sub_categorie.name }}</div>
+													</div>
+													<div class="row justify-content-start forum-flex-mobile-right">
+														<p style="font-size: 17px;">{{ sub_categorie.description }}</p>
+													</div>
+												{% else %}
+													<div class="row d-flex justify-content-start forum-flex-mobile-right">
+														<div class="forum-categorie-title">{{ sub_categorie.name }}</div>
+													</div>
+												{% endif %}
+											</div>
+											<div class="col-12 col-md-3 d-none d-sm-block">
+												<div class="row justify-content-end">
+													<p style="font-size: 15px;">Discussions: {{ sub_categorie.forumDiscussions|length }}</p>
+												</div>
+												<div class="row justify-content-end">
+													<p style="font-size: 15px;">Messages: 0</p>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</a>
-						{% endfor %}
-					{% else %}
-						<p>Aucune sous-catégorie disponible</p>
-					{% endif %}
-				</div>
+								</a>
+							{% endfor %}
+						{% else %}
+							<p>Aucune sous-catégorie disponible</p>
+						{% endif %}
+					</div>
 
-			{% endfor %}
-
+				{% endfor %}
+			{% else %}
+				<p>Le forum est temporairement indisponible (aucunes catégories)</p>
+			{% endif %}
 		</div>
 
 	</section>

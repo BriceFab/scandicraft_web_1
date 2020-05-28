@@ -27,6 +27,10 @@ easy_admin:
               template: "easy_admin/fields/integer.html.twig",
             },
             { property: "writable", label: "Ecrivable ?" },
+            {
+              property: "accept_staff_only",
+              label: "Accept seulement le staff ?",
+            },
             { property: "active", label: "Activé ?" },
             { property: "createdBy", label: "Créé par" },
             { property: "createdAt", label: "Créé le" },
@@ -52,6 +56,11 @@ easy_admin:
             { property: "priority", label: "Ordre" },
             { property: "active", label: "Activé ?" },
             { property: "writable", label: "Ecrivable ?" },
+            {
+              property: "accept_staff_only",
+              label: "Accept seulement le staff ?",
+              help: "Le joueur peut créer la discussion que pour le staff ?",
+            },
             {
               property: "slug",
               label: "Slug",

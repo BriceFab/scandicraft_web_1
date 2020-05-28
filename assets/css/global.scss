@@ -473,3 +473,32 @@ $blur_px: 2px;
 .btn-rouned {
     border-radius: 30px;
 }
+
+.w-textarea {
+    resize: vertical;
+}
+
+.forum-subcat-desc {
+    border-color: $mainColor;
+    border-bottom-left-radius: 0.25em;
+    border-bottom-right-radius: 0.25em;
+}
+
+.forum-discu-pin {
+    color: $mainColor;
+    font-size: 28px;
+}
+
+$forum_discussion_top: 30px;
+.forum-discussion-pin {
+    margin-top: $forum_discussion_top;
+}
+
+.forum-discussion-not-pin {
+    margin-top: $forum_discussion_top;
+}
+
+.forum-discussion-title {
+    font-size: 18px;
+    font-weight: 600;
+}

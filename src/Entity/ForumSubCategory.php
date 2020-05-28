@@ -19,7 +19,7 @@ class ForumSubCategory extends ForumCategory
     protected $id;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": true})
      */
     protected $writable;
 
@@ -39,10 +39,17 @@ class ForumSubCategory extends ForumCategory
      */
     private $forumDiscussions;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=false, options={"default": false})
+     */
+    private $accept_staff_only;
+
     public function __construct()
     {
         parent::__construct();
         $this->forumDiscussions = new ArrayCollection();
+        $this->setAcceptStaffOnly(false);
+        $this->setWritable(true);
     }
 
     public function getDescription(): ?string
@@ -118,6 +125,18 @@ class ForumSubCategory extends ForumCategory
                 $forumDiscussion->setSubCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAcceptStaffOnly(): ?bool
+    {
+        return $this->accept_staff_only;
+    }
+
+    public function setAcceptStaffOnly(?bool $accept_staff_only): self
+    {
+        $this->accept_staff_only = $accept_staff_only;
 
         return $this;
     }
