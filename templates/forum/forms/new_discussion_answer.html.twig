@@ -1,0 +1,21 @@
+{% include 'form/form_errors.html.twig' with {
+	'form': form,
+	'alert_style': 'margin-top:10px;'
+} %}
+
+{{ form_start(form, {'method': 'POST'}) }}
+<div class="row">
+
+	<div class="form-group col-12 col-md-12">
+		{{ form_label(form.message) }}
+		{{ form_widget(form.message, { 'attr': {'class': 'w-input w-textarea', 'style': 'height: 200px;'} }) }}
+	</div>
+
+</div>
+{{ form_rest(form) }}
+<div class="row" style="padding-left:7px;">
+	<button type="submit" class="button" name="Submit">
+		Poster
+	</button>
+</div>
+{{ form_end(form) }}

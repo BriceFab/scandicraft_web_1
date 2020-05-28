@@ -29,7 +29,7 @@ class ForumDiscussionType extends AbstractType
                     new Length([
                         'min' => 10,
                         'minMessage' => 'input.min_length',
-                        'max' => 150,
+                        'max' => 140,
                     ]),
                 ],
             ])

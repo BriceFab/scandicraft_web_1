@@ -110,6 +110,11 @@ class User implements UserInterface
      */
     private $forumDiscussions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ForumDiscussionAnswer", mappedBy="createdBy")
+     */
+    private $forumDiscussionAnswers;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -123,6 +128,7 @@ class User implements UserInterface
         $this->exceptionLogs = new ArrayCollection();
         $this->userIps = new ArrayCollection();
         $this->forumDiscussions = new ArrayCollection();
+        $this->forumDiscussionAnswers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -560,6 +566,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($forumDiscussion->getCreatedBy() === $this) {
                 $forumDiscussion->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ForumDiscussionAnswer[]
+     */
+    public function getForumDiscussionAnswers(): Collection
+    {
+        return $this->forumDiscussionAnswers;
+    }
+
+    public function addForumDiscussionAnswer(ForumDiscussionAnswer $forumDiscussionAnswer): self
+    {
+        if (!$this->forumDiscussionAnswers->contains($forumDiscussionAnswer)) {
+            $this->forumDiscussionAnswers[] = $forumDiscussionAnswer;
+            $forumDiscussionAnswer->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeForumDiscussionAnswer(ForumDiscussionAnswer $forumDiscussionAnswer): self
+    {
+        if ($this->forumDiscussionAnswers->contains($forumDiscussionAnswer)) {
+            $this->forumDiscussionAnswers->removeElement($forumDiscussionAnswer);
+            // set the owning side to null (unless already changed)
+            if ($forumDiscussionAnswer->getCreatedBy() === $this) {
+                $forumDiscussionAnswer->setCreatedBy(null);
             }
         }
 

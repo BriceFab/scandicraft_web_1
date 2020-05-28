@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Forum:
+	{{ forumCategory.name }},
+	{{ forumSubCategory.name }}
+{% endblock %}
+{% block description %}
+	{{ forumSubCategory.description }}
+{% endblock %}
+
+{% block body %}
+	<section class="w-section section">
+
+		<div class="w-container forum-container" style="padding-top: 35px;">
+
+			<div class="list-group" style="padding-bottom: 35px;">
+				<div class="list-group-item list-group-item-action active" style="padding-right: 5px;">
+					<div class="container">
+						<div class="row">
+							<div class="col-12 col-md-12 d-flex align-items-center">
+								{{ discussion.title }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="list-group-item forum-subcat-desc">
+					<div class="row">
+						<div class="col-12 col-md-2 {{ mobileDetect() ? '' : 'forum-discussion-userinfos' }}">
+							<div class="row d-flex justify-content-center align-items-center">
+								<img {{ mobileDetect() ? '' : 'style="max-width:80px;max-height:80px;"' }} src="https://crafatar.com/avatars/948fc377-5ac9-482d-b942-182d6ca58357" class="minecraft-head-skin" alt="Forum Joueur {{ discussion.createdBy.username }}">
+							</div>
+							<div {{ mobileDetect() ? '' : 'style="padding-left:10px;padding-top:10px;"' }}>
+								<div class="row d-flex justify-content-{{ mobileDetect() ? 'center' : 'start' }}">
+									<p style="font-size: 17px;">
+										<i class="fas fa-user"></i>
+										{{ 'Par ' }}
+										{{ discussion.createdBy.username }}
+									</p>
+								</div>
+								<div class="row d-flex justify-content-{{ mobileDetect() ? 'center' : 'start' }}">
+									<p style="font-size: 17px;">
+										<i class="far fa-clock"></i>
+										{{ 'Publié le ' }}
+										{{ discussion.createdAt|date('d/m/Y') }}
+									</p>
+								</div>
+								<div class="row d-flex justify-content-{{ mobileDetect() ? 'center' : 'start' }}">
+									<p style="font-size: 17px;">
+										<i class="far fa-calendar-check"></i>
+										{{ 'Inscrit le ' }}
+										{{ discussion.createdBy.createdAt|date('m/Y') }}
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-10">
+							{% if mobileDetect('mobile') %}
+								<div class="divider"></div>
+							{% endif %}
+							<p style="overflow-wrap:break-word;">{{ forumSubCategory.description|raw }}</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			{# Show commentaires #}
+			<div>
+				{% if discussion.getForumDiscussionAnswers()|length > 0 %}
+
+					<h5>Réponses{{ ' ' }}<span class="lighter">({{ discussion.getForumDiscussionAnswers()|length }})</span>
+					</h5>
+					{% for answer in discussion.getForumDiscussionAnswers() %}
+						<div class="w-clearfix comment">
+							<div class="avatar"><img class="minecraft-head-skin" alt="Joueur Minecraft" src="https://crafatar.com/avatars/b8ffc3d3-7dbf-4827-8f69-475f6690aabd">
+							</div>
+							<div class="comment-dess">
+								<div class="arrow-coment"></div>
+								<div class="w-clearfix comment-by">
+									<h5 class="name">{{ answer.createdBy.username }}</h5>
+									<div class="date">Le
+										{{ answer.createdAt|date("d/m/Y à h:i") }}
+										{# {% if answer.getUser().getId() == app.user.id %}
+											<a class="link-comment" href="{{ path('delete_survey_comment', {'comment_id': comment.id, 'survey_id': sondage.id }) }}">Supprimer</a>
+										{% endif %} #}
+										{# / <a class="link-comment" href="#">Répondre</a> #}
+										&nbsp;</div>
+								</div>
+								<p>
+									{{ answer.message|raw }}
+								</p>
+							</div>
+						</div>
+					{% endfor %}
+
+				{% else %}
+					<p>Aucune réponse</p>
+				{% endif %}
+			</div>
+
+			{# Ajouter réponse #}
+			<div>
+				{% include 'forum/forms/new_discussion_answer.html.twig' with {
+					'form': form
+    			} %}
+			</div>
+
+		</div>
+
+	</div>
+
+</section>{% endblock %}

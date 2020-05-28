@@ -5,7 +5,9 @@ namespace App\Controller\Forum;
 use App\Controller\BaseController;
 use App\Entity\ForumCategory;
 use App\Entity\ForumDiscussion;
+use App\Entity\ForumDiscussionAnswer;
 use App\Entity\ForumSubCategory;
+use App\Form\ForumDiscussionAnswerType;
 use App\Form\ForumDiscussionType;
 use App\Repository\ForumCategoryRepository;
 use App\Repository\ForumDiscussionRepository;
@@ -36,7 +38,7 @@ class ForumController extends BaseController
      * @ParamConverter("forumCategory", options={"mapping": {"main_slug": "slug"}})
      * @ParamConverter("forumSubCategory", options={"mapping": {"sub_slug": "slug"}})
      */
-    public function showDiscussion(Request $request, ForumCategory $forumCategory, ForumSubCategory $forumSubCategory, ForumDiscussionRepository $discu_repo)
+    public function showSubCategoryDiscussion(Request $request, ForumCategory $forumCategory, ForumSubCategory $forumSubCategory, ForumDiscussionRepository $discu_repo)
     {
         if (!$forumCategory->getActive() || !$forumSubCategory->getActive()) {
             return $this->retirectToPreviousRoute($request, 'Forum: cette catégorie n\'est plus active', ForumController::$default_route);
@@ -58,6 +60,10 @@ class ForumController extends BaseController
     {
         if (!$forumCategory->getActive() || !$forumSubCategory->getActive()) {
             return $this->retirectToPreviousRoute($request, 'Forum: cette catégorie n\'est plus active', ForumController::$default_route);
+        }
+
+        if (!$forumSubCategory->getWritable()) {
+            return $this->retirectToPreviousRoute($request, 'Forum: Vous ne pouvez pas écrire dans cette catégorie', ForumController::$default_route);
         }
 
         $discussion = new ForumDiscussion();
@@ -84,6 +90,46 @@ class ForumController extends BaseController
             'form' => $form->createView(),
             'forumCategory' => $forumCategory,
             'forumSubCategory' => $forumSubCategory
+        ]);
+    }
+
+    /**
+     * @Route("/forum/{main_slug}/{sub_slug}/{discussion_slug}", name="show_discussion")
+     * @ParamConverter("forumCategory", options={"mapping": {"main_slug": "slug"}})
+     * @ParamConverter("forumSubCategory", options={"mapping": {"sub_slug": "slug"}})
+     * @ParamConverter("forumDiscussion", options={"mapping": {"discussion_slug": "slug"}})
+     */
+    public function showDiscussion(Request $request, ForumCategory $forumCategory, ForumSubCategory $forumSubCategory, ForumDiscussion $forumDiscussion, EntityManagerInterface $em)
+    {
+        if (!$forumCategory->getActive() || !$forumSubCategory->getActive() || $forumDiscussion->getArchive()) {
+            return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
+        }
+
+        $answer = new ForumDiscussionAnswer();
+        $answer->setDiscussion($forumDiscussion);
+
+        $form = $this->createForm(ForumDiscussionAnswerType::class, $answer);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $answer = $form->getData();
+
+            $em->persist($answer);
+            $em->flush();
+
+            $this->addFlash('notice', 'Réponse ajoutée avec succès');
+            return $this->redirectToRoute('show_discussion', [
+                'main_slug' => $forumCategory->getSlug(),
+                'sub_slug' => $forumSubCategory->getSlug(),
+                'discussion_slug' => $forumDiscussion->getSlug()
+            ]);
+        }
+
+        return $this->render('forum/show_discussion.html.twig', [
+            'forumCategory' => $forumCategory,
+            'forumSubCategory' => $forumSubCategory,
+            'discussion' => $forumDiscussion,
+            'form' => $form->createView(),
         ]);
     }
 }
