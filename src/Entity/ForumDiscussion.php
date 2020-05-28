@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,6 +62,19 @@ class ForumDiscussion
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ForumDiscussionAnswer", mappedBy="discussion")
+     */
+    private $forumDiscussionAnswers;
+
+    public function __construct()
+    {
+        $this->forumDiscussionAnswers = new ArrayCollection();
+        $this->setPin(false);
+        $this->setArchive(false);
+        $this->setStaffOnly(false);
+    }
 
     public function getId(): ?int
     {
@@ -170,6 +185,37 @@ class ForumDiscussion
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ForumDiscussionAnswer[]
+     */
+    public function getForumDiscussionAnswers(): Collection
+    {
+        return $this->forumDiscussionAnswers;
+    }
+
+    public function addForumDiscussionAnswer(ForumDiscussionAnswer $forumDiscussionAnswer): self
+    {
+        if (!$this->forumDiscussionAnswers->contains($forumDiscussionAnswer)) {
+            $this->forumDiscussionAnswers[] = $forumDiscussionAnswer;
+            $forumDiscussionAnswer->setDiscussion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeForumDiscussionAnswer(ForumDiscussionAnswer $forumDiscussionAnswer): self
+    {
+        if ($this->forumDiscussionAnswers->contains($forumDiscussionAnswer)) {
+            $this->forumDiscussionAnswers->removeElement($forumDiscussionAnswer);
+            // set the owning side to null (unless already changed)
+            if ($forumDiscussionAnswer->getDiscussion() === $this) {
+                $forumDiscussionAnswer->setDiscussion(null);
+            }
+        }
 
         return $this;
     }

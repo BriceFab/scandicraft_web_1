@@ -49,7 +49,7 @@
 				{% if pin_discus|length > 0 %}
 					<div class="forum-discussion-pin">
 						{% for discussion in pin_discus %}
-							<a href="#" class="list-group-item list-group-item-action">
+							<a href="{{ path('show_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="list-group-item list-group-item-action">
 								<div class="container" style="padding-left: 0px;">
 									<div class="row">
 
@@ -94,7 +94,7 @@
 				{% if not_pin_discus|length > 0 %}
 					<div class="forum-discussion-not-pin">
 						{% for discussion in not_pin_discus %}
-							<a href="#" class="list-group-item list-group-item-action">
+							<a href="{{ path('show_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="list-group-item list-group-item-action">
 								<div class="container" style="padding-left: 0px;">
 									<div class="row">
 
@@ -133,7 +133,7 @@
 					</div>
 				{% elseif (pin_discus|length == 0) %}
 					<div class="forum-discussion-not-pin">
-						<a href="{{ path('add_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) }}" class="list-group-item list-group-item-action">
+						<a href="{{ forumSubCategory.writable ? path('add_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) : '#' }}" class="list-group-item list-group-item-action">
 							<p>Aucune discussion</p>
 						</a>
 					</div>
