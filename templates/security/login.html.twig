@@ -7,7 +7,7 @@
 
 {% block body %}
 
-	<section class="w-section section">
+	<section class="w-section section" style="{{ mobileDetect('pc') ? 'padding-bottom:0px;' : '' }}">
 		<div class="w-container">
 			<div class="w-row">
 
@@ -19,7 +19,7 @@
 					<div id="logo_error_data" data-login="{{ error.messageKey|trans(error.messageData, 'security') }}"></div>
 					<script type="text/javascript">
 						let data = document.querySelector('#logo_error_data');
-toast.error(data.dataset.login);
+						toast.error(data.dataset.login);
 					</script>
 				{% endif %}
 
@@ -55,8 +55,8 @@ toast.error(data.dataset.login);
 
 			</div>
 
-			<div class="display_if_no_logo d-flex justify-content-center" style="margin-top: 15px;">
-				<img class="login-logo" src="{{ asset('assets/img/main-logo.png') }}" alt="ScandiCraft PvP Faction Minecraft">
+			<div class="display_if_no_logo d-flex justify-content-center" style="margin-top:15px;margin-bottom: {{ mobileDetect('mobile') ? 30 : 0 }}px">
+				<img class="{{ mobileDetect('mobile') ? 'login-logoOLD' : 'login-logo' }}" src="{{ asset('assets/img/main-logo.png') }}" alt="ScandiCraft PvP Faction Minecraft">
 			</div>
 
 		</div>

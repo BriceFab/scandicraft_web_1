@@ -3,6 +3,7 @@
 namespace App\EventListener;
 
 use App\Entity\ExceptionLog;
+use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Error;
@@ -42,8 +43,10 @@ class LogException implements EventSubscriberInterface
         $log = new ExceptionLog();
         $log->setMethod($event->getRequest()->getMethod());
         $log->setUri($event->getRequest()->getUri());
-        if ($this->tokenStorage->getToken() !== null) {
-            $log->setUser($this->tokenStorage->getToken()->getUser());
+        if ($this->tokenStorage->getToken()->isAuthenticated()) {
+            if ($this->tokenStorage->getToken()->getUser() instanceof User) { //n'est pas anonymous
+                $log->setUser($this->tokenStorage->getToken()->getUser());
+            }
         }
         $log->setExceptionMessage($exception->getMessage());
         $code = null;
