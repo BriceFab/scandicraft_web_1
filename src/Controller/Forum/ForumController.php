@@ -12,6 +12,7 @@ use App\Form\ForumDiscussionType;
 use App\Repository\ForumCategoryRepository;
 use App\Repository\ForumDiscussionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -22,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ForumController extends BaseController
 {
@@ -111,31 +113,10 @@ class ForumController extends BaseController
             return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
         }
 
-        $answer = new ForumDiscussionAnswer();
-        $answer->setDiscussion($forumDiscussion);
-
-        $form = $this->createForm(ForumDiscussionAnswerType::class, $answer);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $answer = $form->getData();
-
-            $em->persist($answer);
-            $em->flush();
-
-            $this->addFlash('notice', 'Réponse ajoutée avec succès');
-            return $this->redirectToRoute('show_discussion', [
-                'main_slug' => $forumCategory->getSlug(),
-                'sub_slug' => $forumSubCategory->getSlug(),
-                'discussion_slug' => $forumDiscussion->getSlug()
-            ]);
-        }
-
         return $this->render('forum/show_discussion.html.twig', [
             'forumCategory' => $forumCategory,
             'forumSubCategory' => $forumSubCategory,
             'discussion' => $forumDiscussion,
-            'form' => $form->createView(),
         ]);
     }
 
@@ -143,108 +124,68 @@ class ForumController extends BaseController
      * @Route("/forum_data/post/answer", name="forum_post_answer", methods={"POST"})
      * @IsGranted("ROLE_USER")
      */
-    public function forumPostAnswer(Request $request, ForumDiscussionRepository $discussion_repo, EntityManagerInterface $em)
+    public function forumPostAnswer(Request $request, ForumDiscussionRepository $discussion_repo, EntityManagerInterface $em, ValidatorInterface $validator)
     {
-        $discussion_id = $request->get('dicussion_id');
-        $forumDiscussion = $discussion_repo->findOneBy(['id' => $discussion_id]);
-        $message = $request->get('editor_result');
+        try {
+            $discussion_id = $request->get('dicussion_id');
+            $forumDiscussion = $discussion_repo->findOneBy(['id' => $discussion_id]);
+            $message = $request->get('editor_result');
 
-        if (!$forumDiscussion->getSubCategory()->getActive() || !$forumDiscussion->getSubCategory()->getCategory()->getActive() || $forumDiscussion->getArchive() || !isset($message)) {
-            return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
+            if (!$forumDiscussion->getSubCategory()->getActive() || !$forumDiscussion->getSubCategory()->getCategory()->getActive() || $forumDiscussion->getArchive() || !isset($message)) {
+                return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
+            }
+
+            $answer = new ForumDiscussionAnswer();
+            $answer->setDiscussion($forumDiscussion);
+            $answer->setMessage($message);
+
+            //validate entity
+            $errors = $validator->validate($answer);
+            if (count($errors) > 0) {
+                $this->addFlash('error', $errors[0]->getMessage());
+                return $this->retirectToPreviousRoute($request, ForumController::$default_route);
+            }
+
+            $em->persist($answer);
+            $em->flush();
+
+            $this->addFlash('notice', 'Réponse ajoutée avec succès');
+            return $this->redirectToRoute('show_discussion', [
+                'main_slug' => $forumDiscussion->getSubCategory()->getCategory()->getSlug(),
+                'sub_slug' => $forumDiscussion->getSubCategory()->getSlug(),
+                'discussion_slug' => $forumDiscussion->getSlug()
+            ]);
+        } catch (Exception $e) {
+            $this->addFlash('error', 'Une erreur est survenue..');
         }
-
-        $answer = new ForumDiscussionAnswer();
-        $answer->setDiscussion($forumDiscussion);
-        $answer->setMessage($message);
-
-        $em->persist($answer);
-        $em->flush();
-
-        $this->addFlash('notice', 'Réponse ajoutée avec succès');
-        return $this->redirectToRoute('show_discussion', [
-            'main_slug' => $forumDiscussion->getSubCategory()->getCategory()->getSlug(),
-            'sub_slug' => $forumDiscussion->getSubCategory()->getSlug(),
-            'discussion_slug' => $forumDiscussion->getSlug()
-        ]);
-
-        // $message = $request->get('editor_result');
-        // if (!isset($message)) {
-        // }
-        // dd($request->get('editor_result'));
-
-
-
-        // $defaultRoute = 'sondages';
-
-        // try {
-        //     //check survey
-        //     $survey_id = $request->get('survey');
-        //     $survey = $surveyRepository->findOneBy(['id' => $survey_id]);
-        //     if (!$survey || !$survey->isEnable()) {
-        //         $this->addFlash('error', 'Le sondage a expiré !');
-        //         return $this->retirectToPreviousRoute($request, $defaultRoute);
-        //     }
-
-        //     //check if user has answer
-        //     $has_answer = false;
-        //     if ($this->getUser()) {
-        //         $has_answer = $survey->countUserAnswers($this->getUser()->getId()) > 0;
-        //     }
-        //     if (!$has_answer) {
-        //         $this->addFlash('error', 'Vous devez d\'abord répondre au sondage (voter) !');
-        //         return $this->retirectToPreviousRoute($request, $defaultRoute);
-        //     }
-
-        //     $comment = new SurveyComments();
-        //     $comment->setUser($this->getUser());
-        //     $comment->setComment($request->get('comment'));
-        //     $comment->setSurvey($survey);
-
-        //     //validate entity
-        //     $errors = $validator->validate($comment);
-        //     if (count($errors) > 0) {
-        //         $this->addFlash('error', $errors[0]->getMessage());
-        //         return $this->retirectToPreviousRoute($request, $defaultRoute);
-        //     }
-
-        //     $em->persist($comment);
-        //     $em->flush();
-
-        //     $this->addFlash('notice', 'Merci pour votre commentaire !');
-        // } catch (\Exception $e) {
-        //     $this->addFlash('error', 'Une erreur est survenue..');
-        // }
-
-        // return $this->retirectToPreviousRoute($request, $defaultRoute);
     }
 
     /**
      * @Route("/forum_data/post/image", name="forum_post_image", methods={"POST"})
      * @IsGranted("ROLE_USER")
      */
-    public function postImage(Request $request, SluggerInterface $slugger, Security $security)
+    public function postImage(Request $request, Security $security)
     {
         try {
-            $files_result = $this->uploadFiles($request->files, $slugger, $security->getUser()->getId(), $request);
+            $files_result = $this->uploadFiles($request->files, $security->getUser()->getId(), $request);
 
             return $this->json([
                 'result' => $files_result
             ], Response::HTTP_OK);
         } catch (FileException $e) {
             return $this->json([
-                'errorMessage' => 'Erreure lors de l\upload du fichier'
+                'errorMessage' => 'Erreur lors de l\'upload du fichier'
             ], Response::HTTP_BAD_REQUEST);
         }
     }
 
-    private function uploadFiles($files, $slugger, $user_id, $request)
+    private function uploadFiles($files, $user_id, $request)
     {
         $files_result = [];
 
         foreach ($files as $key => $file) {
             /** @var UploadedFile $file */
-            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-
+            // $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             // $safeFilename = $slugger->slug($originalFilename);
             $newFilename = $user_id . '-' . uniqid() . '.' . $file->guessExtension();
 

@@ -17,7 +17,7 @@ export default {
         maxHeight: '700px',
         charCounter: true,
         charCounterLabel: "Caractères: ",
-        maxCharCount: "250",
+        maxCharCount: getConfig.maxCharCount || 300,
         font: [
             "Arial",
             "Open Sans",

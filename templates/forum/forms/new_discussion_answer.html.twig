@@ -1,24 +1,19 @@
 <form action="{{ path('forum_post_answer') }}" method="POST">
-	<div id="app_editor" style="width:100%;" config='{
+
+	{% set config = {
+		'test': app.request.getSchemeAndHttpHost() ~ "/forum_data/post/image",
 		"input_result_name": "editor_result",
-		"imageUploadUrl": "{{ app.request.getSchemeAndHttpHost() }}/forum_data/post/image"
-	}'></div>
+		"maxCharCount": 300,
+		}|json_encode() %}
 
-	<input id="editor_result" name="editor_result" type="hidden" />
-	<input id="dicussion_id" name="dicussion_id" type="hidden" value="{{ discussion.id }}" />
+	{% include "form/fields/editor.html.twig" with { 'config': config} %}
 
-	<div class="row" style="padding-left:7px;">
+	<input id="dicussion_id" name="dicussion_id" type="hidden" value="{{ discussion.id }}"/>
+
+	<div class="row" style="padding-left:7px;margin-top:15px;">
 		<button type="submit" class="button" name="Submit">
 			Poster
 		</button>
 	</div>
 
 </form>
-
-{% block stylesheets %}
-	{{ encore_entry_link_tags('editor_app') }}
-{% endblock %}
-
-{% block javascripts %}
-	{{ encore_entry_script_tags('editor_app') }}
-{% endblock %}

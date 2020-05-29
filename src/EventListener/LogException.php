@@ -43,7 +43,7 @@ class LogException implements EventSubscriberInterface
         $log = new ExceptionLog();
         $log->setMethod($event->getRequest()->getMethod());
         $log->setUri($event->getRequest()->getUri());
-        if ($this->tokenStorage->getToken()->isAuthenticated()) {
+        if ($this->tokenStorage->getToken() !== null && $this->tokenStorage->getToken()->isAuthenticated()) {
             if ($this->tokenStorage->getToken()->getUser() instanceof User) { //n'est pas anonymous
                 $log->setUser($this->tokenStorage->getToken()->getUser());
             }
