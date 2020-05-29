@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\ForumDiscussionAnswer;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
@@ -15,7 +16,7 @@ class ForumDiscussionAnswerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('message', CKEditorType::class, [
+            ->add('message', TextType::class, [
                 'label' => 'Message',
                 'required' => true,
                 'constraints' => [

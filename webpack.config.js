@@ -68,7 +68,7 @@ Encore
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
-    //.enableIntegrityHashes(Encore.isProduction())
+    .enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
@@ -77,6 +77,7 @@ Encore
     .enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
     .addEntry('main_app', './assets/js/react/main.js')
+    .addEntry('editor_app', './assets/js_editor/index.js')
 
     //ckeditor
     .copyFiles([
@@ -86,7 +87,6 @@ Encore
         { from: './node_modules/ckeditor/plugins', to: 'ckeditor/plugins/[path][name].[ext]' },
         { from: './node_modules/ckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]' }
     ])
-
 
     .addPlugin(new webpack.BannerPlugin('© CopyRight ScandiCraft. Développé par BriceFab (https://www.scandicraft-mc.fr)'))
 module.exports = Encore.getWebpackConfig();

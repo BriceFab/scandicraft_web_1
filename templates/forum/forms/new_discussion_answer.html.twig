@@ -1,21 +1,24 @@
-{% include 'form/form_errors.html.twig' with {
-	'form': form,
-	'alert_style': 'margin-top:10px;'
-} %}
+<form action="{{ path('forum_post_answer') }}" method="POST">
+	<div id="app_editor" style="width:100%;" config='{
+		"input_result_name": "editor_result",
+		"imageUploadUrl": "{{ app.request.getSchemeAndHttpHost() }}/forum_data/post/image"
+	}'></div>
 
-{{ form_start(form, {'method': 'POST'}) }}
-<div class="row">
+	<input id="editor_result" name="editor_result" type="hidden" />
+	<input id="dicussion_id" name="dicussion_id" type="hidden" value="{{ discussion.id }}" />
 
-	<div class="form-group col-12 col-md-12">
-		{{ form_label(form.message) }}
-		{{ form_widget(form.message, { 'attr': {'class': 'w-input w-textarea', 'style': 'height: 200px;'} }) }}
+	<div class="row" style="padding-left:7px;">
+		<button type="submit" class="button" name="Submit">
+			Poster
+		</button>
 	</div>
 
-</div>
-{{ form_rest(form) }}
-<div class="row" style="padding-left:7px;">
-	<button type="submit" class="button" name="Submit">
-		Poster
-	</button>
-</div>
-{{ form_end(form) }}
+</form>
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('editor_app') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('editor_app') }}
+{% endblock %}
