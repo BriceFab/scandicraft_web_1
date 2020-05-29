@@ -8,6 +8,8 @@ parameters:
     site.copyright: "© ScandiCraft. Serveur Minecraft PvP / Faction / Launcher / Moddé / MMORPG."
     mail.sender: "scandicraft.minecraft@gmail.com"
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    forum_images_url: '/uploads/forum/images/'
+    forum_images_directory: '%kernel.project_dir%/public/uploads/forum/images'
 
 services:
     # default configuration for services in *this* file
