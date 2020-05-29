@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ForumDiscussionAnswerRepository")
@@ -33,6 +34,12 @@ class ForumDiscussionAnswer
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 30,
+     *      max = 1500,
+     *      allowEmptyString = false,
+     * )
      */
     private $message;
 

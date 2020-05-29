@@ -1,0 +1,11 @@
+<div id="app_editor" style="width:100%;" config="{{ config }}"></div>
+
+<input id="editor_result" name="editor_result" type="hidden"/>
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('editor_app') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('editor_app') }}
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\EventListener;
 
 use App\Entity\ActionLog;
+use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -44,8 +45,10 @@ class LogAction implements EventSubscriberInterface
             $log = new ActionLog();
             $log->setMethod($method);
             $log->setUri($uri);
-            if ($this->tokenStorage->getToken() !== null) {
-                $log->setUser($this->tokenStorage->getToken()->getUser());
+            if ($this->tokenStorage->getToken() !== null && $this->tokenStorage->getToken()->isAuthenticated()) {
+                if ($this->tokenStorage->getToken()->getUser() instanceof User) { //n'est pas anonymous
+                    $log->setUser($this->tokenStorage->getToken()->getUser());
+                }
             }
             $log->setRequestAt(new DateTime('now'));
             $log->setResponseCode($event->getResponse()->getStatusCode());
