@@ -5,7 +5,6 @@ namespace App\Controller\Forum;
 use App\Entity\ForumCategory;
 use App\Entity\ForumSubCategory;
 use App\Repository\ForumCategoryRepository;
-use App\Repository\ForumDiscussionRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +28,7 @@ class ForumCategoryController extends ForumController
      * @ParamConverter("forumCategory", options={"mapping": {"main_slug": "slug"}})
      * @ParamConverter("forumSubCategory", options={"mapping": {"sub_slug": "slug"}})
      */
-    public function showSubCategoryDiscussion(Request $request, ForumCategory $forumCategory, ForumSubCategory $forumSubCategory, ForumDiscussionRepository $discu_repo)
+    public function showSubCategories(Request $request, ForumCategory $forumCategory, ForumSubCategory $forumSubCategory)
     {
         if (!$forumCategory->getActive() || !$forumSubCategory->getActive()) {
             return $this->retirectToPreviousRoute($request, 'Forum: cette catégorie n\'est plus active', ForumController::$default_route);

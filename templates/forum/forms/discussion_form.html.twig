@@ -19,7 +19,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-12 col-md-6 d-flex align-items-center">
-								Créer une discussion
+								{{ edit ? 'Modifier la' : 'Créer une' }} discussion
 							</div>
 							<div class="col-12 col-md-6 d-flex justify-content-end">
 								[{{ forumCategory.name }}
@@ -32,7 +32,8 @@
 				{# Form #}
 				<div class="list-group-item">
 					{% include 'forum/forms/new_discussion.html.twig' with {
-					'form': form
+					'form': form,
+					'edit': edit
     				} %}
 				</div>
 			</div>

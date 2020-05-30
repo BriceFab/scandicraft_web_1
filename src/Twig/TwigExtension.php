@@ -3,12 +3,21 @@
 namespace App\Twig;
 
 use Mobile_Detect;
+use Symfony\Component\Security\Core\Security;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class TwigExtension extends AbstractExtension
 {
+
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     public function getFilters()
     {
         return [
@@ -20,7 +29,8 @@ class TwigExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('mobileDetect', [$this, 'mobileDetect'])
+            new TwigFunction('mobileDetect', [$this, 'mobileDetect']),
+            new TwigFunction('isAutorized', [$this, 'isAutorized'])
         ];
     }
 
@@ -48,6 +58,7 @@ class TwigExtension extends AbstractExtension
         if ($limit > 0) {
             $meta_string = $this->truncate($meta_string, $limit);
         }
+        $meta_string = html_entity_decode($meta_string);    //remplace le chaine html en utf8
         return $meta_string;
     }
 
@@ -59,5 +70,16 @@ class TwigExtension extends AbstractExtension
             $text = $text . $pad;
         }
         return $text;
+    }
+
+    public function isAutorized($access_roles)
+    {
+        foreach ($access_roles as $key => $access_role) {
+            $can_access = $this->security->isGranted($access_role);
+            if ($can_access) {
+                return true;
+            }
+        }
+        return false;
     }
 }

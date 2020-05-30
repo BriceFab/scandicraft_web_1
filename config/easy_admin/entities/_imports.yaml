@@ -17,3 +17,5 @@ imports:
 - { resource: ActionLog.yaml }
 - { resource: ExceptionLog.yaml }
 - { resource: UserIp.yaml }
+- { resource: ForumDiscussion.yaml }
+- { resource: ForumDiscussionAnswer.yaml }

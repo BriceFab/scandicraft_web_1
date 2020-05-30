@@ -94,4 +94,9 @@ class ForumDiscussionAnswer
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'reponse#' . $this->getId() . '-' . $this->getCreatedBy()->getUsername();
+    }
 }

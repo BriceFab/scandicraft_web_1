@@ -3,7 +3,7 @@ easy_admin:
     ForumCategory:
       class: App\Entity\ForumCategory
       permissions:
-        list: ["ROLE_ADMIN"]
+        list: ["ROLE_STAFF"]
         edit: ["ROLE_ADMIN"]
         new: ["ROLE_ADMIN"]
         delete: ["ROLE_ADMIN"]
@@ -27,6 +27,7 @@ easy_admin:
             { property: "active", label: "Activé ?" },
             { property: "createdBy", label: "Créé par" },
             { property: "createdAt", label: "Créé le" },
+            { property: "countSubCategories", label: "Sous-catégories" },
           ]
       form:
         title: "Ajouter/Modifier"

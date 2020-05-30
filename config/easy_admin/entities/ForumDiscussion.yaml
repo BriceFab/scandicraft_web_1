@@ -1,0 +1,59 @@
+easy_admin:
+  entities:
+    ForumDiscussion:
+      class: App\Entity\ForumDiscussion
+      permissions:
+        list: ["ROLE_STAFF"]
+        show: ["ROLE_STAFF"]
+        edit: ["ROLE_MANAGEUR"]
+        new: ["ROLE_ADMIN"]
+        delete: ["ROLE_MANAGEUR"]
+      disabled_actions: ["new"]
+      list:
+        title: "Liste des discussions du forum"
+        actions:
+          [
+            { name: "show", label: "Détail", icon: "search" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            { property: "title", label: "Titre" },
+            { property: "sub_category", label: "Catégorie" },
+            {
+              property: "staff_only",
+              label: "Staff uniquement ?",
+              type: "boolean",
+            },
+            { property: "pin", label: "Épinglée ?" },
+            { property: "createdBy", label: "Créé par" },
+            { property: "createdAt", label: "Créé le" },
+            { property: "forumDiscussionAnswers", label: "Réponses" },
+          ]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+            { property: "title", label: "Titre" },
+            { property: "message", label: "Message", type: "fos_ckeditor" },
+            { property: "sub_category", label: "Catégorie" },
+            { property: "pin", label: "Épinglée ?" },
+          ]
+      show:
+        title: "Détail"
+        fields:
+          [
+            { property: "title", label: "Titre" },
+            { property: "message", label: "Message", type: "raw" },
+            { property: "sub_category", label: "Catégorie" },
+            {
+              property: "staff_only",
+              label: "Staff uniquement ?",
+              type: "boolean",
+            },
+            { property: "pin", label: "Épinglée ?" },
+            { property: "createdBy", label: "Créé par" },
+            { property: "createdAt", label: "Créé le" },
+            { property: "countAnswers", label: "Réponses" },
+          ]

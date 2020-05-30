@@ -55,7 +55,7 @@ class ForumCategory
     protected $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ForumSubCategory", mappedBy="category", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\ForumSubCategory", mappedBy="category", cascade={"persist", "remove"})
      */
     protected $forumSubCategories;
 

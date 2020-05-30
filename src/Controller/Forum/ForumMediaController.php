@@ -2,6 +2,7 @@
 
 namespace App\Controller\Forum;
 
+use JsonException;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -37,6 +38,10 @@ class ForumMediaController extends ForumController
 
         foreach ($files as $key => $file) {
             /** @var UploadedFile $file */
+            if ($file->getSize() > 3000000) { //3000000 bytes = 3 MB
+                throw new JsonException('Fichier trop grand (plus de 3 MB)');
+            }
+
             // $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             // $safeFilename = $slugger->slug($originalFilename);
             $newFilename = $user_id . '-' . uniqid() . '.' . $file->guessExtension();

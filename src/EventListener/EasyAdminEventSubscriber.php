@@ -5,20 +5,17 @@ namespace App\EventListener;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Security;
 
 class EasyAdminEventSubscriber implements EventSubscriberInterface
 {
 
-    private $decisionManager;
-    private $token;
+    private $security;
 
-    public function __construct(AccessDecisionManagerInterface $decisionManager, TokenStorageInterface $token)
+    public function __construct(Security $security)
     {
-        $this->decisionManager = $decisionManager;
-        $this->token = $token;
+        $this->security = $security;
     }
 
     public static function getSubscribedEvents()
@@ -44,8 +41,19 @@ class EasyAdminEventSubscriber implements EventSubscriberInterface
 
         $authorizedRoles = $entityConfig['permissions'][$action];
 
-        if (!$this->decisionManager->decide($this->token->getToken(), $authorizedRoles)) {
+        if (!$this->checkIsAutorized($authorizedRoles)) {
             throw new AccessDeniedException();
         };
+    }
+
+    private function checkIsAutorized($access_roles)
+    {
+        foreach ($access_roles as $key => $access_role) {
+            $can_access = $this->security->isGranted($access_role);
+            if ($can_access) {
+                return true;
+            }
+        }
+        return false;
     }
 }

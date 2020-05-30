@@ -36,8 +36,11 @@
 	{{ form_rest(form) }}
 	<div class="row" style="padding-left:7px;">
 		<button type="submit" class="button" name="Submit">
-			Publier
+			{{ edit ? 'Modifier' : 'Publier' }}
 		</button>
+		<a  href="{{ app.request.headers.get('referer') != null ? app.request.headers.get('referer') : path('forum') }}" class="button btn-active">
+			Annuler
+		</a>
 	</div>
 	{{ form_end(form) }}
 

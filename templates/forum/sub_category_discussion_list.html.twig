@@ -1,0 +1,49 @@
+{% for discussion in discussions %}
+	<a href="{{ path('show_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="list-group-item list-group-item-action">
+		<div class="container" style="padding-left: 0px;">
+			<div class="row">
+
+				{% if pin %}
+					<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
+						<span class="forum-discu-pin">
+							<i class="fas fa-thumbtack"></i>
+						</span>
+					</div>
+				{% else %}
+					<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
+						<img src="https://crafatar.com/avatars/948fc377-5ac9-482d-b942-182d6ca58357" class="minecraft-head-skin" alt="Forum Joueur {{ discussion.createdBy.username }}">
+					</div>
+				{% endif %}
+
+				<div class="col-9 col-md-8" style="margin-top:5px;">
+					<div class="row justify-content-start forum-flex-mobile-right">
+						<div class="forum-discussion-title">
+							{% if discussion.getStaffOnly() %}
+								<span class="badge badge-secondary">Staff seulement</span>
+							{% endif %}
+							{{ discussion.title|truncate(mobileDetect('mobile') ? 40 : 80) }}
+						</div>
+					</div>
+					<div class="row justify-content-start forum-flex-mobile-right">
+						<p style="font-size: 17px;">
+							Par
+							{{ discussion.createdBy.username }}
+						</p>
+					</div>
+
+				</div>
+
+				<div class="col-12 col-md-3 d-none d-sm-block">
+					<div class="row justify-content-end">
+						<p style="font-size: 15px;">Messages:
+							{{ discussion.getForumDiscussionAnswers()|length }}</p>
+					</div>
+					{# <div class="row justify-content-end">
+						<p style="font-size: 15px;">Affichage: 0</p>
+					</div> #}
+				</div>
+
+			</div>
+		</div>
+	</a>
+{% endfor %}

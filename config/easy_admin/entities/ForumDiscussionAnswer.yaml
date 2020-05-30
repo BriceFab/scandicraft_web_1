@@ -1,0 +1,41 @@
+easy_admin:
+  entities:
+    ForumDiscussionAnswer:
+      class: App\Entity\ForumDiscussionAnswer
+      permissions:
+        list: ["ROLE_STAFF"]
+        show: ["ROLE_STAFF"]
+        edit: ["ROLE_MANAGEUR"]
+        new: ["ROLE_ADMIN"]
+        delete: ["ROLE_MANAGEUR"]
+      disabled_actions: ["new"]
+      list:
+        title: "Liste des réponses aux discussions du forum"
+        actions:
+          [
+            { name: "show", label: "Détail", icon: "search" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            { property: "message", label: "Message" },
+            { property: "discussion", label: "Discussion" },
+            { property: "createdBy", label: "Créé par" },
+            { property: "createdAt", label: "Créé le" },
+          ]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+            { property: "message", label: "Message" },
+          ]
+      show:
+        title: "Détail"
+        fields:
+          [
+            { property: "message", label: "Message", type: "raw" },
+            { property: "discussion", label: "Discussion" },
+            { property: "createdBy", label: "Créé par" },
+            { property: "createdAt", label: "Créé le" },
+          ]

@@ -8,6 +8,10 @@ success.confirm.email: 'Compte confirmé avec succès, vous pouvez vous connecte
 error.already.logged: 'Vous êtes déjà connecté !'
 login.button.reset_password: 'Mot de passe oublié ?'
 ROLE_USER: "Rôle utilisateur"
-ROLE_ADMIN: "Administrateur"
-ROLE_PANEL_ADMIN: "Accès au panel admin"
 ROLE_LAUNCHER: "Accès au launcher"
+ROLE_PANEL_ADMIN: "Accès au panel admin"
+ROLE_STAFF: "Staff"
+ROLE_HELPER: "Helper"
+ROLE_MANAGER: "Manager"
+ROLE_MODERATEUR: "Modérateur"
+ROLE_ADMIN: "Administrateur"
