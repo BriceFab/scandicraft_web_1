@@ -58,11 +58,19 @@
 							{% if mobileDetect('mobile') %}
 								<div class="divider"></div>
 							{% endif %}
-							<p style="overflow-wrap:break-word;">{{ forumSubCategory.description|raw }}</p>
+							<div class="sun-editor-editable">
+								{{ discussion.message|raw }}
+								{# <p style="overflow-wrap:break-word;">{{ discussion.message|raw }}</p> #}
+							</div>
 						</div>
 					</div>
 				</div>
-
+				<div class="row">
+					<div class="col-12 d-flex align-items-end justify-content-end">
+						<a href="{{ path('delete_discussion', { 'discussion_id': discussion.id }) }}" class="badge badge-pill badge-danger" style="padding:10px;margin:5px;">Supprimer</a>
+						<a href="#" class="badge badge-pill badge-secondary" style="padding:10px;margin:5px;">Modifier</a>
+					</div>
+				</div>
 			</div>
 
 			{# Show commentaires #}
@@ -90,7 +98,7 @@
 										{# / <a class="link-comment" href="#">Répondre</a> #}
 										&nbsp;</div>
 								</div>
-								<div class="sun-editor-editable" scrolling="auto" style="background-color:#f6f6f6;">
+								<div class="sun-editor-editable" style="background-color:#f6f6f6;">
 									{{ answer.message|raw }}
 								</div>
 							</div>

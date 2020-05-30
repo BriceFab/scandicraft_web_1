@@ -14,7 +14,15 @@
 		</div>
 		<div class="form-group col-12 col-md-12">
 			{{ form_label(form.message) }}
-			{{ form_widget(form.message, { 'attr': {'class': 'w-input w-textarea', 'style': 'height: 200px;'} }) }}
+			{{ form_widget(form.message, { 'attr': {'class': 'w-input w-textarea', 'style': 'height: 200px;visibility:hidden;display:none;'} }) }}
+
+			{% set config = {
+				'imageUploadUrl': app.request.getSchemeAndHttpHost() ~ "/forum_data/post/image",
+				"input_result_name": "forum_discussion_message",
+				"maxCharCount": 300,
+			}|json_encode() %}
+
+			{% include "form/fields/editor.html.twig" with { 'config': config} %}
 		</div>
 
 		{% if form.staff_only is defined %}
@@ -26,7 +34,7 @@
 
 	</div>
 	{{ form_rest(form) }}
-	<div class="row">
+	<div class="row" style="padding-left:7px;">
 		<button type="submit" class="button" name="Submit">
 			Publier
 		</button>
