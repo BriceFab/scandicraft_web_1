@@ -7,7 +7,6 @@ use App\Entity\ForumCategory;
 use App\Entity\ForumDiscussion;
 use App\Entity\ForumDiscussionAnswer;
 use App\Entity\ForumSubCategory;
-use App\Form\ForumDiscussionAnswerType;
 use App\Form\ForumDiscussionType;
 use App\Repository\ForumCategoryRepository;
 use App\Repository\ForumDiscussionRepository;
@@ -21,9 +20,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ForumController extends BaseController
@@ -90,14 +87,22 @@ class ForumController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $discussion = $form->getData();
 
+            //validate message length
+            $formated_message = $this->sc_service->removeBalises($discussion->getMessage());
+            if (strlen($formated_message) <= 25) {
+                return $this->retirectToPreviousRoute($request, 'Message trop court. Minimum 25 caractères', ForumController::$default_route);
+            } elseif (strlen($formated_message) > 300) {
+                return $this->retirectToPreviousRoute($request, 'Message trop long', ForumController::$default_route);
+            }
+
             $em->persist($discussion);
             $em->flush();
 
             $this->addFlash('notice', 'Discussion créer avec succès');
-            //Todo show discussion
-            return $this->redirectToRoute('forum_sub_category_list', [
+            return $this->redirectToRoute('show_discussion', [
                 'main_slug' => $forumCategory->getSlug(),
-                'sub_slug' => $forumSubCategory->getSlug()
+                'sub_slug' => $forumSubCategory->getSlug(),
+                'discussion_slug' => $discussion->getSlug()
             ]);
         }
 
@@ -145,11 +150,9 @@ class ForumController extends BaseController
             //validate message length
             $formated_message = $this->sc_service->removeBalises($message);
             if (strlen($formated_message) <= 25) {
-                $this->addFlash('error', 'Message trop court');
-                return $this->retirectToPreviousRoute($request, ForumController::$default_route);
+                return $this->retirectToPreviousRoute($request, 'Message trop court. Minimum 25 caractères', ForumController::$default_route);
             } elseif (strlen($formated_message) > 300) {
-                $this->addFlash('error', 'Message trop long');
-                return $this->retirectToPreviousRoute($request, ForumController::$default_route);
+                return $this->retirectToPreviousRoute($request, 'Message trop long', ForumController::$default_route);
             }
 
             $answer = new ForumDiscussionAnswer();
@@ -227,7 +230,7 @@ class ForumController extends BaseController
      * @ParamConverter("answer", options={"mapping": {"answer_id": "id"}})
      * @IsGranted("ROLE_USER")
      */
-    public function deleteSurveyComment(Request $request, ForumDiscussion $discussion, ForumDiscussionAnswer $answer, EntityManagerInterface $em)
+    public function deleteDiscussionAnswer(Request $request, ForumDiscussion $discussion, ForumDiscussionAnswer $answer, EntityManagerInterface $em)
     {
         try {
             //check active
@@ -248,6 +251,35 @@ class ForumController extends BaseController
             $this->addFlash('error', 'Une erreur est survenue..');
         }
 
-        return $this->retirectToPreviousRoute($request, ForumController::$default_route);
+        return $this->retirectToPreviousRoute($request, null, ForumController::$default_route);
+    }
+
+    /**
+     * @Route("/delete/discussion/{discussion_id}", name="delete_discussion", methods={"GET"})
+     * @ParamConverter("discussion", options={"mapping": {"discussion_id": "id"}})
+     * @IsGranted("ROLE_USER")
+     */
+    public function deleteDiscussion(Request $request, ForumDiscussion $discussion, EntityManagerInterface $em)
+    {
+        try {
+            //check active
+            if (!$discussion->getSubCategory()->getActive() || !$discussion->getSubCategory()->getCategory()->getActive() || $discussion->getArchive()) {
+                return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
+            }
+
+            //check user owner discussion
+            if ($discussion->getCreatedBy()->getId() !== $this->getUser()->getId()) {
+                return $this->retirectToPreviousRoute($request, 'Vous ne pouvez pas supprimer cette discussion.', ForumController::$default_route);
+            }
+
+            $em->remove($discussion);
+            $em->flush();
+
+            $this->addFlash('notice', 'Votre discussion a été supprimée !');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Une erreur est survenue..');
+        }
+
+        return $this->retirectToPreviousRoute(null, null, ForumController::$default_route);
     }
 }

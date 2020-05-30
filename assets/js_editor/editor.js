@@ -24,6 +24,7 @@ class Editor extends Component {
     onChange(data) {
         // console.log('onChange data', data)
         const input_name = getConfig().input_result_name;
+        // console.log('result input', document.getElementById(input_name))
         document.getElementById(input_name).value = data;
     }
 

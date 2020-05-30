@@ -3,7 +3,7 @@
 	<label>Ajouter un message:</label>
 
 	{% set config = {
-		'test': app.request.getSchemeAndHttpHost() ~ "/forum_data/post/image",
+		'imageUploadUrl': app.request.getSchemeAndHttpHost() ~ "/forum_data/post/image",
 		"input_result_name": "editor_result",
 		"maxCharCount": 300,
 		}|json_encode() %}
