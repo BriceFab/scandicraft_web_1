@@ -1,5 +1,5 @@
 {% for discussion in discussions %}
-	<a href="{{ path('show_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="list-group-item list-group-item-action">
+	<a href="{{ path('forum_show_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="list-group-item list-group-item-action">
 		<div class="container" style="padding-left: 0px;">
 			<div class="row">
 
