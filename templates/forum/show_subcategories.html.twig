@@ -62,7 +62,7 @@
 				{% elseif (pin_discus|length == 0) %}
 					{% if forumSubCategory.writable %}
 						<div class="forum-discussion-not-pin">
-							<a href="{{ forumSubCategory.writable ? path('add_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) : '#' }}" class="list-group-item list-group-item-action">
+							<a href="{{ forumSubCategory.writable ? path('forum_new_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) : '#' }}" class="list-group-item list-group-item-action">
 								<p>Aucune discussion</p>
 							</a>
 						</div>
