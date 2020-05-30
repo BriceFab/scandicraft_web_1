@@ -20,9 +20,8 @@
 						<div class="row">
 							<div class="col-12 col-md-12 d-flex align-items-center">
 								{% if discussion.getStaffOnly() %}
-									<span class="badge badge-dark">Staff seulement</span>
+									<span class="badge badge-dark">Staff seulement</span>{{ ' | ' }}
 								{% endif %}
-								{{ ' | ' }}
 								{{ discussion.title }}
 							</div>
 						</div>
