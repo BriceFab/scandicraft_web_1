@@ -63,4 +63,10 @@ class ScandiCraftService
 
         return $slug;
     }
+
+    public function removeBalises($string) {
+        $string = htmlspecialchars_decode($string, ENT_HTML5);       //encode en caractères normaux
+        $string = preg_replace("/<[^>]*>/", "", $string); //enlève les balises
+        return $string;
+    }
 }

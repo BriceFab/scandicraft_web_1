@@ -16,6 +16,7 @@ export default {
         minHeight: '300px',
         maxHeight: '700px',
         charCounter: true,
+        charCounterType: 'char',
         charCounterLabel: "Caractères: ",
         maxCharCount: getConfig.maxCharCount || 300,
         font: [
@@ -44,7 +45,9 @@ export default {
         ],
         imageRotation: true,
         "imageUploadUrl": getConfig().imageUploadUrl,
-        "imageUploadSizeLimit": "1000000",  //en byte; 1000000 byte = 1 MB
+        "imageUploadSizeLimit": "3000000",  //en byte; 3000000 byte = 3 MB
+        "imageWidth": "300px",
+        "imageHeight": "300px",
         "videoFileInput": false,
         "audioUrlInput": false,
         "tabDisable": false,
