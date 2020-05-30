@@ -64,7 +64,7 @@ class ForumDiscussion
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ForumDiscussionAnswer", mappedBy="discussion")
+     * @ORM\OneToMany(targetEntity="App\Entity\ForumDiscussionAnswer", mappedBy="discussion", cascade={"remove"})
      */
     private $forumDiscussionAnswers;
 
@@ -218,5 +218,14 @@ class ForumDiscussion
         }
 
         return $this;
+    }
+
+    public function countAnswers() {
+        return count($this->getForumDiscussionAnswers());
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

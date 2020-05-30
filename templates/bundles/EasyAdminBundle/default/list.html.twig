@@ -102,20 +102,10 @@
 
 	{% if easyadmin_action_is_enabled_for_list_view('new', _entity_config.name) %}
 		{% set _action = easyadmin_get_action_for_list_view('new', _entity_config.name) %}
-		{% set _roles = app.user.roles %}
 
-		{% set _denied = true %}
-		{% if _entity_config.permissions is defined and _action.name in _entity_config.permissions|keys %}
-			{% for role in _roles %}
-				{% if role in _entity_config.permissions[_action.name] %}
-					{% set _denied = false %}
-				{% endif %}
-			{% endfor %}
-		{% else %}
-			{% set _denied = false %}
-		{% endif %}
+		{% set _can_access = _entity_config.permissions[_action.name] is defined ? isAutorized(_entity_config.permissions[_action.name]) : true %}
 
-		{% if _denied == false %}
+		{% if _can_access %}
 
 			{% block new_action %}
 				<div class="button-action">

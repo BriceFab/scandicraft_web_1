@@ -11,6 +11,15 @@ class Editor extends Component {
         this.onImageUpload.bind(this);
         this.onImageUploadError.bind(this);
         this.onChange.bind(this);
+
+        const input_name = getConfig().input_result_name;
+        const data = document.getElementById(input_name).value;
+
+        this.state = {
+            'message': data
+        }
+
+        // console.log('data', data)
     }
 
     onImageUpload(targetImgElement, index, state, imageInfo, remainingFilesCount) {
@@ -29,8 +38,9 @@ class Editor extends Component {
     }
 
     render() {
+        // console.log('render state', this.state)
         return (
-            <SunEditor {...editor_config} onChange={this.onChange} onImageUpload={this.onImageUpload} onImageUploadError={this.onImageUploadError} />
+            <SunEditor {...editor_config} setContents={this.state.message} onChange={this.onChange} onImageUpload={this.onImageUpload} onImageUploadError={this.onImageUploadError} />
         );
     }
 };

@@ -35,7 +35,7 @@ class ForumSubCategory extends ForumCategory
     protected $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ForumDiscussion", mappedBy="sub_category")
+     * @ORM\OneToMany(targetEntity="App\Entity\ForumDiscussion", mappedBy="sub_category", cascade={"remove"})
      */
     private $forumDiscussions;
 
@@ -43,6 +43,11 @@ class ForumSubCategory extends ForumCategory
      * @ORM\Column(type="boolean", nullable=false, options={"default": false})
      */
     private $accept_staff_only;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $sub_title;
 
     public function __construct()
     {
@@ -137,6 +142,35 @@ class ForumSubCategory extends ForumCategory
     public function setAcceptStaffOnly(?bool $accept_staff_only): self
     {
         $this->accept_staff_only = $accept_staff_only;
+
+        return $this;
+    }
+
+    public function countMessages()
+    {
+        $messages = 0;
+
+        foreach ($this->getForumDiscussions() as $key => $discussion) {
+            /** @var ForumDiscussion $discussion */
+            $messages += count($discussion->getForumDiscussionAnswers());
+        }
+
+        return $messages;
+    }
+
+    public function countDiscussion()
+    {
+        return count($this->getForumDiscussions());
+    }
+
+    public function getSubTitle(): ?string
+    {
+        return $this->sub_title;
+    }
+
+    public function setSubTitle(?string $sub_title): self
+    {
+        $this->sub_title = $sub_title;
 
         return $this;
     }

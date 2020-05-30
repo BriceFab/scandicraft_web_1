@@ -19,6 +19,10 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-12 col-md-12 d-flex align-items-center">
+								{% if discussion.getStaffOnly() %}
+									<span class="badge badge-dark">Staff seulement</span>
+								{% endif %}
+								{{ ' | ' }}
 								{{ discussion.title }}
 							</div>
 						</div>
@@ -60,17 +64,18 @@
 							{% endif %}
 							<div class="sun-editor-editable">
 								{{ discussion.message|raw }}
-								{# <p style="overflow-wrap:break-word;">{{ discussion.message|raw }}</p> #}
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-12 d-flex align-items-end justify-content-end">
-						<a href="{{ path('delete_discussion', { 'discussion_id': discussion.id }) }}" class="badge badge-pill badge-danger" style="padding:10px;margin:5px;">Supprimer</a>
-						<a href="#" class="badge badge-pill badge-secondary" style="padding:10px;margin:5px;">Modifier</a>
+				{% if discussion.getCreatedBy().getId() == app.user.id %}
+					<div class="row">
+						<div class="col-12 d-flex align-items-end justify-content-end">
+							<a href="{{ path('delete_discussion', { 'discussion_id': discussion.id }) }}" class="badge badge-pill badge-danger" style="padding:10px;margin:5px;">Supprimer</a>
+							<a href="{{ path('edit_discussion', { 'discussion_id': discussion.id }) }}" class="badge badge-pill badge-secondary" style="padding:10px;margin:5px;">Modifier</a>
+						</div>
 					</div>
-				</div>
+				{% endif %}
 			</div>
 
 			{# Show commentaires #}
@@ -93,7 +98,8 @@
 									<div class="date">Le
 										{{ answer.createdAt|date("d/m/Y à h:i") }}
 										{% if app.user.id is defined and answer.createdBy.getId() == app.user.id %}
-											<a class="link-comment" href="{{ path('delete_discussion_answer', {'discussion_id': discussion.id, 'answer_id': answer.id }) }}">Supprimer</a>
+											<a href="{{ path('delete_discussion_answer', {'discussion_id': discussion.id, 'answer_id': answer.id }) }}" class="badge badge-pill badge-danger" style="padding:10px;">Supprimer</a>
+											<a href="{{ path('edit_discussion_answer', {'discussion_id': discussion.id, 'answer_id': answer.id }) }}" class="badge badge-pill badge-secondary" style="padding:10px;">Modifier</a>
 										{% endif %}
 										{# / <a class="link-comment" href="#">Répondre</a> #}
 										&nbsp;</div>

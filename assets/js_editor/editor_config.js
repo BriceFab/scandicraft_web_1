@@ -94,7 +94,7 @@ export default {
                 "showBlocks",
                 // "codeView",
                 "preview",
-                "save",
+                // "save",
             ]
         ],
     }

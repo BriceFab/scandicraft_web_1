@@ -11,11 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Security;
 
 class ForumDiscussionController extends ForumController
 {
@@ -45,36 +41,7 @@ class ForumDiscussionController extends ForumController
         $discussion = new ForumDiscussion();
         $discussion->setSubCategory($forumSubCategory);
 
-        $form = $this->createForm(ForumDiscussionType::class, $discussion);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $discussion = $form->getData();
-
-            //validate message length
-            $formated_message = $this->sc_service->removeBalises($discussion->getMessage());
-            if (strlen($formated_message) <= 25) {
-                return $this->retirectToPreviousRoute($request, 'Message trop court. Minimum 25 caractères', ForumController::$default_route);
-            } elseif (strlen($formated_message) > 300) {
-                return $this->retirectToPreviousRoute($request, 'Message trop long', ForumController::$default_route);
-            }
-
-            $em->persist($discussion);
-            $em->flush();
-
-            $this->addFlash('notice', 'Discussion créer avec succès');
-            return $this->redirectToRoute('show_discussion', [
-                'main_slug' => $forumCategory->getSlug(),
-                'sub_slug' => $forumSubCategory->getSlug(),
-                'discussion_slug' => $discussion->getSlug()
-            ]);
-        }
-
-        return $this->render('forum/create_discussion.html.twig', [
-            'form' => $form->createView(),
-            'forumCategory' => $forumCategory,
-            'forumSubCategory' => $forumSubCategory
-        ]);
+        return $this->discussionForum($request, $em, $discussion);
     }
 
     /**
@@ -89,55 +56,15 @@ class ForumDiscussionController extends ForumController
             return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
         }
 
+        if ($forumSubCategory->getAcceptStaffOnly() && $forumDiscussion->getStaffOnly()) {
+            $this->denyAccessUnlessGranted('ROLE_STAFF');
+        }
+
         return $this->render('forum/show_discussion.html.twig', [
             'forumCategory' => $forumCategory,
             'forumSubCategory' => $forumSubCategory,
             'discussion' => $forumDiscussion,
         ]);
-    }
-
-    /**
-     * @Route("/forum_data/post/image", name="forum_post_image", methods={"POST"})
-     * @IsGranted("ROLE_USER")
-     */
-    public function postImage(Request $request, Security $security)
-    {
-        try {
-            $files_result = $this->uploadFiles($request->files, $security->getUser()->getId(), $request);
-
-            return $this->json([
-                'result' => $files_result
-            ], Response::HTTP_OK);
-        } catch (FileException $e) {
-            return $this->json([
-                'errorMessage' => 'Erreur lors de l\'upload du fichier'
-            ], Response::HTTP_BAD_REQUEST);
-        }
-    }
-
-    private function uploadFiles($files, $user_id, $request)
-    {
-        $files_result = [];
-
-        foreach ($files as $key => $file) {
-            /** @var UploadedFile $file */
-            // $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            // $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $user_id . '-' . uniqid() . '.' . $file->guessExtension();
-
-            $file_result = $file->move(
-                $this->getParameter('forum_images_directory'),
-                $newFilename
-            );
-
-            $files_result[] = [
-                'name' => $newFilename,
-                'size' => $file_result->getSize(),
-                'url' => $request->getSchemeAndHttpHost() . $this->getParameter('forum_images_url') . $newFilename,
-            ];
-        }
-
-        return $files_result;
     }
 
     /**
@@ -167,5 +94,69 @@ class ForumDiscussionController extends ForumController
         }
 
         return $this->retirectToPreviousRoute(null, null, ForumController::$default_route);
+    }
+
+    /**
+     * @Route("/modifier/forum/discussion/{discussion_id}", name="edit_discussion", methods={"GET", "POST"})
+     * @ParamConverter("discussion", options={"mapping": {"discussion_id": "id"}})
+     * @IsGranted("ROLE_USER")
+     */
+    public function editDiscussion(Request $request, ForumDiscussion $discussion, EntityManagerInterface $em)
+    {
+        if ($discussion->getArchive() || !$discussion->getSubCategory()->getActive() || !$discussion->getSubCategory()->getCategory()->getActive()) {
+            return $this->retirectToPreviousRoute($request, 'Forum: cette catégorie n\'est plus active', ForumController::$default_route);
+        }
+
+        if (!$discussion->getSubCategory()->getWritable()) {
+            return $this->retirectToPreviousRoute($request, 'Forum: Vous ne pouvez pas écrire dans cette catégorie', ForumController::$default_route);
+        }
+
+        if ($discussion->getCreatedBy()->getId() !== $this->getUser()->getId()) {
+            return $this->retirectToPreviousRoute($request, 'Vous ne pouvez pas modifier cette discussion.', ForumController::$default_route);
+        }
+
+        return $this->discussionForum($request, $em, $discussion, true);
+    }
+
+    //Add and Edit
+    private function discussionForum($request, $em, ForumDiscussion $discussion, $edit = false)
+    {
+        /** @var ForumDiscussion $discussion */
+        $form = $this->createForm(ForumDiscussionType::class, $discussion);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $discussion = $form->getData();
+
+            //validate message length
+            $formated_message = $this->sc_service->removeBalises($discussion->getMessage());
+            if (strlen($formated_message) <= 25) {
+                return $this->retirectToPreviousRoute($request, 'Message trop court. Minimum 25 caractères', ForumController::$default_route);
+            } elseif (strlen($formated_message) > 300) {
+                return $this->retirectToPreviousRoute($request, 'Message trop long', ForumController::$default_route);
+            }
+
+            //enlève script>
+            $message = htmlspecialchars_decode($discussion->getMessage(), ENT_HTML5); 
+            $message = str_replace('script>', '', $message);
+            $discussion->setMessage($message);
+
+            $em->persist($discussion);
+            $em->flush();
+
+            $this->addFlash('notice', 'Discussion ' . ($edit ? 'modifiée' : 'créer') . ' avec succès');
+            return $this->redirectToRoute('show_discussion', [
+                'main_slug' => $discussion->getSubCategory()->getCategory()->getSlug(),
+                'sub_slug' => $discussion->getSubCategory()->getSlug(),
+                'discussion_slug' => $discussion->getSlug()
+            ]);
+        }
+
+        return $this->render('forum/forms/discussion_form.html.twig', [
+            'form' => $form->createView(),
+            'forumCategory' => $discussion->getSubCategory()->getCategory(),
+            'forumSubCategory' => $discussion->getSubCategory(),
+            'edit' => $edit
+        ]);
     }
 }

@@ -76,9 +76,12 @@ easy_admin:
                   choices:
                     {
                       "Rôle utilisateur": "ROLE_USER",
-                      "Administrateur": "ROLE_ADMIN",
-                      "Panel admin": "ROLE_PANEL_ADMIN",
                       "Launcher": "ROLE_LAUNCHER",
+                      "Panel admin": "ROLE_PANEL_ADMIN",
+                      "Helper": "ROLE_HELPER",
+                      "Manager": "ROLE_MANAGER",
+                      "Modérateur": "ROLE_MODERATEUR",
+                      "Administrateur": "ROLE_ADMIN",
                     },
                 },
             },

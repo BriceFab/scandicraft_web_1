@@ -3,7 +3,7 @@ easy_admin:
     ForumSubCategory:
       class: App\Entity\ForumSubCategory
       permissions:
-        list: ["ROLE_ADMIN"]
+        list: ["ROLE_STAFF"]
         edit: ["ROLE_ADMIN"]
         new: ["ROLE_ADMIN"]
         delete: ["ROLE_ADMIN"]
@@ -20,7 +20,7 @@ easy_admin:
           [
             { property: "name", label: "Nom" },
             { property: "category", label: "Catégorie parente" },
-            { property: "description", label: "Description" },
+            { property: "sub_title", label: "Sous-titre" },
             {
               property: "priority",
               label: "Ordre",
@@ -34,6 +34,8 @@ easy_admin:
             { property: "active", label: "Activé ?" },
             { property: "createdBy", label: "Créé par" },
             { property: "createdAt", label: "Créé le" },
+            { property: "countDiscussion", label: "Discussions" },
+            { property: "countMessages", label: "Messages" },
           ]
       form:
         title: "Ajouter/Modifier"
@@ -52,7 +54,8 @@ easy_admin:
                   query_builder: 'App\Repository\ForumCategoryRepository::getMainCategoriesFromAdmin',
                 },
             },
-            { property: "description", label: "Description" },
+            { property: "description", label: "Description", type: "fos_ckeditor" },
+            { property: "sub_title", label: "Sous-titre", help: "Sous-titre affiché depuis les catégories" },
             { property: "priority", label: "Ordre" },
             { property: "active", label: "Activé ?" },
             { property: "writable", label: "Ecrivable ?" },

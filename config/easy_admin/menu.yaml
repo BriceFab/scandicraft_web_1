@@ -21,11 +21,13 @@ easy_admin:
           ]
       - label: "Forum"
         icon: "comments"
-        permission: "ROLE_ADMIN"
+        permission: "ROLE_STAFF"
         children:
           [
             { entity: "ForumCategory", label: "Categories" },
             { entity: "ForumSubCategory", label: "Sous-categories" },
+            { entity: "ForumDiscussion", label: "Discussions" },
+            { entity: "ForumDiscussionAnswer", label: "Réponses" },
           ]
       - label: "Sondages"
         icon: "poll-h"

@@ -37,106 +37,36 @@
 				</div>
 				{% if forumSubCategory.description|length > 0 %}
 					<div class="list-group-item forum-subcat-desc">
-						<p style="overflow-wrap:break-word;">{{ forumSubCategory.description }}</p>
+						<div class="sun-editor-editable">
+							{{ forumSubCategory.description|raw }}
+						</div>
 					</div>
 				{% endif %}
 
 				{# foreach discussion #}
-				{% set pin_discus = forumSubCategory.forumDiscussions|filter(disc => disc.pin == true) %}
-				{% set not_pin_discus = forumSubCategory.forumDiscussions|filter(disc => disc.pin == false) %}
+				{% set pin_discus = forumSubCategory.forumDiscussions|filter(disc => (disc.getStaffOnly() ? is_granted('ROLE_STAFF') : true) and disc.pin) %}
+				{% set not_pin_discus = forumSubCategory.forumDiscussions|filter(disc => (disc.getStaffOnly() ? is_granted('ROLE_STAFF') : true) and not disc.pin) %}
 
 				{# pin discussions #}
 				{% if pin_discus|length > 0 %}
 					<div class="forum-discussion-pin">
-						{% for discussion in pin_discus %}
-							<a href="{{ path('show_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="list-group-item list-group-item-action">
-								<div class="container" style="padding-left: 0px;">
-									<div class="row">
-
-										<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
-											<span class="forum-discu-pin">
-												<i class="fas fa-thumbtack"></i>
-											</span>
-										</div>
-
-										<div class="col-9 col-md-8" style="margin-top:5px;">
-											<div class="row justify-content-start forum-flex-mobile-right">
-												<div class="forum-discussion-title">
-													{{ discussion.title }}
-												</div>
-											</div>
-											<div class="row justify-content-start forum-flex-mobile-right">
-												<p style="font-size: 17px;">
-													Par
-													{{ discussion.createdBy.username }}
-												</p>
-											</div>
-
-										</div>
-
-										<div class="col-12 col-md-3 d-none d-sm-block">
-											<div class="row justify-content-end">
-												<p style="font-size: 15px;">Messages: 0</p>
-											</div>
-											<div class="row justify-content-end">
-												<p style="font-size: 15px;">Affichage: 0</p>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</a>
-						{% endfor %}
+						{% include "forum/sub_category_discussion_list.html.twig" with {'discussions': pin_discus, 'pin': true} %}
 					</div>
 				{% endif %}
 
 				{# not pin discussions #}
 				{% if not_pin_discus|length > 0 %}
 					<div class="forum-discussion-not-pin">
-						{% for discussion in not_pin_discus %}
-							<a href="{{ path('show_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="list-group-item list-group-item-action">
-								<div class="container" style="padding-left: 0px;">
-									<div class="row">
-
-										<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
-											<img src="https://crafatar.com/avatars/948fc377-5ac9-482d-b942-182d6ca58357" class="minecraft-head-skin" alt="Forum Joueur {{ discussion.createdBy.username }}">
-										</div>
-
-										<div class="col-9 col-md-8" style="margin-top:5px;">
-											<div class="row justify-content-start forum-flex-mobile-right">
-												<div class="forum-discussion-title">
-													{{ discussion.title|truncate(mobileDetect('mobile') ? 40 : 80) }}
-												</div>
-											</div>
-											<div class="row justify-content-start forum-flex-mobile-right">
-												<p style="font-size: 17px;">
-													Par
-													{{ discussion.createdBy.username }}
-												</p>
-											</div>
-
-										</div>
-
-										<div class="col-12 col-md-3 d-none d-sm-block">
-											<div class="row justify-content-end">
-												<p style="font-size: 15px;">Messages: {{ discussion.getForumDiscussionAnswers()|length }}</p>
-											</div>
-											<div class="row justify-content-end">
-												<p style="font-size: 15px;">Affichage: 0</p>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</a>
-						{% endfor %}
+						{% include "forum/sub_category_discussion_list.html.twig" with {'discussions': not_pin_discus, 'pin': false} %}
 					</div>
 				{% elseif (pin_discus|length == 0) %}
-					<div class="forum-discussion-not-pin">
-						<a href="{{ forumSubCategory.writable ? path('add_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) : '#' }}" class="list-group-item list-group-item-action">
-							<p>Aucune discussion</p>
-						</a>
-					</div>
+					{% if forumSubCategory.writable %}
+						<div class="forum-discussion-not-pin">
+							<a href="{{ forumSubCategory.writable ? path('add_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) : '#' }}" class="list-group-item list-group-item-action">
+								<p>Aucune discussion</p>
+							</a>
+						</div>
+					{% endif %}
 				{% endif %}
 
 			</div>
