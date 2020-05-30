@@ -29,3 +29,4 @@ public/upload/capes/
 .env.local
 launcher/
 public/*.zip
+public/uploads/*

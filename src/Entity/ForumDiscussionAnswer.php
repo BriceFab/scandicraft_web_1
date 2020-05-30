@@ -37,7 +37,6 @@ class ForumDiscussionAnswer
      * @Assert\NotBlank
      * @Assert\Length(
      *      min = 30,
-     *      max = 1500,
      *      allowEmptyString = false,
      * )
      */

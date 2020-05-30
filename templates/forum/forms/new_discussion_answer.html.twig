@@ -1,5 +1,7 @@
 <form action="{{ path('forum_post_answer') }}" method="POST">
 
+	<label>Ajouter un message:</label>
+
 	{% set config = {
 		'test': app.request.getSchemeAndHttpHost() ~ "/forum_data/post/image",
 		"input_result_name": "editor_result",

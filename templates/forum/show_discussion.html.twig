@@ -73,23 +73,26 @@
 					</h5>
 					{% for answer in discussion.getForumDiscussionAnswers() %}
 						<div class="w-clearfix comment">
-							<div class="avatar"><img class="minecraft-head-skin" alt="Joueur Minecraft" src="https://crafatar.com/avatars/b8ffc3d3-7dbf-4827-8f69-475f6690aabd">
-							</div>
+							{% if not mobileDetect('mobile') %}
+								<div class="avatar">
+									<img class="minecraft-head-skin" alt="Joueur Minecraft" src="https://crafatar.com/avatars/b8ffc3d3-7dbf-4827-8f69-475f6690aabd">
+								</div>
+							{% endif %}
 							<div class="comment-dess">
 								<div class="arrow-coment"></div>
 								<div class="w-clearfix comment-by">
 									<h5 class="name">{{ answer.createdBy.username }}</h5>
 									<div class="date">Le
 										{{ answer.createdAt|date("d/m/Y à h:i") }}
-										{# {% if answer.getUser().getId() == app.user.id %}
-											<a class="link-comment" href="{{ path('delete_survey_comment', {'comment_id': comment.id, 'survey_id': sondage.id }) }}">Supprimer</a>
-										{% endif %} #}
+										{% if app.user.id is defined and answer.createdBy.getId() == app.user.id %}
+											<a class="link-comment" href="{{ path('delete_discussion_answer', {'discussion_id': discussion.id, 'answer_id': answer.id }) }}">Supprimer</a>
+										{% endif %}
 										{# / <a class="link-comment" href="#">Répondre</a> #}
 										&nbsp;</div>
 								</div>
-								<p>
+								<div class="sun-editor-editable" scrolling="auto" style="background-color:#f6f6f6;">
 									{{ answer.message|raw }}
-								</p>
+								</div>
 							</div>
 						</div>
 					{% endfor %}

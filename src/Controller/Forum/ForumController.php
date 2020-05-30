@@ -11,6 +11,7 @@ use App\Form\ForumDiscussionAnswerType;
 use App\Form\ForumDiscussionType;
 use App\Repository\ForumCategoryRepository;
 use App\Repository\ForumDiscussionRepository;
+use App\Service\ScandiCraftService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,6 +29,12 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class ForumController extends BaseController
 {
     private static $default_route = 'forum';
+    private $sc_service;
+
+    public function __construct(ScandiCraftService $sc_service)
+    {
+        $this->sc_service = $sc_service;
+    }
 
     /**
      * @Route("/forum", name="forum")
@@ -135,6 +142,16 @@ class ForumController extends BaseController
                 return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
             }
 
+            //validate message length
+            $formated_message = $this->sc_service->removeBalises($message);
+            if (strlen($formated_message) <= 25) {
+                $this->addFlash('error', 'Message trop court');
+                return $this->retirectToPreviousRoute($request, ForumController::$default_route);
+            } elseif (strlen($formated_message) > 300) {
+                $this->addFlash('error', 'Message trop long');
+                return $this->retirectToPreviousRoute($request, ForumController::$default_route);
+            }
+
             $answer = new ForumDiscussionAnswer();
             $answer->setDiscussion($forumDiscussion);
             $answer->setMessage($message);
@@ -202,5 +219,35 @@ class ForumController extends BaseController
         }
 
         return $files_result;
+    }
+
+    /**
+     * @Route("/delete/discussion_answer/{discussion_id}/{answer_id}", name="delete_discussion_answer", methods={"GET"})
+     * @ParamConverter("discussion", options={"mapping": {"discussion_id": "id"}})
+     * @ParamConverter("answer", options={"mapping": {"answer_id": "id"}})
+     * @IsGranted("ROLE_USER")
+     */
+    public function deleteSurveyComment(Request $request, ForumDiscussion $discussion, ForumDiscussionAnswer $answer, EntityManagerInterface $em)
+    {
+        try {
+            //check active
+            if (!$discussion->getSubCategory()->getActive() || !$discussion->getSubCategory()->getCategory()->getActive() || $discussion->getArchive()) {
+                return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
+            }
+
+            //check user owner comment
+            if ($answer->getCreatedBy()->getId() !== $this->getUser()->getId()) {
+                return $this->retirectToPreviousRoute($request, 'Vous ne pouvez pas supprimer ce commentaire.', ForumController::$default_route);
+            }
+
+            $em->remove($answer);
+            $em->flush();
+
+            $this->addFlash('notice', 'Votre message a été supprimé !');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Une erreur est survenue..');
+        }
+
+        return $this->retirectToPreviousRoute($request, ForumController::$default_route);
     }
 }
