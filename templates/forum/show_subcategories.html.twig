@@ -26,7 +26,7 @@
 							<div class="col-12 col-md-6 d-flex justify-content-end" style="padding-right:0px;">
 								{% if forumSubCategory.writable %}
 									{# create discussion #}
-									<a href="{{ path('add_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) }}" class="button button btn-second btn-small btn-rouned">
+									<a href="{{ path('forum_new_discussion', { 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) }}" class="button button btn-second btn-small btn-rouned">
 										<i class="fas fa-plus-square"></i>
 										Discussion
 									</a>
@@ -50,14 +50,14 @@
 				{# pin discussions #}
 				{% if pin_discus|length > 0 %}
 					<div class="forum-discussion-pin">
-						{% include "forum/sub_category_discussion_list.html.twig" with {'discussions': pin_discus, 'pin': true} %}
+						{% include "forum/show_discussions.html.twig" with {'discussions': pin_discus, 'pin': true} %}
 					</div>
 				{% endif %}
 
 				{# not pin discussions #}
 				{% if not_pin_discus|length > 0 %}
 					<div class="forum-discussion-not-pin">
-						{% include "forum/sub_category_discussion_list.html.twig" with {'discussions': not_pin_discus, 'pin': false} %}
+						{% include "forum/show_discussions.html.twig" with {'discussions': not_pin_discus, 'pin': false} %}
 					</div>
 				{% elseif (pin_discus|length == 0) %}
 					{% if forumSubCategory.writable %}

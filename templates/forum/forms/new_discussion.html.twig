@@ -17,7 +17,7 @@
 			{{ form_widget(form.message, { 'attr': {'class': 'w-input w-textarea', 'style': 'height: 200px;visibility:hidden;display:none;'} }) }}
 
 			{% set config = {
-				'imageUploadUrl': app.request.getSchemeAndHttpHost() ~ "/forum_data/post/image",
+				'imageUploadUrl': path('forum_add_images', { 'main_slug': category.slug, 'sub_slug': subCategory.slug }),
 				"input_result_name": "forum_discussion_message",
 				"maxCharCount": 300,
 			}|json_encode() %}

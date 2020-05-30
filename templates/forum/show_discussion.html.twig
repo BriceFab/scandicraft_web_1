@@ -71,8 +71,8 @@
 				{% if discussion.getCreatedBy().getId() == app.user.id %}
 					<div class="row">
 						<div class="col-12 d-flex align-items-end justify-content-end">
-							<a href="{{ path('delete_discussion', { 'discussion_id': discussion.id }) }}" class="badge badge-pill badge-danger" style="padding:10px;margin:5px;">Supprimer</a>
-							<a href="{{ path('edit_discussion', { 'discussion_id': discussion.id }) }}" class="badge badge-pill badge-secondary" style="padding:10px;margin:5px;">Modifier</a>
+							<a href="{{ path('forum_delete_discussion', { 'discussion_id': discussion.id, 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) }}" class="badge badge-pill badge-danger" style="padding:10px;margin:5px;">Supprimer</a>
+							<a href="{{ path('forum_edit_discussion', { 'discussion_id': discussion.id, 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) }}" class="badge badge-pill badge-secondary" style="padding:10px;margin:5px;">Modifier</a>
 						</div>
 					</div>
 				{% endif %}
@@ -98,8 +98,8 @@
 									<div class="date">Le
 										{{ answer.createdAt|date("d/m/Y à h:i") }}
 										{% if app.user.id is defined and answer.createdBy.getId() == app.user.id %}
-											<a href="{{ path('delete_discussion_answer', {'discussion_id': discussion.id, 'answer_id': answer.id }) }}" class="badge badge-pill badge-danger" style="padding:10px;">Supprimer</a>
-											<a href="{{ path('edit_discussion_answer', {'discussion_id': discussion.id, 'answer_id': answer.id }) }}" class="badge badge-pill badge-secondary" style="padding:10px;">Modifier</a>
+											<a href="{{ path('forum_delete_answer', {'answer_id': answer.id, 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="badge badge-pill badge-danger" style="padding:10px;">Supprimer</a>
+											<a href="{{ path('forum_edit_answer', {'answer_id': answer.id, 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="badge badge-pill badge-secondary" style="padding:10px;">Modifier</a>
 										{% endif %}
 										{# / <a class="link-comment" href="#">Répondre</a> #}
 										&nbsp;</div>
@@ -119,7 +119,9 @@
 			{# Ajouter réponse #}
 			<div>
 				<div class="divider" style="margin-top:15px;"></div>
-				{% include 'forum/forms/new_discussion_answer.html.twig' with {
+				{% include 'forum/forms/new_answer.html.twig' with {
+					'category': forumCategory,
+					'subCategory': forumSubCategory,
 					'discussion': discussion
     			} %}
 			</div>

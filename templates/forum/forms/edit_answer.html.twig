@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Forum:
+	{{ category.name }},
+	{{ subCategory.name }}
+{% endblock %}
+{% block description %}
+	{{ subCategory.description }}
+{% endblock %}
+
+{% block body %}
+	<section class="w-section section">
+
+		<div class="w-container forum-container" style="padding-top: 35px;">
+
+			<div class="list-group" style="padding-bottom: 35px;">
+				<div class="list-group-item list-group-item-action active" style="padding-right: 5px;">
+					<div class="container">
+						<div class="row">
+							<div class="col-12 col-md-6 d-flex align-items-center">
+								Modifier le message
+							</div>
+							<div class="col-12 col-md-6 d-flex justify-content-end">
+								[{{ category.name }}
+								-
+								{{ subCategory.name }}]
+							</div>
+						</div>
+					</div>
+				</div>
+				{# Form #}
+
+				<div class="list-group-item">
+					{% include 'form/form_errors.html.twig' with {
+						'form': form,
+						'alert_style': 'margin-right:15px;margin-left:15px;margin-top:10px;'
+					} %}
+
+					<div class="container">
+
+						{{ form_start(form, {'method': 'POST'}) }}
+						<div class="row">
+
+							<div class="form-group col-12 col-md-12">
+								{# {{ form_label(form.message) }} #}
+								{{ form_widget(form.message, { 'attr': {'class': 'w-input w-textarea', 'style': 'height: 200px;visibility:hidden;display:none;'} }) }}
+
+								{% set config = {
+									'imageUploadUrl': path('forum_add_images', { 'main_slug': category.slug, 'sub_slug': subCategory.slug, 'discussion_slug': discussion.slug }),
+									"input_result_name": "forum_discussion_answer_message",
+									"maxCharCount": 300,
+								}|json_encode() %}
+
+								{% include "form/fields/editor.html.twig" with { 'config': config} %}
+							</div>
+
+						</div>
+						{{ form_rest(form) }}
+						<div class="row" style="padding-left:7px;">
+							<button type="submit" class="button" name="Submit">
+								Modifier
+							</button>
+							<a href="{{ app.request.headers.get('referer') != null ? app.request.headers.get('referer') : path('forum') }}" class="button btn-active">
+								Annuler
+							</a>
+						</div>
+						{{ form_end(form) }}
+
+					</div>
+
+
+				</div>
+
+
+			</div>
+
+		</div>
+
+	</section>
+{% endblock %}

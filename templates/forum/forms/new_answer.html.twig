@@ -1,16 +1,14 @@
-<form action="{{ path('forum_post_answer') }}" method="POST">
+<form action="{{ path('forum_new_answer', { 'main_slug': category.slug, 'sub_slug': subCategory.slug, 'discussion_slug': discussion.slug }) }}" method="POST">
 
 	<label>Ajouter un message:</label>
 
 	{% set config = {
-		'imageUploadUrl': app.request.getSchemeAndHttpHost() ~ "/forum_data/post/image",
+		'imageUploadUrl': path('forum_add_images', { 'main_slug': category.slug, 'sub_slug': subCategory.slug, 'discussion_slug': discussion.slug }),
 		"input_result_name": "editor_result",
 		"maxCharCount": 300,
 		}|json_encode() %}
 
 	{% include "form/fields/editor.html.twig" with { 'config': config} %}
-
-	<input id="dicussion_id" name="dicussion_id" type="hidden" value="{{ discussion.id }}"/>
 
 	<div class="row" style="padding-left:7px;margin-top:15px;">
 		<button type="submit" class="button" name="Submit">

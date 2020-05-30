@@ -21,7 +21,7 @@
 						</div>
 						{% if categorie.forumSubCategories|length > 0 %}
 							{% for sub_categorie in categorie.forumSubCategories|filter((cat) => cat.active) %}
-								<a href="{{ path('forum_sub_category_list', { 'main_slug': categorie.slug, 'sub_slug': sub_categorie.slug }) }}" class="list-group-item list-group-item-action">
+								<a href="{{ path('forum_show_subcategories', { 'main_slug': categorie.slug, 'sub_slug': sub_categorie.slug }) }}" class="list-group-item list-group-item-action">
 									<div class="container" style="padding-left: 0px;">
 										<div class="row">
 											<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">

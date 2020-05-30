@@ -16,110 +16,80 @@ use Symfony\Component\HttpFoundation\Request;
 class ForumDiscussionController extends ForumController
 {
     private $sc_service;
+    private $em;
 
-    public function __construct(ScandiCraftService $sc_service)
+    public function __construct(ScandiCraftService $sc_service, EntityManagerInterface $em)
     {
         $this->sc_service = $sc_service;
+        $this->em = $em;
+    }
+
+    private function checkOwnItem(ForumDiscussion $discussion)
+    {
+        if ($discussion->getCreatedBy()->getId() !== $this->getUser()->getId()) {
+            $this->createAccessDeniedException("Vous n'etes pas autorisé à effecter cette action");
+        }
     }
 
     /**
-     * @Route("/forum/{main_slug}/{sub_slug}/ajouter", name="add_discussion")
-     * @ParamConverter("forumCategory", options={"mapping": {"main_slug": "slug"}})
-     * @ParamConverter("forumSubCategory", options={"mapping": {"sub_slug": "slug"}})
-     * @IsGranted("ROLE_USER")
+     * @Route("/forum/{main_slug}/{sub_slug}/{discussion_slug}", name="forum_show_discussion")
+     * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
+     * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
+     * @ParamConverter("discussion", options={"mapping": {"discussion_slug": "slug"}})
      */
-    public function postAddDiscussion(Request $request, ForumCategory $forumCategory, ForumSubCategory $forumSubCategory, EntityManagerInterface $em)
+    public function showDiscussion(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion)
     {
-        if (!$forumCategory->getActive() || !$forumSubCategory->getActive()) {
-            return $this->retirectToPreviousRoute($request, 'Forum: cette catégorie n\'est plus active', ForumController::$default_route);
-        }
-
-        if (!$forumSubCategory->getWritable()) {
-            return $this->retirectToPreviousRoute($request, 'Forum: Vous ne pouvez pas écrire dans cette catégorie', ForumController::$default_route);
-        }
-
-        $discussion = new ForumDiscussion();
-        $discussion->setSubCategory($forumSubCategory);
-
-        return $this->discussionForum($request, $em, $discussion);
-    }
-
-    /**
-     * @Route("/forum/{main_slug}/{sub_slug}/{discussion_slug}", name="show_discussion")
-     * @ParamConverter("forumCategory", options={"mapping": {"main_slug": "slug"}})
-     * @ParamConverter("forumSubCategory", options={"mapping": {"sub_slug": "slug"}})
-     * @ParamConverter("forumDiscussion", options={"mapping": {"discussion_slug": "slug"}})
-     */
-    public function showDiscussion(Request $request, ForumCategory $forumCategory, ForumSubCategory $forumSubCategory, ForumDiscussion $forumDiscussion, EntityManagerInterface $em)
-    {
-        if (!$forumCategory->getActive() || !$forumSubCategory->getActive() || $forumDiscussion->getArchive()) {
-            return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
-        }
-
-        if ($forumSubCategory->getAcceptStaffOnly() && $forumDiscussion->getStaffOnly()) {
-            $this->denyAccessUnlessGranted('ROLE_STAFF');
-        }
+        //Check access
+        $access_result = $this->checkAutorized($request, $category, $subCategory, $discussion);
+        if ($access_result !== null) return $access_result;
 
         return $this->render('forum/show_discussion.html.twig', [
-            'forumCategory' => $forumCategory,
-            'forumSubCategory' => $forumSubCategory,
-            'discussion' => $forumDiscussion,
+            'forumCategory' => $category,
+            'forumSubCategory' => $subCategory,
+            'discussion' => $discussion,
         ]);
     }
 
     /**
-     * @Route("/delete/discussion/{discussion_id}", name="delete_discussion", methods={"GET"})
-     * @ParamConverter("discussion", options={"mapping": {"discussion_id": "id"}})
+     * @Route("/forum/discussion/{main_slug}/{sub_slug}/ajouter", name="forum_new_discussion", methods={"GET", "POST"})
+     * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
+     * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @IsGranted("ROLE_USER")
      */
-    public function deleteDiscussion(Request $request, ForumDiscussion $discussion, EntityManagerInterface $em)
+    public function newDiscussion(Request $request, ForumCategory $category, ForumSubCategory $subCategory)
     {
-        try {
-            //check active
-            if (!$discussion->getSubCategory()->getActive() || !$discussion->getSubCategory()->getCategory()->getActive() || $discussion->getArchive()) {
-                return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
-            }
+        //init discussion
+        $discussion = new ForumDiscussion();
 
-            //check user owner discussion
-            if ($discussion->getCreatedBy()->getId() !== $this->getUser()->getId()) {
-                return $this->retirectToPreviousRoute($request, 'Vous ne pouvez pas supprimer cette discussion.', ForumController::$default_route);
-            }
+        //Check access
+        $access_result = $this->checkAutorized($request, $category, $subCategory, $discussion);
+        if ($access_result !== null) return $access_result;
 
-            $em->remove($discussion);
-            $em->flush();
+        //handle form
+        $discussion->setSubCategory($subCategory);
 
-            $this->addFlash('notice', 'Votre discussion a été supprimée !');
-        } catch (\Exception $e) {
-            $this->addFlash('error', 'Une erreur est survenue..');
-        }
-
-        return $this->retirectToPreviousRoute(null, null, ForumController::$default_route);
+        return $this->discussionForm($request, $discussion);
     }
 
     /**
-     * @Route("/modifier/forum/discussion/{discussion_id}", name="edit_discussion", methods={"GET", "POST"})
+     * @Route("/forum/discussion/{main_slug}/{sub_slug}/modifier/{discussion_id}", name="forum_edit_discussion", methods={"GET", "POST"})
+     * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
+     * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @ParamConverter("discussion", options={"mapping": {"discussion_id": "id"}})
      * @IsGranted("ROLE_USER")
      */
-    public function editDiscussion(Request $request, ForumDiscussion $discussion, EntityManagerInterface $em)
+    public function editDiscussion(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion)
     {
-        if ($discussion->getArchive() || !$discussion->getSubCategory()->getActive() || !$discussion->getSubCategory()->getCategory()->getActive()) {
-            return $this->retirectToPreviousRoute($request, 'Forum: cette catégorie n\'est plus active', ForumController::$default_route);
-        }
+        //Check access
+        $access_result = $this->checkAutorized($request, $category, $subCategory, $discussion);
+        if ($access_result !== null) return $access_result;
+        $this->checkOwnItem($discussion);
 
-        if (!$discussion->getSubCategory()->getWritable()) {
-            return $this->retirectToPreviousRoute($request, 'Forum: Vous ne pouvez pas écrire dans cette catégorie', ForumController::$default_route);
-        }
-
-        if ($discussion->getCreatedBy()->getId() !== $this->getUser()->getId()) {
-            return $this->retirectToPreviousRoute($request, 'Vous ne pouvez pas modifier cette discussion.', ForumController::$default_route);
-        }
-
-        return $this->discussionForum($request, $em, $discussion, true);
+        return $this->discussionForm($request, $discussion, true);
     }
 
     //Add and Edit
-    private function discussionForum($request, $em, ForumDiscussion $discussion, $edit = false)
+    private function discussionForm(Request $request, ForumDiscussion $discussion, $edit = false)
     {
         /** @var ForumDiscussion $discussion */
         $form = $this->createForm(ForumDiscussionType::class, $discussion);
@@ -137,15 +107,15 @@ class ForumDiscussionController extends ForumController
             }
 
             //enlève script>
-            $message = htmlspecialchars_decode($discussion->getMessage(), ENT_HTML5); 
+            $message = htmlspecialchars_decode($discussion->getMessage(), ENT_HTML5);
             $message = str_replace('script>', '', $message);
             $discussion->setMessage($message);
 
-            $em->persist($discussion);
-            $em->flush();
+            $this->em->persist($discussion);
+            $this->em->flush();
 
             $this->addFlash('notice', 'Discussion ' . ($edit ? 'modifiée' : 'créer') . ' avec succès');
-            return $this->redirectToRoute('show_discussion', [
+            return $this->redirectToRoute('forum_show_discussion', [
                 'main_slug' => $discussion->getSubCategory()->getCategory()->getSlug(),
                 'sub_slug' => $discussion->getSubCategory()->getSlug(),
                 'discussion_slug' => $discussion->getSlug()
@@ -158,5 +128,27 @@ class ForumDiscussionController extends ForumController
             'forumSubCategory' => $discussion->getSubCategory(),
             'edit' => $edit
         ]);
+    }
+
+    /**
+     * @Route("/forum/discussion/{main_slug}/{sub_slug}/supprimer/{discussion_id}", name="forum_delete_discussion", methods={"GET"})
+     * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
+     * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
+     * @ParamConverter("discussion", options={"mapping": {"discussion_id": "id"}})
+     * @IsGranted("ROLE_USER")
+     */
+    public function deleteDiscussion(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion)
+    {
+        //Check access
+        $access_result = $this->checkAutorized($request, $category, $subCategory, $discussion);
+        if ($access_result !== null) return $access_result;
+        $this->checkOwnItem($discussion);
+
+        $this->em->remove($discussion);
+        $this->em->flush();
+
+        $this->addFlash('notice', 'Votre discussion a été supprimée !');
+
+        return $this->retirectToPreviousRoute(null, null, ForumController::$default_route);
     }
 }
