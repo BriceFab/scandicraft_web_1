@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum
+{% endblock %}
+{% block description %}Espace de discussions entre joueurs Minecraft de la communauté ScandiCraft !
+{% endblock %}
+
+{% block body %}
+	<section class="w-section section">
+
+		<div class="w-container forum-container" style="padding-top: 35px;">
+
+			{% if categories|length > 0 %}
+
+
+				{% for categorie in categories %}
+
+					<div class="list-group" style="padding-bottom: 35px;">
+						<div class="list-group-item list-group-item-action active">
+							{{ categorie.name }}
+						</div>
+						{% if categorie.forumSubCategories|length > 0 %}
+							{% for sub_categorie in categorie.forumSubCategories|filter((cat) => cat.active) %}
+								<a href="{{ path('forum_show_subcategories', { 'main_slug': categorie.slug, 'sub_slug': sub_categorie.slug }) }}" class="list-group-item list-group-item-action">
+									<div class="container" style="padding-left: 0px;">
+										<div class="row">
+											<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
+												<span class="forum-categorie-icon">
+													<i class="fas fa-comments"></i>
+												</span>
+											</div>
+											<div class="col-9 col-md-8" style="margin-top:5px;">
+												{% if sub_categorie.description|length > 0 %}
+													<div class="row justify-content-start forum-flex-mobile-right">
+														<div class="forum-categorie-title">{{ sub_categorie.name|truncate(mobileDetect('mobile') ? 40 : 80) }}</div>
+													</div>
+													<div class="row justify-content-start forum-flex-mobile-right">
+														<p style="font-size: 17px;">{{ sub_categorie.getSubTitle()|seo_format()|truncate(mobileDetect('mobile') ? 30 : 100) }}</p>
+													</div>
+												{% else %}
+													<div class="row d-flex justify-content-start forum-flex-mobile-right">
+														<div class="forum-categorie-title">{{ sub_categorie.name|truncate(mobileDetect('mobile') ? 40 : 80)}}</div>
+													</div>
+												{% endif %}
+											</div>
+											<div class="col-12 col-md-3 d-none d-sm-block">
+												<div class="row justify-content-end">
+													<p style="font-size: 15px;">Discussions: {{ sub_categorie.forumDiscussions|length }}</p>
+												</div>
+												<div class="row justify-content-end">
+													<p style="font-size: 15px;">Messages: {{ sub_categorie.countMessages() }}</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</a>
+							{% endfor %}
+						{% else %}
+							<p>Aucune sous-catégorie disponible</p>
+						{% endif %}
+					</div>
+
+				{% endfor %}
+			{% else %}
+				<p>Le forum est temporairement indisponible (aucunes catégories)</p>
+			{% endif %}
+		</div>
+
+	</section>
+{% endblock %}

@@ -101,9 +101,9 @@ class ForumDiscussionController extends ForumController
             //validate message length
             $formated_message = $this->sc_service->removeBalises($discussion->getMessage());
             if (strlen($formated_message) <= 25) {
-                return $this->retirectToPreviousRoute($request, 'Message trop court. Minimum 25 caractères', ForumController::$default_route);
-            } elseif (strlen($formated_message) > 300) {
-                return $this->retirectToPreviousRoute($request, 'Message trop long', ForumController::$default_route);
+                return $this->retirectToPreviousRoute($request, 'Message trop court. Minimum 25 caractères !', ForumController::$default_route);
+            } elseif (strlen($formated_message) > 25000) {
+                return $this->retirectToPreviousRoute($request, 'Message trop long. Maximum 25\'000 caractères !', ForumController::$default_route);
             }
 
             //enlève script>

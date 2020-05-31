@@ -40,9 +40,9 @@ class ForumAnswerController extends ForumController
         //length and balises
         $formated_message = $this->sc_service->removeBalises($answer->getMessage());
         if (strlen($formated_message) <= 25) {
-            return $this->retirectToPreviousRoute($request, 'Message trop court. Minimum 25 caractères', ForumController::$default_route);
-        } elseif (strlen($formated_message) > 300) {
-            return $this->retirectToPreviousRoute($request, 'Message trop long', ForumController::$default_route);
+            return $this->retirectToPreviousRoute($request, 'Message trop court. Minimum 25 caractères !', ForumController::$default_route);
+        } elseif (strlen($formated_message) > 25000) {
+            return $this->retirectToPreviousRoute($request, 'Message trop long. Maximum 25\'0000 caractères !', ForumController::$default_route);
         }
 
         $errors = $this->validator->validate($answer);
