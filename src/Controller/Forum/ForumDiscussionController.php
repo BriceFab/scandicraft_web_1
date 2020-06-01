@@ -114,7 +114,7 @@ class ForumDiscussionController extends ForumController
             $this->em->persist($discussion);
             $this->em->flush();
 
-            $this->addFlash('notice', 'Discussion ' . ($edit ? 'modifiée' : 'créer') . ' avec succès');
+            $this->addFlash('notice', 'Discussion ' . ($edit ? 'modifiée' : 'créée') . ' avec succès');
             return $this->redirectToRoute('forum_show_discussion', [
                 'main_slug' => $discussion->getSubCategory()->getCategory()->getSlug(),
                 'sub_slug' => $discussion->getSubCategory()->getSlug(),

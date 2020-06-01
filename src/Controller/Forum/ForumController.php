@@ -14,6 +14,7 @@ class ForumController extends BaseController
 
     protected function checkAutorized(Request $request, ForumCategory $category, ForumSubCategory $subCategory, $discussion)
     {
+        /** @var ForumDiscussion $discussion */
         if (!$category->getActive() || !$subCategory->getActive() || ($discussion != null && $discussion->getArchive())) {
             return $this->retirectToPreviousRoute($request, 'Forum: cette discussion n\'est plus active', ForumController::$default_route);
         }
@@ -22,7 +23,7 @@ class ForumController extends BaseController
             return $this->retirectToPreviousRoute($request, 'Forum: Vous ne pouvez pas écrire dans cette catégorie', ForumController::$default_route);
         }
 
-        if ($discussion != null && $subCategory->getAcceptStaffOnly() && $discussion->getStaffOnly()) {
+        if ($discussion != null && $subCategory->getAcceptStaffOnly() && $discussion->getStaffOnly() && $this->getUser() != $discussion->getCreatedBy()) {
             $this->denyAccessUnlessGranted('ROLE_STAFF');
         }
 

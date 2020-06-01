@@ -44,8 +44,8 @@
 				{% endif %}
 
 				{# foreach discussion #}
-				{% set pin_discus = forumSubCategory.forumDiscussions|filter(disc => (disc.getStaffOnly() ? is_granted('ROLE_STAFF') : true) and disc.pin) %}
-				{% set not_pin_discus = forumSubCategory.forumDiscussions|filter(disc => (disc.getStaffOnly() ? is_granted('ROLE_STAFF') : true) and not disc.pin) %}
+				{% set pin_discus = forumSubCategory.forumDiscussions|filter(disc => (disc.getStaffOnly() ? is_granted('ROLE_STAFF') or app.user == disc.createdBy : true) and disc.pin) %}
+				{% set not_pin_discus = forumSubCategory.forumDiscussions|filter(disc => (disc.getStaffOnly() ? is_granted('ROLE_STAFF') or app.user == disc.createdBy : true) and not disc.pin) %}
 
 				{# pin discussions #}
 				{% if pin_discus|length > 0 %}

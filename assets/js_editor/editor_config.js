@@ -18,7 +18,7 @@ export default {
         charCounter: true,
         charCounterType: 'char',
         charCounterLabel: "Caractères: ",
-        maxCharCount: getConfig.maxCharCount || 2000,
+        maxCharCount: getConfig.maxCharCount || 25000,
         font: [
             "Arial",
             "Open Sans",
