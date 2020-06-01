@@ -80,7 +80,7 @@ class ForumAnswerController extends ForumController
         $this->em->persist($answer);
         $this->em->flush();
 
-        $this->addFlash('notice', 'Message ajoutée avec succès');
+        $this->addFlash('notice', 'Message ajouté avec succès');
 
         return $this->redirectToRoute('forum_show_discussion', [
             'main_slug' => $category->getSlug(),
