@@ -40,14 +40,14 @@
 									<p style="font-size: 17px;">
 										<i class="far fa-clock"></i>
 										{{ 'Publié le ' }}
-										{{ discussion.createdAt|date('d/m/Y') }}
+										{{ discussion.createdAt|date('d/m/Y à H:i') }}
 									</p>
 								</div>
 								<div class="row d-flex justify-content-{{ mobileDetect() ? 'center' : 'start' }}">
 									<p style="font-size: 17px;">
 										<i class="far fa-calendar-check"></i>
-										{{ 'Inscrit le ' }}
-										{{ discussion.createdBy.createdAt|date('m/Y') }}
+										{{ 'Inscrit en ' }}
+										{{ discussion.createdBy.createdAt|format_datetime(pattern="MMMM Y", locale='fr') }}
 									</p>
 								</div>
 							</div>
@@ -90,7 +90,7 @@
 								<div class="w-clearfix comment-by">
 									<h5 class="name">{{ answer.createdBy.username }}</h5>
 									<div class="date">Le
-										{{ answer.createdAt|date("d/m/Y à h:i") }}
+										{{ answer.createdAt|date("d/m/Y à H:i") }}
 										{% if app.user.id is defined and answer.createdBy.getId() == app.user.id %}
 											<a href="{{ path('forum_delete_answer', {'answer_id': answer.id, 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="badge badge-pill badge-danger" style="padding:10px;">Supprimer</a>
 											<a href="{{ path('forum_edit_answer', {'answer_id': answer.id, 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="badge badge-pill badge-secondary" style="padding:10px;">Modifier</a>
