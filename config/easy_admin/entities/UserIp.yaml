@@ -4,6 +4,7 @@ easy_admin:
       class: App\Entity\UserIp
       disabled_actions: ["new", "edit", "show"]
       permissions:
+        list: ["ROLE_MANAGEUR"]
         delete: ["ROLE_ADMIN"]
         edit: ["ROLE_ADMIN"]
         show: ["ROLE_ADMIN"]

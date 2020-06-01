@@ -3,6 +3,7 @@ easy_admin:
     menu:
       - label: "Utilisateurs"
         icon: "users-cog"
+        permission: "ROLE_MANAGEUR"
         children:
           [
             { entity: "User", label: "Joueurs" },
@@ -24,36 +25,67 @@ easy_admin:
         permission: "ROLE_STAFF"
         children:
           [
-            { entity: "ForumCategory", label: "Categories" },
-            { entity: "ForumSubCategory", label: "Sous-categories" },
+            {
+              entity: "ForumCategory",
+              label: "Categories",
+              permission: "ROLE_MANAGEUR",
+            },
+            {
+              entity: "ForumSubCategory",
+              label: "Sous-categories",
+              permission: "ROLE_MANAGEUR",
+            },
             { entity: "ForumDiscussion", label: "Discussions" },
             { entity: "ForumDiscussionAnswer", label: "Réponses" },
           ]
       - label: "Sondages"
         icon: "poll-h"
+        permission: "ROLE_STAFF"
         children:
           [
-            { entity: "Survey", label: "Sondages" },
-            { entity: "SurveyAnswers", label: "Réponses" },
+            {
+              entity: "Survey",
+              label: "Sondages",
+              permission: "ROLE_MANAGEUR",
+            },
+            {
+              entity: "SurveyAnswers",
+              label: "Réponses",
+              permission: "ROLE_MANAGEUR",
+            },
             { entity: "SurveyComments", label: "Commentaires" },
-            { entity: "SurveyAnswerList", label: "Listes réponses" },
+            {
+              entity: "SurveyAnswerList",
+              label: "Listes réponses",
+              permission: "ROLE_MANAGEUR",
+            },
           ]
       - label: "Équipe"
         icon: "user-tie"
+        permission: "ROLE_MANAGEUR"
         children:
           [
             { entity: "Staff", label: "Staff", permission: "ROLE_ADMIN" },
-            { entity: "Thanks", label: "Remerciements" },
+            {
+              entity: "Thanks",
+              label: "Remerciements",
+              permission: "ROLE_MANAGEUR",
+            },
             {
               entity: "StaffCategory",
               label: "Staff catégories",
               permission: "ROLE_ADMIN",
             },
-            { entity: "ThanksCategory", label: "Remerciements catégories" },
+            {
+              entity: "ThanksCategory",
+              label: "Remerciements catégories",
+              permission: "ROLE_MANAGEUR",
+            },
           ]
       - label: "Aide"
         icon: "hands-helping"
-        children: [{ entity: "FAQ", label: "FAQ" }]
+        permission: "ROLE_STAFF"
+        children: [{ entity: "FAQ", label: "FAQ", permission: "ROLE_STAFF" }]
       - label: "Réseaux sociaux"
         icon: "network-wired"
         permission: "ROLE_ADMIN"

@@ -6,12 +6,14 @@ easy_admin:
       permissions:
         delete: ["ROLE_ADMIN"]
         new: ["ROLE_ADMIN"]
-        edit: ["ROLE_ADMIN"]
-        show: ["ROLE_ADMIN"]
+        edit: ["ROLE_MANAGEUR"]
+        show: ["ROLE_STAFF"]
+        list: ["ROLE_STAFF"]
       list:
         title: "Liste des commentaires des sondages"
         actions:
           [
+            { name: "show", label: "Détail", icon: "search" },
             { name: "edit", label: "Modifier", icon: "edit" },
             { name: "delete", label: "Supprimer", icon: "trash" },
           ]
@@ -20,5 +22,14 @@ easy_admin:
             { property: "survey", label: "Sondage" },
             { property: "user", label: "Utilisateur" },
             { property: "comment", label: "Commentaire" },
+            { property: "commentAt", label: "Commenté le" },
+          ]
+      show:
+        title: "Détail du commentaire"
+        fields:
+          [
+            { property: "survey", label: "Sondage" },
+            { property: "user", label: "Utilisateur" },
+            { property: "comment", label: "Commentaire", type: "raw" },
             { property: "commentAt", label: "Commenté le" },
           ]

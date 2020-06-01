@@ -3,11 +3,11 @@ easy_admin:
     ForumCategory:
       class: App\Entity\ForumCategory
       permissions:
-        list: ["ROLE_STAFF"]
+        list: ["ROLE_MANAGEUR"]
         edit: ["ROLE_ADMIN"]
         new: ["ROLE_ADMIN"]
         delete: ["ROLE_ADMIN"]
-        show: ["ROLE_ADMIN"]
+        show: ["ROLE_STAFF"]
       list:
         title: "Liste des catégories principales"
         actions:

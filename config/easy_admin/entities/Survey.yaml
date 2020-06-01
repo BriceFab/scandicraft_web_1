@@ -3,6 +3,10 @@ easy_admin:
     Survey:
       class: App\Entity\Survey
       permissions:
+        list: ["ROLE_MANAGEUR"]
+        edit: ["ROLE_MANAGEUR"]
+        new: ["ROLE_MANAGEUR"]
+        show: ["ROLE_STAFF"]
         delete: ["ROLE_ADMIN"]
       list:
         title: "Liste des sondages"
@@ -52,7 +56,7 @@ easy_admin:
           [
             { property: "title", label: "Titre" },
             { property: "slug", label: "Slug" },
-            { property: "description", label: "Description" },
+            { property: "description", label: "Description", type: "raw" },
             {
               property: "answer_delay",
               label: "Temps de réponses maximale (en heures)",

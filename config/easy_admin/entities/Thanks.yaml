@@ -3,7 +3,10 @@ easy_admin:
     Thanks:
       class: App\Entity\Thanks
       permissions:
-        show: ["ROLE_ADMIN"]
+        list: ["ROLE_MANAGEUR"]
+        edit: ["ROLE_MANAGEUR"]
+        new: ["ROLE_MODERATEUR"]
+        show: ["ROLE_MANAGEUR"]
         delete: ["ROLE_ADMIN"]
       list:
         title: "Liste des remerciements"

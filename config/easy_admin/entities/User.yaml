@@ -4,6 +4,8 @@ easy_admin:
       class: App\Entity\User
       disabled_actions: ["new"]
       permissions:
+        list: ["ROLE_MANAGEUR"]
+        show: ["ROLE_MANAGEUR"]
         delete: ["ROLE_ADMIN"]
         edit: ["ROLE_ADMIN"]
       list:
@@ -78,8 +80,8 @@ easy_admin:
                       "Rôle utilisateur": "ROLE_USER",
                       "Launcher": "ROLE_LAUNCHER",
                       "Panel admin": "ROLE_PANEL_ADMIN",
-                      "Helper": "ROLE_HELPER",
-                      "Manager": "ROLE_MANAGER",
+                      "Helper": "ROLE_HELPEUR",
+                      "Manager": "ROLE_MANAGEUR",
                       "Modérateur": "ROLE_MODERATEUR",
                       "Administrateur": "ROLE_ADMIN",
                     },
