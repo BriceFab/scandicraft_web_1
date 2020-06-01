@@ -7,7 +7,8 @@ easy_admin:
         delete: ["ROLE_ADMIN"]
         new: ["ROLE_ADMIN"]
         edit: ["ROLE_ADMIN"]
-        show: ["ROLE_ADMIN"]
+        show: ["ROLE_STAFF"]
+        list: ["ROLE_MANAGEUR"]
       list:
         title: "Liste des réponses aux sondages"
         actions:

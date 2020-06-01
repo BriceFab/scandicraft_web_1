@@ -3,11 +3,11 @@ easy_admin:
     ForumSubCategory:
       class: App\Entity\ForumSubCategory
       permissions:
-        list: ["ROLE_STAFF"]
+        list: ["ROLE_MANAGEUR"]
         edit: ["ROLE_ADMIN"]
         new: ["ROLE_ADMIN"]
         delete: ["ROLE_ADMIN"]
-        show: ["ROLE_ADMIN"]
+        show: ["ROLE_STAFF"]
       list:
         title: "Liste des sous-catégories"
         actions:

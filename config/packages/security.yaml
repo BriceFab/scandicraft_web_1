@@ -54,7 +54,7 @@ security:
             # switch_user: true
 
     role_hierarchy:
-        ROLE_USER: [] #ADD: ROLE_LAUNCHER
+        ROLE_USER: [] #ADD : ROLE_LAUNCHER
         ROLE_STAFF: [ROLE_USER, ROLE_LAUNCHER, ROLE_PANEL_ADMIN]
         ROLE_HELPEUR: [ROLE_STAFF]
         ROLE_MANAGEUR: [ROLE_HELPEUR]

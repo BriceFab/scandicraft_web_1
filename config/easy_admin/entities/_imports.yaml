@@ -1,4 +1,6 @@
 imports:
+- { resource: ForumDiscussion.yaml }
+- { resource: ForumCategory.yaml }
 - { resource: User.yaml }
 - { resource: DevProgression.yaml }
 - { resource: Survey.yaml }
@@ -12,10 +14,8 @@ imports:
 - { resource: Staff.yaml }
 - { resource: StaffCategory.yaml }
 - { resource: FAQ.yaml }
-- { resource: ForumCategory.yaml }
 - { resource: ForumSubCategory.yaml }
 - { resource: ActionLog.yaml }
 - { resource: ExceptionLog.yaml }
 - { resource: UserIp.yaml }
-- { resource: ForumDiscussion.yaml }
 - { resource: ForumDiscussionAnswer.yaml }

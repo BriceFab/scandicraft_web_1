@@ -3,6 +3,9 @@ easy_admin:
     SurveyAnswerList:
       class: App\Entity\SurveyAnswerList
       permissions:
+        list: ["ROLE_MANAGEUR"]
+        edit: ["ROLE_MANAGEUR"]
+        new: ["ROLE_MODERATEUR"]
         delete: ["ROLE_ADMIN"]
         show: ["ROLE_ADMIN"]
       list:
