@@ -43,7 +43,7 @@ class ForumDiscussionStatusRepository extends ServiceEntityRepository
 
         $id_list = [];
         /** @var ForumDiscussion $discussion_staff_only */
-        if ($discussion_staff_only->getSubCategory()->getAcceptStaffOnly() && $discussion_staff_only->getStaffOnly()) {
+        if ($discussion_staff_only->getSubCategory()->getAcceptStaffOnly()) {
             $id_list = $this->accept_staff_only_ids;
         } else {
             $id_list = $this->normal_discussion_ids;

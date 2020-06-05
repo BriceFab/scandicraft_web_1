@@ -187,7 +187,7 @@ class ForumDiscussionController extends ForumController
         if ($access_result !== null) return $access_result;
         $this->checkOwnItem($discussion);
 
-        if ($discussion->getStaffOnly() || $discussion->getStatus()->getId() != ForumDiscussionStatusRepository::OUVERT_ID) {
+        if ($discussion->getSubCategory()->getAcceptStaffOnly() || $discussion->getStatus()->getId() != ForumDiscussionStatusRepository::OUVERT_ID) {
             throw new AccessDeniedException("Vous ne pouvez pas fermer cette discussion");
         }
 
