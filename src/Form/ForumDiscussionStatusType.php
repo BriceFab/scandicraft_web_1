@@ -21,6 +21,7 @@ class ForumDiscussionStatusType extends AbstractType
                 /** @var ForumDiscussion $entity */
                 $entity = $event->getData();
                 $form = $event->getForm();
+                $parent_form = $event->getForm()->getParent();
                 $forumDiscussion = $form->getParent()->getData();
 
                 $query_builder = null;
@@ -30,12 +31,15 @@ class ForumDiscussionStatusType extends AbstractType
                     };
                 }
 
-                $form->add('status', EntityType::class, [
+                $parent_form->add('status', EntityType::class, [
                     'label' => false,
                     'required' => true, //false
                     'class' => ForumDiscussionStatus::class,
                     'query_builder' => $query_builder,
-                    'help' => 'Attention, si vous fermer la discussion, vous ne pourrez plus la réouvrir.'
+                    'attr' => [
+                        'style' => 'margin-left:55%;'
+                    ]
+                    // 'help' => 'Attention, si vous fermer la discussion, vous ne pourrez plus la réouvrir.'
                 ]);
             });
     }

@@ -15,9 +15,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ForumDiscussionRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $status_repo;
+
+    public function __construct(ManagerRegistry $registry, ForumDiscussionStatusRepository $status_repo)
     {
         parent::__construct($registry, ForumDiscussion::class);
+        $this->status_repo = $status_repo;
     }
 
     public function findAllFromCategory(ForumSubCategory $sub_cat)
@@ -27,5 +30,10 @@ class ForumDiscussionRepository extends ServiceEntityRepository
             ->setParameter('sub_cat_id', $sub_cat->getId())
             ->getQuery()
             ->execute();
+    }
+
+    public function createStatusQueryBuilder($discussion_staff_only)
+    {
+        return $this->status_repo->createStatusQueryBuilder($discussion_staff_only);
     }
 }

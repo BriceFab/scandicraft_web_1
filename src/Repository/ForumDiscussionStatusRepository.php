@@ -37,25 +37,6 @@ class ForumDiscussionStatusRepository extends ServiceEntityRepository
         ];
     }
 
-    public function findOuvertFromId()
-    {
-        return $this->findOneFromFromId(ForumDiscussionStatusRepository::OUVERT_ID);
-    }
-
-    public function findEnAttenteFromId()
-    {
-        return $this->findOneFromFromId(ForumDiscussionStatusRepository::EN_ATTENTE_ID);
-    }
-
-    public function findOneFromFromId($id)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
     public function createStatusQueryBuilder($discussion_staff_only)
     {
         $qb = $this->createQueryBuilder('s');
