@@ -68,6 +68,11 @@ class ForumDiscussion
      */
     private $forumDiscussionAnswers;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ForumDiscussionStatus", inversedBy="forumDiscussions")
+     */
+    private $status;
+
     public function __construct()
     {
         $this->forumDiscussionAnswers = new ArrayCollection();
@@ -227,5 +232,17 @@ class ForumDiscussion
     public function __toString()
     {
         return $this->getTitle();
+    }
+
+    public function getStatus(): ?ForumDiscussionStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?ForumDiscussionStatus $status): self
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }

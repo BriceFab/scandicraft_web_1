@@ -58,6 +58,10 @@ class ForumDiscussionType extends AbstractType
                         'required' => false,
                     ]);
                 }
+
+                if ($entity->getId() != null && !$entity->getSubCategory()->getAcceptStaffOnly()) { //= edit mode
+                    $form->add('status', ForumDiscussionStatusType::class);
+                }
             });
     }
 

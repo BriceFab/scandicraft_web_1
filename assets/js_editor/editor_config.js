@@ -6,7 +6,8 @@ export default {
     lang: "fr",
     name: "scandicraft-editor",
     // placeholder: "Votre message",
-    autoFocus: true,
+    // autoFocus: true,
+    autoFocus: false,
     setDefaultStyle: "font-family: 'Open Sans', sans-serif; font-size: 16px;",
     setOptions: {
         addTagsWhitelist: "<script>",

@@ -2,8 +2,10 @@
 
 namespace App\Service;
 
+use App\Entity\ForumDiscussion;
 use App\Entity\MySocialmedia;
 use App\Entity\Survey;
+use App\Repository\ForumDiscussionStatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 
@@ -64,9 +66,35 @@ class ScandiCraftService
         return $slug;
     }
 
-    public function removeBalises($string) {
+    public function removeBalises($string)
+    {
         $string = htmlspecialchars_decode($string, ENT_HTML5);       //encode en caractères normaux
         $string = preg_replace("/<[^>]*>/", "", $string); //enlève les balises
         return $string;
+    }
+
+    /*
+        Check si l'utilisateur peut effectuer une action en fonction du status de la discussion
+    */
+    public function checkDiscussionActionFromStatus(ForumDiscussion $discussion)
+    {
+        if ($discussion->getStatus() == null) {
+            return true;
+        }
+
+        switch ($discussion->getStatus()->getId()) {
+            case ForumDiscussionStatusRepository::OUVERT_ID: //ouvert
+                return true;
+            case ForumDiscussionStatusRepository::FERMER_ID: //fermer
+                return false;
+            case ForumDiscussionStatusRepository::ACCEPTER_ID: //accepter
+                return false;
+            case ForumDiscussionStatusRepository::REFUSER_ID: //refuser
+                return false;
+            case ForumDiscussionStatusRepository::EN_ATTENTE_ID: //en attente
+                return true;
+            default:
+                return true;
+        }
     }
 }

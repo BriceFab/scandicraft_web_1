@@ -6,28 +6,32 @@ use App\Entity\ForumCategory;
 use App\Entity\ForumDiscussion;
 use App\Entity\ForumSubCategory;
 use App\Form\ForumDiscussionType;
+use App\Repository\ForumDiscussionStatusRepository;
 use App\Service\ScandiCraftService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ForumDiscussionController extends ForumController
 {
     private $sc_service;
     private $em;
+    private $status_repo;
 
-    public function __construct(ScandiCraftService $sc_service, EntityManagerInterface $em)
+    public function __construct(ScandiCraftService $sc_service, EntityManagerInterface $em, ForumDiscussionStatusRepository $status_repo)
     {
         $this->sc_service = $sc_service;
         $this->em = $em;
+        $this->status_repo = $status_repo;
     }
 
     private function checkOwnItem(ForumDiscussion $discussion)
     {
         if ($discussion->getCreatedBy()->getId() !== $this->getUser()->getId()) {
-            $this->createAccessDeniedException("Vous n'etes pas autorisé à effecter cette action");
+            throw new AccessDeniedException("Vous n'etes pas autorisé à effecter cette action");
         }
     }
 
@@ -84,6 +88,14 @@ class ForumDiscussionController extends ForumController
         $access_result = $this->checkAutorized($request, $category, $subCategory, $discussion);
         if ($access_result !== null) return $access_result;
         $this->checkOwnItem($discussion);
+        // $this->checkDiscussionActionFromStatus($discussion);
+
+        //Check access change status
+        if ($discussion->getStatus() && $discussion->getSubCategory()->getAcceptStaffOnly() && $discussion->getStaffOnly()) {
+            if (!in_array($discussion->getStatus(), [$this->status_repo->findEnAttenteFromId()])) { // && $this->denyAccessUnlessGranted('ROLE_STAFF')
+                throw new AccessDeniedException("Vous ne pouvez pas changer le status de cette discussion");
+            }
+        }
 
         return $this->discussionForm($request, $discussion, true);
     }
@@ -110,6 +122,16 @@ class ForumDiscussionController extends ForumController
             $message = htmlspecialchars_decode($discussion->getMessage(), ENT_HTML5);
             $message = str_replace('script>', '', $message);
             $discussion->setMessage($message);
+
+            //status
+            if (!$edit) {
+                if ($discussion->getSubCategory()->getAcceptStaffOnly()) {
+                    $discussion->setStatus($this->status_repo->findEnAttenteFromId());  //en attente
+                } else {
+                    $discussion->setStatus($this->status_repo->findOuvertFromId());  //ouvert
+                }
+            }
+            $this->checkDiscussionActionFromStatus($discussion);    //check status
 
             $this->em->persist($discussion);
             $this->em->flush();

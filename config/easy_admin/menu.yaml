@@ -37,6 +37,11 @@ easy_admin:
             },
             { entity: "ForumDiscussion", label: "Discussions" },
             { entity: "ForumDiscussionAnswer", label: "Réponses" },
+            {
+              entity: "ForumDiscussionStatus",
+              label: "Status",
+              permission: "ROLE_MANAGEUR",
+            },
           ]
       - label: "Sondages"
         icon: "poll-h"
