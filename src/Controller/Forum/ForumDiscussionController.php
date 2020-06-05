@@ -88,11 +88,11 @@ class ForumDiscussionController extends ForumController
         $access_result = $this->checkAutorized($request, $category, $subCategory, $discussion);
         if ($access_result !== null) return $access_result;
         $this->checkOwnItem($discussion);
-        // $this->checkDiscussionActionFromStatus($discussion);
+        $this->checkDiscussionActionFromStatus($discussion);
 
         //Check access change status
         if ($discussion->getStatus() && $discussion->getSubCategory()->getAcceptStaffOnly() && $discussion->getStaffOnly()) {
-            if (!in_array($discussion->getStatus(), [$this->status_repo->findEnAttenteFromId()])) { // && $this->denyAccessUnlessGranted('ROLE_STAFF')
+            if (!in_array($discussion->getStatus(), [$this->status_repo->find(ForumDiscussionStatusRepository::EN_ATTENTE_ID)])) { // && $this->denyAccessUnlessGranted('ROLE_STAFF')
                 throw new AccessDeniedException("Vous ne pouvez pas changer le status de cette discussion");
             }
         }
@@ -126,12 +126,11 @@ class ForumDiscussionController extends ForumController
             //status
             if (!$edit) {
                 if ($discussion->getSubCategory()->getAcceptStaffOnly()) {
-                    $discussion->setStatus($this->status_repo->findEnAttenteFromId());  //en attente
+                    $discussion->setStatus($this->status_repo->find(ForumDiscussionStatusRepository::EN_ATTENTE_ID));  //en attente
                 } else {
-                    $discussion->setStatus($this->status_repo->findOuvertFromId());  //ouvert
+                    $discussion->setStatus($this->status_repo->find(ForumDiscussionStatusRepository::OUVERT_ID));  //ouvert
                 }
             }
-            $this->checkDiscussionActionFromStatus($discussion);    //check status
 
             $this->em->persist($discussion);
             $this->em->flush();
@@ -170,6 +169,33 @@ class ForumDiscussionController extends ForumController
         $this->em->flush();
 
         $this->addFlash('notice', 'Votre discussion a été supprimée !');
+
+        return $this->retirectToPreviousRoute(null, null, ForumController::$default_route);
+    }
+
+    /**
+     * @Route("/forum/discussion/{main_slug}/{sub_slug}/fermer/{discussion_id}", name="forum_clore_discussion", methods={"GET"})
+     * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
+     * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
+     * @ParamConverter("discussion", options={"mapping": {"discussion_id": "id"}})
+     * @IsGranted("ROLE_USER")
+     */
+    public function cloreDiscussion(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion)
+    {
+        //Check access
+        $access_result = $this->checkAutorized($request, $category, $subCategory, $discussion);
+        if ($access_result !== null) return $access_result;
+        $this->checkOwnItem($discussion);
+
+        if ($discussion->getStaffOnly() || $discussion->getStatus()->getId() != ForumDiscussionStatusRepository::OUVERT_ID) {
+            throw new AccessDeniedException("Vous ne pouvez pas fermer cette discussion");
+        }
+
+        $discussion->setStatus($this->status_repo->find(ForumDiscussionStatusRepository::FERMER_ID));
+        $this->em->persist($discussion);
+        $this->em->flush();
+
+        $this->addFlash('notice', 'Votre discussion a été fermée !');
 
         return $this->retirectToPreviousRoute(null, null, ForumController::$default_route);
     }

@@ -40,13 +40,6 @@ class ForumController extends BaseController
             return;
         }
 
-        dd($discussion->getStatus()->getId());
-
-        //les utilisateurs peuvent seulement changer le status en ouvert/fermer
-        if ($discussion->getStatus()->getId() != ForumDiscussionStatusRepository::OUVERT_ID) {
-            throw new AccessDeniedException("Vous ne pouvez pas changer le status de cette discussion");
-        }
-
         switch ($discussion->getStatus()->getId()) {
             case ForumDiscussionStatusRepository::OUVERT_ID: //ouvert
                 break;

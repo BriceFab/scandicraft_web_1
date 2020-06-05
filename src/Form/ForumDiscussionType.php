@@ -59,9 +59,9 @@ class ForumDiscussionType extends AbstractType
                     ]);
                 }
 
-                if ($entity->getId() != null && !$entity->getSubCategory()->getAcceptStaffOnly()) { //= edit mode
-                    $form->add('status', ForumDiscussionStatusType::class);
-                }
+                // if ($entity->getId() != null && !$entity->getSubCategory()->getAcceptStaffOnly()) { //= edit mode
+                //     $form->add('status', ForumDiscussionStatusType::class);
+                // }
             });
     }
 
