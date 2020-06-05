@@ -29,6 +29,7 @@ easy_admin:
             { property: "pin", label: "Épinglée ?" },
             { property: "createdBy", label: "Créé par" },
             { property: "createdAt", label: "Créé le" },
+            { property: "status", label: "Status" },
             { property: "forumDiscussionAnswers", label: "Réponses" },
           ]
       form:
@@ -39,6 +40,11 @@ easy_admin:
             { property: "message", label: "Message", type: "fos_ckeditor" },
             { property: "sub_category", label: "Catégorie" },
             { property: "pin", label: "Épinglée ?" },
+            {
+              property: "status",
+              label: "Status",
+              type: 'App\Form\ForumDiscussionStatusType',
+            },
           ]
       show:
         title: "Détail"
@@ -55,5 +61,6 @@ easy_admin:
             { property: "pin", label: "Épinglée ?" },
             { property: "createdBy", label: "Créé par" },
             { property: "createdAt", label: "Créé le" },
+            { property: "status", label: "Status" },
             { property: "countAnswers", label: "Réponses" },
           ]

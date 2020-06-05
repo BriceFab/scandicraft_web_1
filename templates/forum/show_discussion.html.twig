@@ -18,6 +18,10 @@
 									{{ ' | ' }}
 								{% endif %}
 								{{ discussion.title }}
+								{% if discussion.status %}
+									{{ ' | ' }}
+									<span class="badge badge-{{ discussion.status.color ? discussion.status.color : 'secondary' }}">{{ discussion.status.status }}</span>
+								{% endif %}
 							</div>
 						</div>
 					</div>
@@ -62,7 +66,7 @@
 						</div>
 					</div>
 				</div>
-				{% if app.user and discussion.getCreatedBy().getId() == app.user.id %}
+				{% if app.user and discussion.getCreatedBy().getId() == app.user.id and scandicraft_service.checkDiscussionActionFromStatus(discussion) %}
 					<div class="row">
 						<div class="col-12 d-flex align-items-end justify-content-end">
 							<a href="{{ path('forum_delete_discussion', { 'discussion_id': discussion.id, 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug }) }}" class="badge badge-pill badge-danger" style="padding:10px;margin:5px;">Supprimer</a>
@@ -91,7 +95,7 @@
 									<h5 class="name">{{ answer.createdBy.username }}</h5>
 									<div class="date">Le
 										{{ answer.createdAt|date("d/m/Y à H:i") }}
-										{% if app.user.id is defined and answer.createdBy.getId() == app.user.id %}
+										{% if app.user.id is defined and answer.createdBy.getId() == app.user.id and scandicraft_service.checkDiscussionActionFromStatus(discussion) %}
 											<a href="{{ path('forum_delete_answer', {'answer_id': answer.id, 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="badge badge-pill badge-danger" style="padding:10px;">Supprimer</a>
 											<a href="{{ path('forum_edit_answer', {'answer_id': answer.id, 'main_slug': forumCategory.slug, 'sub_slug': forumSubCategory.slug, 'discussion_slug': discussion.slug }) }}" class="badge badge-pill badge-secondary" style="padding:10px;">Modifier</a>
 										{% endif %}
@@ -113,12 +117,16 @@
 			{# Ajouter réponse #}
 			<div>
 				{% if app.user %}
-					<div class="divider" style="margin-top:15px;"></div>
-					{% include 'forum/forms/new_answer.html.twig' with {
-						'category': forumCategory,
-						'subCategory': forumSubCategory,
-						'discussion': discussion
-    				} %}
+					{% if scandicraft_service.checkDiscussionActionFromStatus(discussion) %}
+						<div class="divider" style="margin-top:15px;"></div>
+						{% include 'forum/forms/new_answer.html.twig' with {
+							'category': forumCategory,
+							'subCategory': forumSubCategory,
+							'discussion': discussion
+						} %}
+					{% else %}
+						<div class="scandicraft_error" style="margin-top:15px;">Cette discussion n'accepte désormais plus de commentaires.</div>
+					{% endif %}
 				{% else %}
 					<div class="scandicraft_error" style="margin-top:15px;">Connectez-vous pour pouvoir commenter.</div>
 				{% endif %}

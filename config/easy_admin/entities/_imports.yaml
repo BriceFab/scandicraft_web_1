@@ -19,3 +19,4 @@ imports:
 - { resource: ExceptionLog.yaml }
 - { resource: UserIp.yaml }
 - { resource: ForumDiscussionAnswer.yaml }
+- { resource: ForumDiscussionStatus.yaml }

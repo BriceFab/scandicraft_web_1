@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ForumAnswerController extends ForumController
@@ -31,7 +32,7 @@ class ForumAnswerController extends ForumController
     private function checkOwnItem(ForumDiscussionAnswer $answer)
     {
         if ($answer->getCreatedBy()->getId() !== $this->getUser()->getId()) {
-            $this->createAccessDeniedException("Vous n'etes pas autorisé à effecter cette action");
+            throw new AccessDeniedException("Vous n'êtes pas autorisé à effecter cette action");
         }
     }
 
@@ -68,6 +69,7 @@ class ForumAnswerController extends ForumController
         //Check access
         $access_result = $this->checkAutorized($request, $category, $subCategory, $discussion);
         if ($access_result !== null) return $access_result;
+        $this->checkDiscussionActionFromStatus($discussion);
 
         $answer = new ForumDiscussionAnswer();
         $answer->setDiscussion($discussion);
@@ -103,6 +105,7 @@ class ForumAnswerController extends ForumController
         $access_result = $this->checkAutorized($request, $category, $subCategory, $discussion);
         if ($access_result !== null) return $access_result;
         $this->checkOwnItem($answer);
+        $this->checkDiscussionActionFromStatus($discussion);
 
         /** @var ForumDiscussionAnswer $answer */
         $form = $this->createForm(ForumDiscussionAnswerType::class, $answer);
@@ -148,6 +151,7 @@ class ForumAnswerController extends ForumController
         $access_result = $this->checkAutorized($request, $category, $subCategory, $discussion);
         if ($access_result !== null) return $access_result;
         $this->checkOwnItem($answer);
+        $this->checkDiscussionActionFromStatus($discussion);
 
         $this->em->remove($answer);
         $this->em->flush();
