@@ -17,7 +17,6 @@ use Symfony\Component\Yaml\Yaml;
 /*
 https://symfony.com/blog/new-in-symfony-3-2-file-controller-helper
 */
-
 class LauncherController extends AbstractController
 {
     private const unauthorized_message = "ScandiCraft est en maintenance. Et vous ne faites pas parti des joueurs autorisés à lancer le launcher !";
