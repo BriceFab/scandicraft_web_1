@@ -115,6 +115,11 @@ class User implements UserInterface
      */
     private $forumDiscussionAnswers;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $uuid;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -599,6 +604,18 @@ class User implements UserInterface
                 $forumDiscussionAnswer->setCreatedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?string $uuid): self
+    {
+        $this->uuid = $uuid;
 
         return $this;
     }
