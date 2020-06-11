@@ -2,19 +2,11 @@
 
 namespace App\Controller;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    private $em;
-
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
-    }
-
     /**
      * @Route("/", name="accueil")
      */
@@ -25,6 +17,8 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/jouer", name="jouer")
+     * @Route("/play")
+     * @Route("/join")
     */
     public function jouer() {
         return $this->render('jouer/index.html.twig');

@@ -20,6 +20,7 @@ class HelpController extends AbstractController
 
     /**
      * @Route("/wiki-et-nouveautes", name="wiki")
+     * @Route("/wiki", name="simple_wiki")
      */
     public function showWiki()
     {

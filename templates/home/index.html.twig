@@ -78,7 +78,9 @@
 					</div>
 					<font>
 						<div class="w-col w-col-4 w-col-stack alg-right">
-							<a class="button btn-large" href="{{ path('jouer') }}"><b>Joue avec nous</b></a>
+							<a class="button btn-large" href="{{ path('jouer') }}">
+								<b>Joue avec nous</b>
+							</a>
 						</div>
 					</font>
 				</div>
@@ -174,6 +176,25 @@
 				</div>
 			</div>
 		</section>
+
+		{# Temp accueil infos #}
+		<a style="position:absolute;top:122px;left:0px;z-index:10;width:100%;" href="{{ path('forum') }}">
+
+			<div class="w-row div-spc">
+				<div class="w-col w-col-4 w-col-stack" style="max-width:500px;">
+					<div class="w-clearfix square-box-wrp">
+						<div class="square-ico" style="height:90px;font-size:30px;line-height:94px;width:40px;">
+							<i class="fa fa-flag"></i>
+						</div>
+						<div class="square-content" style="max-height:90px;min-height:90px;">
+							<h5>Candidature</h5>
+							<p class="p-square" style="height:60px">Nous recrutons depuis le <b>forum</b> !</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</a>
 
 	</section>
 
