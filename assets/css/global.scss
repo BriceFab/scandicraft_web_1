@@ -3,12 +3,14 @@ $mainColor: #b30000; //violet: #781f6f
 $secondaryColor: #333333; //gray
 $thirdColor: #f3f2f5; //light gray
 $fontColor: #717171; //gray
+$footerColor: #9d9d9d;
 
 $menuFontSize: 16px;
 $menuTopFontSize: 14px;
 $subMenuFontSize: 16px;
 $download_system_size: 120px;
 $copyrightFontSize: 17px;
+$footerFontSize: 17px;
 $pFontSize: 20px;
 
 //### Imports
@@ -509,4 +511,21 @@ $forum_discussion_top: 30px;
 
 .sun-editor-editable {
     word-break: break-all;
+}
+
+.bottom-footer {
+    color: $footerColor;
+    font-size: $footerFontSize;
+
+    .top-footer {
+        margin-bottom: 16px;
+    }
+
+    .copyright {
+        color: $footerColor !important;
+    }
+}
+
+body {
+    padding-bottom: 0px;
 }
