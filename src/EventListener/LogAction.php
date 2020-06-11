@@ -21,7 +21,10 @@ class LogAction implements EventSubscriberInterface
         '/inscription',
         'ActionLog',
         'ExceptionLog',
-        'survey'
+        'survey',
+        'reset_password',
+        'verify_token',
+        'launcher/download'
     ];
 
     public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage)
