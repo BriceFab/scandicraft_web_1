@@ -20,9 +20,9 @@ class CommunityController extends AbstractController
     }
 
     /**
-     * @Route("/nouveautes", name="nouveautes")
+     * @Route("/spoils", name="spoils")
      */
-    public function showNews()
+    public function showSpoils()
     {
         return $this->render('maintenance/page_under_maintenance.html.twig');
     }
