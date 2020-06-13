@@ -24,7 +24,7 @@ class CommunityController extends AbstractController
      */
     public function showSpoils()
     {
-        return $this->render('maintenance/page_under_maintenance.html.twig');
+        return $this->render('spoils/list.html.twig');
     }
 
     /**

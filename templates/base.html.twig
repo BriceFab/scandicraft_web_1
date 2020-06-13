@@ -25,7 +25,9 @@
 		<meta property="og:url" content="{{ app.request.uri }}" />
         <link rel="canonical" href="{{ app.request.uri }}" />
         <meta name="twitter:card" content="summary_large_image" />
-        
+        <meta property="og:image" content="{{ app.request.schemeAndHttpHost ~ asset('assets/img/main-logo.png') }}" />
+        <meta property="og:locale" content="fr_FR" />
+
         <link rel="manifest" href="/manifest.webmanifest.json" />
         <meta name="theme-color" content="#b30000" />
         <link rel="dns-prefetch" href="//www.google.fr" />

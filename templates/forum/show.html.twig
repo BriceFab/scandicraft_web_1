@@ -45,10 +45,12 @@
 											</div>
 											<div class="col-12 col-md-3 d-none d-sm-block">
 												<div class="row justify-content-end">
-													<p style="font-size: 15px;">Discussions: {{ sub_categorie.forumDiscussions|length }}</p>
+													<p style="font-size: 15px;">Discussions:
+														{{ sub_categorie.forumDiscussions|length }}</p>
 												</div>
 												<div class="row justify-content-end">
-													<p style="font-size: 15px;">Messages: {{ sub_categorie.countMessages() }}</p>
+													<p style="font-size: 15px;">Messages:
+														{{ sub_categorie.countMessages() }}</p>
 												</div>
 											</div>
 										</div>
@@ -61,6 +63,12 @@
 					</div>
 
 				{% endfor %}
+
+				<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1457190527508329" data-ad-slot="7582886758"></ins>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
 			{% else %}
 				<p>Le forum est temporairement indisponible (aucunes catégories)</p>
 			{% endif %}
