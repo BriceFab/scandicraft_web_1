@@ -26,7 +26,6 @@ easy_admin:
               type: "image",
               base_path: "%path.spoil.upload_images%",
             },
-            { property: "Description", label: "Description", type: "raw" },
             { property: "getCurrentShare", label: "Partages" },
             {
               property: "shareGoal",
