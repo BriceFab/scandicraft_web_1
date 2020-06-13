@@ -11,6 +11,10 @@ easy_admin:
         new: ["ROLE_ADMIN"]
       list:
         title: "Historique des IPs de connexion"
+        actions:
+          [
+            { name: "delete", label: "Supprimer", icon: "trash" }
+          ]
         fields:
           [
             { property: "ip", label: "IP" },
@@ -18,4 +22,4 @@ easy_admin:
             { property: "login_at", label: "Depuis le" },
           ]
         search:
-          fields: ['user.email', 'user.username', 'ip']
+          fields: ["user.email", "user.username", "ip"]

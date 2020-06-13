@@ -1,0 +1,21 @@
+easy_admin:
+  entities:
+    SpoilShare:
+      class: App\Entity\SpoilShare
+      disabled_actions: ["new", "edit", "show"]
+      permissions:
+        list: ["ROLE_MANAGEUR"]
+        edit: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+      list:
+        title: "Liste des partages"
+        actions: [{ name: "delete", label: "Supprimer", icon: "trash" }]
+        fields:
+          [
+            { property: "spoil", label: "Spoil" },
+            { property: "user", label: "Partagé par" },
+            { property: "shareAt", label: "Partagé le" },
+            { property: "social", label: "Réseau" },
+          ]

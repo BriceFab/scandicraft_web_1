@@ -1,0 +1,109 @@
+<div>
+	<div class="top-title">
+		<div class="title-txt">
+			<h3>
+				{{ 'Spoil #' ~ spoil.id ~ ' - ' ~ spoil.title }}
+			</h3>
+		</div>
+	</div>
+	<div class="info-box survey-info-box">
+
+		{% set spoil_image_path = app.request.schemeAndHttpHost ~ spoils_images_path ~ '/' ~ spoil.image %}
+		<div class="portfolio-top spoil-portfolio-top" data-ix="portfolio-hover">
+			<div class="portfolio-overlay" style="transition: opacity 400ms ease 0s; opacity: 0;">
+				<div class="port-ic-wp">
+					<a class="w-inline-block portfolio-ico-zoom" href="{{ spoil_image_path }}" data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom" style="opacity: 0; transform: translateX(-66px) translateY(0px); transition: opacity 400ms ease 0s, transform 400ms ease 0s;">
+						<div class="w-embed">
+							<i class="fa fa-search"></i>
+						</div>
+					</a>
+				</div>
+			</div><img class="spoil-list-image" src="{{ spoil_image_path }}" alt="Image {{ spoil.title }}">
+		</div>
+
+		<div class="div-spc">
+			<div class="divider" style="margin-top:10px;margin-bottom:20px;"></div>
+			<div class="row text" style="font-size:18px;">
+				<div class="col-12 col-md-6">
+					Partage
+					<span style="color:{{ spoil.getCurrentShare() < spoil.shareGoal / 2 ? '#b30000' : '#70db70' }};">{{ spoil.getCurrentShare() }}</span>/<b>{{ spoil.shareGoal }}</b>
+					pour le prochain spoil !
+				</div>
+				<div class="col-12 col-md-6" style="text-align:right;">
+					<li class="li-top m-space">
+						<div id="fb-root"></div>
+						<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v7.0" nonce="zEJjBBDA"></script>
+
+						<div class="fb-share-button" data-href="https://www.scandicraft-mc.fr/" data-layout="button_count" data-size="small">
+							<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.scandicraft-mc.fr%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
+						</div>
+					</li>
+					<li class="li-top m-space">
+						<div class="meta-cs">
+							<div class="top-ico top-darker">
+								<div class="w-embed">
+									<i class="fab fa-whatsapp"></i>
+								</div>
+							</div>
+							<div class="txt-top txt-last">
+								<a target="_blank" href="{{ 'https://api.whatsapp.com/send?text=Recrutement de la faction ' ~ (app.request.schemeAndHttpHost)|url_encode}}">Whatsapp</a>
+							</div>
+						</div>
+					</li>
+					<li class="li-top m-space">
+						<div class="meta-cs">
+							<div class="top-ico top-darker">
+								<div class="w-embed">
+									<i class="fab fa-twitter"></i>
+								</div>
+							</div>
+							<div class="txt-top txt-last">
+								<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Hello%20world @ScandiCraftServ" target="_blank" data-size="large">Tweet</a>
+							</div>
+						</div>
+					</li>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="meta-tag">
+		<ul class="w-list-unstyled">
+			<li class="li-top m-space">
+				<div class="meta-cs">
+					<div class="top-ico top-darker">
+						<div class="w-embed">
+							<i class="fa fa-user"></i>
+						</div>
+					</div>
+					<div class="txt-top txt-last">par
+						{{ spoil.createdBy.username }}
+					</div>
+				</li>
+			</li>
+			<li class="li-top m-space">
+				<div class="meta-cs">
+					<div class="top-ico top-darker">
+						<div class="w-embed">
+							<i class="fa fa-calendar-week"></i>
+						</div>
+					</div>
+					<div class="txt-top txt-last">Le
+						{{ spoil.createdAt|date("d/m/Y à H:i") }}
+					</div>
+				</li>
+			</li>
+			<a href="/sondage/arc-punch-minecraft-modifier-6">
+				<li class="li-top m-space button" style="float:right;margin-right:0px;margin-top:-5px;padding:10px;">
+					<div style="color: white;">
+						<div class="txt-last">
+							<b>En savoir plus</b>
+						</div>
+					</div>
+				</li>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="divider" style="margin-top:15px;"></div></div>

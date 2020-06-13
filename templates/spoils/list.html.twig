@@ -2,7 +2,7 @@
 
 {% block title %}Spoils
 {% endblock %}
-{% block description %}Liste des spoils / nouveautés qui seront disponible sur le serveur Minecraft ScandiCraft.
+{% block description %}Liste des spoils / nouveautés qui seront disponibles sur le serveur Minecraft ScandiCraft.
 {% endblock %}
 
 {% block body %}
@@ -11,106 +11,24 @@
 		<div class="w-container">
 			<div class="w-row">
 
+				{% if spoils|length > 0 %}
 
-				<div class="blog-post">
-					<div class="last-wrapper">
-						<div class="last-bottom">
-							<h6>
-								<a class="last-title big-blog-title" href="#">Spoil 1 - HUD</a>
-							</h6>
-						</div>
-						<div class="last-top">
-							<div class="portfolio-top" data-ix="portfolio-hover">
-								<div class="portfolio-overlay" style="transition: opacity 400ms ease 0s; opacity: 0;">
-									<div class="port-ic-wp">
-										<a class="w-inline-block portfolio-ico-zoom" href="/build/images/slide1.39826261.png" data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom" style="opacity: 0; transform: translateX(-66px) translateY(0px); transition: opacity 400ms ease 0s, transform 400ms ease 0s;">
-											<div class="w-embed">
-												<i class="fa fa-search"></i>
-											</div>
-										</a>
-									</div>
-								</div><img src="/build/images/slide1.39826261.png">
-							</div>
-						</div>
-						<div class="meta-tag">
-							<ul class="w-list-unstyled">
-								<li class="li-top m-space">
-									<div class="meta-cs">
-										<div class="top-ico top-darker">
-											<div class="w-embed">
-												<i class="fa fa-user"></i>
-											</div>
-										</div>
-										<div class="txt-top txt-last">admin</div>
-									</div>
-								</li>
-								<li class="li-top m-space">
-									<div class="meta-cs">
-										<div class="top-ico top-darker">
-											<div class="w-embed">
-												<i class="fa fa-clock-o"></i>
-											</div>
-										</div>
-										<div class="txt-top txt-last">March 09, 2015</div>
-									</div>
-								</li>
-								<li class="li-top m-space">
-									<div class="meta-cs">
-										<div class="top-ico top-darker">
-											<div class="w-embed">
-												<i class="fas fa-share-square"></i>
-											</div>
-										</div>
-										<div class="txt-top txt-last">99 Partages</div>
-									</div>
-								</li>
-								<div style="float:right;">
-									<li class="li-top m-space">
-										<div id="fb-root"></div>
-										<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v7.0" nonce="zEJjBBDA"></script>
+					{% for spoil in spoils %}
 
-										<div class="fb-share-button" data-href="https://www.scandicraft-mc.fr/" data-layout="button_count" data-size="small">
-											<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.scandicraft-mc.fr%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
-										</div>
-									</li>
-									<li class="li-top m-space">
-										<div class="meta-cs">
-											<div class="top-ico top-darker">
-												<div class="w-embed">
-													<i class="fab fa-whatsapp"></i>
-												</div>
-											</div>
-											<div class="txt-top txt-last">
-												<a target="_blank" href="{{ 'https://api.whatsapp.com/send?text=Recrutement de la faction ' ~ (app.request.schemeAndHttpHost)|url_encode}}">Whatsapp</a>
-											</div>
-										</div>
-									</li>
-									<li class="li-top m-space">
-										<div class="meta-cs">
-											<div class="top-ico top-darker">
-												<div class="w-embed">
-													<i class="fab fa-twitter"></i>
-												</div>
-											</div>
-											<div class="txt-top txt-last">
-												<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Hello%20world @ScandiCraftServ" target="_blank" data-size="large">Tweet</a>
-											</div>
-										</div>
-									</li>
-								</div>
-							</li>
-						</div>
-					</ul>
-				</div>
+						{% include "spoils/spoil.html.twig" with { 'spoil': spoil } %}
+
+					{% endfor %}
+
+				{% else %}
+					<h1>Aucun spoil actuellement</h1>
+					<p>
+						Revenez plus tard.
+					</p>
+				{% endif %}
+
 			</div>
-			<div>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere...</p>
-			</div>
-			<div class="divider" style="margin-bottom:36px;"></div>
 
 		</div>
 
-	</div>
-
-
-</div></div></section>{% endblock %}
+	</section>
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\DevProgression;
 use App\Entity\Survey;
+use App\Repository\SpoilRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,9 +23,11 @@ class CommunityController extends AbstractController
     /**
      * @Route("/spoils", name="spoils")
      */
-    public function showSpoils()
+    public function showSpoils(SpoilRepository $repo)
     {
-        return $this->render('spoils/list.html.twig');
+        return $this->render('spoils/list.html.twig', [
+            'spoils' => $repo->findAll()
+        ]);
     }
 
     /**
