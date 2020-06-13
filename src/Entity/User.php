@@ -120,6 +120,11 @@ class User implements UserInterface
      */
     private $uuid;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SpoilShare", mappedBy="user", orphanRemoval=true)
+     */
+    private $spoilShares;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -134,6 +139,7 @@ class User implements UserInterface
         $this->userIps = new ArrayCollection();
         $this->forumDiscussions = new ArrayCollection();
         $this->forumDiscussionAnswers = new ArrayCollection();
+        $this->spoilShares = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -616,6 +622,37 @@ class User implements UserInterface
     public function setUuid(?string $uuid): self
     {
         $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SpoilShare[]
+     */
+    public function getSpoilShares(): Collection
+    {
+        return $this->spoilShares;
+    }
+
+    public function addSpoilShare(SpoilShare $spoilShare): self
+    {
+        if (!$this->spoilShares->contains($spoilShare)) {
+            $this->spoilShares[] = $spoilShare;
+            $spoilShare->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpoilShare(SpoilShare $spoilShare): self
+    {
+        if ($this->spoilShares->contains($spoilShare)) {
+            $this->spoilShares->removeElement($spoilShare);
+            // set the owning side to null (unless already changed)
+            if ($spoilShare->getUser() === $this) {
+                $spoilShare->setUser(null);
+            }
+        }
 
         return $this;
     }

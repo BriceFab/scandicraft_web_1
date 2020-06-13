@@ -33,9 +33,15 @@ class SocialmediaType
      */
     private $userSocialmedia;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SpoilShare", mappedBy="social", orphanRemoval=true)
+     */
+    private $spoilShares;
+
     public function __construct()
     {
         $this->userSocialmedia = new ArrayCollection();
+        $this->spoilShares = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,4 +108,36 @@ class SocialmediaType
     {
         return $this->getName();
     }
+
+    /**
+     * @return Collection|SpoilShare[]
+     */
+    public function getSpoilShares(): Collection
+    {
+        return $this->spoilShares;
+    }
+
+    public function addSpoilShare(SpoilShare $spoilShare): self
+    {
+        if (!$this->spoilShares->contains($spoilShare)) {
+            $this->spoilShares[] = $spoilShare;
+            $spoilShare->setSocial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpoilShare(SpoilShare $spoilShare): self
+    {
+        if ($this->spoilShares->contains($spoilShare)) {
+            $this->spoilShares->removeElement($spoilShare);
+            // set the owning side to null (unless already changed)
+            if ($spoilShare->getSocial() === $this) {
+                $spoilShare->setSocial(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -10,6 +10,7 @@ parameters:
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     forum_images_url: '/uploads/forum/images/'
     forum_images_directory: '%kernel.project_dir%/public/uploads/forum/images'
+    path.spoil.upload_images: /uploads/spoils/images
 
 services:
     # default configuration for services in *this* file

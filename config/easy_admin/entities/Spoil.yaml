@@ -1,0 +1,45 @@
+easy_admin:
+  entities:
+    Spoil:
+      class: App\Entity\Spoil
+      permissions:
+        list: ["ROLE_MANAGEUR"]
+        edit: ["ROLE_MANAGEUR"]
+        new: ["ROLE_MANAGEUR"]
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+      list:
+        title: "Liste des spoils"
+        actions:
+          [
+            { name: "new", label: "Ajouter" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            { property: "createdBy", label: "Créé par" },
+            { property: "createdAt", label: "Créé le" },
+            { property: "title", label: "Titre" },
+            {
+              property: "image",
+              type: "image",
+              base_path: "%path.spoil.upload_images%",
+            },
+            { property: "Description", label: "Description", type: "raw" },
+            { property: "getCurrentShare", label: "Partages" },
+            {
+              property: "shareGoal",
+              label: "Objectif partages",
+              template: "easy_admin/fields/integer.html.twig",
+            },
+          ]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+            { property: "title", lable: "Titre" },
+            { property: "imageFile", type: "vich_image" },
+            { property: "Description", label: "Description", type: "fos_ckeditor" },
+            { property: "shareGoal", label: "Objectif partage" },
+          ]

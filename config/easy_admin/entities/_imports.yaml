@@ -20,3 +20,5 @@ imports:
 - { resource: UserIp.yaml }
 - { resource: ForumDiscussionAnswer.yaml }
 - { resource: ForumDiscussionStatus.yaml }
+- { resource: Spoil.yaml }
+- { resource: SpoilShare.yaml }

@@ -65,6 +65,14 @@ easy_admin:
               permission: "ROLE_MANAGEUR",
             },
           ]
+      - label: "Spoils"
+        icon: "question"
+        permission: "ROLE_STAFF"
+        children:
+          [
+            { entity: "Spoil", label: "Spoils", permission: "ROLE_MANAGEUR" },
+            { entity: "SpoilShare", label: "Partages", permission: "ROLE_MANAGEUR" },
+          ]
       - label: "Équipe"
         icon: "user-tie"
         permission: "ROLE_MANAGEUR"
