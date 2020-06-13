@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Spoil et nouveautés:
+	{{ spoil.title }}
+{% endblock %}
+{% block description %}Spoil Minecraft Faction:
+	{{ spoil.description }}
+{% endblock %}
+
+{% block body %}
+
+	<section class="w-section section">
+		<div class="w-container">
+			<div class="w-row">
+
+				{% include "spoils/spoil.html.twig" with {'spoil': spoil, 'showMore': false } %}
+				<p>
+					{{ spoil.description|raw }}
+				</p>
+
+			</div>
+		</div>
+
+	</section>
+
+{% endblock %}
