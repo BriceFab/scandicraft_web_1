@@ -512,20 +512,3 @@ $forum_discussion_top: 30px;
 .sun-editor-editable {
     word-break: break-all;
 }
-
-.bottom-footer {
-    color: $footerColor;
-    font-size: $footerFontSize;
-
-    .top-footer {
-        margin-bottom: 16px;
-    }
-
-    .copyright {
-        color: $footerColor !important;
-    }
-}
-
-body {
-    padding-bottom: 0px;
-}
