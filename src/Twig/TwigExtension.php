@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use App\Service\ScandiCraftService;
 use Mobile_Detect;
 use Symfony\Component\Security\Core\Security;
 use Twig\Extension\AbstractExtension;
@@ -12,10 +13,12 @@ class TwigExtension extends AbstractExtension
 {
 
     private $security;
+    private $sc_service;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security, ScandiCraftService $sc_service)
     {
         $this->security = $security;
+        $this->sc_service = $sc_service;
     }
 
     public function getFilters()
@@ -23,6 +26,7 @@ class TwigExtension extends AbstractExtension
         return [
             new TwigFilter('seo_format', [$this, 'seo_format']),
             new TwigFilter('truncate', [$this, 'truncate']),
+            new TwigFilter('sc_slug', [$this, 'sc_slug']),
         ];
     }
 
@@ -81,5 +85,10 @@ class TwigExtension extends AbstractExtension
             }
         }
         return false;
+    }
+
+    public function sc_slug($text)
+    {
+        return $this->sc_service->generateSlug($text);
     }
 }

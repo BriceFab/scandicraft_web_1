@@ -29,6 +29,7 @@ class SpoilController extends AbstractController
 
     /**
      * @Route("/spoil/{id}", name="show_spoil")
+     * @Route("/spoil/{title}/{id}", name="show_spoil_title")
      */
     public function showSpoilDetail(Spoil $spoil)
     {

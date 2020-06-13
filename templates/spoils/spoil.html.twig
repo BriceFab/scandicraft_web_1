@@ -80,7 +80,7 @@
 			</li>
 		</li>
 		{% if showMore is not defined or showMore == true %}
-			<a href="{{ path('show_spoil', {'id': spoil.id}) }}">
+			<a href="{{ path('show_spoil_title', {'id': spoil.id, 'title': spoil.title|sc_slug }) }}">
 				<li class="li-top m-space button" style="float:right;margin-right:0px;margin-top:-5px;padding:10px;">
 					<div style="color: white;">
 						<div class="txt-last">
