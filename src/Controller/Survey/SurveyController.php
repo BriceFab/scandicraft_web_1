@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Survey;
 
 use App\Entity\Survey;
 use App\Entity\SurveyAnswers;

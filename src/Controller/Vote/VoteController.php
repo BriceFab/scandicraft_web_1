@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Vote;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class StoreController extends AbstractController
+class VoteController extends AbstractController
 {
     /**
-     * @Route("/boutique", name="store")
+     * @Route("/voter", name="voter")
      */
-    public function boutiquePage()
+    public function voterPage()
     {
         return $this->render('maintenance/page_under_maintenance.html.twig');
     }

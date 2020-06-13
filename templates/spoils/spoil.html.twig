@@ -93,15 +93,17 @@
 					</div>
 				</li>
 			</li>
-			<a href="/sondage/arc-punch-minecraft-modifier-6">
-				<li class="li-top m-space button" style="float:right;margin-right:0px;margin-top:-5px;padding:10px;">
-					<div style="color: white;">
-						<div class="txt-last">
-							<b>En savoir plus</b>
+			{% if showMore is not defined or showMore == true %}
+				<a href="{{ path('show_spoil', {'id': spoil.id}) }}">
+					<li class="li-top m-space button" style="float:right;margin-right:0px;margin-top:-5px;padding:10px;">
+						<div style="color: white;">
+							<div class="txt-last">
+								<b>En savoir plus</b>
+							</div>
 						</div>
-					</div>
-				</li>
-			</a>
+					</li>
+				</a>
+			{% endif %}
 		</li>
 	</ul>
 </div>
