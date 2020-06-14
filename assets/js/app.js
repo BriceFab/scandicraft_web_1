@@ -17,7 +17,7 @@ import '../../node_modules/bootstrap/js/dist/modal';
 
 //Other app function
 import './modal_blur';
-import './share/index';
+import './share/spoil';
 
 //cannot call from html
 export default function isIE() {

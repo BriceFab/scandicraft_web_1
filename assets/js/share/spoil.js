@@ -25,7 +25,11 @@ function postShare(user, spoil, share_type) {
         'spoil': spoil,
     }).then((res) => {
         // console.log('res ok', res)
-        toast.success('Merci pour votre partage !')
+        if (res.status !== 200 || res.data.res != "ok") {
+            toast.warn('Vous devez être connecté pour partager le spoil !')
+        } else {
+            toast.success('Merci pour votre partage !')
+        }
     }, (err) => {
         // console.error('share err', err)
         toast.warn('Votre partage n\'a pas pu être enregistré. Vous avez peut-être déjà partager ce spoil')
