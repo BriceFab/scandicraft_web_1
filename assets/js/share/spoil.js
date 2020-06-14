@@ -4,9 +4,11 @@ import { toast } from 'react-toastify';
 
 $(() => {
     //register spoils share button
-    const spoils_share = $('.btn-share-spoil');
+    const spoils_share = $('a[share="btn-share-spoil"]');
     spoils_share.each((index, element) => {
         element.addEventListener('click', () => {
+
+            // console.log('share click')
             setTimeout(() => {
 
                 //post share
@@ -14,6 +16,7 @@ $(() => {
                 postShare(data.attr('user'), data.attr('spoil'), element.getAttribute('type'));
 
             }, 8000);   //wait 8 secondes
+
         });
     });
 });

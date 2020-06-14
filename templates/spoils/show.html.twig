@@ -7,6 +7,12 @@
 	{{ spoil.description }}
 {% endblock %}
 
+{# edit meta image #}
+{% block meta_image %}
+	{% set spoil_image_path = app.request.schemeAndHttpHost ~ spoils_images_path ~ '/' ~ spoil.image %}
+	<meta property="og:image" content="{{ spoil_image_path }}"/>
+{% endblock %}
+
 {% block body %}
 
 	<section class="w-section section">
@@ -14,9 +20,7 @@
 			<div class="w-row">
 
 				{% include "spoils/spoil.html.twig" with {'spoil': spoil, 'showMore': false } %}
-				<p>
-					{{ spoil.description|raw }}
-				</p>
+				{{ spoil.description|raw }}
 
 			</div>
 		</div>
