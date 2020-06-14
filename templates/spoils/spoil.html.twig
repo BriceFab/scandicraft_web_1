@@ -40,11 +40,11 @@
 								<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}) }}&src=sdkpreparse" class="fb-xfbml-parse-ignore btn-share-spoil" type="facebook" spoil="{{ spoil.id }}">Facebook</a>
 							</div>
 						</li>
-						<a href="{{ 'https://api.whatsapp.com/send?text=' ~ spoil.description|seo_format(200) ~ ' - Site: ' ~ (app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}))|url_encode}}" target="_blank" class="button btn-active btn-small btn-share-spoil" type="whatsapp" spoil="{{ spoil.id }}">
+						<a href="{{ 'https://api.whatsapp.com/send?text=' ~ spoil.title|seo_format(200) ~ ' - Site: ' ~ (app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}))|url_encode}}" target="_blank" class="button btn-active btn-small btn-share-spoil" type="whatsapp" spoil="{{ spoil.id }}">
 							<i class="fab fa-whatsapp"></i>
 							Whatsapp
 						</a>
-						<a href="https://twitter.com/intent/tweet?text={{ spoil.description|seo_format(200) ~ ' - Site: ' ~ (app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}))|url_encode }} @ScandiCraftServ" target="_blank" data-size="large" class="button btn-active btn-small btn-share-spoil" type="twitter" spoil="{{ spoil.id }}">
+						<a href="https://twitter.com/intent/tweet?text={{ spoil.title|seo_format(200) ~ ' - Site: ' ~ (app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}))|url_encode }} @ScandiCraftServ" target="_blank" data-size="large" class="button btn-active btn-small btn-share-spoil" type="twitter" spoil="{{ spoil.id }}">
 							<i class="fab fa-twitter"></i>
 							Twitter
 						</a>
