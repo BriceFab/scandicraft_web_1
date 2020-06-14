@@ -14,7 +14,10 @@ class HomeController extends AbstractController
     public function index(SpoilRepository $spoilRepository)
     {
         $last = $spoilRepository->findOneBy([], ['createdAt' => 'DESC']);
-        $missing_share = $last->getShareGoal() - $last->getCurrentShare();
+        $missing_share = 0;
+        if ($last) {
+            $missing_share = $last->getShareGoal() - $last->getCurrentShare();
+        }
 
         return $this->render('home/index.html.twig', [
             'last_spoil_missing_number' => $missing_share > 0 ? $missing_share : 0
