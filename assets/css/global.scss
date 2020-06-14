@@ -533,8 +533,17 @@ $forum_discussion_top: 30px;
 
 .spoil-list-image {
     height: auto;
+    overflow: visible;
+    display: block;
+    object-fit: contain;
     max-width: 900px;
     border: 1px solid rgba(0, 0, 0, 0.28);
+}
+
+@media (max-width: 576px) {
+    .spoil-list-image {
+        width: 100%;
+    }
 }
 
 .spoil-portfolio-top {
