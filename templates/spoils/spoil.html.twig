@@ -37,7 +37,7 @@
 							<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v7.0" nonce="zEJjBBDA"></script>
 
 							<div class="fb-share-button" data-href="https://www.scandicraft-mc.fr/" data-layout="button_count" data-size="small">
-								<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}) }}&src=sdkpreparse" class="fb-xfbml-parse-ignore btn-share-spoil" type="facebook" spoil="{{ spoil.id }}">Partager</a>
+								<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}) }}&src=sdkpreparse" class="fb-xfbml-parse-ignore btn-share-spoil" type="facebook" spoil="{{ spoil.id }}">Facebook</a>
 							</div>
 						</li>
 						<a href="{{ 'https://api.whatsapp.com/send?text=' ~ spoil.description|seo_format(200) ~ ' - Site: ' ~ (app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}))|url_encode}}" target="_blank" class="button btn-active btn-small btn-share-spoil" type="whatsapp" spoil="{{ spoil.id }}">
