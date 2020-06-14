@@ -1,3 +1,5 @@
+{% set spoil_image_path = app.request.schemeAndHttpHost ~ spoils_images_path ~ '/' ~ spoil.image %}
+
 <div>
 	<div class="top-title">
 		<div class="title-txt">
@@ -8,7 +10,6 @@
 	</div>
 	<div class="info-box survey-info-box">
 
-		{% set spoil_image_path = app.request.schemeAndHttpHost ~ spoils_images_path ~ '/' ~ spoil.image %}
 		<div class="portfolio-top spoil-portfolio-top" data-ix="portfolio-hover">
 			<div class="portfolio-overlay" style="transition: opacity 400ms ease 0s; opacity: 0;">
 				<div class="port-ic-wp">
@@ -24,27 +25,23 @@
 		<div class="div-spc">
 			<div class="divider" style="margin-top:10px;margin-bottom:20px;"></div>
 			<div class="row text" style="font-size:18px;">
-				<div class="col-12 col-md-6" style="display:flex;align-items:center;">
+				<div class="col-12 col-md-6" style="{{ mobileDetect() ? '' : 'display:flex;align-items:center;' }}">
 					Partage:&nbsp;
 					<span style="color:{{ spoil.getCurrentShare() < spoil.shareGoal / 2 ? '#b30000' : '#70db70' }};font-weight:bold;">{{ spoil.getCurrentShare() }}</span>/<b>{{ spoil.shareGoal }}</b>
 					&nbsp;pour le prochain spoil !
 				</div>
 				<div class="col-12 col-md-6" style="text-align:right;">
 					{% if app.user %}
-						<div class="spoil-share-data-{{ spoil.id }}" spoil="{{ spoil.id }}" user="{{ app.user ? app.user.id : null }}"></div>
-						<li class="li-top m-space">
-							<div id="fb-root"></div>
-							<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v7.0" nonce="zEJjBBDA"></script>
-
-							<div class="fb-share-button" data-href="https://www.scandicraft-mc.fr/" data-layout="button_count" data-size="small">
-								<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}) }}&src=sdkpreparse" class="fb-xfbml-parse-ignore btn-share-spoil" type="facebook" spoil="{{ spoil.id }}">Facebook</a>
-							</div>
-						</li>
-						<a href="{{ 'https://api.whatsapp.com/send?text=Spoil ' ~ spoil.id ~ ': ' ~ spoil.title|seo_format(200) ~ ' - Site: ' ~ (app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}))|url_encode}}" target="_blank" class="button btn-active btn-small btn-share-spoil" type="whatsapp" spoil="{{ spoil.id }}">
+						<div class="spoil-share-data-{{ spoil.id }}" spoil="{{ spoil.id }}" user="{{ app.user ? app.user.id : null }}" style="display:none;"></div>
+						<a href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}) }}&src=sdkpreparse" target="_blank" class="button btn-active btn-small" share="btn-share-spoil" type="facebook" spoil="{{ spoil.id }}">
+							<i class="fab fa-facebook"></i>
+							Facebook
+						</a>
+						<a href="{{ 'https://api.whatsapp.com/send?text=Spoil ' ~ spoil.id ~ ': ' ~ spoil.title|seo_format(200) ~ ' - Site: ' ~ (app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}))|url_encode}}" target="_blank" class="button btn-active btn-small" share="btn-share-spoil" type="whatsapp" spoil="{{ spoil.id }}">
 							<i class="fab fa-whatsapp"></i>
 							Whatsapp
 						</a>
-						<a href="https://twitter.com/intent/tweet?text=Spoil {{ spoil.id ~ ': ' ~ spoil.title|seo_format(200) ~ ' - Site: ' ~ (app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}))|url_encode }} @ScandiCraftServ" target="_blank" data-size="large" class="button btn-active btn-small btn-share-spoil" type="twitter" spoil="{{ spoil.id }}">
+						<a href="https://twitter.com/intent/tweet?text=Spoil {{ spoil.id ~ ': ' ~ spoil.title|seo_format(200) ~ ' - Site: ' ~ (app.request.schemeAndHttpHost ~ path('show_spoil', {'id': spoil.id}))|url_encode }} @ScandiCraftServ" target="_blank" data-size="large" class="button btn-active btn-small" share="btn-share-spoil" type="twitter" spoil="{{ spoil.id }}">
 							<i class="fab fa-twitter"></i>
 							Twitter
 						</a>
@@ -53,12 +50,12 @@
 							<div class="scandicraft_error" style="padding: 4px;width: 300px;text-align: left;">Connectez-vous pour partager.</div>
 						</div>
 					{% endif %}
-				</li>
+				</div>
 			</div>
 		</div>
+
 	</div>
 </div>
-
 <div class="meta-tag">
 	<ul class="w-list-unstyled">
 		<li class="li-top m-space">
@@ -71,7 +68,7 @@
 				<div class="txt-top txt-last">par
 					{{ spoil.createdBy.username }}
 				</div>
-			</li>
+			</div>
 		</li>
 		<li class="li-top m-space">
 			<div class="meta-cs">
@@ -83,7 +80,7 @@
 				<div class="txt-top txt-last">Le
 					{{ spoil.createdAt|date("d/m/Y à H:i") }}
 				</div>
-			</li>
+			</div>
 		</li>
 		{% if showMore is not defined or showMore == true %}
 			<a href="{{ path('show_spoil_title', {'id': spoil.id, 'title': spoil.title|sc_slug }) }}">
@@ -96,5 +93,6 @@
 				</li>
 			</a>
 		{% endif %}
-	</li>
-</ul></div><div class="divider" style="margin-top:15px;"></div></div>
+	</ul>
+</div>
+<div class="divider" style="margin-top:15px;"></div>
