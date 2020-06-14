@@ -41,7 +41,7 @@
 									<h5 class="name">{{ comment.getUser().getUsername() }}</h5>
 									<div class="date">Le
 										{{ comment.getCommentAt()|date("d/m/Y à H:i") }}
-										{% if comment.getUser().getId() == app.user.id %}
+										{% if app.user and comment.getUser().getId() == app.user.id %}
 											<a class="link-comment" href="{{ path('delete_survey_comment', {'comment_id': comment.id, 'survey_id': sondage.id }) }}">Supprimer</a>
 										{% endif %}
 										{# / <a class="link-comment" href="#">Répondre</a> #}
