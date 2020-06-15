@@ -2,8 +2,8 @@ git status
 REM git diff <file>
 git stash
 git pull
-REM composer update --no-dev --optimize-autoloader
 REM composer install --no-dev --optimize-autoloader
+REM composer update --no-dev --optimize-autoloader
 
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:migrations:execute --up 20200424184143
