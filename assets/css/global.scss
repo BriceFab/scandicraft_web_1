@@ -460,8 +460,8 @@ $blur_px: 2px;
 
 @media (max-width: 576px) {
     .forum-flex-mobile-right {
-        justify-content: flex-end !important;
-        text-align: end !important;
+        justify-content: flex-start !important;
+        text-align: start !important;
     }
 }
 
@@ -498,10 +498,12 @@ $blur_px: 2px;
 $forum_discussion_top: 30px;
 .forum-discussion-pin {
     margin-top: $forum_discussion_top;
+    box-shadow: 0 3px 3px -2px rgba(0,0,0,.2),0 0px 4px 0 rgba(0,0,0,.14),0 1px 2px 0 rgba(0,0,0,.12);
 }
 
 .forum-discussion-not-pin {
     margin-top: $forum_discussion_top;
+    box-shadow: 0 3px 3px -2px rgba(0,0,0,.2),0 0px 4px 0 rgba(0,0,0,.14),0 1px 2px 0 rgba(0,0,0,.12);
 }
 
 .forum-discussion-title {

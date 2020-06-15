@@ -30,3 +30,5 @@ public/upload/capes/
 launcher/
 public/*.zip
 public/uploads/*
+
+src/migrations

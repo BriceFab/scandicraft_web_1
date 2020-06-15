@@ -1,0 +1,26 @@
+easy_admin:
+  entities:
+    SpoilGoalType:
+      class: App\Entity\SpoilGoalType
+      permissions:
+        list: ["ROLE_MANAGEUR"]
+        edit: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+      list:
+        title: "Liste des objectifs disponibles pour les spoils"
+        actions:
+          [
+            { name: "new", label: "Ajouter" },
+            { name: "edit", label: "Modifier", icon: "edit" },
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields: [{ property: "label", label: "Label" }]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+            { property: "name", label: "Nom" },
+            { property: "label", label: "Label" },
+          ]

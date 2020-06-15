@@ -198,7 +198,7 @@
 				</div>
 			</a>
 
-			{% if last_spoil_missing_number > 0 %}
+			{% if last_spoil_missing_number > 0 and last_spoil.getGoalType() %}
 				<a href="{{ path('spoils') }}" target="_blank">
 					<div class="w-row div-spc">
 						<div class="w-col w-col-4 w-col-stack" style="max-width:500px;">
@@ -210,7 +210,11 @@
 									<h5>Spoils</h5>
 									<p class="p-square" style="height:60px">Il manque
 										<b style="color:#b30000;">{{ last_spoil_missing_number }}</b>
-										{{ last_spoil_missing_number > 1 ? 'partages' : 'partage' }}
+										{% if last_spoil.goalType.name == 'social_share' %}
+											{{ last_spoil_missing_number > 1 ? 'partages' : 'partage' }}
+										{% elseif last_spoil.goalType.name == 'discord_members' %}
+											{{ last_spoil_missing_number > 1 ? 'membres Discord' : 'membre Discord' }}
+										{% endif %}
 										!</p>
 								</div>
 							</div>

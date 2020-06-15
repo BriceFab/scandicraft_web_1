@@ -72,6 +72,7 @@ easy_admin:
           [
             { entity: "Spoil", label: "Spoils", permission: "ROLE_MANAGEUR" },
             { entity: "SpoilShare", label: "Partages", permission: "ROLE_MANAGEUR" },
+            { entity: "SpoilGoalType", label: "Objectifs", permission: "ROLE_MANAGEUR" },
           ]
       - label: "Équipe"
         icon: "user-tie"

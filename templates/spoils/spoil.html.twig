@@ -26,9 +26,25 @@
 			<div class="divider" style="margin-top:10px;margin-bottom:20px;"></div>
 			<div class="row text" style="font-size:18px;">
 				<div class="col-12 col-md-6" style="{{ mobileDetect() ? '' : 'display:flex;align-items:center;' }}">
-					Partage:&nbsp;
-					<span style="color:{{ spoil.getCurrentShare() < spoil.shareGoal / 2 ? '#b30000' : '#70db70' }};font-weight:bold;">{{ spoil.getCurrentShare() }}</span>/<b>{{ spoil.shareGoal }}</b>
-					&nbsp;pour le prochain spoil !
+					{% if spoil.goalType %}
+						{% if spoil.goalType.name == 'social_share' %}
+							Partage:&nbsp;
+							<span style="color:{{ spoil.getCurrentSocialShare() < spoil.shareGoal / 2 ? '#b30000' : '#70db70' }};font-weight:bold;">{{ spoil.getCurrentSocialShare() }}</span>/<b>{{ spoil.shareGoal }}</b>
+							&nbsp;pour le prochain spoil !
+						{% elseif spoil.goalType.name == 'discord_members' %}
+							{% set discordMembers = discord_service.countMembers() %}
+							Objectif:&nbsp;
+							<span style="color:{{ discordMembers >= spoil.shareGoal ? '#70db70' : '#b30000' }};font-weight:bold;">{{ discordMembers }}</span>
+							<b>/{{ spoil.shareGoal }}</b>
+							&nbsp;membres
+							<a href="http://discord.gg/EkhvKb5" target="_blank">
+								<b>&nbsp;Discord&nbsp;</b>
+							</a>
+							pour le prochain spoil !
+						{% endif %}
+					{% else %}
+						Aucun objectif pour ce spoil.
+					{% endif %}
 				</div>
 				<div class="col-12 col-md-6" style="text-align:right;">
 					{% if app.user %}
