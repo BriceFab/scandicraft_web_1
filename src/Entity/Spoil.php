@@ -63,6 +63,11 @@ class Spoil
      */
     private $title;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\SpoilGoalType", inversedBy="spoils")
+     */
+    private $goal_type;
+
     public function __construct()
     {
         $this->spoilShares = new ArrayCollection();
@@ -183,7 +188,7 @@ class Spoil
         return $this;
     }
 
-    public function getCurrentShare()
+    public function getCurrentSocialShare()
     {
         return count($this->getSpoilShares());
     }
@@ -198,5 +203,22 @@ class Spoil
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getGoalType(): ?SpoilGoalType
+    {
+        return $this->goal_type;
+    }
+
+    public function setGoalType(?SpoilGoalType $goal_type): self
+    {
+        $this->goal_type = $goal_type;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

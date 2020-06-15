@@ -41,6 +41,9 @@ services:
     scandicraft_service:
         class: App\Service\ScandiCraftService
         autowire: true
+    discord_service:
+        class: App\Service\DiscordService
+        autowire: true
 
     App\EventListener\DoctrineListener:
         tags:

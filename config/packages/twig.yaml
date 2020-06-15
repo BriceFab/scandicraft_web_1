@@ -8,6 +8,7 @@ twig:
         user_service: "@user_service"
         maintenance_service: "@maintenance_service"
         scandicraft_service: "@scandicraft_service"
+        discord_service: "@discord_service"
         # Google Recaptcha v3
         RECAPTCHA3_SITE_KEY: "%env(RECAPTCHA3_SITE_KEY)%"
         spoils_images_path: "%path.spoil.upload_images%"

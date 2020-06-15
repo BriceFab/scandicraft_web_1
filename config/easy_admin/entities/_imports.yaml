@@ -22,3 +22,4 @@ imports:
 - { resource: ForumDiscussionStatus.yaml }
 - { resource: Spoil.yaml }
 - { resource: SpoilShare.yaml }
+- { resource: SpoilGoalType.yaml }
