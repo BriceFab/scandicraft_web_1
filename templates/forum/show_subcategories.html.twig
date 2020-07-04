@@ -44,8 +44,16 @@
 				{% endif %}
 
 				{# foreach discussion #}
+				{% set total_discussions = forumSubCategory.forumDiscussions|length %}
 				{% set pin_discus = forumSubCategory.forumDiscussions|filter(disc => (disc.getStaffOnly() ? is_granted('ROLE_STAFF') or app.user == disc.createdBy : true) and disc.pin) %}
 				{% set not_pin_discus = forumSubCategory.forumDiscussions|filter(disc => (disc.getStaffOnly() ? is_granted('ROLE_STAFF') or app.user == disc.createdBy : true) and not disc.pin) %}
+				{% set total_hidden_discussion = total_discussions - (pin_discus|length + not_pin_discus|length) %}
+
+				{% if total_hidden_discussion > 0 %}
+					<div class="forum-nbr-hidden-discussions">Il y'a
+						{{ total_hidden_discussion }}
+						discussions masquées (pour le staff uniquement).</div>
+				{% endif %}
 
 				{# pin discussions #}
 				{% if pin_discus|length > 0 %}

@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\ForumDiscussion;
 use App\Entity\MySocialmedia;
+use App\Entity\Spoil;
 use App\Entity\Survey;
 use App\Repository\ForumDiscussionStatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,6 +24,18 @@ class ScandiCraftService
     public function getSocialmedia()
     {
         return $this->em->getRepository(MySocialmedia::class)->getSocialmedia();
+    }
+
+    public function countTotalCommunityNotifs()
+    {
+        return $this->countTotalSurvey() + $this->countTotalSpoils();
+    }
+
+    public function countTotalSpoils()
+    {
+        $all_spoils = $this->em->getRepository(Spoil::class)->findAll();
+        //TODO count total user not see (+ post when seen)
+        return count($all_spoils);
     }
 
     public function countTotalSurvey()

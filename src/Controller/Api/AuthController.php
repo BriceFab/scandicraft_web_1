@@ -37,14 +37,14 @@ class AuthController extends AbstractController
         $uuid = $data["uuid"];
         if (!$uuid) return $this->json(["error" => "invalid uuid"], Response::HTTP_UNAUTHORIZED);
         $username = $data["username"];
-        if (!$username) return $this->json(["error" => "invalid username 1"], Response::HTTP_UNAUTHORIZED);
+        if (!$username) return $this->json(["error" => "invalid username (1)"], Response::HTTP_UNAUTHORIZED);
 
         /* Verify */
         $payload = $this->JWTManager->decode($this->security->getToken());
 
         //Verify user
         $token_username = $payload['username'];
-        if ($username != $token_username) return $this->json(["error" => "invalid username 2"], Response::HTTP_UNAUTHORIZED);
+        if ($username != $token_username) return $this->json(["error" => "invalid username (2) " . $token_username . " - " . $username], Response::HTTP_UNAUTHORIZED);
 
         //Verify uuid
         $user = $user_repo->findOneBy(["username" => $token_username]);

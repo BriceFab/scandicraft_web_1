@@ -35,13 +35,13 @@
 					<a class="w-inline-block link-menu {{ app.request.get('_route') in ['forum', 'nouveautes', 'sondages', 'maintenances'] ? 'active' : '' }}" href="#">
 						<div>
 							Communauté
-							{% if scandicraft_service.countTotalSurvey() > 0 %}
+							{% if scandicraft_service.countTotalCommunityNotifs() > 0 %}
 								<span class="badge_nav">
 
-									{% if scandicraft_service.countTotalSurvey() >= 9 %}
+									{% if scandicraft_service.countTotalCommunityNotifs() >= 9 %}
 										9+
 									{% else %}
-										{{ scandicraft_service.countTotalSurvey() }}
+										{{ scandicraft_service.countTotalCommunityNotifs() }}
 									{% endif %}
 								</span>
 							{% endif %}
@@ -55,7 +55,11 @@
 						</li>
 						<li class="li-drop">
 							<a class="w-inline-block dd-link {{ app.request.get('_route') in ['spoils'] ? 'w--current' : '' }}" href="{{ path('spoils') }}" data-ix="move-txt-dropdown">
-								<div class="dd-txt">Spoils</div>
+								<div class="dd-txt">Spoils
+									{% if scandicraft_service.countTotalSpoils() > 0 %}
+										({{ scandicraft_service.countTotalSpoils() }})
+									{% endif %}
+								</div>
 							</a>
 						</li>
 						<li class="li-drop">
