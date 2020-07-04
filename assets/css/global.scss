@@ -552,3 +552,11 @@ $forum_discussion_top: 30px;
     display: flex;
     justify-content: center;
 }
+
+.forum-nbr-hidden-discussions {
+    padding: 10px;
+    text-align: right;
+    color: $secondaryColor;
+    font-style: italic;
+    font-size: 0.9em;
+}
