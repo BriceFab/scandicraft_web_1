@@ -18,19 +18,19 @@
 							<div class="divider" style="margin-bottom: 10px;"></div>
 							{% if app.user %}
 								<p>Choisissez le site de vote:</p>
-								<a href="https://serveur-prive.net/minecraft/scandicraft-4201/vote" target="_blank">
-									<button class="button btn-active btn-small" style="margin-left:0;">
+								<a id="btn_server_vote" href="https://serveur-prive.net/minecraft/scandicraft-4201/vote" target="_blank">
+									<button class="button btn-small" style="margin-left:0;">
 										Serveur Privé
 									</button>
 								</a>
-								<a href="https://www.rpg-paradize.com/?page=vote&vote=101103" target="_blank">
-									<button class="button btn-active btn-small" style="margin-left:0;">
-										RPG Paradize
-									</button>
-								</a>
+								{# <a href="https://www.rpg-paradize.com/?page=vote&vote=101103" target="_blank">
+																																	<button class="button btn-small" style="margin-left:0;">
+																																		RPG Paradize
+																																	</button>
+																																</a> #}
 
-								<a href="{{ path('verify_vote', {'vote_site_id': 1}) }}">
-									<button class="button btn-small" style="margin-left:0;">
+								<a id="btn_verif_vote" href="{{ path('verify_vote', {'vote_site_id': 1}) }}" style="display:grid;margin-top:15px;width:auto">
+									<button class="button btn-active btn-small" style="margin-left:0;">
 										Vérifier mon vote
 									</button>
 								</a>
@@ -89,4 +89,19 @@
 		</div>
 
 	</section>
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		const btn_vote_server = document.getElementById('btn_server_vote');
+		const btn_verif_vote = document.getElementById('btn_verif_vote');
+
+		//Init
+		btn_verif_vote.style.display = "none";
+
+		btn_vote_server.addEventListener('click', () => {
+			btn_verif_vote.style.display = "grid";
+			btn_vote_server.style.display = "none";
+		});
+	</script>
 {% endblock %}
