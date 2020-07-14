@@ -6,6 +6,7 @@ use App\Entity\UserVote;
 use App\Entity\VoteSite;
 use App\Repository\UserVoteRepository;
 use App\Repository\VoteSiteRepository;
+use DateInterval;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -83,12 +84,23 @@ class VoteController extends AbstractController
 
         if ($json_data['status'] === "1") {
             //Vérification dans la bdd, que le vote n'a pas déjà été comptabilisé
+            /** @var UserVote $user_vote */
             $user_vote = $this->em->getRepository(UserVote::class)->findOneBy(["vote_id" => $json_data['vote']]);
-            $next_vote = intval($json_data["nextvote"] / 60);
 
             if ($user_vote != null) {
-                $this->addFlash('error', "Vous devez attendre $next_vote minutes avant le prochain vote pour le site Server Privé.");
-                return false;
+                /** @var DateTime $vote_at_date */
+                $vote_at_date = clone $user_vote->getCreatedAt();
+                $add_seconds = $user_vote->getVoteSite()->getTimeWaitVote();
+                $next_vote_date = $vote_at_date->add(new DateInterval('PT' . $add_seconds . 'S'));
+                $current_date = new DateTime('now');
+
+                if ($next_vote_date > $current_date) {
+                    $next_vote = intval($json_data["nextvote"] / 60);
+                    $this->addFlash('error', "Vous devez attendre $next_vote minutes avant le prochain vote pour le site Server Privé.");
+                    return false;
+                } else {
+                    return  $json_data['vote'];
+                }
             } else {
                 return $json_data['vote'];
             }
