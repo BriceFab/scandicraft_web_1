@@ -23,3 +23,5 @@ imports:
 - { resource: Spoil.yaml }
 - { resource: SpoilShare.yaml }
 - { resource: SpoilGoalType.yaml }
+- { resource: VoteSite.yaml }
+- { resource: UserVote.yaml }

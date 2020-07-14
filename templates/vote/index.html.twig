@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voter et gagner
+{% block title %}Votez et gagnez
 {% endblock %}
 {% block description %}Votez et gagnez des récompenses sur Minecraft.
 {% endblock %}
@@ -18,16 +18,19 @@
 							<div class="divider" style="margin-bottom: 10px;"></div>
 							{% if app.user %}
 								<p>Choisissez le site de vote:</p>
-								<a id="btn_server_vote" href="https://serveur-prive.net/minecraft/scandicraft-4201/vote" target="_blank">
-									<button class="button btn-small" style="margin-left:0;">
-										Serveur Privé
-									</button>
-								</a>
+
+								{% for vote_site in vote_sites %}
+									<a id="btn_server_vote" href="{{ vote_site.voteUrl }}" target="_blank">
+										<button class="button btn-small" style="margin-left:0;">
+											{{ vote_site.name }}
+										</button>
+									</a>
+								{% endfor %}
 								{# <a href="https://www.rpg-paradize.com/?page=vote&vote=101103" target="_blank">
-																																	<button class="button btn-small" style="margin-left:0;">
-																																		RPG Paradize
-																																	</button>
-																																</a> #}
+																																																	<button class="button btn-small" style="margin-left:0;">
+																																																		RPG Paradize
+																																																	</button>
+																																																</a> #}
 
 								<a id="btn_verif_vote" href="{{ path('verify_vote', {'vote_site_id': 1}) }}" style="display:grid;margin-top:15px;width:auto">
 									<button class="button btn-active btn-small" style="margin-left:0;">
@@ -73,7 +76,7 @@
 							<br><br>
 							<h3>Récompenses</h3>
 							<div class="divider" style="margin-bottom: 10px;"></div>
-							<p>Comme le serveur est en maintenance, il n'y a pas de récompenses pour le moment.</p>
+							<p style="font-size:1.2em;">Comme le serveur est en maintenance, il n'y a pas de récompenses pour le moment. Cependant, les votes vont beaucoup nous aider et nous remercions les personnes qui vont quand même voter.</p>
 						</div>
 					</div>
 				</div>
@@ -94,14 +97,14 @@
 {% block javascripts %}
 	<script>
 		const btn_vote_server = document.getElementById('btn_server_vote');
-		const btn_verif_vote = document.getElementById('btn_verif_vote');
+const btn_verif_vote = document.getElementById('btn_verif_vote');
 
-		//Init
-		btn_verif_vote.style.display = "none";
+// Init
+btn_verif_vote.style.display = "none";
 
-		btn_vote_server.addEventListener('click', () => {
-			btn_verif_vote.style.display = "grid";
-			btn_vote_server.style.display = "none";
-		});
+btn_vote_server.addEventListener('click', () => {
+btn_verif_vote.style.display = "grid";
+btn_vote_server.style.display = "none";
+});
 	</script>
 {% endblock %}

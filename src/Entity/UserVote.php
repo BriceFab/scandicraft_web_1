@@ -107,4 +107,9 @@ class UserVote
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getUser()->getUsername() . " - " . $this->getVoteId();
+    }
 }

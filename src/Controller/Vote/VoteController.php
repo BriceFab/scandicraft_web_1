@@ -5,6 +5,7 @@ namespace App\Controller\Vote;
 use App\Entity\UserVote;
 use App\Entity\VoteSite;
 use App\Repository\UserVoteRepository;
+use App\Repository\VoteSiteRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,11 +27,12 @@ class VoteController extends AbstractController
     /**
      * @Route("/voter", name="voter")
      */
-    public function voterPage(UserVoteRepository $userVoteRepository)
+    public function voterPage(UserVoteRepository $userVoteRepository, VoteSiteRepository $voteSiteRepository)
     {
         $top_votes = $userVoteRepository->getTopVotes();
 
         return $this->render('vote/index.html.twig', [
+            "vote_sites" => $voteSiteRepository->findBy(['active' => true]),
             "top_votes" => $top_votes,
         ]);
     }

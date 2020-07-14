@@ -1,0 +1,25 @@
+easy_admin:
+  entities:
+    UserVote:
+      class: App\Entity\UserVote
+      disabled_actions: ["new", "edit"]
+      permissions:
+        list: ["ROLE_MANAGEUR"]
+        delete: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        show: ["ROLE_MANAGEUR"]
+        new: ["ROLE_ADMIN"]
+      list:
+        title: "Votes des utilisateurs"
+        actions:
+          [
+            { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+            { property: "user", label: "Utilisateur" },
+            { property: "createdAt", label: "Voté le" },
+            { property: "vote_site", label: "Site de vote" },
+            { property: "vote_id", label: "Id de vote" },
+            { property: "user_ip", label: "IP", permission: "ROLE_ADMIN" },
+          ]
