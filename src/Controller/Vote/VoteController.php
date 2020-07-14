@@ -45,7 +45,7 @@ class VoteController extends AbstractController
      */
     public function valideVote(Request $request, VoteSite $voteSite)
     {
-        $user_ip = '81.13.140.215'; //$request->getClientIp()
+        $user_ip = $request->getClientIp();
 
         //Vérification du vote
         $has_vote = $this->verifyServerPriveVote($user_ip);
