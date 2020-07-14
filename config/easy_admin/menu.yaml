@@ -96,6 +96,14 @@ easy_admin:
               permission: "ROLE_MANAGEUR",
             },
           ]
+      - label: "Votes"
+        icon: "check-circle"
+        permission: "ROLE_MANAGEUR"
+        children:
+          [
+            { entity: "UserVote", label: "Votes", permission: "ROLE_MANAGEUR" },
+            { entity: "VoteSite", label: "Sites de vote", permission: "ROLE_ADMIN" },
+          ]
       - label: "Aide"
         icon: "hands-helping"
         permission: "ROLE_STAFF"
