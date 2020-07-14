@@ -125,6 +125,16 @@ class User implements UserInterface
      */
     private $spoilShares;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UserVote::class, mappedBy="user")
+     */
+    private $userVotes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=VoteSite::class, mappedBy="createdBy")
+     */
+    private $voteSites;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -140,6 +150,8 @@ class User implements UserInterface
         $this->forumDiscussions = new ArrayCollection();
         $this->forumDiscussionAnswers = new ArrayCollection();
         $this->spoilShares = new ArrayCollection();
+        $this->userVotes = new ArrayCollection();
+        $this->voteSites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -651,6 +663,68 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($spoilShare->getUser() === $this) {
                 $spoilShare->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserVote[]
+     */
+    public function getUserVotes(): Collection
+    {
+        return $this->userVotes;
+    }
+
+    public function addUserVote(UserVote $userVote): self
+    {
+        if (!$this->userVotes->contains($userVote)) {
+            $this->userVotes[] = $userVote;
+            $userVote->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserVote(UserVote $userVote): self
+    {
+        if ($this->userVotes->contains($userVote)) {
+            $this->userVotes->removeElement($userVote);
+            // set the owning side to null (unless already changed)
+            if ($userVote->getUser() === $this) {
+                $userVote->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|VoteSite[]
+     */
+    public function getVoteSites(): Collection
+    {
+        return $this->voteSites;
+    }
+
+    public function addVoteSite(VoteSite $voteSite): self
+    {
+        if (!$this->voteSites->contains($voteSite)) {
+            $this->voteSites[] = $voteSite;
+            $voteSite->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVoteSite(VoteSite $voteSite): self
+    {
+        if ($this->voteSites->contains($voteSite)) {
+            $this->voteSites->removeElement($voteSite);
+            // set the owning side to null (unless already changed)
+            if ($voteSite->getCreatedBy() === $this) {
+                $voteSite->setCreatedBy(null);
             }
         }
 
