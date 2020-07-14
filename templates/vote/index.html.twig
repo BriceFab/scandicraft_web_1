@@ -1,20 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello VoteController!{% endblock %}
+{% block title %}Voter et gagner
+{% endblock %}
+{% block description %}Votez et gagnez des récompenses sur Minecraft.
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<section class="w-section section">
+		<div class="w-container">
+			<div class="w-row">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/sources/scandicraft/scandicraft_web/src/Controller/VoteController.php'|file_link(0) }}">src/Controller/VoteController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/sources/scandicraft/scandicraft_web/templates/vote/index.html.twig'|file_link(0) }}">templates/vote/index.html.twig</a></code></li>
-    </ul>
-</div>
+				<div class="w-col w-col-4">
+					<div class="top-spc">
+						<div class="w-embed">
+							<h3>Votez et gagnez !</h3>
+							<div class="divider" style="margin-bottom: 10px;"></div>
+							{% if app.user %}
+								<p>Choisissez le site de vote:</p>
+								<a href="https://serveur-prive.net/minecraft/scandicraft-4201/vote" target="_blank">
+									<button class="button btn-active btn-small" style="margin-left:0;">
+										Serveur Privé
+									</button>
+								</a>
+								<a href="https://www.rpg-paradize.com/?page=vote&vote=101103" target="_blank">
+									<button class="button btn-active btn-small" style="margin-left:0;">
+										RPG Paradize
+									</button>
+								</a>
+
+								<a href="{{ path('verify_vote', {'vote_site_id': 1}) }}">
+									<button class="button btn-small" style="margin-left:0;">
+										Vérifier mon vote
+									</button>
+								</a>
+							{% else %}
+								<div class="scandicraft_error" style="padding: 4px;width: 300px;text-align: left;">Connectez-vous pour voter.</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+
+				<div class="w-col w-col-8">
+					<div class="top-spc">
+						<div class="w-embed">
+							<h3>Classement des meilleurs votants</h3>
+							<div class="divider" style="margin-bottom: 10px;"></div>
+							<div>
+								{% if top_votes|length > 0 %}
+									<table class="style">
+										<tbody>
+											<tr>
+												<th>Rang</th>
+												<th>Skin</th>
+												<th>Pseudo</th>
+												<th>Votes</th>
+											</tr>
+											{% for user_vote in top_votes %}
+												<tr>
+													<td>#{{ loop.index }}</td>
+													<td>Skin</td>
+													<td>{{ user_vote[0].user.username }}</td>
+													<td>{{ user_vote.nbr_votes }}</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								{% else %}
+									<p>Aucuns votes pour le mois en cours</p>
+								{% endif %}
+							</div>
+							<br><br>
+							<h3>Récompenses</h3>
+							<div class="divider" style="margin-bottom: 10px;"></div>
+							<p>Comme le serveur est en maintenance, il n'y a pas de récompenses pour le moment.</p>
+						</div>
+					</div>
+				</div>
+
+				{# survey_archived #}
+				<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1457190527508329" data-ad-slot="7669320152"></ins>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+			</div>
+
+		</div>
+
+	</section>
 {% endblock %}
