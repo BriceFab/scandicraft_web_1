@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte
+{% endblock %}
+
+{% block body %}
+
+    <section>
+
+        <section class="w-section section">
+            <div class="w-container">
+                <div class="w-row">
+
+                    <h3>
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="p-2">{{ user.username }}</div>
+                            <div class="p-2">
+                                <a href="#">
+                                    <span class="badge badge-account-pbs">PBS: 0</span>
+                                    <span class="badge badge-account-credit">
+										<i class="fas fa-coins"></i>
+										Créditer</span>
+                                </a>
+                            </div>
+                        </div>
+                    </h3>
+
+                    <div class="divider" style="margin-bottom: 15px;"></div>
+
+                    {% set tabs = [
+                        {
+                            name: 'Informations',
+                            content: include('user/compte/tabInformations.twig'),
+                        },
+                        {
+                            name: 'Récompenses',
+                            notif: 0,
+                        },
+                        {
+                            name: 'Historique',
+                        }] %}
+
+                    {% include '_components/tabs/tabs.twig' with { tabs: tabs} %}
+
+                    <div class="w-tabs" data-duration-in="300" data-duration-out="100">
+                        <div class="w-tab-menu">
+                            <a class="w-tab-link w-inline-block tab w--current" data-w-tab="informations">
+                                <div>Informations</div>
+                            </a>
+                            <a class="w-tab-link w-inline-block tab" data-w-tab="recompenses">
+                                <div>Récompenses
+                                    <span class="badge badge-account-award">0</span>
+                                </div>
+                            </a>
+                            <a class="w-tab-link w-inline-block tab" data-w-tab="historique">
+                                <div>Historique</div>
+                            </a>
+                        </div>
+                        <div
+                                class="w-tab-content tab-content">
+                            <!-- Tab1 -->
+                            <div class="w-tab-pane" data-w-tab="informations"
+                                 style="opacity: 1; transition: opacity 300ms ease 0s;">
+
+                            </div>
+                            <!-- Tab2 -->
+                            <div class="w-tab-pane" data-w-tab="recompenses">
+                                En cours de développement
+                            </div>
+                            <!-- Tab3 -->
+                            <div class="w-tab-pane" data-w-tab="historique">
+                                En cours de développement
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+    </section>
+
+    {% include 'security/reset_password_modal.html.twig' with {'email': user.email} %}
+
+{% endblock %}

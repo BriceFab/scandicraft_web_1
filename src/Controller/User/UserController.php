@@ -6,12 +6,15 @@ use App\Entity\User;
 use App\Entity\UserSocialmedia;
 use App\Form\ResetPasswordType;
 use App\Form\UserSocialmediaType;
+use App\Repository\UserVoteRepository;
 use App\Service\JWTService;
 use App\Service\TokenAction;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
@@ -29,8 +32,10 @@ class UserController extends AbstractController
 
     /**
      * @Route("/compte", name="compte")
+     * @param UserVoteRepository $userVoteRepository
+     * @return RedirectResponse|Response
      */
-    public function index()
+    public function index(UserVoteRepository $userVoteRepository)
     {
         if (!$this->getUser() || $this->getUser() == null) {
             $this->addFlash('error', 'Vous devez être connecté pour accéder à cette page !');
@@ -41,16 +46,20 @@ class UserController extends AbstractController
         $network = new UserSocialmedia();
         $form_network = $this->createForm(UserSocialmediaType::class, $network);
 
-        return $this->render('user/compte.html.twig', [
+        return $this->render('user/compte/index.twig', [
             'user' => $this->getUser(),
             'form_network' => $form_network->createView(),
+            'nombre_votes' => count($userVoteRepository->getUserMonthlyVotes($this->getUser())),
         ]);
     }
 
     /**
      * @Route("/compte/add_network", name="compte_add_network", methods={"POST"})
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
-    public function addNetwork(Request $request) {
+    public function addNetwork(Request $request)
+    {
         $network = new UserSocialmedia();
 
         $form_network = $this->createForm(UserSocialmediaType::class, $network);
@@ -66,6 +75,8 @@ class UserController extends AbstractController
 
     /**
      * @Route("/reset_password", name="ask_reset_password")
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function askPassword(Request $request)
     {
@@ -89,6 +100,10 @@ class UserController extends AbstractController
 
     /**
      * @Route("/reset_password/{token}", name="reset_password")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param $token
+     * @return RedirectResponse|Response
      */
     public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, $token)
     {
