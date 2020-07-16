@@ -11,6 +11,9 @@ parameters:
     forum_images_url: '/uploads/forum/images/'
     forum_images_directory: '%kernel.project_dir%/public/uploads/forum/images'
     path.spoil.upload_images: /uploads/spoils/images
+    VOTE_SERVER_PRIVE_KEY: '%env(VOTE_SERVER_PRIVE_KEY)%'
+    APP_ENV: '%env(APP_ENV)%'
+    VOTE_DEV_TEST_IP: '%env(VOTE_DEV_TEST_IP)%'
 
 services:
     # default configuration for services in *this* file
