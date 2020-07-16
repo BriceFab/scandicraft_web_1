@@ -32,7 +32,7 @@
             <meta property="og:image" content="{{ app.request.schemeAndHttpHost ~ asset('assets/img/main-logo.png') }}" />
         {% endif %}
 
-        <link rel="manifest" href="/manifest.webmanifest.json" />
+        <link rel="manifest" href="{{ asset('manifest.webmanifest.json') }}" />
         <meta name="theme-color" content="#b30000" />
         <link rel="dns-prefetch" href="//www.google.fr" />
         <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
@@ -43,7 +43,7 @@
         <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}" />
 
         <!-- main css -->
-        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('styles') }}
 
         {% block stylesheets %}{% endblock %}
         
@@ -74,7 +74,7 @@
         {% for message in app.flashes('error') %}
 		    <div id="notification_error" data-message="{{ message|trans }}"></div>
 	        <script type="text/javascript">
-			    let data = document.querySelector('#notification_error');
+                let data = document.querySelector('#notification_error');
 				toast.error(data.dataset.message);
 			</script>
         {% endfor %}

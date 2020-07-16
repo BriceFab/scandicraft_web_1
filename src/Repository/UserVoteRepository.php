@@ -3,9 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\UserVote;
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method UserVote|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,9 +21,11 @@ class UserVoteRepository extends ServiceEntityRepository
     }
 
     /**
+     * Liste des x top voter
+     * @param int $max nombre max de top
      * @return UserVote[] Returns an array of UserVote objects
      */
-    public function getTopVotes()
+    public function getTopVotes($max = 15)
     {
         $qb = $this->createQueryBuilder('v');
 
@@ -34,6 +36,26 @@ class UserVoteRepository extends ServiceEntityRepository
             ->where('substring(v.createdAt, 6, 2) = :act_month')
             ->groupBy('v.user')
             ->orderBy('nbr_votes', 'DESC')
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Les votes du mois du joueur
+     * @param UserInterface $user joueur
+     * @return int|mixed|string
+     */
+    public function getUserMonthlyVotes(UserInterface $user)
+    {
+        $qb = $this->createQueryBuilder('v');
+
+        return $qb
+            ->innerJoin('v.user', 'user')
+            ->setParameter('act_month', (new \DateTime('now'))->format("m"))
+            ->setParameter('user', $user)
+            ->where('substring(v.createdAt, 6, 2) = :act_month')
+            ->andWhere('v.user = :user')
             ->setMaxResults(25)
             ->getQuery()
             ->getResult();

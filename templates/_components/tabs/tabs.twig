@@ -1,0 +1,27 @@
+<div class="w-tabs" data-duration-in="300" data-duration-out="100">
+    <div class="w-tab-menu">
+        {% for tab in tabs %}
+            <a class="w-tab-link w-inline-block tab {{ loop.index == 0 ?: 'w--current' }}"
+               data-w-tab="tab_{{ loop.index }}">
+                <div>
+                    <span>{{ tab.name }}</span>
+                    {% if tab.notif is defined %}
+                        <span class="badge badge-account-award">{{ tab.notif }}</span>
+                    {% endif %}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <div class="w-tab-content tab-content">
+        {% for tab in tabs %}
+            <div class="w-tab-pane {{ loop.index == 0 ?: 'w--tab-active' }}" data-w-tab="tab_{{ loop.index }}"
+                 style="opacity: 1; transition: opacity 300ms ease 0s;">
+                {% if tab.content is defined %}
+                    {{ tab.content|raw }}
+                {% else %}
+                    en cours de développement..
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
