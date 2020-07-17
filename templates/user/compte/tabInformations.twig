@@ -25,7 +25,7 @@
     <div class="col-6 col-md-4">
         ********
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-4 tab-menu-last-col">
         <a class="button btn-active btn-extra-small" href="#" style="float: right;"
            data-toggle="modal" data-target="#reset_password">Modifier</a>
     </div>
@@ -38,7 +38,7 @@
     <div class="col-6 col-md-4">
         Scandinave
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-4 tab-menu-last-col">
         <a class="button btn-active btn-extra-small" href="#" style="float: right;">Boutique</a>
     </div>
 </div>
@@ -50,7 +50,7 @@
     <div class="col-6 col-md-4">
         {{ nombre_votes }}
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-4 tab-menu-last-col">
         <a class="button btn-active btn-extra-small" href="{{ path('voter') }}"
            style="float: right;">Voter</a>
     </div>
@@ -63,11 +63,21 @@
     <div class="col-6 col-md-4">
         image
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-4 tab-menu-last-col">
         <input type="file"
-               id="avatar" name="avatar"
+               id="upload_skin" name="avatar"
                accept="image/png, image/jpeg">
-        {#                                        <a class="button btn-active btn-extra-small" href="#"#}
-        {#                                           style="float: right;">Parcourir</a>#}
+        <a id="btn_send_skin" class="button btn-active btn-extra-small" style="float: right;">Modifier</a>
     </div>
 </div>
+
+{% block javascripts %}
+    <script type="application/ld+json" id="script_skin_data">
+    {
+        "skin_input": "upload_skin",
+        "button_skin_upload": "btn_send_skin",
+        "upload_skin_route": "{{ path('upload_skin') }}"
+    }
+    </script>
+    {{ encore_entry_script_tags('upload_skin') }}
+{% endblock %}

@@ -1,6 +1,30 @@
 @import "../../colors";
 @import "../../variables";
 
+//Variables
+$home_slides_path: '../../../images/home/slides/';
+
+//Slides
+.slide-1 {
+  background-image: url("#{$home_slides_path}/#{$homeSlide1}");
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.slide-2 {
+  background-image: url("#{$home_slides_path}/#{$homeSlide2}");
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.slide-3 {
+  background-image: url("#{$home_slides_path}/#{$homeSlide3}");
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+
 /*-----------------------------------------------------------------------------------
 
 [Table of contents]
@@ -1613,13 +1637,6 @@ a {
   background-color: $mainColor;
 }
 
-.slide-1 {
-  background-image: url('images/scandicraft/slide1.png');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 .cont-slider {
   position: relative;
   margin-top: 50px;
@@ -1655,18 +1672,6 @@ a {
   text-transform: uppercase;
   opacity: 0.8;
   font-weight: bold;
-}
-
-.slide-2 {
-  background-image: url('images/scandicraft/slide2.png');
-  background-position: 50% 50%;
-  background-size: cover;
-}
-
-.slide-3 {
-  background-image: url('images/scandicraft/slide3.png');
-  background-position: 50% 50%;
-  background-size: cover;
 }
 
 .big-slider-title {

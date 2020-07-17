@@ -7,224 +7,252 @@
 
 {% block body %}
 
-	<section>
+    <section>
 
-		<div class="banner">
-			<div class="w-slider big-slider" data-animation="cross" data-duration="500" data-infinite="1" data-nav-spacing="5">
-				<div class="w-slider-mask">
-					<div class="w-slide slide-1" style="transform: translateX(0px); opacity: 1; z-index: 9;">
-						<div class="video-overlay">
-							<div class="w-container cont-slider in-video">
-								<div class="alg-center">
-									<h1 class="big-slider-title big-white" width="10000" data-ix="slide-big-title" style="opacity: 1; transform: translateX(0px) translateY(0px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Bienvenue</h1>
-									<h3 class="slider-sub-txt" data-ix="slide-sub-title" style="opacity: 1; transform: translateX(0px) translateY(0px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Rejoins-nous dès maintenant !</h3>
-									<div class="slider-spc" data-ix="slide-spc" style="opacity: 1; transform: translateX(0px) translateY(0px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
-										<a class="button no-lft-mrg" href="{{ path('app_register') }}">S'inscrire</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="w-slide slide-2" style="transform: translateX(0px); opacity: 1; z-index: 7; visibility: hidden;">
-						<div class="video-wrapper">
-							<div class="w-embed embed-video"></div>
-							<div class="video-overlay">
-								<div class="w-container cont-slider in-video">
-									<div class="alg-center">
-										<h1 class="big-slider-title big-white" width="10000" data-ix="slide-big-title" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Boutique</h1>
-										<h3 class="slider-sub-txt" data-ix="slide-sub-title" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Soutenez-nous avec notre boutique automatique</h3>
-										<div class="slider-spc" data-ix="slide-spc" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
-											<a class="button no-lft-mrg" href="#">Notre boutique</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="w-slide slide-3" style="transform: translateX(0px); opacity: 1; z-index: 8; visibility: hidden;">
-						<div class="video-wrapper">
-							<div class="w-embed embed-video"></div>
-							<div class="video-overlay">
-								<div class="w-container cont-slider in-video">
-									<div class="alg-center">
-										<h1 class="big-slider-title big-white" width="10000" data-ix="slide-big-title" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Voter</h1>
-										<h3 class="slider-sub-txt" data-ix="slide-sub-title" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">Votez régulièrement et gagnez beaucoup de cadeaux !</h3>
-										<div class="slider-spc" data-ix="slide-spc" style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
-											<a class="button no-lft-mrg" href="#">Voter pour le serveur</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="w-slider-arrow-left arrow-big-sl">
-					<div class="w-icon-slider-left"></div>
-				</div>
-				<div class="w-slider-arrow-right arrow-big-sl">
-					<div class="w-icon-slider-right"></div>
-				</div>
-			</div>
-		</div>
-		<div class="welc-hero">
-			<div class="w-container">
-				<div class="w-row">
-					<div class="w-col w-col-8 w-col-stack">
-						<font>
-							<h3 style="margin-top:12px;">
-								ScandiCraft: Serveur Minecraft PvP / Faction / Moddé !
-							</h3>
-						</font>
-					</div>
-					<font>
-						<div class="w-col w-col-4 w-col-stack alg-right">
-							<a class="button btn-large" href="{{ path('jouer') }}">
-								<b>Joue avec nous</b>
-							</a>
-						</div>
-					</font>
-				</div>
-			</div>
+        <div class="banner">
+            <div class="w-slider big-slider" data-animation="cross" data-duration="500" data-infinite="1"
+                 data-nav-spacing="5">
+                <div class="w-slider-mask">
+                    <div class="w-slide" style="transform: translateX(0px); opacity: 1; z-index: 9;">
+                        <div class="w-slide slide-1 slide-blur"></div>
+                        <div class="video-overlay">
+                            <div class="w-container cont-slider in-video">
+                                <div class="alg-center">
+                                    <h1 class="big-slider-title big-white" width="10000" data-ix="slide-big-title"
+                                        style="opacity: 1; transform: translateX(0px) translateY(0px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+                                        Bienvenue</h1>
+                                    <h3 class="slider-sub-txt" data-ix="slide-sub-title"
+                                        style="opacity: 1; transform: translateX(0px) translateY(0px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+                                        Rejoins-nous dès maintenant !</h3>
+                                    <div class="slider-spc" data-ix="slide-spc"
+                                         style="opacity: 1; transform: translateX(0px) translateY(0px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+                                        <a class="button no-lft-mrg" href="{{ path('app_register') }}">S'inscrire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-slide"
+                         style="transform: translateX(0px); opacity: 1; z-index: 7; visibility: hidden;">
+                        <div class="w-slide slide-2 slide-blur"></div>
+                        <div class="video-overlay">
+                            <div class="w-container cont-slider in-video">
+                                <div class="alg-center">
+                                    <h1 class="big-slider-title big-white" width="10000" data-ix="slide-big-title"
+                                        style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+                                        Boutique</h1>
+                                    <h3 class="slider-sub-txt" data-ix="slide-sub-title"
+                                        style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+                                        Soutenez-nous avec notre boutique automatique</h3>
+                                    <div class="slider-spc" data-ix="slide-spc"
+                                         style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+                                        <a class="button no-lft-mrg" href="#">Notre boutique</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-slide"
+                         style="transform: translateX(0px); opacity: 1; z-index: 8; visibility: hidden;">
+                        <div class="w-slide slide-3 slide-blur"></div>
+                        <div class="video-overlay">
+                            <div class="w-container cont-slider in-video">
+                                <div class="alg-center">
+                                    <h1 class="big-slider-title big-white" width="10000" data-ix="slide-big-title"
+                                        style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+                                        Voter</h1>
+                                    <h3 class="slider-sub-txt" data-ix="slide-sub-title"
+                                        style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+                                        Votez régulièrement et gagnez beaucoup de cadeaux !</h3>
+                                    <div class="slider-spc" data-ix="slide-spc"
+                                         style="opacity: 0; transform: translateX(0px) translateY(-40px); transition: opacity 500ms ease 0s, transform 500ms ease 0s;">
+                                        <a class="button no-lft-mrg" href="#">Voter pour le serveur</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-slider-arrow-left arrow-big-sl">
+                    <div class="w-icon-slider-left"></div>
+                </div>
+                <div class="w-slider-arrow-right arrow-big-sl">
+                    <div class="w-icon-slider-right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="welc-hero">
+            <div class="w-container">
+                <div class="w-row">
+                    <div class="w-col w-col-8 w-col-stack">
+                        <font>
+                            <h3 style="margin-top:12px;">
+                                ScandiCraft: Serveur Minecraft PvP / Faction / Moddé !
+                            </h3>
+                        </font>
+                    </div>
+                    <font>
+                        <div class="w-col w-col-4 w-col-stack alg-right">
+                            <a class="button btn-large" href="{{ path('jouer') }}">
+                                <b>Joue avec nous</b>
+                            </a>
+                        </div>
+                    </font>
+                </div>
+            </div>
 
-		</div>
+        </div>
 
-		<section class="w-section section">
-			<div class="w-container">
-				<div class="big-spc-bottom">
-					<div class="w-row">
-						<div class="w-col w-col-4">
-							<div class="flip-container">
-								<div class="flipper" ontouchstart="this.classList.toggle('hover');">
-									<div class="front">
-										<div class="ico-flip">
-											<i class="fa fa-shopping-cart"></i>
-										</div>
-										<div class="div-spc">
-											<h5>Une boutique</h5>
-											<p>100% automatique avec différentes offres disponibles.</p>
-										</div>
-									</div>
-									<div class="back">
-										<div>
-											<h5 class="white-orignal">Une boutique</h5>
-											<p class="white-orignal">De nombreux élements sont disponibles à l'achat sur notre site internet, vous pouvez vous procurez des items, ou bien des rangs privilégiés</p>
-										</div>
-										<div class="div-spc">
-											<a class="button btn-transparent" style="margin-top: 50px;" href="#">Accéder à la boutique</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+        <section class="w-section section">
+            <div class="w-container">
+                <div class="big-spc-bottom">
+                    <div class="w-row">
+                        <div class="w-col w-col-4">
+                            <div class="flip-container">
+                                <div class="flipper" ontouchstart="this.classList.toggle('hover');">
+                                    <div class="front">
+                                        <div class="ico-flip">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="div-spc">
+                                            <h5>Une boutique</h5>
+                                            <p>100% automatique avec différentes offres disponibles.</p>
+                                        </div>
+                                    </div>
+                                    <div class="back">
+                                        <div>
+                                            <h5 class="white-orignal">Une boutique</h5>
+                                            <p class="white-orignal">De nombreux élements sont disponibles à l'achat sur
+                                                notre site internet, vous pouvez vous procurez des items, ou bien des
+                                                rangs privilégiés</p>
+                                        </div>
+                                        <div class="div-spc">
+                                            <a class="button btn-transparent" style="margin-top: 50px;" href="#">Accéder
+                                                à la boutique</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-						<div class="w-col w-col-4">
-							<div class="flip-container">
-								<div class="flipper" ontouchstart="this.classList.toggle('hover');">
-									<div class="front">
-										<div class="ico-flip">
-											<i class="fa fa-laptop"></i>
-										</div>
-										<div class="div-spc">
-											<h5>Une optimisation maximale</h5>
-											<p>Tout a été pensé et conçu afin de vous faire gagner le max d'FPS possible.</p>
-										</div>
-									</div>
-									<div class="back">
-										<div>
-											<h5 class="white-orignal">Une optimisation maximale</h5>
-											<p class="white-orignal">De plus notre communauté est très active sur le jeu, sur le forum et sur le serveur teamspeak ; vous vous ferez surement de nombreux amis en jouant !</p>
-										</div>
-										<div class="div-spc">
-											<a class="button btn-transparent" style="margin-top: 50px;" href="{{ path('jouer') }}">Débute l'aventure maintenant !</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+                        <div class="w-col w-col-4">
+                            <div class="flip-container">
+                                <div class="flipper" ontouchstart="this.classList.toggle('hover');">
+                                    <div class="front">
+                                        <div class="ico-flip">
+                                            <i class="fa fa-laptop"></i>
+                                        </div>
+                                        <div class="div-spc">
+                                            <h5>Une optimisation maximale</h5>
+                                            <p>Tout a été pensé et conçu afin de vous faire gagner le max d'FPS
+                                                possible.</p>
+                                        </div>
+                                    </div>
+                                    <div class="back">
+                                        <div>
+                                            <h5 class="white-orignal">Une optimisation maximale</h5>
+                                            <p class="white-orignal">De plus notre communauté est très active sur le
+                                                jeu, sur le forum et sur le serveur teamspeak ; vous vous ferez surement
+                                                de nombreux amis en jouant !</p>
+                                        </div>
+                                        <div class="div-spc">
+                                            <a class="button btn-transparent" style="margin-top: 50px;"
+                                               href="{{ path('jouer') }}">Débute l'aventure maintenant !</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-						<div class="w-col w-col-4">
-							<div class="flip-container">
-								<div class="flipper" ontouchstart="this.classList.toggle('hover');">
-									<div class="front">
-										<div class="ico-flip">
-											<i class="fa fa-lock"></i>
-										</div>
-										<div class="div-spc">
-											<h5>Haute sécurité</h5>
-											<p>Un site fluide et sécurisé ! Que demandez de mieux ?</p>
-										</div>
-									</div>
-									<div class="back">
-										<div>
-											<h5 class="white-orignal">Sûr et sécurisé</h5>
-											<p class="white-orignal">Profitez de services vous offrant une sécurité optimale et vous permettant de naviguer fiablement sur le site du serveur !</p>
-										</div>
-										<div class="div-spc">
-											<a class="button btn-transparent" style="margin-top: 50px;" href="{{ path('app_register') }}">Inscrivez-vous dès maintenant !</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+                        <div class="w-col w-col-4">
+                            <div class="flip-container">
+                                <div class="flipper" ontouchstart="this.classList.toggle('hover');">
+                                    <div class="front">
+                                        <div class="ico-flip">
+                                            <i class="fa fa-lock"></i>
+                                        </div>
+                                        <div class="div-spc">
+                                            <h5>Haute sécurité</h5>
+                                            <p>Un site fluide et sécurisé ! Que demandez de mieux ?</p>
+                                        </div>
+                                    </div>
+                                    <div class="back">
+                                        <div>
+                                            <h5 class="white-orignal">Sûr et sécurisé</h5>
+                                            <p class="white-orignal">Profitez de services vous offrant une sécurité
+                                                optimale et vous permettant de naviguer fiablement sur le site du
+                                                serveur !</p>
+                                        </div>
+                                        <div class="div-spc">
+                                            <a class="button btn-transparent" style="margin-top: 50px;"
+                                               href="{{ path('app_register') }}">Inscrivez-vous dès maintenant !</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-						<ins class="adsbygoogle w-col w-col-12" style="display:block;text-align:center;padding-top:150px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1457190527508329" data-ad-slot="9217371390"></ins>
-						<script>
-							(adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
+                        <ins class="adsbygoogle w-col w-col-12"
+                             style="display:block;text-align:center;padding-top:150px;" data-ad-layout="in-article"
+                             data-ad-format="fluid" data-ad-client="ca-pub-1457190527508329"
+                             data-ad-slot="9217371390"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
 
-					</div>
-				</div>
-			</div>
-		</section>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-		{# Temp accueil infos #}
-		<div class="d-none d-sm-block" style="position:absolute;top:122px;left:0px;width:100%;">
+        {# Temp accueil infos #}
+        <div class="d-none d-sm-block" style="position:absolute;top:122px;left:0px;width:100%;">
 
-			<a href="{{ path('forum') }}" target="_blank">
-				<div class="w-row div-spc">
-					<div class="w-col w-col-4 w-col-stack" style="max-width:500px;">
-						<div class="w-clearfix square-box-wrp" style="z-index:1;">
-							<div class="square-ico" style="height:90px;font-size:30px;line-height:94px;width:40px;">
-								<i class="fa fa-flag"></i>
-							</div>
-							<div class="square-content" style="max-height:90px;min-height:90px;">
-								<h5>Candidature</h5>
-								<p class="p-square" style="height:60px">Nous recrutons depuis le
-									<b>forum</b>
-									!</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
+            <a href="{{ path('forum') }}" target="_blank">
+                <div class="w-row div-spc">
+                    <div class="w-col w-col-4 w-col-stack" style="max-width:500px;">
+                        <div class="w-clearfix square-box-wrp" style="z-index:1;">
+                            <div class="square-ico" style="height:90px;font-size:30px;line-height:94px;width:40px;">
+                                <i class="fa fa-flag"></i>
+                            </div>
+                            <div class="square-content" style="max-height:90px;min-height:90px;">
+                                <h5>Candidature</h5>
+                                <p class="p-square" style="height:60px">Nous recrutons depuis le
+                                    <b>forum</b>
+                                    !</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
 
-			{% if last_spoil_missing_number > 0 and last_spoil.getGoalType() %}
-				<a href="{{ path('spoils') }}" target="_blank">
-					<div class="w-row div-spc">
-						<div class="w-col w-col-4 w-col-stack" style="max-width:500px;">
-							<div class="w-clearfix square-box-wrp" style="z-index:1;">
-								<div class="square-ico" style="height:90px;font-size:30px;line-height:94px;width:40px;">
-									<i class="fas fa-question"></i>
-								</div>
-								<div class="square-content" style="max-height:90px;min-height:90px;">
-									<h5>Spoils</h5>
-									<p class="p-square" style="height:60px">Il manque
-										<b style="color:#b30000;">{{ last_spoil_missing_number }}</b>
-										{% if last_spoil.goalType.name == 'social_share' %}
-											{{ last_spoil_missing_number > 1 ? 'partages' : 'partage' }}
-										{% elseif last_spoil.goalType.name == 'discord_members' %}
-											{{ last_spoil_missing_number > 1 ? 'membres Discord' : 'membre Discord' }}
-										{% endif %}
-										!</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</a>
-			{% endif %}
+            {% if last_spoil_missing_number > 0 and last_spoil.getGoalType() %}
+                <a href="{{ path('spoils') }}" target="_blank">
+                    <div class="w-row div-spc">
+                        <div class="w-col w-col-4 w-col-stack" style="max-width:500px;">
+                            <div class="w-clearfix square-box-wrp" style="z-index:1;">
+                                <div class="square-ico" style="height:90px;font-size:30px;line-height:94px;width:40px;">
+                                    <i class="fas fa-question"></i>
+                                </div>
+                                <div class="square-content" style="max-height:90px;min-height:90px;">
+                                    <h5>Spoils</h5>
+                                    <p class="p-square" style="height:60px">Il manque
+                                        <b style="color:#b30000;">{{ last_spoil_missing_number }}</b>
+                                        {% if last_spoil.goalType.name == 'social_share' %}
+                                            {{ last_spoil_missing_number > 1 ? 'partages' : 'partage' }}
+                                        {% elseif last_spoil.goalType.name == 'discord_members' %}
+                                            {{ last_spoil_missing_number > 1 ? 'membres Discord' : 'membre Discord' }}
+                                        {% endif %}
+                                        !</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endif %}
 
-		</div>
+        </div>
 
-	</section>
+    </section>
 
 {% endblock %}
