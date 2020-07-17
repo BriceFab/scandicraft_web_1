@@ -21,6 +21,9 @@ Encore
     .addEntry('main_app', './assets/javascript/react/main.js')          //js utilise react
     .addEntry('editor_app', './assets/javascript/js_editor/index.js')   //js editeur
 
+    //Twigs JS scripts
+    .addEntry('upload_skin', './assets/javascript/twig/upload_skin.js')
+
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
 
@@ -45,6 +48,13 @@ Encore
     })
 
     .enableSassLoader()
+    // .configureCssLoader((options) => {
+    //     console.log('options', options)
+    //     options.importLoaders = 1;
+    //     options.modules = {
+    //         localIdentName: '[path][name]__[local]--[hash:base64:5]'
+    //     };
+    // })
     .enableIntegrityHashes(Encore.isProduction())
     .autoProvidejQuery()
     .enableReactPreset()

@@ -1,7 +1,15 @@
 @import "variables";
 @import "colors";
 
+//Imports des styles
+@import "twig/index";
+@import "_overrides/index";
+
 //### ScandiCraft style
+.slide-blur {
+  filter: blur($homeSlideBlur);
+}
+
 p {
   font-size: $pFontSize;
 }

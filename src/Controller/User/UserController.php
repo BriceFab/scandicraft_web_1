@@ -3,10 +3,7 @@
 namespace App\Controller\User;
 
 use App\Entity\User;
-use App\Entity\UserSocialmedia;
 use App\Form\ResetPasswordType;
-use App\Form\UserSocialmediaType;
-use App\Repository\UserVoteRepository;
 use App\Service\JWTService;
 use App\Service\TokenAction;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,46 +28,23 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/compte", name="compte")
-     * @param UserVoteRepository $userVoteRepository
-     * @return RedirectResponse|Response
-     */
-    public function index(UserVoteRepository $userVoteRepository)
-    {
-        if (!$this->getUser() || $this->getUser() == null) {
-            $this->addFlash('error', 'Vous devez être connecté pour accéder à cette page !');
-            return $this->redirectToRoute('app_login');
-        }
-
-        //Forms
-        $network = new UserSocialmedia();
-        $form_network = $this->createForm(UserSocialmediaType::class, $network);
-
-        return $this->render('user/compte/index.twig', [
-            'user' => $this->getUser(),
-            'form_network' => $form_network->createView(),
-            'nombre_votes' => count($userVoteRepository->getUserMonthlyVotes($this->getUser())),
-        ]);
-    }
-
-    /**
      * @Route("/compte/add_network", name="compte_add_network", methods={"POST"})
      * @param Request $request
-     * @return RedirectResponse|Response
+     * @return void
      */
     public function addNetwork(Request $request)
     {
-        $network = new UserSocialmedia();
-
-        $form_network = $this->createForm(UserSocialmediaType::class, $network);
-
-        $form_network->handleRequest($request);
-
-        if ($form_network->isSubmitted() && $form_network->isValid()) {
-            // ... do your form processing, like saving the Task and Tag entities
-        }
-
-        return $this->index();
+//        $network = new UserSocialmedia();
+//
+//        $form_network = $this->createForm(UserSocialmediaType::class, $network);
+//
+//        $form_network->handleRequest($request);
+//
+//        if ($form_network->isSubmitted() && $form_network->isValid()) {
+//            // ... do your form processing, like saving the Task and Tag entities
+//        }
+//
+//        return $this->index();
     }
 
     /**
