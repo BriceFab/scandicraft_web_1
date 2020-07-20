@@ -7,104 +7,115 @@
 
 {% block body %}
 
-	<section class="w-section section">
-		<div class="w-container">
-			<div class="w-row">
+    <section class="w-section section">
+        <div class="w-container">
+            <div class="w-row">
 
-				<div class="w-col w-col-4">
-					<div class="top-spc">
-						<div class="w-embed">
-							<h3>Votez et gagnez !</h3>
-							<div class="divider" style="margin-bottom: 10px;"></div>
-							{% if app.user %}
-								<p>Choisissez le site de vote:</p>
+                <div class="w-col w-col-4">
+                    <div class="top-spc">
+                        <div class="w-embed">
+                            <h3>Votez et gagnez !</h3>
+                            <div class="divider" style="margin-bottom: 10px;"></div>
+                            {% if app.user %}
+                                <p>Choisissez le site de vote:</p>
 
-								{% for vote_site in vote_sites %}
-									<a id="btn_server_vote" href="{{ vote_site.voteUrl }}" target="_blank">
-										<button class="button btn-small" style="margin-left:0;">
-											{{ vote_site.name }}
-										</button>
-									</a>
-								{% endfor %}
-								{# <a href="https://www.rpg-paradize.com/?page=vote&vote=101103" target="_blank">
-																																																	<button class="button btn-small" style="margin-left:0;">
-																																																		RPG Paradize
-																																																	</button>
-																																																</a> #}
+                                {% for vote_site in vote_sites %}
+                                    <a id="btn_server_vote" href="{{ vote_site.voteUrl }}" target="_blank">
+                                        <button class="button btn-small" style="margin-left:0;">
+                                            {{ vote_site.name }}
+                                        </button>
+                                    </a>
+                                {% endfor %}
+                                {# <a href="https://www.rpg-paradize.com/?page=vote&vote=101103" target="_blank">
+                                                                                                                                                                                                    <button class="button btn-small" style="margin-left:0;">
+                                                                                                                                                                                                        RPG Paradize
+                                                                                                                                                                                                    </button>
+                                                                                                                                                                                                </a> #}
 
-								<a id="btn_verif_vote" href="{{ path('verify_vote', {'vote_site_id': 1}) }}" style="display:grid;margin-top:15px;width:auto">
-									<button class="button btn-active btn-small" style="margin-left:0;">
-										Vérifier mon vote
-									</button>
-								</a>
-							{% else %}
-								<div class="scandicraft_error" style="padding: 4px;width: 300px;text-align: left;">Connectez-vous pour voter.</div>
-							{% endif %}
-						</div>
-					</div>
-				</div>
+                                <a id="btn_verif_vote" href="{{ path('verify_vote', {'vote_site_id': 1}) }}"
+                                   style="display:grid;margin-top:15px;width:auto">
+                                    <button class="button btn-active btn-small" style="margin-left:0;">
+                                        Vérifier mon vote
+                                    </button>
+                                </a>
+                            {% else %}
+                                <div class="scandicraft_error" style="padding: 4px;width: 300px;text-align: left;">
+                                    Connectez-vous pour voter.
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
 
-				<div class="w-col w-col-8">
-					<div class="top-spc">
-						<div class="w-embed">
-							<h3>Classement des meilleurs votants</h3>
-							<div class="divider" style="margin-bottom: 10px;"></div>
-							<div>
-								{% if top_votes|length > 0 %}
-									<table class="style">
-										<tbody>
-											<tr>
-												<th>Rang</th>
-												<th>Skin</th>
-												<th>Pseudo</th>
-												<th>Votes</th>
-											</tr>
-											{% for user_vote in top_votes %}
-												<tr>
-													<td>#{{ loop.index }}</td>
-													<td>Skin</td>
-													<td>{{ user_vote[0].user.username }}</td>
-													<td>{{ user_vote.nbr_votes }}</td>
-												</tr>
-											{% endfor %}
-										</tbody>
-									</table>
-								{% else %}
-									<p>Aucuns votes pour le mois en cours</p>
-								{% endif %}
-							</div>
-							<br><br>
-							<h3>Récompenses</h3>
-							<div class="divider" style="margin-bottom: 10px;"></div>
-							<p style="font-size:1.2em;">Comme le serveur est en maintenance, il n'y a pas de récompenses pour le moment. Cependant, les votes vont beaucoup nous aider et nous remercions les personnes qui vont quand même voter.</p>
-						</div>
-					</div>
-				</div>
+                <div class="w-col w-col-8">
+                    <div class="top-spc">
+                        <div class="w-embed">
+                            <h3>Classement des meilleurs votants</h3>
+                            <div class="divider" style="margin-bottom: 10px;"></div>
+                            <div>
+                                {% if top_votes|length > 0 %}
+                                    <table class="style">
+                                        <tbody>
+                                        <tr>
+                                            <th>Rang</th>
+                                            <th>Skin</th>
+                                            <th>Pseudo</th>
+                                            <th>Votes</th>
+                                        </tr>
+                                        {% for user_vote in top_votes %}
+                                            <tr>
+                                                <td>#{{ loop.index }}</td>
+                                                <td>Skin</td>
+                                                <td>{{ user_vote[0].user.username }}</td>
+                                                <td>{{ user_vote.nbr_votes }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p>Aucuns votes pour le mois en cours</p>
+                                {% endif %}
+                            </div>
+                            <br><br>
+                            <h3>Récompenses</h3>
+                            <div class="divider" style="margin-bottom: 10px;"></div>
+                            <p style="font-size:1.2em;">Comme le serveur est en maintenance, il n'y a pas de récompenses
+                                pour le moment. Cependant, les votes vont beaucoup nous aider et nous remercions les
+                                personnes qui vont quand même voter.</p>
+                        </div>
+                    </div>
+                </div>
 
-				{# survey_archived #}
-				<ins class="adsbygoogle" style="display:block; text-align:center; height: auto;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1457190527508329" data-ad-slot="7669320152"></ins>
-				<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
+            </div>
 
-			</div>
+            <div class="w-row">
+                <!-- ad_display_carre -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1457190527508329"
+                     data-ad-slot="3778143153"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
 
-		</div>
-
-	</section>
+        </div>
+    </section>
 {% endblock %}
 
 {% block javascripts %}
-	<script>
-		const btn_vote_server = document.getElementById('btn_server_vote');
-const btn_verif_vote = document.getElementById('btn_verif_vote');
+    <script>
+        const btn_vote_server = document.getElementById('btn_server_vote');
+        const btn_verif_vote = document.getElementById('btn_verif_vote');
 
-// Init
-btn_verif_vote.style.display = "none";
+        // Init
+        btn_verif_vote.style.display = "none";
 
-btn_vote_server.addEventListener('click', () => {
-btn_verif_vote.style.display = "grid";
-btn_vote_server.style.display = "none";
-});
-	</script>
+        btn_vote_server.addEventListener('click', () => {
+            btn_verif_vote.style.display = "grid";
+            btn_vote_server.style.display = "none";
+        });
+    </script>
 {% endblock %}
