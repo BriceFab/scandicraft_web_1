@@ -65,7 +65,8 @@ class CompteController extends AbstractController
         //check dimensions
         $width = getimagesize($file)[0];
         $height = getimagesize($file)[1];
-        if ($width !== 64 && ($height !== 64 || $height !== 32)) {
+//        if ($width !== 64 && ($height !== 64 || $height !== 32)) {
+        if ($width !== 64 && $height !== 64) {
             return $this->json(["message" => "fichier dimensions incorrect"], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
