@@ -62,7 +62,8 @@ function checkFile(file) {
             let height = this.height;
             let width = this.width;
 
-            if (width !== 64 && (height !== 64 || height !== 32)) {
+            // if (width !== 64 && (height !== 64 || height !== 32)) {
+            if (width !== 64 && height !== 64) {
                 throw new Error("L'image doit être en 64x64 ou 64x32 pixels");
             }
         };
