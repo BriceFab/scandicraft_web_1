@@ -143,5 +143,9 @@
     <orderEntry type="library" name="adsbygoogle" level="application" />
     <orderEntry type="library" name="placeholders" level="application" />
     <orderEntry type="library" name="webfont" level="application" />
+    <orderEntry type="library" name="slick" level="application" />
+    <orderEntry type="library" name="slick-theme" level="application" />
+    <orderEntry type="library" name="jquery-migrate-1.2.1" level="application" />
+    <orderEntry type="library" name="jquery-1.11.0" level="application" />
   </component>
 </module>

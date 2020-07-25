@@ -68,10 +68,16 @@ class Spoil
      */
     private $goal_type;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Attachment::class, cascade={"persist"}, orphanRemoval=true)
+     */
+    private $images;
+
     public function __construct()
     {
         $this->spoilShares = new ArrayCollection();
         $this->setCreatedAt(new DateTime('now'));
+        $this->images = new ArrayCollection();
     }
 
     public function setImageFile(File $image = null)
@@ -220,5 +226,31 @@ class Spoil
     public function __toString()
     {
         return $this->getTitle();
+    }
+
+    /**
+     * @return Collection|Attachment[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Attachment $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Attachment $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+        }
+
+        return $this;
     }
 }

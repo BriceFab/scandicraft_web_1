@@ -1,37 +1,91 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Spoil et nouveautés:
-	{{ spoil.title }}
+    {{ spoil.title }}
 {% endblock %}
 {% block description %}Spoil Minecraft Faction:
-	{{ spoil.description }}
+    {{ spoil.description }}
 {% endblock %}
 
 {# edit meta image #}
 {% block meta_image %}
-	{% set spoil_image_path = app.request.schemeAndHttpHost ~ spoils_images_path ~ '/' ~ spoil.image %}
-	<meta property="og:image" content="{{ spoil_image_path }}"/>
+    {% set spoil_image_path = app.request.schemeAndHttpHost ~ spoils_images_path ~ '/' ~ spoil.image %}
+    <meta property="og:image" content="{{ spoil_image_path }}"/>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <style>
+        .slick-next {
+            margin-right: 30px;
+            z-index: 10;
+        }
+
+        .slick-prev {
+            margin-left: 30px;
+            z-index: 10;
+        }
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+        }
+
+        .slick-item {
+            padding-left: 35px;
+            padding-right: 35px;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(function () {
+            $('.slick-slider').slick({
+                dots: true,
+                accessibility: true,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                arrows: true,
+            })
+        });
+    </script>
 {% endblock %}
 
 {% block body %}
 
-	<section class="w-section section">
-		<div class="w-container">
-			<div class="w-row">
+    <section class="w-section section">
+        <div class="w-container">
+            <div class="w-row">
 
-				{% include "spoils/spoil.html.twig" with {'spoil': spoil, 'showMore': false } %}
-				{{ spoil.description|raw }}
+                {% include "spoils/spoil.html.twig" with {'spoil': spoil, 'showMore': false } %}
+                <div class="slick-slider">
+                    {% for spoil_image in spoil.images %}
+                        <div>
+                            <div class="slick-item">
+                                <img src="{{ asset(app.request.schemeAndHttpHost ~ attachment_path ~ '/' ~ spoil_image.url) }}"
+                                     alt="Spoil Image {{ spoil.title }}"/>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {{ spoil.description|raw }}
 
-			</div>
+            </div>
 
-			{# survey_archived #}
-			<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1457190527508329" data-ad-slot="7669320152"></ins>
-			<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
+            {# survey_archived #}
+            <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                 data-ad-format="fluid" data-ad-client="ca-pub-1457190527508329" data-ad-slot="7669320152"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
 
-		</div>
+        </div>
 
-	</section>
+    </section>
 
 {% endblock %}
