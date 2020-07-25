@@ -1,12 +1,12 @@
 vich_uploader:
-    db_driver: orm
-
-    #mappings:
-    #    products:
-    #        uri_prefix: /images/products
-    #        upload_destination: '%kernel.project_dir%/public/images/products'
-    mappings:
-        spoils_images:
-            uri_prefix: "%path.spoil.upload_images%"
-            upload_destination: "%kernel.project_dir%/public/%path.spoil.upload_images%"
-            namer: vich_uploader.namer_uniqid
+  db_driver: orm
+  mappings:
+    spoils_images:
+      uri_prefix: "%path.spoil.upload_images%"
+      upload_destination: "%kernel.project_dir%/public/%path.spoil.upload_images%"
+      namer: vich_uploader.namer_uniqid
+    attachment_path:
+      uri_prefix: "%path_upload_attachment%"
+      upload_destination: "%kernel.project_dir%/public/%path_upload_attachment%"
+      namer: vich_uploader.namer_uniqid
+      delete_on_remove: true

@@ -8,7 +8,7 @@
         "core-js": "^3.0.0",
         "node-sass": "^4.14.1",
         "regenerator-runtime": "^0.13.2",
-        "sass-loader": "^8.0.8",
+        "sass-loader": "^8.0.0",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -26,6 +26,7 @@
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-toastify": "^5.5.0",
+        "slick-carousel": "^1.8.1",
         "suneditor-react": "^2.11.3"
     }
 }

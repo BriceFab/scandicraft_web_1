@@ -10,41 +10,54 @@ easy_admin:
         show: ["ROLE_ADMIN"]
       list:
         title: "Liste des spoils"
+        collapse_actions: true
         actions:
           [
-            { name: "new", label: "Ajouter" },
-            { name: "edit", label: "Modifier", icon: "edit" },
-            { name: "delete", label: "Supprimer", icon: "trash" },
+          { name: "new", label: "Ajouter" },
+          { name: "edit", label: "Modifier", icon: "edit" },
+          { name: "delete", label: "Supprimer", icon: "trash" },
           ]
         fields:
           [
-            { property: "createdBy", label: "Créé par" },
-            { property: "createdAt", label: "Créé le" },
-            { property: "title", label: "Titre" },
-            {
-              property: "image",
-              type: "image",
-              base_path: "%path.spoil.upload_images%",
-            },
-            { property: "getCurrentSocialShare", label: "Partages réseaux" },
-            {
-              property: "shareGoal",
-              label: "Nombre pour l'objectif",
-              template: "easy_admin/fields/integer.html.twig",
-            },
-            { property: "goal_type", label: "Type d'objectif" },
+          { property: "createdBy", label: "Créé par" },
+          { property: "createdAt", label: "Créé le" },
+          { property: "title", label: "Titre" },
+          {
+            label: "Image résumé",
+            property: "image",
+            type: "image",
+            base_path: "%path.spoil.upload_images%",
+          },
+          { property: "getCurrentSocialShare", label: "Partages réseaux" },
+          {
+            property: "shareGoal",
+            label: "Nombre pour l'objectif",
+            template: "easy_admin/fields/integer.html.twig",
+          },
+          { property: "goal_type", label: "Type d'objectif" },
           ]
       form:
         title: "Ajouter/Modifier"
         fields:
           [
-            { property: "title", label: "Titre" },
-            { property: "imageFile", type: "vich_image" },
-            {
-              property: "Description",
-              label: "Description",
-              type: "fos_ckeditor",
-            },
-            { property: "goal_type", label: "Type d'objectif" },
-            { property: "shareGoal", label: "Nombre pour l'objectif" },
+          { property: "title", label: "Titre" },
+          { property: "imageFile", label: "Image résumé", type: "vich_image" },
+          {
+            label: "Images",
+            property: "images",
+            type: "collection",
+            type_options: {
+              entry_type: "App\\Form\\AttachmentType",
+              allow_delete: true,
+              allow_add: true,
+              by_reference: false
+            }
+          },
+          {
+            property: "Description",
+            label: "Description",
+            type: "fos_ckeditor",
+          },
+          { property: "goal_type", label: "Type d'objectif" },
+          { property: "shareGoal", label: "Nombre pour l'objectif" },
           ]

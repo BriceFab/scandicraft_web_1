@@ -135,6 +135,11 @@ class User implements UserInterface
      */
     private $voteSites;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Attachment::class, mappedBy="createdBy")
+     */
+    private $attachments;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -152,6 +157,7 @@ class User implements UserInterface
         $this->spoilShares = new ArrayCollection();
         $this->userVotes = new ArrayCollection();
         $this->voteSites = new ArrayCollection();
+        $this->attachments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -725,6 +731,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($voteSite->getCreatedBy() === $this) {
                 $voteSite->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Attachment[]
+     */
+    public function getAttachments(): Collection
+    {
+        return $this->attachments;
+    }
+
+    public function addAttachment(Attachment $attachment): self
+    {
+        if (!$this->attachments->contains($attachment)) {
+            $this->attachments[] = $attachment;
+            $attachment->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttachment(Attachment $attachment): self
+    {
+        if ($this->attachments->contains($attachment)) {
+            $this->attachments->removeElement($attachment);
+            // set the owning side to null (unless already changed)
+            if ($attachment->getCreatedBy() === $this) {
+                $attachment->setCreatedBy(null);
             }
         }
 
