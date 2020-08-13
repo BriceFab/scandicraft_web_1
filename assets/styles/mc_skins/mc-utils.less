@@ -1,0 +1,28 @@
+// ----------------------------------------------
+// Helpers
+// ----------------------------------------------
+
+.tile(@x, @y, @divider:1, @zoom:1, @offset_x:0, @offset_y:0) {
+  background-position: (-1px * ( @x * @divider + @offset_x ) * @zoom) (-1px * ( @y * @divider + @offset_y ) * @zoom);
+}
+
+.quad(@width, @height, @rotateX:0, @rotateY:0, @translateX:0, @translateY:0, @translateZ:0) {
+  width: @width * 1px;
+  height: @height * 1px;
+  position: absolute;
+  .pos3D(@rotateX, @rotateY, @translateX, @translateY, @translateZ);
+}
+
+.pos3D(@rotateX, @rotateY:0, @translateX:0, @translateY:0, @translateZ:0) {
+  transform: rotateX(@rotateX * 1deg) rotateY(@rotateY * 1deg) translateX(@translateX * 1px) translateY(@translateY * 1px) translateZ(@translateZ * 1px);
+}
+
+.pos3DZ(@rotateX, @rotateY:0, @rotateZ:0, @translateX:0, @translateY:0, @translateZ:0) {
+  transform: rotateX(@rotateX * 1deg) rotateY(@rotateY * 1deg) rotateZ(@rotateZ * 1deg) translateX(@translateX * 1px) translateY(@translateY * 1px) translateZ(@translateZ * 1px);
+}
+
+.scaleAndCenter(@scale, @size, @zoom:1) {
+  @relSize: @size * @zoom;
+  transform-style: preserve-3d;
+  transform: scale3d(@scale, @scale, @scale) translateY(1px * (@relSize - (@relSize * (@scale))) / 2);
+}

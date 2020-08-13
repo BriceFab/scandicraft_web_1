@@ -1,0 +1,37 @@
+@import "mc-utils";
+
+// ----------------------------------------------
+// 2D Skin: Face Viewer
+// ----------------------------------------------
+
+.mc-face-viewer(@zoom){
+
+  .mc-face-viewer-@{zoom}x{
+    image-rendering:optimizeSpeed;             /* Legal fallback */
+    image-rendering:-moz-crisp-edges;          /* Firefox        */
+    image-rendering:-o-crisp-edges;            /* Opera          */
+    image-rendering:-webkit-optimize-contrast; /* Safari         */
+    image-rendering:optimize-contrast;         /* CSS3 Proposed  */
+    image-rendering:crisp-edges;               /* CSS4 Proposed  */
+    image-rendering:pixelated;                 /* CSS4 Proposed  */
+    -ms-interpolation-mode:nearest-neighbor;   /* IE8+           */
+
+    background-size: 64px * @zoom;
+    width: 8px * @zoom;
+    height: 8px * @zoom;
+    .tile(1, 1, 8, @zoom);
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .mc-face-viewer-@{zoom}x::after{
+    content: " ";
+    width: 8px * @zoom;
+    height: 8px * @zoom;
+    background-size: (9/8) * 64px * @zoom;
+    background-image: inherit;
+    .tile(5, 1, 9, @zoom, 0.5, 0.5);
+    overflow: hidden;
+    display: inline-block;
+  }
+}
