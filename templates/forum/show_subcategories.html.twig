@@ -5,8 +5,13 @@
 	{{ forumCategory.name }},
 	{{ forumSubCategory.name }}
 {% endblock %}
+
 {% block description %}
 	{{ forumSubCategory.description }}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('mc_skins') }}
 {% endblock %}
 
 {% block body %}
