@@ -61,13 +61,18 @@
         Skin:
     </div>
     <div class="col-6 col-md-4">
-        image
+        {% import "_components/mc_viewer/head.twig" as head %}
+        {{ head.render('uploads/skins/' ~ user.username ~ '.png') }}
     </div>
     <div class="col-6 col-md-4 tab-menu-last-col">
         <input type="file"
                id="upload_skin" name="avatar"
                accept="image/png, image/jpeg">
         <a id="btn_send_skin" class="button btn-active btn-extra-small" style="float: right;">Modifier</a>
+    </div>
+    <div class="col-12" style="margin-top:50px;">
+        {% import "_components/mc_viewer/skin.twig" as skin %}
+        {{ skin.render('uploads/skins/' ~ user.username ~ '.png', 8) }}
     </div>
 </div>
 

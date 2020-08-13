@@ -36,56 +36,56 @@
         //transform: rotateY(180deg) translateZ(55px) translateY(105px) rotateX(5deg);
 
         // Settings for All Faces
-        > .front, > .back, > .left, > .right, > .top, > .bottom {
+        > .player_front, > .player_back, > .player_left, > .player_right, > .player_top, > .player_bottom {
           position: absolute;
           background-size: (64px * @zoom) (32px * @zoom);
           backface-visibility: hidden;
         }
 
         // Sizes
-        > .front, > .back {
+        > .player_front, > .player_back {
           width: 10px * @zoom;
           height: 15px * @zoom;
         }
 
-        > .left, > .right {
+        > .player_left, > .player_right {
           width: 1px * @zoom;
           height: 15px * @zoom;
         }
 
-        > .top, > .bottom {
+        > .player_top, > .player_bottom {
           width: 10px * @zoom;
           height: 1px * @zoom;
         }
 
         // 3D Translations
-        > .front {
+        > .player_front {
           .tile(1, 1, 1, @zoom);
           transform: translateZ(((1px * @zoom)/2));
         }
 
-        > .back {
+        > .player_back {
           .tile(12, 1, 1, @zoom);
           transform: translateZ((((1px * @zoom)/2) * -1)) rotateY(180deg);
         }
 
-        > .left {
+        > .player_left {
           .tile(0, 1, 1, @zoom);
           transform: rotateY(270deg) translateZ((1px * @zoom)/2);
         }
 
-        > .right {
+        > .player_right {
           .tile(11, 1, 1, @zoom);
           transform: rotateY(-270deg) translateZ(((10px * @zoom) + (-1px * @zoom)/2));
         }
 
-        > .top {
+        > .player_top {
           .tile(1, 0, 1, @zoom);
           .pos3D(90deg, 0, 0, 0, @zoom / 2);
           //transform: rotateY(270deg) translateZ((1px * @zoom)/2);
         }
 
-        > .bottom {
+        > .player_bottom {
           .tile(11, 0, 1, @zoom);
           transform: rotateX(-90deg) translateZ(14px * @zoom + @zoom/2) ;
         }
@@ -95,7 +95,7 @@
 
   // Legacy Texture Support
   .mc-cape-viewer-@{zoom}x.legacy .wrapper .cape {
-    > .front, > .back, > .left, > .right {
+    > .player_front, > .player_back, > .player_left, > .player_right {
       background-size: (22px * @zoom) (17px * @zoom);
     }
   }
@@ -158,7 +158,7 @@
       background-image: none !important;
 
       // Settings for All Faces
-      > .front, > .back, > .left, > .right, > .top, > .bottom{
+      > .player_front, > .player_back, > .player_left, > .player_right, > .player_top, > .player_bottom{
         position: absolute;
         width: @8px;
         height: @8px;
@@ -178,32 +178,32 @@
       }
 
       // 3D Translations
-      > .front {
+      > .player_front {
         .tile(1, 1, 8, @zoom);
         .pos3D(0, 0, 0, 0, @8px/2);
       }
 
-      > .back {
+      > .player_back {
         .tile(3, 1, 8, @zoom);
         .pos3D(0, 180deg, 0, 0, @8px/2);
       }
 
-      > .right {
+      > .player_right {
         .tile(0, 1, 8, @zoom);
         .pos3D(0, 270deg, 0, 0, @8px/2);
       }
 
-      > .left {
+      > .player_left {
         .tile(2, 1, 8, @zoom);
         .pos3D(0, 90deg, 0, 0, @8px/2);
       }
 
-      > .top {
+      > .player_top {
         .tile(1, 0, 8, @zoom);
         .pos3D(90deg, 0, 0, 0, @8px/2);
       }
 
-      > .bottom {
+      > .player_bottom {
         .tile(2, 0, 8, @zoom);
         .pos3D(270deg, 0, 0, 0, @8px/2);
       }
@@ -270,7 +270,7 @@
   .mc-skin-viewer-@{zoom}x {
     width: @8px;
     height: @8px + @12px + @12px;
-    margin: 15px auto 40px auto;
+    margin: 0 auto 0 auto;
     perspective: 800px;
     perspective-origin: 50% 100px;
     transform-style: preserve-3d;
@@ -287,7 +287,7 @@
 
     // Utilities
     &.hide-accessories{
-      .accessory{
+      .player_accessory{
         display: none;
       }
     }
@@ -301,7 +301,7 @@
       transform-style: preserve-3d;
 
       // All Elements
-      .front, .back, .left, .right, .top, .bottom { // Elements
+      .player_front, .player_back, .player_left, .player_right, .player_top, .player_bottom { // Elements
         position: absolute;
         background-size: @bg_size * @zoom;
         background-repeat: no-repeat;
@@ -309,10 +309,10 @@
         //transform-origin: center center;
       }
 
-      .accessory{
+      .player_accessory{
         background-image: none;
 
-        .front, .back, .left, .right, .top, .bottom {
+        .player_front, .player_back, .player_left, .player_right, .player_top, .player_bottom {
           backface-visibility: visible;
         }
       }
@@ -330,59 +330,59 @@
         background-image: none !important;
 
         // Settings for All Faces
-        .front, .back, .left, .right, .top, .bottom{
+        .player_front, .player_back, .player_left, .player_right, .player_top, .player_bottom{
           width: @8px;
           height: @8px;
         }
 
         // 3D Translations
-        .front {
+        .player_front {
           .tile(1, 1, 8, @zoom);
           .pos3D(0, 0, 0, 0, @8px/2);
         }
 
-        .back {
+        .player_back {
           .tile(3, 1, 8, @zoom);
           .pos3D(0, 180deg, 0, 0, @8px/2);
         }
 
-        .right {
+        .player_right {
           .tile(0, 1, 8, @zoom);
           .pos3D(0, 270deg, 0, 0, @8px/2);
         }
 
-        .left {
+        .player_left {
           .tile(2, 1, 8, @zoom);
           .pos3D(0, 90deg, 0, 0, @8px/2);
         }
 
-        .top {
+        .player_top {
           .tile(1, 0, 8, @zoom);
           .pos3D(90deg, 0, 0, 0, @8px/2);
         }
 
-        .bottom {
+        .player_bottom {
           .tile(2, 0, 8, @zoom);
           .pos3DZ(270deg, 0, 180deg, 0, 0, @8px/2);
         }
 
         // Head - Accessories
-        > .accessory{
+        > .player_accessory{
           transform-style: preserve-3d;
           transform: scale3d(@scale_9to8, @scale_9to8, @scale_9to8) translateY(-@offset_center_9to8);
-          > .front  { .tile(5, 1, 8, @zoom); }
-          > .back   { .tile(7, 1, 8, @zoom); }
-          > .right  { .tile(4, 1, 8, @zoom); }
-          > .left   { .tile(6, 1, 8, @zoom); }
-          > .top    { .tile(5, 0, 8, @zoom); }
-          > .bottom { .tile(6, 0, 8, @zoom); }
+          > .player_front  { .tile(5, 1, 8, @zoom); }
+          > .player_back   { .tile(7, 1, 8, @zoom); }
+          > .player_right  { .tile(4, 1, 8, @zoom); }
+          > .player_left   { .tile(6, 1, 8, @zoom); }
+          > .player_top    { .tile(5, 0, 8, @zoom); }
+          > .player_bottom { .tile(6, 0, 8, @zoom); }
         }
       }
 
       // #######################
-      // ######## Body #########
+      // ######## player_body #########
       // #######################
-      > .body {
+      > .player_body {
         position: absolute;
         transform-style: preserve-3d;
         width: @8px;
@@ -392,54 +392,54 @@
         background-image: none !important;
 
         // Settings for All Faces
-        .front, .back, .left, .right, .top, .bottom{
+        .player_front, .player_back, .player_left, .player_right, .player_top, .player_bottom{
           width: @8px;
           height: @12px;
         }
 
-        .left, .right { width: @4px; }
-        .top, .bottom { height: @4px; }
+        .player_left, .player_right { width: @4px; }
+        .player_top, .player_bottom { height: @4px; }
 
         // 3D Translations
-        .front {
+        .player_front {
           .tile(5, 5, 4, @zoom);
           .pos3D(0, 0, 0, 0, @4px/2);
         }
 
-        .back {
+        .player_back {
           .tile(8, 5, 4, @zoom);
           .pos3D(0, 180deg, 0, 0, @4px/2);
         }
 
-        .right {
+        .player_right {
           .tile(4, 5, 4, @zoom);
           .pos3D(0, 270deg, 0, 0, @4px/2);
         }
 
-        .left {
+        .player_left {
           .tile(7, 5, 4, @zoom);
           .pos3D(0, 90deg, 0, 0, @12px/2);
         }
 
-        .top {
+        .player_top {
           .tile(5, 4, 4, @zoom);
           .pos3D(90deg, 0, 0, 0, @4px / 2);
         }
 
-        .bottom {
+        .player_bottom {
           .tile(7, 4, 4, @zoom);
           .pos3D(270deg, 0, 0, 0, @12px - (@4px /2));
         }
 
-        // Body - Accessories (Jacket)
-        > .accessory{
+        // player_body - Accessories (Jacket)
+        > .player_accessory{
           .scaleAndCenter(@scale_8hto8, 12, @zoom);
-          > .front  { .tile(5, 9, 4, @zoom); }
-          > .back   { .tile(8, 9, 4, @zoom); }
-          > .right  { .tile(4, 9, 4, @zoom); }
-          > .left   { .tile(7, 9, 4, @zoom); }
-          > .top    { .tile(5, 8, 4, @zoom); }
-          > .bottom { .tile(7, 8, 4, @zoom); }
+          > .player_front  { .tile(5, 9, 4, @zoom); }
+          > .player_back   { .tile(8, 9, 4, @zoom); }
+          > .player_right  { .tile(4, 9, 4, @zoom); }
+          > .player_left   { .tile(7, 9, 4, @zoom); }
+          > .player_top    { .tile(5, 8, 4, @zoom); }
+          > .player_bottom { .tile(7, 8, 4, @zoom); }
         }
       }
 
@@ -448,7 +448,7 @@
       // #######################
 
       // Arms Common
-      > .left-arm, > .right-arm {
+      > .player_left-arm, > .player_right-arm {
         position: absolute;
         transform-style: preserve-3d;
         width: @4px;
@@ -458,62 +458,62 @@
         background-image: none !important;
 
         // Settings for All Faces
-        .front, .back, .left, .right, .top, .bottom{
+        .player_front, .player_back, .player_left, .player_right, .player_top, .player_bottom{
           width: @4px;
           height: @12px;
         }
 
-        .top, .bottom{
+        .player_top, .player_bottom{
           height: @4px;
         }
 
         // 3D Translations
-        .front {
+        .player_front {
           .tile(11, 5, 4, @zoom);
           .pos3D(0, 0, 0, 0, @4px/2);
         }
 
-        .back {
+        .player_back {
           .tile(13, 5, 4, @zoom);
           .pos3D(0, 180deg, 0, 0, @4px/2);
         }
 
-        .right {
+        .player_right {
           .tile(10, 5, 4, @zoom);
           .pos3D(0, 270deg, 0, 0, @4px/2);
         }
 
-        .left {
+        .player_left {
           .tile(12, 5, 4, @zoom);
           .pos3D(0, 90deg, 0, 0, @4px/2);
         }
 
-        .top {
+        .player_top {
           .tile(11, 4, 4, @zoom);
           .pos3D(90deg, 0, 0, 0, @4px / 2);
         }
 
-        .bottom {
+        .player_bottom {
           .tile(12, 4, 4, @zoom);
           .pos3D(270deg, 0, 0, 0, @12px - (@4px /2));
         }
 
-        // Body - Accessories (Jacket)
+        // player_body - Accessories (Jacket)
         // Right Arm - Accessories
-        > .accessory{
+        > .player_accessory{
           .scaleAndCenter(@scale_8hto8, 12, @zoom);
-          .front  { .tile(11, 9, 4, @zoom); }
-          .back   { .tile(13, 9, 4, @zoom); }
-          .right  { .tile(10, 9, 4, @zoom); }
-          .left   { .tile(12, 9, 4, @zoom); }
-          .top    { .tile(11, 8, 4, @zoom); }
-          .bottom { .tile(12, 8, 4, @zoom); }
+          .player_front  { .tile(11, 9, 4, @zoom); }
+          .player_back   { .tile(13, 9, 4, @zoom); }
+          .player_right  { .tile(10, 9, 4, @zoom); }
+          .player_left   { .tile(12, 9, 4, @zoom); }
+          .player_top    { .tile(11, 8, 4, @zoom); }
+          .player_bottom { .tile(12, 8, 4, @zoom); }
         }
 
       }
 
       // Right Arm
-      > .right-arm {
+      > .player_right-arm {
         transform: translateY(@8px) translateX(@8px) scaleX(-1); // Under Head on Right Side
       }
 
@@ -522,7 +522,7 @@
       // #######################
 
       // Legs Common
-      > .left-leg, > .right-leg {
+      > .player_left-leg, > .player_right-leg {
         position: absolute;
         transform-style: preserve-3d;
         width: @4px;
@@ -532,60 +532,60 @@
         background-image: none !important;
 
         // Settings for All Faces
-        .front, .back, .left, .right, .top, .bottom{
+        .player_front, .player_back, .player_left, .player_right, .player_top, .player_bottom{
           width: @4px;
           height: @12px;
         }
 
-        .top, .bottom{
+        .player_top, .player_bottom{
           height: @4px;
         }
 
         // 3D Translations
-        .front {
+        .player_front {
           .tile(1, 5, 4, @zoom);
           .pos3D(0, 0, 0, 0, @4px/2);
         }
 
-        .back {
+        .player_back {
           .tile(3, 5, 4, @zoom);
           .pos3D(0, 180deg, 0, 0, @4px/2);
         }
 
-        .right {
+        .player_right {
           .tile(0, 5, 4, @zoom);
           .pos3D(0, 270deg, 0, 0, @4px/2);
         }
 
-        .left {
+        .player_left {
           .tile(2, 5, 4, @zoom);
           .pos3D(0, 90deg, 0, 0, @4px/2);
         }
 
-        .top {
+        .player_top {
           .tile(1, 4, 4, @zoom);
           .pos3D(90deg, 0, 0, 0, @4px / 2);
         }
 
-        .bottom {
+        .player_bottom {
           .tile(2, 4, 4, @zoom);
           .pos3D(270deg, 0, 0, 0, @12px - (@4px /2));
         }
 
-        // Body - Accessories (Jacket)
-        > .accessory{
+        // player_body - Accessories (Jacket)
+        > .player_accessory{
           .scaleAndCenter(@scale_8qto8, 12, @zoom);
-          .front  { .tile(1, 9, 4, @zoom); }
-          .back   { .tile(3, 9, 4, @zoom); }
-          .right  { .tile(0, 9, 4, @zoom); }
-          .left   { .tile(2, 9, 4, @zoom); }
-          .top    { .tile(1, 8, 4, @zoom); }
-          .bottom { .tile(2, 8, 4, @zoom); }
+          .player_front  { .tile(1, 9, 4, @zoom); }
+          .player_back   { .tile(3, 9, 4, @zoom); }
+          .player_right  { .tile(0, 9, 4, @zoom); }
+          .player_left   { .tile(2, 9, 4, @zoom); }
+          .player_top    { .tile(1, 8, 4, @zoom); }
+          .player_bottom { .tile(2, 8, 4, @zoom); }
         }
 
       }
 
-      > .right-leg {
+      > .player_right-leg {
         transform: translateY(@8px + @12px) translateX(@4px) scaleX(-1); // Under Head on Left Side
       }
     }
@@ -593,49 +593,49 @@
     // Legacy Skin Support
     &:not(.legacy) .player {
       // Right Arm
-      > .right-arm {
+      > .player_right-arm {
         transform: translateY(@8px) translateX(@8px); // Under Head on Right Side
 
         // Normal Faces
-        .front  { .tile(9, 13, 4, @zoom); }
-        .back   { .tile(11, 13, 4, @zoom); }
-        .right  { .tile(8, 13, 4, @zoom); }
-        .left   { .tile(10, 13, 4, @zoom); }
-        .top    { .tile(9, 12, 4, @zoom); }
-        .bottom { .tile(10, 12, 4, @zoom); }
+        .player_front  { .tile(9, 13, 4, @zoom); }
+        .player_back   { .tile(11, 13, 4, @zoom); }
+        .player_right  { .tile(8, 13, 4, @zoom); }
+        .player_left   { .tile(10, 13, 4, @zoom); }
+        .player_top    { .tile(9, 12, 4, @zoom); }
+        .player_bottom { .tile(10, 12, 4, @zoom); }
 
 
         // Right Arm - Accessories
-        > .accessory{
-          .front  { .tile(13, 13, 4, @zoom); }
-          .back   { .tile(15, 13, 4, @zoom); }
-          .right  { .tile(12, 13, 4, @zoom); }
-          .left   { .tile(14, 13, 4, @zoom); }
-          .top    { .tile(13, 12, 4, @zoom); }
-          .bottom { .tile(14, 12, 4, @zoom); }
+        > .player_accessory{
+          .player_front  { .tile(13, 13, 4, @zoom); }
+          .player_back   { .tile(15, 13, 4, @zoom); }
+          .player_right  { .tile(12, 13, 4, @zoom); }
+          .player_left   { .tile(14, 13, 4, @zoom); }
+          .player_top    { .tile(13, 12, 4, @zoom); }
+          .player_bottom { .tile(14, 12, 4, @zoom); }
         }
       }
 
       // Right Leg
-      > .right-leg {
+      > .player_right-leg {
         transform: translateY(@8px + @12px) translateX(@4px); // Under Head on Left Side
 
         // Normal Faces
-        .front  { .tile(5, 13, 4, @zoom); }
-        .back   { .tile(7, 13, 4, @zoom); }
-        .right  { .tile(4, 13, 4, @zoom); }
-        .left   { .tile(6, 13, 4, @zoom); }
-        .top    { .tile(5, 12, 4, @zoom); }
-        .bottom { .tile(6, 12, 4, @zoom); }
+        .player_front  { .tile(5, 13, 4, @zoom); }
+        .player_back   { .tile(7, 13, 4, @zoom); }
+        .player_right  { .tile(4, 13, 4, @zoom); }
+        .player_left   { .tile(6, 13, 4, @zoom); }
+        .player_top    { .tile(5, 12, 4, @zoom); }
+        .player_bottom { .tile(6, 12, 4, @zoom); }
 
-        // Body - Accessories (Jacket)
-        > .accessory{
-          .front  { .tile(1, 13, 4, @zoom); }
-          .back   { .tile(3, 13, 4, @zoom); }
-          .right  { .tile(0, 13, 4, @zoom); }
-          .left   { .tile(2, 13, 4, @zoom); }
-          .top    { .tile(1, 12, 4, @zoom); }
-          .bottom { .tile(2, 12, 4, @zoom); }
+        // player_body - Accessories (Jacket)
+        > .player_accessory{
+          .player_front  { .tile(1, 13, 4, @zoom); }
+          .player_back   { .tile(3, 13, 4, @zoom); }
+          .player_right  { .tile(0, 13, 4, @zoom); }
+          .player_left   { .tile(2, 13, 4, @zoom); }
+          .player_top    { .tile(1, 12, 4, @zoom); }
+          .player_bottom { .tile(2, 12, 4, @zoom); }
         }
       }
     }
@@ -643,66 +643,66 @@
     // Slim Skin Version
     &.slim .player{
 
-      > .left-arm, > .right-arm{
+      > .player_left-arm, > .player_right-arm{
         // Settings for All Faces
-        .front, .back, .top, .bottom{
+        .player_front, .player_back, .player_top, .player_bottom{
           width: @3px;
         }
       }
 
-      > .left-arm {
+      > .player_left-arm {
         // Normal Faces
-        .front  { .pos3D(0, 0, @zoom, 0, @4px/2); }
-        .back   {
+        .player_front  { .pos3D(0, 0, @zoom, 0, @4px/2); }
+        .player_back   {
           .tile(0, 5, 4, @zoom, 51);
           .pos3D(0, 180deg, -@zoom, 0, @4px/2);
         }
-        .right  { .pos3D(0, 270deg, 0, 0, @zoom); }
-        .left   {
+        .player_right  { .pos3D(0, 270deg, 0, 0, @zoom); }
+        .player_left   {
           .tile(0, 5, 4, @zoom, 47);
         }
-        .top    { .pos3D(90deg, 0, @zoom, 0, @4px / 2); }
-        .bottom {
+        .player_top    { .pos3D(90deg, 0, @zoom, 0, @4px / 2); }
+        .player_bottom {
           .tile(0, 4, 4, @zoom, 47);
           .pos3D(270deg, 0, @zoom, 0, @12px - (@4px /2));
         }
 
         // Left Arm - Accessories
-        > .accessory{
-          .back   { .tile(0, 9, 4, @zoom, 51); }
-          .left   { .tile(0, 9, 4, @zoom, 47); }
-          .bottom { .tile(0, 8, 4, @zoom, 47); }
+        > .player_accessory{
+          .player_back   { .tile(0, 9, 4, @zoom, 51); }
+          .player_left   { .tile(0, 9, 4, @zoom, 47); }
+          .player_bottom { .tile(0, 8, 4, @zoom, 47); }
         }
       }
 
-      > .right-arm {
+      > .player_right-arm {
         // Normal Faces
-        .back   { .tile(0, 13, 4, @zoom, 43); }
-        .left   {
+        .player_back   { .tile(0, 13, 4, @zoom, 43); }
+        .player_left   {
           .tile(0, 13, 4, @zoom, 39);
           .pos3D(0, 90deg, 0, 0, @zoom);
         }
-        .bottom { .tile(0, 12, 4, @zoom, 39); }
+        .player_bottom { .tile(0, 12, 4, @zoom, 39); }
 
         // Right Arm - Accessories
-        > .accessory{
-          .back   { .tile(0, 13, 4, @zoom, 59); }
-          .left   { .tile(0, 13, 4, @zoom, 55); }
-          .bottom { .tile(0, 12, 4, @zoom, 55); }
+        > .player_accessory{
+          .player_back   { .tile(0, 13, 4, @zoom, 59); }
+          .player_left   { .tile(0, 13, 4, @zoom, 55); }
+          .player_bottom { .tile(0, 12, 4, @zoom, 55); }
         }
       }
     }
 
     // Slim + Legacy
     &.slim.legacy .player{
-      > .right-arm {
+      > .player_right-arm {
         transform: translateY(@8px) translateX(@8px - @zoom) scaleX(-1); // Under Head on Right Side
 
         // Normal Faces
-        .back   { .tile(0, 5, 4, @zoom, 51); }
+        .player_back   { .tile(0, 5, 4, @zoom, 51); }
 
-        > .accessory{
-          .back   { .tile(0, 9, 4, @zoom, 51); } // Probably unnecessary
+        > .player_accessory{
+          .player_back   { .tile(0, 9, 4, @zoom, 51); } // Probably unnecessary
         }
       }
     }
@@ -713,7 +713,7 @@
       transform: rotateY(180deg) translateX(-@zoom * 1px) translateZ(@4px / 2 + @zoom/2) translateY(@8px - @zoom/2) rotateX(5deg);
 
       // Settings for All Faces
-      > .front, > .back, > .left, > .right, > .top, > .bottom {
+      > .player_front, > .player_back, > .player_left, > .player_right, > .player_top, > .player_bottom {
         position: absolute;
         background-image: inherit!important;
         background-size: (64px * @zoom) (32px * @zoom);
@@ -721,55 +721,55 @@
       }
 
       // Sizes
-      > .front, > .back {
+      > .player_front, > .player_back {
         width: 10px * @zoom;
         height: 15px * @zoom;
       }
 
-      > .left, > .right {
+      > .player_left, > .player_right {
         width: 1px * @zoom;
         height: 15px * @zoom;
       }
 
-      > .top, > .bottom {
+      > .player_top, > .player_bottom {
         width: 10px * @zoom;
         height: 1px * @zoom;
       }
 
       // 3D Translations
-      > .front {
+      > .player_front {
         .tile(1, 1, 1, @zoom);
         transform: translateZ(((1px * @zoom)/2));
       }
 
-      > .back {
+      > .player_back {
         .tile(12, 1, 1, @zoom);
         transform: translateZ((((1px * @zoom)/2) * -1)) rotateY(180deg);
       }
 
-      > .left {
+      > .player_left {
         .tile(0, 1, 1, @zoom);
         transform: rotateY(270deg) translateZ((1px * @zoom)/2);
       }
 
-      > .right {
+      > .player_right {
         .tile(11, 1, 1, @zoom);
         transform: rotateY(-270deg) translateZ(((10px * @zoom) + (-1px * @zoom)/2));
       }
 
-      > .top {
+      > .player_top {
         .tile(1, 0, 1, @zoom);
         .pos3D(90deg, 0, 0, 0, @zoom / 2);
       }
 
-      > .bottom {
+      > .player_bottom {
         .tile(11, 0, 1, @zoom);
         transform: rotateX(-90deg) translateZ(14px * @zoom + @zoom/2) ;
       }
     }
 
     &.legacy-cape > .player .cape {
-      > .front, > .back, > .left, > .right, > .top, > .bottom {
+      > .player_front, > .player_back, > .player_left, > .player_right, > .player_top, > .player_bottom {
         background-size: (22px * @zoom) (17px * @zoom);
       }
     }
