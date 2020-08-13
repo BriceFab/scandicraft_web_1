@@ -65,7 +65,10 @@
                                         {% for user_vote in top_votes %}
                                             <tr>
                                                 <td>#{{ loop.index }}</td>
-                                                <td>Skin</td>
+                                                <td>
+                                                    {% import "_components/mc_viewer/head.twig" as head %}
+                                                    {{ head.render('uploads/skins/' ~ user_vote[0].user.username ~ '.png') }}
+                                                </td>
                                                 <td>{{ user_vote[0].user.username }}</td>
                                                 <td>{{ user_vote.nbr_votes }}</td>
                                             </tr>

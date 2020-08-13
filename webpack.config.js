@@ -16,6 +16,7 @@ Encore
      *
      */
     .addEntry('styles', './assets/styles/index.js')                     //style scss
+    .addEntry('mc_skins', './assets/styles/mc_skins/index.js')                     //mc skin/cape/head less
     .addEntry('app', './assets/javascript/app/index.js')                //javascript principal
     .addEntry('easy_admin', './assets/javascript/admin/main.js')        //js admin
     .addEntry('main_app', './assets/javascript/react/main.js')          //js utilise react
@@ -48,6 +49,7 @@ Encore
     })
 
     .enableSassLoader()
+    .enableLessLoader()
     // .configureCssLoader((options) => {
     //     console.log('options', options)
     //     options.importLoaders = 1;
