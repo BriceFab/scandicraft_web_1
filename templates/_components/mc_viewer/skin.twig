@@ -1,0 +1,117 @@
+{#Affiche d'un skin sans cape#}
+{% macro render(skin_path, size = 16) %}
+    <!-- Set Skin for the Viewer -->
+    <style>
+        #skin-viewer * {
+            background-image: url('/{{ skin_path }}');
+        }
+    </style>
+
+    <!-- Skin Viewer HTML Elements -->
+    <div id="skin-viewer" class="mc-skin-viewer-{{ size }}x spin">
+        <div class="player">
+            <!-- player_head -->
+            <div class="head">
+                <div class="player_top"></div>
+                <div class="player_left"></div>
+                <div class="player_front"></div>
+                <div class="player_right"></div>
+                <div class="player_back"></div>
+                <div class="player_bottom"></div>
+                <div class="player_accessory">
+                    <div class="player_top"></div>
+                    <div class="player_left"></div>
+                    <div class="player_front"></div>
+                    <div class="player_right"></div>
+                    <div class="player_back"></div>
+                    <div class="player_bottom"></div>
+                </div>
+            </div>
+            <!-- player_body -->
+            <div class="player_body">
+                <div class="player_top"></div>
+                <div class="player_left"></div>
+                <div class="player_front"></div>
+                <div class="player_right"></div>
+                <div class="player_back"></div>
+                <div class="player_bottom"></div>
+                <div class="player_accessory">
+                    <div class="player_top"></div>
+                    <div class="player_left"></div>
+                    <div class="player_front"></div>
+                    <div class="player_right"></div>
+                    <div class="player_back"></div>
+                    <div class="player_bottom"></div>
+                </div>
+            </div>
+            <!-- Left Arm -->
+            <div class="player_left-arm">
+                <div class="player_top"></div>
+                <div class="player_left"></div>
+                <div class="player_front"></div>
+                <div class="player_right"></div>
+                <div class="player_back"></div>
+                <div class="player_bottom"></div>
+                <div class="player_accessory">
+                    <div class="player_top"></div>
+                    <div class="player_left"></div>
+                    <div class="player_front"></div>
+                    <div class="player_right"></div>
+                    <div class="player_back"></div>
+                    <div class="player_bottom"></div>
+                </div>
+            </div>
+            <!-- Right Arm -->
+            <div class="player_right-arm">
+                <div class="player_top"></div>
+                <div class="player_left"></div>
+                <div class="player_front"></div>
+                <div class="player_right"></div>
+                <div class="player_back"></div>
+                <div class="player_bottom"></div>
+                <div class="player_accessory">
+                    <div class="player_top"></div>
+                    <div class="player_left"></div>
+                    <div class="player_front"></div>
+                    <div class="player_right"></div>
+                    <div class="player_back"></div>
+                    <div class="player_bottom"></div>
+                </div>
+            </div>
+            <!-- Left Leg -->
+            <div class="player_left-leg">
+                <div class="player_top"></div>
+                <div class="player_left"></div>
+                <div class="player_front"></div>
+                <div class="player_right"></div>
+                <div class="player_back"></div>
+                <div class="player_bottom"></div>
+                <div class="player_accessory">
+                    <div class="player_top"></div>
+                    <div class="player_left"></div>
+                    <div class="player_front"></div>
+                    <div class="player_right"></div>
+                    <div class="player_back"></div>
+                    <div class="player_bottom"></div>
+                </div>
+            </div>
+            <!-- Right Leg -->
+            <div class="player_right-leg">
+                <div class="player_top"></div>
+                <div class="player_left"></div>
+                <div class="player_front"></div>
+                <div class="player_right"></div>
+                <div class="player_back"></div>
+                <div class="player_bottom"></div>
+                <div class="player_accessory">
+                    <div class="player_top"></div>
+                    <div class="player_left"></div>
+                    <div class="player_front"></div>
+                    <div class="player_right"></div>
+                    <div class="player_back"></div>
+                    <div class="player_bottom"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
