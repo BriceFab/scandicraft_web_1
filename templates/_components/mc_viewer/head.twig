@@ -1,11 +1,7 @@
 {#Affiche une tête d'un skin#}
 {% macro render(skin_path, size = 6) %}
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('mc_skins') }}
-    {% endblock %}
-
     <div
             class="mc-face-viewer-{{ size }}x"
-            style="background-image:url('{{ skin_path }}')">
+            style="background-image:url('/{{ skin_path }}')">
     </div>
 {% endmacro %}

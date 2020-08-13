@@ -11,7 +11,8 @@
 					</div>
 				{% else %}
 					<div class="col-3 col-md-1 d-flex justify-content-center align-items-center">
-						<img src="https://crafatar.com/avatars/948fc377-5ac9-482d-b942-182d6ca58357" class="minecraft-head-skin" alt="Forum Joueur {{ discussion.createdBy.username }}">
+						{% import "_components/mc_viewer/head.twig" as head %}
+						{{ head.render('uploads/skins/' ~ discussion.createdBy.username ~ '.png') }}
 					</div>
 				{% endif %}
 

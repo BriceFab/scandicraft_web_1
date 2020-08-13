@@ -3,6 +3,10 @@
 {% block title %}Forum: {{ discussion.title }}{% endblock %}
 {% block description %}{{ discussion.message }}{% endblock %}
 
+{% block stylesheets %}
+	{{ encore_entry_link_tags('mc_skins') }}
+{% endblock %}
+
 {% block body %}
 	<section class="w-section section">
 
@@ -30,7 +34,8 @@
 					<div class="row">
 						<div class="col-12 col-md-2 {{ mobileDetect() ? '' : 'forum-discussion-userinfos' }}">
 							<div class="row d-flex justify-content-center align-items-center">
-								<img {{ mobileDetect() ? '' : 'style="max-width:80px;max-height:80px;"' }} src="https://crafatar.com/avatars/948fc377-5ac9-482d-b942-182d6ca58357" class="minecraft-head-skin" alt="Forum Joueur {{ discussion.createdBy.username }}">
+								{% import "_components/mc_viewer/head.twig" as head %}
+								{{ head.render('uploads/skins/' ~ discussion.createdBy.username ~ '.png') }}
 							</div>
 							<div {{ mobileDetect() ? '' : 'style="padding-left:10px;padding-top:10px;"' }}>
 								<div class="row d-flex justify-content-{{ mobileDetect() ? 'center' : 'start' }}">
@@ -89,7 +94,8 @@
 						<div class="w-clearfix comment">
 							{% if not mobileDetect('mobile') %}
 								<div class="avatar">
-									<img class="minecraft-head-skin" alt="Joueur Minecraft" src="https://crafatar.com/avatars/b8ffc3d3-7dbf-4827-8f69-475f6690aabd">
+									{% import "_components/mc_viewer/head.twig" as head %}
+									{{ head.render('uploads/skins/' ~ answer.createdBy.username ~ '.png') }}
 								</div>
 							{% endif %}
 							<div class="comment-dess">
