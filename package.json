@@ -1,23 +1,24 @@
 {
     "devDependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.10.1",
-        "@babel/preset-flow": "^7.10.1",
-        "@babel/preset-react": "^7.10.1",
+        "@babel/plugin-proposal-class-properties": "^7.10.4",
+        "@babel/preset-flow": "^7.10.4",
+        "@babel/preset-react": "^7.10.4",
         "@symfony/webpack-encore": "^0.30.2",
-        "bootstrap": "^4.5.0",
+        "bootstrap": "^4.5.2",
         "core-js": "^3.0.0",
         "less": "^3.12.2",
-        "less-loader": "4.1.0",
+        "less-loader": "^4.1.0",
         "node-sass": "^4.14.1",
-        "regenerator-runtime": "^0.13.2",
-        "sass-loader": "^8.0.0",
+        "regenerator-runtime": "^0.13.7",
+        "sass-loader": "^8.0.2",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
         "start": "symfony server:start --no-tls",
-        "encore-dev": "encore dev --watch",
+        "dev-server": "encore dev-server",
+        "encore-watch": "encore dev --watch",
         "encore-build": "encore production --progress"
     },
     "dependencies": {
@@ -29,6 +30,6 @@
         "react-dom": "^16.13.1",
         "react-toastify": "^5.5.0",
         "slick-carousel": "^1.8.1",
-        "suneditor-react": "^2.11.3"
+        "suneditor-react": "^2.13.2"
     }
 }
