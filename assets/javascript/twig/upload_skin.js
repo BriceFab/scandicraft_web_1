@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {toast} from 'react-toastify';
-import {CONFIG} from "../config";
+import {CONFIG} from "../_common/config";
 
 //data
 const params = JSON.parse(document.getElementById('script_skin_data').innerText);
