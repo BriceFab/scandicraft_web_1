@@ -1,0 +1,20 @@
+{% extends '_components/page/base_page.twig' %}
+
+{% block title %}Créditer {% endblock %}
+
+{% block page_content %}
+    <h2>Acheter des crédits</h2>
+    <a>PayPal</a>
+    <a>PaySafeCard</a>
+    <a>Stripe</a>
+    <a>Dedipass</a>
+
+    <div>
+        <html-component type="payment_paypal"></html-component>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('html_elements') }}
+{% endblock %}

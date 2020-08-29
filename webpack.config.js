@@ -21,6 +21,7 @@ Encore
     .addEntry('easy_admin', './assets/javascript/admin/main.js')        //js admin
     .addEntry('editor_app', './assets/javascript/js_editor/index.js')   //js editeur
     .addEntry('notifications', './assets/javascript/notifications/index.js')   //client notification
+    .addEntry('html_elements', './assets/javascript/_common/html_elements/index.js')   //client custom html elements
 
     //Twigs JS scripts
     .addEntry('upload_skin', './assets/javascript/twig/upload_skin.js')
