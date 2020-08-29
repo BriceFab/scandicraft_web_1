@@ -5,12 +5,16 @@ namespace App\Controller;
 use App\Repository\SpoilRepository;
 use App\Service\DiscordService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="accueil")
+     * @param SpoilRepository $spoilRepository
+     * @param DiscordService $discordService
+     * @return Response
      */
     public function index(SpoilRepository $spoilRepository, DiscordService $discordService)
     {

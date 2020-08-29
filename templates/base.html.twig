@@ -44,6 +44,7 @@
 
         <!-- main css -->
         {{ encore_entry_link_tags('styles') }}
+        {{ encore_entry_link_tags('notifications') }}
 
         {% block stylesheets %}{% endblock %}
         
@@ -55,29 +56,11 @@
 
     </head>
     <body>
-        <!-- react app -->
-        <div id="main_app"></div>
-        {{ encore_entry_script_tags('main_app') }}
-
         <!-- body -->
         {% include 'blocks/header.html.twig' %}
 
         <!-- notifications -->
-        {% for message in app.flashes('notice') %}
-		    <div id="notification_notice" data-message="{{ message|trans }}"></div>
-	        <script type="text/javascript">
-			    let data = document.querySelector('#notification_notice');
-				toast.success(data.dataset.message);
-			</script>
-        {% endfor %}
-
-        {% for message in app.flashes('error') %}
-		    <div id="notification_error" data-message="{{ message|trans }}"></div>
-	        <script type="text/javascript">
-                let data = document.querySelector('#notification_error');
-				toast.error(data.dataset.message);
-			</script>
-        {% endfor %}
+        <notifications-container data-notifications="{{ app.flashes|json_encode }}"></notifications-container>
 
         {% block body %}{% endblock %}
         {% include 'blocks/footer.html.twig' %}
@@ -101,6 +84,7 @@
             });
         </script>
         <!--[if lte IE 9]><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+        {{ encore_entry_script_tags('notifications') }}
         {% block javascripts %}{% endblock %}
 
         <!-- Global site tag (gtag.js) - Google Analytics -->

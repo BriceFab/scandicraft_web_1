@@ -19,8 +19,8 @@ Encore
     .addEntry('mc_skins', './assets/styles/mc_skins/index.js')                     //mc skin/cape/head less
     .addEntry('app', './assets/javascript/app/index.js')                //javascript principal
     .addEntry('easy_admin', './assets/javascript/admin/main.js')        //js admin
-    .addEntry('main_app', './assets/javascript/react/main.js')          //js utilise react
     .addEntry('editor_app', './assets/javascript/js_editor/index.js')   //js editeur
+    .addEntry('notifications', './assets/javascript/notifications/index.js')   //client notification
 
     //Twigs JS scripts
     .addEntry('upload_skin', './assets/javascript/twig/upload_skin.js')
