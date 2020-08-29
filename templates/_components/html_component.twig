@@ -1,0 +1,7 @@
+{% macro render(type) %}
+    <html-component type="{{ type }}"></html-component>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('html_elements') }}
+    {% endblock %}
+{% endmacro %}

@@ -1,4 +1,5 @@
 {% extends '_components/page/base_page.twig' %}
+{% import "_components/html_component.twig" as html_component %}
 
 {% block title %}Créditer {% endblock %}
 
@@ -10,11 +11,7 @@
     <a>Dedipass</a>
 
     <div>
-        <html-component type="payment_paypal"></html-component>
+        {{ html_component.render("payment_paypal") }}
     </div>
 
-{% endblock %}
-
-{% block javascripts %}
-    {{ encore_entry_script_tags('html_elements') }}
 {% endblock %}
