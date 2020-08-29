@@ -1870,7 +1870,7 @@ a {
 
 .flip-container,
 .front,
-.back {
+.button_back {
   width: auto;
   min-height: 260px;
 }
@@ -1882,7 +1882,7 @@ a {
 }
 
 .front,
-.back {
+.button_back {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -o-backface-visibility: hidden;
@@ -1902,7 +1902,7 @@ a {
   left: 0;
 }
 
-.back {
+.button_back {
   -webkit-transform: rotateY(-180deg);
   -moz-transform: rotateY(-180deg);
   -o-transform: rotateY(-180deg);
@@ -1910,8 +1910,8 @@ a {
   transform: rotateY(-180deg);
 }
 
-.flip-container:hover .back,
-.flip-container.hover .back {
+.flip-container:hover .button_back,
+.flip-container.hover .button_back {
   -webkit-transform: rotateY(0deg);
   -moz-transform: rotateY(0deg);
   -o-transform: rotateY(0deg);
