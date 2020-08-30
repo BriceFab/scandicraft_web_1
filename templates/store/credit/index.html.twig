@@ -5,16 +5,19 @@
 
 {% block page_content %}
     <h2>Acheter des crédits</h2>
-    <a>PayPal</a>
-    <a>PaySafeCard</a>
-    <a>Stripe</a>
-    <a>Dedipass</a>
 
-    <div>
-        {{ html_component.render("payment_paypal") }}
-        {{ html_component.render("payment_dedipass", [
-            "data-public_key=" ~ dedipass_public_key,
-        ]) }}
-    </div>
+    {{ html_component.render("crediter_steps") }}
+
+{#    <a>PayPal</a>#}
+{#    <a>PaySafeCard</a>#}
+{#    <a>Stripe</a>#}
+{#    <a>Dedipass</a>#}
+
+    {#    <div>#}
+    {#        {{ html_component.render("payment_paypal") }}#}
+    {#        {{ html_component.render("payment_dedipass", [#}
+    {#            "data-public_key=" ~ dedipass_public_key,#}
+    {#        ]) }}#}
+    {#    </div>#}
 
 {% endblock %}
