@@ -12,6 +12,9 @@
 
     <div>
         {{ html_component.render("payment_paypal") }}
+        {{ html_component.render("payment_dedipass", [
+            "data-public_key=" ~ dedipass_public_key,
+        ]) }}
     </div>
 
 {% endblock %}

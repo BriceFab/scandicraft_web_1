@@ -23,15 +23,24 @@ class HtmlComponent extends HTMLElement {
         }
     }
 
+    getAttributes() {
+        return this.getAttributeNames().map((attribute_name) => {
+            return {
+                name: attribute_name,
+                value: this.getAttribute(attribute_name),
+            };
+        });
+    }
+
     renderComponent() {
         const type = this.getAttribute(DYNAMIC_COMPONENT_ATTRIBUTE);
         const DynamicReactComponent = DYNAMIC_COMPONENTS[type];
-        const {data} = this.dataset;
 
         render(<DynamicReactComponent
             element_ref={this}
             type={type}
-            data={data}
+            data={this.dataset}
+            attributes={this.getAttributes()}
         />, this);
     }
 

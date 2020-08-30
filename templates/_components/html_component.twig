@@ -1,5 +1,11 @@
-{% macro render(type) %}
-    <html-component type="{{ type }}"></html-component>
+{% macro render(type, attributes = []) %}
+    <html-component
+            type="{{ type }}"
+            {% for attr in attributes %}
+                {{ attr }}
+            {% endfor %}
+    >
+    </html-component>
 
     {% block javascripts %}
         {{ encore_entry_script_tags('html_elements') }}
