@@ -1,0 +1,66 @@
+@import "../../../styles/colors";
+
+.step_shower {
+  cursor: pointer;
+  padding: 8px 10px;
+  margin-bottom: 15px;
+  border: 1px black solid;
+  border-radius: 3px;
+}
+
+.step_shower_current {
+  font-weight: bold;
+  background-color: $mainColor;
+  color: white;
+  border: none;
+}
+
+//Step 0
+.step_payments_choices_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.step_payments_choice_box {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background-color: $mainColor;
+  color: white;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.step_payments_choice_text_container {
+  text-align: center;
+}
+
+.step_payments_choice_box:hover {
+  .step_payments_choice_text_name {
+    display: none;
+  }
+
+  .step_payments_choice_text_help {
+    display: block;
+  }
+}
+
+.step_payments_choice_text_name {
+  font-weight: bold;
+  font-size: 1.5em;
+  display: block;
+}
+
+.step_payments_choice_text_help {
+  font-size: 1.4em;
+  display: none;
+}

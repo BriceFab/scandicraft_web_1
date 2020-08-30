@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {injectHeadScript} from "../_common/utils/injectHeadScript";
+import {injectHeadScript} from "../../_common/utils/injectHeadScript";
 
 class PaymentDedipass extends PureComponent {
     componentDidMount() {

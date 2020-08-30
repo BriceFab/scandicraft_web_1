@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
-import {injectHeadScript} from "../_common/utils/injectHeadScript";
-import {CONFIG} from "../_common/config";
+import {injectHeadScript} from "../../_common/utils/injectHeadScript";
+import {CONFIG} from "../../_common/config";
 
 class PaymentPaypal extends PureComponent {
     componentDidMount() {
