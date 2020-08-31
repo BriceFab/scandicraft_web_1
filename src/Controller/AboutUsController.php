@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\StaffCategory;
-use App\Entity\Thanks;
 use App\Entity\ThanksCategory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +23,7 @@ class AboutUsController extends AbstractController
     public function showRemerciements()
     {
         $remerciements_categories = $this->em->getRepository(ThanksCategory::class)->findBy([], ['priority' => 'ASC']);
-        return $this->render('remerciement/index.html.twig', ['categories' => $remerciements_categories]);
+        return $this->render('about_us/remerciement/index.html.twig', ['categories' => $remerciements_categories]);
     }
 
     /**
@@ -33,7 +32,7 @@ class AboutUsController extends AbstractController
     public function showEquipe()
     {
         $staff_categories = $this->em->getRepository(StaffCategory::class)->findBy([], ['priority' => 'ASC']);
-        return $this->render('staff/index.html.twig', ['categories' => $staff_categories]);
+        return $this->render('about_us/staff/index.html.twig', ['categories' => $staff_categories]);
     }
 
     /**
@@ -41,6 +40,6 @@ class AboutUsController extends AbstractController
      */
     public function showPresentation()
     {
-        return $this->render('maintenance/page_under_maintenance.html.twig');
+        return $this->render('about_us/presentation/index.twig');
     }
 }
