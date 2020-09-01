@@ -9,5 +9,8 @@ export const CONFIG = {
             INTENT: 'capture',
             DISABLE_FUNDING: 'card',
         },
+        DEDIPASS: {
+            PUBLIC_KEY: '3b0359ca8fdac1a7ace1a56a477a872c',
+        },
     },
 }

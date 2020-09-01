@@ -1,6 +1,6 @@
 import React from "react";
 import {render, unmountComponentAtNode} from 'react-dom';
-import {DYNAMIC_COMPONENTS} from "../dynamic_components";
+import {DYNAMIC_COMPONENTS} from "../dynamic_component/dynamic_components";
 
 const DYNAMIC_COMPONENT_ATTRIBUTE = 'type';
 
