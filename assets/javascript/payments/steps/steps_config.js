@@ -22,6 +22,7 @@ export const STEPS_CONFIG = {
         {
             name: 'Dédipass',
             help: 'Paiement par SMS et Téléphone',
+            dynamic_key: 'payment_dedipass',
         },
         {
             name: 'PaySafeCard',
@@ -30,6 +31,7 @@ export const STEPS_CONFIG = {
         {
             name: 'PayPal',
             help: 'Paiement avec votre compte PayPal',
+            dynamic_key: 'payment_paypal',
         },
     ]
 };

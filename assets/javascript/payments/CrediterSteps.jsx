@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import clsx from 'clsx';
 import {STEPS_CONFIG} from "./steps/steps_config";
 import './styles/crediter_steps.module.scss';
+import DynamicComponent from "../_common/dynamic_component/dynamic_component";
 
 class CrediterSteps extends Component {
     constructor(props) {
@@ -9,11 +10,13 @@ class CrediterSteps extends Component {
 
         this.state = {
             step: STEPS_CONFIG.MIN_STEP,
+            steps_data: {},
         };
 
         this.nextStep = this.nextStep.bind(this);
         this.previousStep = this.previousStep.bind(this);
         this.changeStep = this.changeStep.bind(this);
+        this.setStepData = this.setStepData.bind(this);
     }
 
     nextStep() {
@@ -30,11 +33,17 @@ class CrediterSteps extends Component {
         });
     }
 
-    render() {
-        const {step} = this.state;
+    setStepData(data, callback) {
+        let next_steps_data = {...this.state.steps_data};
+        next_steps_data[this.state.step] = data;
 
-        const dynamic_step = STEPS_CONFIG.DYNAMIC_STEPS[step];
-        const DynamicStepComponent = dynamic_step?.component;
+        this.setState({
+            steps_data: next_steps_data,
+        }, callback);
+    }
+
+    render() {
+        const {step, steps_data} = this.state;
 
         return (
             <div className={"container-fluid"}>
@@ -58,26 +67,31 @@ class CrediterSteps extends Component {
                     </div>
                     <div className={"col-9"}>
                         <div>
-                            {DynamicStepComponent && <DynamicStepComponent/>}
-                            {!DynamicStepComponent && <div>étape {step} inconnue..</div>}
+                            <DynamicComponent
+                                dynamic_list={STEPS_CONFIG.DYNAMIC_STEPS} dynamic_key={step}
+                                current_step={step}
+                                steps_data={steps_data}
+                                load_next_step={this.nextStep}
+                                set_step_data={this.setStepData}
+                            />
                         </div>
                     </div>
                 </div>
                 <div className={"row"}>
                     <div className={"col-6"}>
-                        <button
+                        {step > STEPS_CONFIG.MIN_STEP && <button
                             className={clsx("button btn-small", step === STEPS_CONFIG.MIN_STEP && "disabled")}
                             disabled={step === STEPS_CONFIG.MIN_STEP}
                             onClick={this.previousStep}>
                             Précédent
-                        </button>
+                        </button>}
                     </div>
                     <div className={"col-6"} style={{display: 'flex', justifyContent: 'flex-end'}}>
-                        <button className={clsx("button btn-small", step === STEPS_CONFIG.MAX_STEP && "disabled")}
-                                disabled={step === STEPS_CONFIG.MAX_STEP}
-                                onClick={this.nextStep}>
-                            Suivant
-                        </button>
+                        {/*<button className={clsx("button btn-small", step === STEPS_CONFIG.MAX_STEP && "disabled")}*/}
+                        {/*        disabled={step === STEPS_CONFIG.MAX_STEP}*/}
+                        {/*        onClick={this.nextStep}>*/}
+                        {/*    Suivant*/}
+                        {/*</button>*/}
                     </div>
                 </div>
             </div>

@@ -4,7 +4,6 @@ import {CONFIG} from "../../_common/config";
 
 class PaymentPaypal extends PureComponent {
     componentDidMount() {
-        const {element_ref} = this.props;
         const {CLIENT_ID, CURRENCY, INTENT, DISABLE_FUNDING} = CONFIG.PAYMENTS.PAYPAL;
 
         injectHeadScript(`https://www.paypal.com/sdk/js?client-id=${CLIENT_ID}&currency=${CURRENCY}&intent=${INTENT}&disable-funding=${DISABLE_FUNDING}`, () => {
@@ -26,13 +25,14 @@ class PaymentPaypal extends PureComponent {
                         alert('Transaction completed by ' + details.payer.name.given_name);
                     });
                 }
-            }).render(element_ref);
+            }).render('#paypal_payment_id');
         });
     }
 
     render() {
         return (
             <div>
+                <div id={'paypal_payment_id'}/>
                 paiement paypal
             </div>
         );

@@ -14,6 +14,11 @@ p {
   font-size: $pFontSize;
 }
 
+.html_content {
+  font-size: 18px;
+  color: $fontColor;
+}
+
 .li-top-right {
   padding: 8px;
 }
@@ -530,4 +535,17 @@ $forum_discussion_top: 30px;
   color: $secondaryColor;
   font-style: italic;
   font-size: 0.9em;
+}
+
+.presentation_signature {
+  text-align: right;
+}
+
+.presentation_paragraph {
+  margin-bottom: 25px;
+  text-align: justify;
+}
+
+.presentation_version {
+  font-weight: bold;
 }

@@ -4,7 +4,7 @@
   cursor: pointer;
   padding: 8px 10px;
   margin-bottom: 15px;
-  border: 1px black solid;
+  border: 1px gray solid;
   border-radius: 3px;
 }
 
@@ -25,12 +25,17 @@
 }
 
 .step_payments_choice_box {
+  $size: 180px;
+
   position: relative;
-  width: 250px;
-  height: 250px;
-  background-color: $mainColor;
-  color: white;
+  width: $size;
+  height: $size;
   cursor: pointer;
+
+  background-color: white;
+  color: $mainColor;
+  border: 1px rgba($mainColor, 0.4) solid;
+  border-radius: 5px;
 
   display: flex;
   justify-content: center;
@@ -45,22 +50,32 @@
 }
 
 .step_payments_choice_box:hover {
+  background-color: $mainColor;
+  color: white;
+  border: none;
+  padding: 5px;
+
   .step_payments_choice_text_name {
-    display: none;
+    opacity: 0;
+    height: 0;
   }
 
   .step_payments_choice_text_help {
-    display: block;
+    opacity: 1;
+    transition: all .3s ease-out;
+    height: auto;
   }
 }
 
 .step_payments_choice_text_name {
   font-weight: bold;
   font-size: 1.5em;
-  display: block;
+  opacity: 1;
+  height: auto;
 }
 
 .step_payments_choice_text_help {
   font-size: 1.4em;
-  display: none;
+  opacity: 0;
+  height: 0;
 }
