@@ -21,6 +21,10 @@ parameters:
   PAYPAL_SECRET_ID: '%env(PAYPAL_SECRET_ID)%'
   DEDIPASS_PUBLIC_KEY: '%env(DEDIPASS_PUBLIC_KEY)%'
   DEDIPASS_PRIVATE_KEY: '%env(DEDIPASS_PRIVATE_KEY)%'
+  rcon_timeout: '%env(rcon_timeout)%'
+  rcon_faction_host: '%env(rcon_faction_host)%'
+  rcon_faction_port: '%env(rcon_faction_port)%'
+  rcon_faction_password: '%env(rcon_faction_password)%'
 
 services:
   # default configuration for services in *this* file
