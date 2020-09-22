@@ -2,6 +2,7 @@
 
 namespace App\DQL;
 
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
@@ -14,13 +15,13 @@ use Doctrine\ORM\Query\SqlWalker;
  *
  * Assuming the same "Person" entity from Doctrine's documentation on
  * Inheritence Mapping, which has a discriminator field named "discr":
- * 
+ *
  * Using the TYPE() function, DQL will interpret this:
- * 
+ *
  * <pre>'SELECT TYPE(p) FROM Person p'</pre>
  *
  * as if you had written this:
- * 
+ *
  * <pre>'SELECT p.discr FROM Person p'</pre>
  *
  * This conversion happens at the SQL level, so the ORM is no longer
@@ -44,12 +45,13 @@ class TypeFunction extends FunctionNode
     /**
      * @param SqlWalker $sqlWalker
      * @return string
+     * @throws QueryException
      */
     public function getSql(SqlWalker $sqlWalker)
     {
-        $qComp      = $sqlWalker->getQueryComponent($this->dqlAlias);
-        /** @var \Doctrine\ORM\Mapping\ClassMetadataInfo $class */
-        $class      = $qComp['metadata'];
+        $qComp = $sqlWalker->getQueryComponent($this->dqlAlias);
+        /** @var ClassMetadataInfo $class */
+        $class = $qComp['metadata'];
         $tableAlias = $sqlWalker->getSQLTableAlias($class->getTableName(), $this->dqlAlias);
 
         if (!isset($class->discriminatorColumn['name'])) {
@@ -63,6 +65,7 @@ class TypeFunction extends FunctionNode
 
     /**
      * @param Parser $parser
+     * @throws QueryException
      */
     public function parse(Parser $parser)
     {

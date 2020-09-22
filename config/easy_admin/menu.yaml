@@ -65,6 +65,22 @@ easy_admin:
               permission: "ROLE_MANAGEUR",
             },
           ]
+      - label: "Boutique"
+        icon: "store"
+        permission: "ROLE_ADMIN"
+        children:
+          [
+          {
+            entity: "StoreCategory",
+            label: "Catégories",
+            permission: "ROLE_ADMIN",
+          },
+          {
+            entity: "StoreArticle",
+            label: "Articles",
+            permission: "ROLE_ADMIN",
+          },
+          ]
       - label: "Spoils"
         icon: "question"
         permission: "ROLE_STAFF"

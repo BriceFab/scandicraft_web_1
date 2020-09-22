@@ -145,6 +145,11 @@ class User implements UserInterface
      */
     private $credit;
 
+    /**
+     * @ORM\OneToMany(targetEntity=StoreArticle::class, mappedBy="createdBy")
+     */
+    private $storeArticles;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -163,6 +168,7 @@ class User implements UserInterface
         $this->userVotes = new ArrayCollection();
         $this->voteSites = new ArrayCollection();
         $this->attachments = new ArrayCollection();
+        $this->storeArticles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -781,6 +787,37 @@ class User implements UserInterface
     public function setCredit(int $credit): self
     {
         $this->credit = $credit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|StoreArticle[]
+     */
+    public function getStoreArticles(): Collection
+    {
+        return $this->storeArticles;
+    }
+
+    public function addStoreArticle(StoreArticle $storeArticle): self
+    {
+        if (!$this->storeArticles->contains($storeArticle)) {
+            $this->storeArticles[] = $storeArticle;
+            $storeArticle->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStoreArticle(StoreArticle $storeArticle): self
+    {
+        if ($this->storeArticles->contains($storeArticle)) {
+            $this->storeArticles->removeElement($storeArticle);
+            // set the owning side to null (unless already changed)
+            if ($storeArticle->getCreatedBy() === $this) {
+                $storeArticle->setCreatedBy(null);
+            }
+        }
 
         return $this;
     }

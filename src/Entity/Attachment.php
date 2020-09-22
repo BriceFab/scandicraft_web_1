@@ -81,7 +81,7 @@ class Attachment
 
     public function __toString()
     {
-        return "afsd";
+        return "attachment_" . $this->getAlt();
 //        return $this->getUrl();
     }
 

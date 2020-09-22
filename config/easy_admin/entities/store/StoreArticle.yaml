@@ -1,0 +1,65 @@
+easy_admin:
+  entities:
+    StoreArticle:
+      class: App\Entity\StoreArticle
+      permissions:
+        list: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+      list:
+        title: "Liste des articles"
+        actions:
+          [
+          { name: "new", label: "Ajouter" },
+          { name: "show", label: "Détail", icon: "search" },
+          { name: "edit", label: "Modifier", icon: "edit" },
+          { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+          { property: "name", label: "Nom" },
+          { property: "enable", label: "Activé ?" },
+          { property: "duration", label: "Durée" },
+          { property: "price", label: "Prix" },
+          { property: "category", label: "Catégorie" },
+          { property: "untilDate", label: "Jusqu'au" },
+          { property: "createdBy", label: "Créé par" },
+          ]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+          { property: "name", label: "Nom" },
+          { property: "enable", label: "Activé ?" },
+          { property: "duration", label: "Durée" },
+          { property: "price", label: "Prix" },
+          { property: "category", label: "Catégorie" },
+          { property: "untilDate", label: "Jusqu'au" },
+          {
+            label: "Images",
+            property: "attachments",
+            type: "collection",
+            type_options: {
+              entry_type: "App\\Form\\AttachmentType",
+              allow_delete: true,
+              allow_add: true,
+              by_reference: false
+            }
+          },
+          ]
+      show:
+        title: "Détail"
+        fields:
+          [
+          { property: "name", label: "Nom" },
+          { property: "enable", label: "Activé ?" },
+          { property: "duration", label: "Durée" },
+          { property: "price", label: "Prix" },
+          { property: "category", label: "Catégorie" },
+          { property: "attachments", label: "Images" },
+          { property: "untilDate", label: "Jusqu'au" },
+          { property: "createdBy", label: "Créé par" },
+          { property: "createdAt", label: "Créé le" },
+          ]
