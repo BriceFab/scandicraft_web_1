@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Repository\SpoilRepository;
 use App\Service\DiscordService;
-use App\Service\RconService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,11 +42,8 @@ class HomeController extends AbstractController
      * @Route("/play")
      * @Route("/join")
      */
-    public function jouer(RconService $rconService)
+    public function jouer()
     {
-        $success = $rconService->executeFactionCommand("say hello from rcon");
-        dd($success);
-
         return $this->render('jouer/index.html.twig');
     }
 

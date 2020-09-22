@@ -9,9 +9,10 @@ class StoreController extends AbstractController
 {
     /**
      * @Route("/boutique", name="store")
+     * @Route("/store")
      */
     public function boutiquePage()
     {
-        return $this->render('maintenance/page_under_maintenance.html.twig');
+        return $this->render('store/index.html.twig');
     }
 }
