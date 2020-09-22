@@ -140,6 +140,11 @@ class User implements UserInterface
      */
     private $attachments;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $credit;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -764,6 +769,18 @@ class User implements UserInterface
                 $attachment->setCreatedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCredit(): ?int
+    {
+        return $this->credit;
+    }
+
+    public function setCredit(int $credit): self
+    {
+        $this->credit = $credit;
 
         return $this;
     }

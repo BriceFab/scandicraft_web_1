@@ -1,20 +1,314 @@
-{% extends 'base.html.twig' %}
+{% extends '_components/page/base_page.twig' %}
 
-{% block title %}Hello StoreController!{% endblock %}
+{% block title %}Boutique{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block page_content %}
+    <div class="top-title">
+        <div class="title-txt">
+            <h5>Boutique
+                <span class="sub-title-lighter">/ Soutenez-nous et aidez notre serveur à se développer !</span>
+            </h5>
+        </div>
+        <div class="divider"></div>
+        {% if app.user %}
+            <p>
+                {{ app.user.username }}, Vous possédez actuellement {{ app.user.credit }} <i class="fas fa-coins"></i>
+                <button class="w-button button btn-active btn-extra-small no-margin" style="float: right">
+                    <a href="{{ path('crediter') }}" style="color: white;">Recharger</a>
+                </button>
+            </p>
+        {% endif %}
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/sources/scandicraft/scandicraft_web/src/Controller/StoreController.php'|file_link(0) }}">src/Controller/StoreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/sources/scandicraft/scandicraft_web/templates/store/index.html.twig'|file_link(0) }}">templates/store/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!-- STORE SECTION -->
+    <section class="w-section section">
+        <div class="w-container">
+            <div class="filters">
+                <ul class="w-list-unstyled ul-filters">
+                    <li class="li-filter">
+                        <a class="w-inline-block filter" href="#" data-filter="all">
+                            <div>All</div>
+                        </a>
+                    </li>
+                    <li class="li-filter">
+                        <a class="w-inline-block filter" href="#" data-filter=".design">
+                            <div>Design</div>
+                        </a>
+                    </li>
+                    <li class="li-filter">
+                        <a class="w-inline-block filter" href="#" data-filter=".animation">
+                            <div>Animation</div>
+                        </a>
+                    </li>
+                    <li class="li-filter">
+                        <a class="w-inline-block filter" href="#" data-filter=".video">
+                            <div>Video</div>
+                        </a>
+                    </li>
+                    <li class="li-filter">
+                        <a class="w-inline-block filter" href="#" data-filter=".photo">
+                            <div>Photography</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-clearfix grid" id="Grid">
+                <div class="mix animation design mix-4">
+                    <div class="portfolio-wrapper" data-ix="portfolio-hover">
+                        <div class="portfolio-top">
+                            <div class="portfolio-overlay">
+                                <div class="port-ic-wp">
+                                    <a class="w-inline-block portfolio-ico" href="#" data-ix="move-portfolio-ico">
+                                        <div class="w-embed"><i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                    <a class="w-inline-block portfolio-ico-zoom" href="images/p1.jpg"
+                                       data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom">
+                                        <div class="w-embed"><i class="fa fa-search"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <img src="images/p1.jpg">
+                        </div>
+                        <a class="w-inline-block portfolio-bottom" href="#"><h6>Aenean Tellus</h6>
+                            <div class="sub-txt-portolio">Duis arcu tortor, suscipit</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mix video photo mix-4">
+                    <div class="portfolio-wrapper" data-ix="portfolio-hover">
+                        <div class="portfolio-top">
+                            <div class="portfolio-overlay">
+                                <div class="port-ic-wp">
+                                    <a class="w-inline-block portfolio-ico" href="#" data-ix="move-portfolio-ico">
+                                        <div class="w-embed"><i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                    <a class="w-inline-block portfolio-ico-zoom" href="images/p12.jpg"
+                                       data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom">
+                                        <div class="w-embed"><i class="fa fa-search"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <img src="images/p12.jpg">
+                        </div>
+                        <a class="w-inline-block portfolio-bottom" href="#"><h6>Aenean Tellus</h6>
+                            <div class="sub-txt-portolio">Duis arcu tortor, suscipit</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mix design photo mix-4">
+                    <div class="portfolio-wrapper">
+                        <div class="portfolio-top">
+                            <div class="w-slider carousel-second" data-animation="slide" data-duration="500"
+                                 data-infinite="1">
+                                <div class="w-slider-mask">
+                                    <div class="w-slide">
+                                        <div class="portfolio-top" data-ix="portfolio-hover">
+                                            <div class="portfolio-overlay">
+                                                <div class="port-ic-wp">
+                                                    <a class="w-inline-block portfolio-ico" href="#"
+                                                       data-ix="move-portfolio-ico">
+                                                        <div class="w-embed"><i class="fa fa-link"></i>
+                                                        </div>
+                                                    </a>
+                                                    <a class="w-inline-block portfolio-ico-zoom" href="images/p3.jpg"
+                                                       data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom">
+                                                        <div class="w-embed"><i class="fa fa-search"></i>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <img src="images/p3.jpg">
+                                        </div>
+                                    </div>
+                                    <div class="w-slide">
+                                        <div class="portfolio-top" data-ix="portfolio-hover">
+                                            <div class="portfolio-overlay">
+                                                <div class="port-ic-wp">
+                                                    <a class="w-inline-block portfolio-ico" href="#"
+                                                       data-ix="move-portfolio-ico">
+                                                        <div class="w-embed"><i class="fa fa-link"></i>
+                                                        </div>
+                                                    </a>
+                                                    <a class="w-inline-block portfolio-ico-zoom" href="images/p4.jpgg"
+                                                       data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom">
+                                                        <div class="w-embed"><i class="fa fa-search"></i>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <img src="images/p4.jpg">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-slider-arrow-left second-carousel-arrow">
+                                    <div class="w-icon-slider-left arrow-carousel"></div>
+                                </div>
+                                <div class="w-slider-arrow-right second-carousel-arrow">
+                                    <div class="w-icon-slider-right arrow-carousel"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="w-inline-block portfolio-bottom" href="#"><h6>Cras Non</h6>
+                            <div class="sub-txt-portolio">In hac habitasse platea</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mix video design mix-4">
+                    <div class="portfolio-wrapper" data-ix="portfolio-hover">
+                        <div class="portfolio-top">
+                            <div class="portfolio-overlay">
+                                <div class="port-ic-wp">
+                                    <a class="w-inline-block portfolio-ico" href="#" data-ix="move-portfolio-ico">
+                                        <div class="w-embed"><i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                    <a class="w-inline-block portfolio-ico-zoom" href="images/p9.jpg"
+                                       data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom">
+                                        <div class="w-embed"><i class="fa fa-search"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <img src="images/p9.jpg">
+                        </div>
+                        <a class="w-inline-block portfolio-bottom" href="#"><h6>Aenean Tellus</h6>
+                            <div class="sub-txt-portolio">Duis arcu tortor, suscipit</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mix photo mix-4">
+                    <div class="portfolio-wrapper">
+                        <div class="portfolio-top">
+                            <div class="w-slider carousel-second" data-animation="slide" data-duration="500"
+                                 data-infinite="1">
+                                <div class="w-slider-mask">
+                                    <div class="w-slide">
+                                        <div class="portfolio-top" data-ix="portfolio-hover">
+                                            <div class="portfolio-overlay">
+                                                <div class="port-ic-wp">
+                                                    <a class="w-inline-block portfolio-ico" href="#"
+                                                       data-ix="move-portfolio-ico">
+                                                        <div class="w-embed"><i class="fa fa-link"></i>
+                                                        </div>
+                                                    </a>
+                                                    <a class="w-inline-block portfolio-ico-zoom" href="images/p6.jpg"
+                                                       data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom">
+                                                        <div class="w-embed"><i class="fa fa-search"></i>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <img src="images/p6.jpg">
+                                        </div>
+                                    </div>
+                                    <div class="w-slide">
+                                        <div class="portfolio-top" data-ix="portfolio-hover">
+                                            <div class="portfolio-overlay">
+                                                <div class="port-ic-wp">
+                                                    <a class="w-inline-block portfolio-ico" href="#"
+                                                       data-ix="move-portfolio-ico">
+                                                        <div class="w-embed"><i class="fa fa-link"></i>
+                                                        </div>
+                                                    </a>
+                                                    <a class="w-inline-block portfolio-ico-zoom" href="images/p11.jpg"
+                                                       data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom">
+                                                        <div class="w-embed"><i class="fa fa-search"></i>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <img src="images/p11.jpg">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-slider-arrow-left second-carousel-arrow">
+                                    <div class="w-icon-slider-left arrow-carousel"></div>
+                                </div>
+                                <div class="w-slider-arrow-right second-carousel-arrow">
+                                    <div class="w-icon-slider-right arrow-carousel"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="w-inline-block portfolio-bottom" href="#"><h6>Cras Non</h6>
+                            <div class="sub-txt-portolio">In hac habitasse platea</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mix video mix-4">
+                    <div class="portfolio-wrapper" data-ix="portfolio-hover">
+                        <div class="portfolio-top">
+                            <div class="portfolio-overlay">
+                                <div class="port-ic-wp">
+                                    <a class="w-inline-block portfolio-ico" href="#" data-ix="move-portfolio-ico">
+                                        <div class="w-embed"><i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                    <a class="w-inline-block portfolio-ico-zoom" href="images/p7.jpg"
+                                       data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom">
+                                        <div class="w-embed"><i class="fa fa-search"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <img src="images/p7.jpg">
+                        </div>
+                        <a class="w-inline-block portfolio-bottom" href="#"><h6>Aenean Tellus</h6>
+                            <div class="sub-txt-portolio">Duis arcu tortor, suscipit</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mix video animation mix-4">
+                    <div class="portfolio-wrapper" data-ix="portfolio-hover">
+                        <div class="portfolio-top">
+                            <div class="portfolio-overlay">
+                                <div class="port-ic-wp">
+                                    <a class="w-inline-block portfolio-ico" href="#" data-ix="move-portfolio-ico">
+                                        <div class="w-embed"><i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                    <a class="w-inline-block portfolio-ico-zoom" href="images/p8.jpg"
+                                       data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom">
+                                        <div class="w-embed"><i class="fa fa-search"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <img src="images/p8.jpg">
+                        </div>
+                        <a class="w-inline-block portfolio-bottom" href="#"><h6>Aenean Tellus</h6>
+                            <div class="sub-txt-portolio">Duis arcu tortor, suscipit</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mix video mix-4">
+                    <div class="portfolio-wrapper" data-ix="portfolio-hover">
+                        <div class="portfolio-top">
+                            <div class="portfolio-overlay">
+                                <div class="port-ic-wp">
+                                    <a class="w-inline-block portfolio-ico" href="#" data-ix="move-portfolio-ico">
+                                        <div class="w-embed"><i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                    <a class="w-inline-block portfolio-ico-zoom" href="images/p2.jpg"
+                                       data-lightbox="portfolio-1" data-ix="move-portfolio-ico-zoom">
+                                        <div class="w-embed"><i class="fa fa-search"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <img src="images/p2.jpg">
+                        </div>
+                        <a class="w-inline-block portfolio-bottom" href="#"><h6>Aenean Tellus</h6>
+                            <div class="sub-txt-portolio">Duis arcu tortor, suscipit</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- STORE SECTION -->
 {% endblock %}
