@@ -12,7 +12,7 @@ class StepPaymentsChoices extends Component {
     render() {
         return (
             <div>
-                <h4>Choissisez votre moyen de paiement</h4>
+                <h4 className={'step_payment_title'}>Choissisez votre moyen de paiement</h4>
                 <div className={"step_payments_choices_container"}>
                     {STEPS_CONFIG.PAYMENTS_TYPES.map((payment_type, index) => {
                         const {name, help} = payment_type;

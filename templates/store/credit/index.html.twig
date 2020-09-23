@@ -4,20 +4,17 @@
 {% block title %}Créditer{% endblock %}
 
 {% block page_content %}
-    <h2>Acheter des crédits</h2>
+    <div class="top-title">
+        <div class="title-txt">
+            <h3>Acheter des crédits
+                {% if app.user %}
+                    <span class="sub-title-lighter">/ {{ app.user.username }}, votre solde: {{ app.user.credit }}
+                        <i class="fas fa-coins"></i></span>
+                {% endif %}
+            </h3>
+        </div>
+        <div class="divider"></div>
+    </div>
 
     {{ html_component.render("crediter_steps") }}
-
-{#    <a>PayPal</a>#}
-{#    <a>PaySafeCard</a>#}
-{#    <a>Stripe</a>#}
-{#    <a>Dedipass</a>#}
-
-    {#    <div>#}
-    {#        {{ html_component.render("payment_paypal") }}#}
-    {#        {{ html_component.render("payment_dedipass", [#}
-    {#            "data-public_key=" ~ dedipass_public_key,#}
-    {#        ]) }}#}
-    {#    </div>#}
-
 {% endblock %}

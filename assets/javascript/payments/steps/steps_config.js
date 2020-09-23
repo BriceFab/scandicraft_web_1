@@ -25,13 +25,13 @@ export const STEPS_CONFIG = {
             dynamic_key: 'payment_dedipass',
         },
         {
-            name: 'PaySafeCard',
-            help: 'Paiement par code PaySafeCard',
-        },
-        {
             name: 'PayPal',
             help: 'Paiement avec votre compte PayPal',
             dynamic_key: 'payment_paypal',
         },
+        // {
+        //     name: 'PaySafeCard',
+        //     help: 'Paiement par code PaySafeCard',
+        // },
     ]
 };
