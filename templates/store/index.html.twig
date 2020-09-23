@@ -25,72 +25,106 @@
         <div class="w-container">
 
             {# Catégories#}
-            <div class="filters">
-                <ul class="w-list-unstyled ul-filters">
-                    <li class="li-filter">
-                        <a class="w-inline-block filter" href="#" data-filter="all">
-                            <div>Tous</div>
-                        </a>
-                    </li>
-                    {% for category in categories %}
+            {% if categories|length > 0 %}
+                <div class="filters">
+                    <ul class="w-list-unstyled ul-filters">
                         <li class="li-filter">
-                            <a class="w-inline-block filter" href="#" data-filter=".{{ category.name|lower }}">
-                                <div>{{ category.name }}</div>
+                            <a class="w-inline-block filter" href="#" data-filter="all">
+                                <div>Tous</div>
                             </a>
                         </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                        {% for category in categories %}
+                            <li class="li-filter">
+                                <a class="w-inline-block filter" href="#" data-filter=".{{ category.name|lower }}">
+                                    <div>{{ category.name }}</div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <div class="divider"></div>
+                <p>La boutique ne contient aucune catégorie pour le moment.</p>
+                <p>
+                    Cependant, vous pouvez déjà créditer votre compte <i class="fas fa-money-bill-alt"></i>:
+                    <br/>
+                    <button class="w-button button btn-primary btn-lg no-margin" style="margin-top: 15px;">
+                        <a href="{{ path('crediter') }}" style="color: white;">Créditer</a>
+                    </button>
+                </p>
+            {% endif %}
 
             {# Articles #}
-            <div class="w-clearfix grid" id="Grid">
-                {% for article in articles %}
-                    <div class="mix {{ article.category.name|lower }} mix-4">
-                        <div class="portfolio-wrapper">
-                            <div class="portfolio-top">
-                                <div class="w-slider carousel-second" data-animation="slide" data-duration="500"
-                                     data-infinite="1">
-                                    <div class="w-slider-mask">
-                                        {% for attachment in article.attachments %}
-                                            <div class="w-slide">
-                                                <div class="portfolio-top" data-ix="portfolio-hover">
-                                                    <div class="portfolio-overlay">
-                                                        <div class="port-ic-wp">
-                                                            <a class="w-inline-block portfolio-ico" href="#"
-                                                               data-ix="move-portfolio-ico">
-                                                                <div class="w-embed">
-                                                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+            {% if categories|length > 0 %}
+                {% if articles|length > 0 %}
+                    <div class="w-clearfix grid" id="Grid">
+                        {% for article in articles %}
+                            <div class="mix {{ article.category.name|lower }} mix-4">
+                                <div class="portfolio-wrapper">
+                                    <div class="portfolio-top">
+                                        <div class="w-slider carousel-second" data-animation="slide" data-duration="500"
+                                             data-infinite="1">
+                                            <div class="w-slider-mask">
+                                                {% for attachment in article.attachments %}
+                                                    <div class="w-slide">
+                                                        <div class="portfolio-top" data-ix="portfolio-hover">
+                                                            <div class="portfolio-overlay">
+                                                                <div class="port-ic-wp">
+                                                                    <a class="w-inline-block portfolio-ico" href="#"
+                                                                       data-ix="move-portfolio-ico">
+                                                                        <div class="w-embed">
+                                                                            <i class="fa fa-info-circle"
+                                                                               aria-hidden="true"></i>
+                                                                        </div>
+                                                                    </a>
                                                                 </div>
-                                                            </a>
+                                                            </div>
+                                                            <img src="{{ asset(app.request.schemeAndHttpHost ~ attachment_path ~ '/' ~ attachment.url) }}"
+                                                                 alt="{{ attachment.alt }}">
                                                         </div>
                                                     </div>
-                                                    <img src="{{ asset(app.request.schemeAndHttpHost ~ attachment_path ~ '/' ~ attachment.url) }}"
-                                                         alt="{{ attachment.alt }}">
-                                                </div>
+                                                {% endfor %}
                                             </div>
-                                        {% endfor %}
+                                            {% if article.attachments|length > 1 %}
+                                                <div class="w-slider-arrow-left second-carousel-arrow">
+                                                    <div class="w-icon-slider-left arrow-carousel"></div>
+                                                </div>
+                                                <div class="w-slider-arrow-right second-carousel-arrow">
+                                                    <div class="w-icon-slider-right arrow-carousel"></div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
                                     </div>
-                                    {% if article.attachments|length > 1 %}
-                                        <div class="w-slider-arrow-left second-carousel-arrow">
-                                            <div class="w-icon-slider-left arrow-carousel"></div>
+                                    <a class="w-inline-block portfolio-bottom" href="#">
+                                        <h6>{{ article.name }}</h6>
+                                        <div class="sub-txt-portolio">
+                                            {{ article.price }}
+                                            <i class="fas fa-money-bill-alt"></i>
                                         </div>
-                                        <div class="w-slider-arrow-right second-carousel-arrow">
-                                            <div class="w-icon-slider-right arrow-carousel"></div>
-                                        </div>
-                                    {% endif %}
+                                    </a>
                                 </div>
                             </div>
-                            <a class="w-inline-block portfolio-bottom" href="#">
-                                <h6>{{ article.name }}</h6>
-                                <div class="sub-txt-portolio">
-                                    {{ article.price }}
-                                    <i class="fas fa-money-bill-alt"></i>
-                                </div>
-                            </a>
-                        </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            </div>
+                {% else %}
+                    <p>La boutique ne contient aucun article pour le moment.</p>
+                    <p>
+                        Cependant, vous pouvez déjà créditer votre compte <i class="fas fa-money-bill-alt"></i>:
+                        <br/>
+                        <button class="w-button button btn-primary btn-lg no-margin" style="margin-top: 15px;">
+                            <a href="{{ path('crediter') }}" style="color: white;">Créditer</a>
+                        </button>
+                    </p>
+                {% endif %}
+            {% endif %}
+
+            {# survey_archived #}
+            <ins class="adsbygoogle" style="display:block; text-align:center; margin-top: 15px;" data-ad-layout="in-article"
+                 data-ad-format="fluid" data-ad-client="ca-pub-1457190527508329" data-ad-slot="7669320152"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+
         </div>
     </section>
     <!-- STORE SECTION -->

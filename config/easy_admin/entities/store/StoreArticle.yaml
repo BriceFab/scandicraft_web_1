@@ -26,6 +26,7 @@ easy_admin:
           { property: "category", label: "Catégorie" },
           { property: "untilDate", label: "Jusqu'au" },
           { property: "createdBy", label: "Créé par" },
+          { property: "attachments", label: "Images" },
           ]
       form:
         title: "Ajouter/Modifier"
