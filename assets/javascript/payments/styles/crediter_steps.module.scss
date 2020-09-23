@@ -1,5 +1,9 @@
 @import "../../../styles/colors";
 
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
 .step_shower {
   cursor: pointer;
   padding: 8px 10px;
@@ -15,6 +19,12 @@
   border: none;
 }
 
+.step_disabled {
+  cursor: default;
+  color: grey;
+  border: 1px lightgray solid;
+}
+
 //Step 0
 .step_payments_choices_container {
   display: flex;
@@ -25,7 +35,7 @@
 }
 
 .step_payments_choice_box {
-  $size: 180px;
+  $size: 200px;
 
   position: relative;
   width: $size;
@@ -41,8 +51,8 @@
   justify-content: center;
   align-items: center;
 
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin-right: 25px;
+  margin-bottom: 25px;
 }
 
 .step_payments_choice_text_container {
@@ -78,4 +88,34 @@
   font-size: 1.4em;
   opacity: 0;
   height: 0;
+}
+
+.step_payment_title {
+  font-size: 1.4em;
+  margin-bottom: 15px;
+}
+
+//Mobile
+@include media-breakpoint-down(md) {
+  .step_payments_choice_box {
+    $size: 120px;
+
+    width: $size;
+    height: $size;
+
+    margin-right: 15px;
+    margin-bottom: 15px;
+  }
+
+  .step_payments_choice_text_name {
+    font-size: 1.1em;
+  }
+
+  .step_payments_choice_text_help {
+    font-size: 1em;
+  }
+
+  .step_payment_title {
+    font-size: 1.2em;
+  }
 }

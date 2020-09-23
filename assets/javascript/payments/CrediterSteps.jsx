@@ -48,7 +48,7 @@ class CrediterSteps extends Component {
         return (
             <div className={"container-fluid"}>
                 <div className={"row"}>
-                    <div className={"col-3"}>
+                    <div className={"col-lg-3 col-md-4 col-xs-12"}>
                         {
                             Object.values(STEPS_CONFIG.DYNAMIC_STEPS).map((dynamic_step, index) => {
                                 const {name} = dynamic_step;
@@ -56,8 +56,12 @@ class CrediterSteps extends Component {
                                 return (
                                     <div
                                         key={`crediter-steps-${name}-${index}`}
-                                        onClick={() => this.changeStep(index)}
-                                        className={clsx('step_shower', index === step && 'step_shower_current')}
+                                        onClick={() => {
+                                            if (step > index) {
+                                                this.changeStep(index)
+                                            }
+                                        }}
+                                        className={clsx('step_shower', index === step && 'step_shower_current', step < index && 'step_disabled')}
                                     >
                                         {name}
                                     </div>
@@ -65,7 +69,7 @@ class CrediterSteps extends Component {
                             })
                         }
                     </div>
-                    <div className={"col-9"}>
+                    <div className={"col-lg-9 col-md-8 col-xs-12"}>
                         <div>
                             <DynamicComponent
                                 dynamic_list={STEPS_CONFIG.DYNAMIC_STEPS} dynamic_key={step}

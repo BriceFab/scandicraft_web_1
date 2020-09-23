@@ -13,9 +13,11 @@
         {% if app.user %}
             <p>
                 {{ app.user.username }}, Vous possédez actuellement {{ app.user.credit }} <i class="fas fa-coins"></i>
-                <button class="w-button button btn-active btn-extra-small no-margin" style="float: right">
-                    <a href="{{ path('crediter') }}" style="color: white;">Recharger</a>
-                </button>
+                <a href="{{ path('crediter') }}" style="color: white;">
+                    <button class="w-button button btn-active btn-extra-small no-margin" style="float: right">
+                        Recharger
+                    </button>
+                </a>
             </p>
         {% endif %}
     </div>
@@ -48,9 +50,11 @@
                 <p>
                     Cependant, vous pouvez déjà créditer votre compte <i class="fas fa-money-bill-alt"></i>:
                     <br/>
-                    <button class="w-button button btn-primary btn-lg no-margin" style="margin-top: 15px;">
-                        <a href="{{ path('crediter') }}" style="color: white;">Créditer</a>
-                    </button>
+                    <a href="{{ path('crediter') }}" style="color: white;">
+                        <button class="w-button button btn-primary btn-lg no-margin" style="margin-top: 15px;">
+                            Créditer
+                        </button>
+                    </a>
                 </p>
             {% endif %}
 
@@ -111,15 +115,18 @@
                     <p>
                         Cependant, vous pouvez déjà créditer votre compte <i class="fas fa-money-bill-alt"></i>:
                         <br/>
-                        <button class="w-button button btn-primary btn-lg no-margin" style="margin-top: 15px;">
-                            <a href="{{ path('crediter') }}" style="color: white;">Créditer</a>
-                        </button>
+                        <a href="{{ path('crediter') }}" style="color: white;">
+                            <button class="w-button button btn-primary btn-lg no-margin" style="margin-top: 15px;">
+                                Créditer
+                            </button>
+                        </a>
                     </p>
                 {% endif %}
             {% endif %}
 
             {# survey_archived #}
-            <ins class="adsbygoogle" style="display:block; text-align:center; margin-top: 15px;" data-ad-layout="in-article"
+            <ins class="adsbygoogle" style="display:block; text-align:center; margin-top: 15px;"
+                 data-ad-layout="in-article"
                  data-ad-format="fluid" data-ad-client="ca-pub-1457190527508329" data-ad-slot="7669320152"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});

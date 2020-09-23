@@ -22,10 +22,6 @@ class CreditController extends AbstractController
      */
     public function index()
     {
-//        $test = $this->paypalService->captureOrder('test', false);
-
-        return $this->render('maintenance/page_under_maintenance.html.twig');
-
         return $this->render('store/credit/index.html.twig', [
             'dedipass_public_key' => $this->getParameter('DEDIPASS_PUBLIC_KEY'),
         ]);
