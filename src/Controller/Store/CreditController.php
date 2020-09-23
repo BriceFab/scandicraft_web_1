@@ -7,9 +7,11 @@ use Stripe\Exception\ApiErrorException;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CreditController extends AbstractController
@@ -32,25 +34,64 @@ class CreditController extends AbstractController
     }
 
     /**
-     * @Route("/stripe/payment", methods={"GET"})
+     * @Route("/stripe/pay", methods={"post"})
      * @param Request $request
+     * @param ParameterBagInterface $parameter
      * @return JsonResponse
-     * @throws ApiErrorException
      */
-    public function getStripePayment(Request $request)
+    public function handleStripePayment(Request $request, ParameterBagInterface $parameter)
     {
-        Stripe::setApiKey('sk_test_51HUbBjJd9qznNTg3AvNwegZqp4OyWcdi2SYIrsFWgUYEdpAZ390Ch1vsKWUeitjP7ERaPDzjDzuADOcbrcVo0Ff400L2QnnuFD');
+        Stripe::setApiKey($parameter->get('STRIPE_SECRET_KEY'));
 
-        $intent = PaymentIntent::create([
-            'amount' => 1099,
-            'currency' => 'chf',
-            // Verify your integration in this guide by including this parameter
-            'metadata' => ['integration_check' => 'accept_a_payment'],
-        ]);
+        $intent = null;
+        try {
+            $request_json = json_decode($request->getContent(), true);
+            $payment_method_id = isset($request_json['payment_method_id']) ? $request_json['payment_method_id'] : null;
+            $payment_intent_id = isset($request_json['payment_intent_id']) ? $request_json['payment_intent_id'] : null;
 
-        return $this->json([
-            'client_secret' => $intent->client_secret,
-        ]);
+            if (!is_null($payment_method_id)) {
+                # Create the PaymentIntent
+                $intent = PaymentIntent::create([
+                    'payment_method' => $payment_method_id,
+                    'amount' => 100,
+                    'currency' => 'chf',
+                    'confirmation_method' => 'manual',
+                    'confirm' => true,
+                ]);
+            }
+            if (!is_null($payment_intent_id)) {
+                $intent = PaymentIntent::retrieve(
+                    $payment_intent_id
+                );
+
+                $intent->confirm();
+            }
+
+            //generate response
+            if ($intent->status == 'requires_action' && $intent->next_action->type == 'use_stripe_sdk') {
+                # Tell the client to handle the action
+                return $this->json([
+                    'requires_action' => true,
+                    'payment_intent_client_secret' => $intent->client_secret
+                ]);
+            } else if ($intent->status == 'succeeded') {
+                # The payment didn’t need any additional actions and completed!
+                # Handle post-payment fulfillment
+                return $this->json([
+                    "success" => true,
+                    "amount_received" => $intent->amount_received,
+                ]);
+            } else {
+                # Invalid status
+                return $this->json([
+                    'error' => 'Invalid PaymentIntent status'
+                ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
+        } catch (ApiErrorException $e) {
+            return $this->json([
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     /**

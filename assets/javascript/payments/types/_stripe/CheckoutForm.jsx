@@ -1,58 +1,118 @@
 import React from 'react';
-import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js';
-
-import CardSection from './CardSection';
-import {CONFIG} from "../../../_common/config";
+import {CardElement, ElementsConsumer} from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-export default function CheckoutForm() {
-    const stripe = useStripe();
-    const elements = useElements();
+import CardSection from './CardSection';
+import {toast} from "react-toastify";
 
-    const handleSubmit = async (event) => {
+class CheckoutForm extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleServerResponse = this.handleServerResponse.bind(this);
+        this.handleStripeJsResult = this.handleStripeJsResult.bind(this);
+        this.stripePaymentMethodHandler = this.stripePaymentMethodHandler.bind(this);
+    }
+
+    handleSubmit = async (event) => {
         // We don't want to let default form submission happen here,
         // which would refresh the page.
         event.preventDefault();
 
+        const {stripe, elements} = this.props
+
         if (!stripe || !elements) {
             // Stripe.js has not yet loaded.
-            // Make sure to disable form submission until Stripe.js has loaded.
+            // Make  sure to disable form submission until Stripe.js has loaded.
             return;
         }
 
-        const secret_payment = await axios.get('/stripe/payment');
-
-        const result = await stripe.confirmCardPayment(secret_payment?.data?.client_secret, {
-            payment_method: {
-                card: elements.getElement(CardElement),
-                billing_details: {
-                    name: 'Jenny Rosen',
-                },
-            }
+        const result = await stripe.createPaymentMethod({
+            type: 'card',
+            card: elements.getElement(CardElement),
+            billing_details: {
+                // Include any additional collected billing details.
+                name: 'Jenny Rosen',
+            },
         });
 
-        if (result.error) {
-            // Show error to your customer (e.g., insufficient funds)
-            console.log(result.error.message);
-
-            alert('error')
-        } else {
-            // The payment has been processed!
-            if (result.paymentIntent.status === 'succeeded') {
-                alert('ok')
-                // Show a success message to your customer
-                // There's a risk of the customer closing the window before callback
-                // execution. Set up a webhook or plugin to listen for the
-                // payment_intent.succeeded event that handles any business critical
-                // post-payment actions.
-            }
-        }
+        this.stripePaymentMethodHandler(result);
     };
 
+    handleServerResponse(response) {
+        if (response.error) {
+            // Show error from server on payment form
+            console.log('handleServerResponse', response?.error)
+            toast.error(response?.error);
+        } else if (response.requires_action) {
+            // Use Stripe.js to handle required card action
+            const {stripe} = this.props
+
+            stripe.handleCardAction(
+                response.payment_intent_client_secret
+            ).then(this.handleStripeJsResult);
+        } else {
+            // Show success message
+            toast.success(`Merci pour votre achat. Vous avez été crédité de ${response?.amount_received} coins!`)
+        }
+    }
+
+    handleStripeJsResult(result) {
+        if (result.error) {
+            // Show error in payment form
+            console.log('handleStripeJsResult', result?.error)
+            toast.error(result?.error?.message);
+        } else {
+            // The card action has been handled
+            // The PaymentIntent can be confirmed again on the server
+            axios.post('/stripe/pay', {
+                payment_intent_id: result.paymentIntent.id
+            }, {
+                headers: {'Content-Type': 'application/json'},
+            }).then(result => {
+                this.handleServerResponse(result.data);
+            })
+        }
+    }
+
+    stripePaymentMethodHandler(result) {
+        if (result.error) {
+            // Show error in payment form
+            console.log('stripePaymentMethodHandler', result?.error)
+            toast.error(result?.error?.message);
+        } else {
+            // Otherwise send paymentMethod.id to your server (see Step 4)
+            axios.post('/stripe/pay', {
+                payment_method_id: result.paymentMethod.id,
+            }, {
+                headers: {'Content-Type': 'application/json'},
+            }).then(result => {
+                this.handleServerResponse(result.data);
+            });
+        }
+    }
+
+    render() {
+        const {stripe} = this.props;
+
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <CardSection/>
+                <button type="submit" disabled={!stripe}>
+                    Submit Payment
+                </button>
+            </form>
+        );
+    }
+}
+
+export default function InjectedCheckoutForm() {
     return (
-        <form onSubmit={handleSubmit}>
-            <CardSection/>
-            <button disabled={!stripe}>Confirm order</button>
-        </form>
+        <ElementsConsumer>
+            {({stripe, elements}) => (
+                <CheckoutForm stripe={stripe} elements={elements}/>
+            )}
+        </ElementsConsumer>
     );
 }
