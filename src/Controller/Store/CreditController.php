@@ -30,6 +30,8 @@ class CreditController extends AbstractController
     {
         return $this->render('store/credit/index.html.twig', [
             'dedipass_public_key' => $this->getParameter('DEDIPASS_PUBLIC_KEY'),
+            'stripe_public_key' => $this->getParameter('STRIPE_PUBLIC_KEY'),
+            'paypal_public_key' => $this->getParameter('PAYPAL_CLIENT_ID'),
         ]);
     }
 

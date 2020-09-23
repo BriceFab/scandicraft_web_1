@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import {STEPS_CONFIG} from "./steps/steps_config";
 import './styles/crediter_steps.module.scss';
 import DynamicComponent from "../_common/dynamic_component/dynamic_component";
+import {CONFIG} from "../_common/config";
 
 class CrediterSteps extends Component {
     constructor(props) {
@@ -17,6 +18,11 @@ class CrediterSteps extends Component {
         this.previousStep = this.previousStep.bind(this);
         this.changeStep = this.changeStep.bind(this);
         this.setStepData = this.setStepData.bind(this);
+
+        //Set payment keys
+        CONFIG.PAYMENTS.DEDIPASS.PUBLIC_KEY = props.attributes?.dedipass_public_key;
+        CONFIG.PAYMENTS.STRIPE.PUBLIC_KEY = props.attributes?.stripe_public_key;
+        CONFIG.PAYMENTS.PAYPAL.CLIENT_ID = props.attributes?.paypal_public_key;
     }
 
     nextStep() {

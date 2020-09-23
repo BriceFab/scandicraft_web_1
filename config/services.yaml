@@ -26,6 +26,7 @@ parameters:
   rcon_faction_port: '%env(rcon_faction_port)%'
   rcon_faction_password: '%env(rcon_faction_password)%'
   STRIPE_SECRET_KEY: '%env(STRIPE_SECRET_KEY)%'
+  STRIPE_PUBLIC_KEY: '%env(STRIPE_PUBLIC_KEY)%'
 
 services:
   # default configuration for services in *this* file

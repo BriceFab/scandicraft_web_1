@@ -24,12 +24,13 @@ class HtmlComponent extends HTMLElement {
     }
 
     getAttributes() {
-        return this.getAttributeNames().map((attribute_name) => {
-            return {
-                name: attribute_name,
-                value: this.getAttribute(attribute_name),
-            };
+        let attributes = {};
+
+        this.getAttributeNames().forEach((attribute_name) => {
+            attributes[attribute_name] = this.getAttribute(attribute_name);
         });
+
+        return attributes;
     }
 
     renderComponent() {
