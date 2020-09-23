@@ -34,6 +34,9 @@ class LauncherController extends AbstractController
     /**
      * @Route("/api/launcher/download", name="launcher_download_files")
      * @Method("POST")
+     * @param Request $request
+     * @return BinaryFileResponse
+     * @throws JsonException
      */
     public function downloadFile(Request $request)
     {
@@ -77,6 +80,7 @@ class LauncherController extends AbstractController
     /**
      * @Route("/api/launcher/checksum", name="launcher_files_checksum")
      * @Method("GET")
+     * @throws JsonException
      */
     public function getChecksum()
     {
