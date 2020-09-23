@@ -23,6 +23,8 @@
         "encore-build": "encore production --progress"
     },
     "dependencies": {
+        "@stripe/react-stripe-js": "^1.1.2",
+        "@stripe/stripe-js": "^1.9.0",
         "axios": "^0.19.2",
         "ckeditor": "^4.12.1",
         "clsx": "^1.1.1",
