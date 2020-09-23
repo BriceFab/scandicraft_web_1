@@ -16,5 +16,9 @@
         <div class="divider"></div>
     </div>
 
-    {{ html_component.render("crediter_steps") }}
+    {{ html_component.render("crediter_steps", [
+        "dedipass_public_key=" ~ dedipass_public_key,
+        "stripe_public_key=" ~ stripe_public_key,
+        "paypal_public_key=" ~ paypal_public_key,
+    ]) }}
 {% endblock %}

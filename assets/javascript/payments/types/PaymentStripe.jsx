@@ -4,19 +4,23 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import CheckoutForm from "./_stripe/CheckoutForm";
 
-const stripePromise = loadStripe(CONFIG.PAYMENTS.STRIPE.PUBLIC_KEY);
-
 class PaymentStripe extends PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.stripePromise = loadStripe(CONFIG.PAYMENTS.STRIPE.PUBLIC_KEY);
+    }
+
     render() {
         const public_key = CONFIG.PAYMENTS.STRIPE.PUBLIC_KEY;
 
-        if (!public_key || !stripePromise) {
+        if (!public_key || !this.stripePromise) {
             console.warn('PaymentStripe missing public_key');
             return null;
         }
 
         return (
-            <Elements stripe={stripePromise}>
+            <Elements stripe={this.stripePromise}>
                 <CheckoutForm/>
             </Elements>
         );
