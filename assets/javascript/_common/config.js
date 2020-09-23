@@ -12,5 +12,9 @@ export const CONFIG = {
         DEDIPASS: {
             PUBLIC_KEY: '3b0359ca8fdac1a7ace1a56a477a872c',
         },
+        STRIPE: {
+            PUBLIC_KEY: 'pk_test_51HUbBjJd9qznNTg3pKduX2GiY03klOnJg0pazlm4HXa2d9sdZEC0zxaXKwWWzXtmzRVOimZYXQzoKil1Y0XunWbO00TqZGMQDQ',
+            SECRET_KEY: 'sk_test_51HUbBjJd9qznNTg3AvNwegZqp4OyWcdi2SYIrsFWgUYEdpAZ390Ch1vsKWUeitjP7ERaPDzjDzuADOcbrcVo0Ff400L2QnnuFD',
+        },
     },
 }

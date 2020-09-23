@@ -18,6 +18,7 @@ export const STEPS_CONFIG = {
         {
             name: 'Stripe',
             help: 'Paiement par Cartes',
+            dynamic_key: 'payment_stripe',
         },
         {
             name: 'Dédipass',

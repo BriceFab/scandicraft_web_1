@@ -5,6 +5,7 @@
     "php": "^7.2.5",
     "ext-ctype": "*",
     "ext-iconv": "*",
+    "ext-intl": "*",
     "ext-json": "*",
     "doctrine/doctrine-migrations-bundle": "^2.0",
     "easycorp/easyadmin-bundle": "^2.3",
@@ -19,6 +20,7 @@
     "paypal/paypal-checkout-sdk": "1.0.1",
     "paypal/rest-api-sdk-php": "*",
     "sensio/framework-extra-bundle": "^5.1",
+    "stripe/stripe-php": "^7.53",
     "symfony/apache-pack": "^1.0",
     "symfony/asset": "5.0.*",
     "symfony/console": "5.0.*",
@@ -47,8 +49,7 @@
     "symfony/webpack-encore-bundle": "^1.7",
     "symfony/yaml": "5.0.*",
     "twig/intl-extra": "^3.0",
-    "vich/uploader-bundle": "^1.13",
-    "ext-intl": "*"
+    "vich/uploader-bundle": "^1.13"
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.3",

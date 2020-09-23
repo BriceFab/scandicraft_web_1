@@ -3,7 +3,11 @@
 namespace App\Controller\Store;
 
 use App\Service\PaypalService;
+use Stripe\Exception\ApiErrorException;
+use Stripe\PaymentIntent;
+use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,6 +28,28 @@ class CreditController extends AbstractController
     {
         return $this->render('store/credit/index.html.twig', [
             'dedipass_public_key' => $this->getParameter('DEDIPASS_PUBLIC_KEY'),
+        ]);
+    }
+
+    /**
+     * @Route("/stripe/payment", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ApiErrorException
+     */
+    public function getStripePayment(Request $request)
+    {
+        Stripe::setApiKey('sk_test_51HUbBjJd9qznNTg3AvNwegZqp4OyWcdi2SYIrsFWgUYEdpAZ390Ch1vsKWUeitjP7ERaPDzjDzuADOcbrcVo0Ff400L2QnnuFD');
+
+        $intent = PaymentIntent::create([
+            'amount' => 1099,
+            'currency' => 'chf',
+            // Verify your integration in this guide by including this parameter
+            'metadata' => ['integration_check' => 'accept_a_payment'],
+        ]);
+
+        return $this->json([
+            'client_secret' => $intent->client_secret,
         ]);
     }
 
