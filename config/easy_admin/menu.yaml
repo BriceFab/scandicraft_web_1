@@ -1,6 +1,7 @@
 easy_admin:
   design:
     menu:
+      - { label: 'Statistiques', route: 'admin_stats', default: true }
       - label: "Utilisateurs"
         icon: "users-cog"
         permission: "ROLE_MANAGEUR"

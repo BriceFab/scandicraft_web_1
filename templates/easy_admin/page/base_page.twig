@@ -1,0 +1,22 @@
+{% extends "@EasyAdmin/page/blank.html.twig" %}
+
+{% block page_title %}
+    Modifier le block: page_title
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <section class="content-header ">
+            <div class="d-flex flex-row justify-content-between align-content-center w-100">
+                <div class="content-header-title">
+                    <h1 class="title">Statistiques</h1>
+                </div>
+            </div>
+        </section>
+        <div style="padding: 20px;">
+            {% block page_content %}
+                Modifier le block: page_content
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

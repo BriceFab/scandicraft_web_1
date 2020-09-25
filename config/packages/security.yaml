@@ -65,7 +65,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^/L2kM|qb3.2W5:;Mb", roles: ROLE_PANEL_ADMIN } #Panel admin
+        - { path: "^/%ADMIN_PATH%", roles: ROLE_PANEL_ADMIN } #Panel admin
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
