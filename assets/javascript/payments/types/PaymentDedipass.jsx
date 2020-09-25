@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
-import {injectHeadScript} from "../../_common/utils/injectHeadScript";
-import {CONFIG} from "../../_common/config";
+import {injectHeadScript} from "../../_common/utils/scriptUtils";
 
 class PaymentDedipass extends PureComponent {
     componentDidMount() {
@@ -8,7 +7,7 @@ class PaymentDedipass extends PureComponent {
     }
 
     render() {
-        const public_key = CONFIG.PAYMENTS.DEDIPASS.PUBLIC_KEY;
+        const public_key = this.props.public_key?.dedipass;
 
         if (!public_key) {
             console.warn('PaymentDedipass missing public_key');

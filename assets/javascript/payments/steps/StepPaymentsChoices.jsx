@@ -7,17 +7,17 @@ class StepPaymentsChoices extends Component {
 
         this.load_next_step = this.props.load_next_step.bind(this);
         this.set_step_data = this.props.set_step_data.bind(this);
-
-
     }
 
     render() {
+        const {component_data} = this.props;
+
         return (
             <div>
                 <h4 className={'step_payment_title'}>Choissisez votre moyen de paiement</h4>
                 <div className={"step_payments_choices_container"}>
-                    {STEPS_CONFIG.PAYMENTS_TYPES.map((payment_type, index) => {
-                        const {name, help} = payment_type;
+                    {component_data?.payment_types.map((payment_type, index) => {
+                        const {name, help_text} = payment_type;
 
                         return (
                             <div key={`steps-payment-choice-${name}-${index}`} className={"step_payments_choice_box"}
@@ -33,7 +33,7 @@ class StepPaymentsChoices extends Component {
                                         {name}
                                     </div>
                                     <div className={"step_payments_choice_text_help"}>
-                                        {help}
+                                        {help_text}
                                     </div>
                                 </div>
                             </div>

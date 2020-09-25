@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
-class UnavailableComponent extends Component {
+class UnavailableComponent extends PureComponent {
     render() {
         const {type} = this.props;
 

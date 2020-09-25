@@ -1,12 +1,12 @@
 import React, {PureComponent} from 'react';
-import {injectHeadScript} from "../../_common/utils/injectHeadScript";
+import {injectHeadScript} from "../../_common/utils/scriptUtils";
 import {CONFIG} from "../../_common/config";
 
 class PaymentPaypal extends PureComponent {
     componentDidMount() {
-        const {CLIENT_ID, CURRENCY, INTENT, DISABLE_FUNDING} = CONFIG.PAYMENTS.PAYPAL;
+        const {CURRENCY, INTENT, DISABLE_FUNDING} = CONFIG.PAYMENTS.PAYPAL;
 
-        injectHeadScript(`https://www.paypal.com/sdk/js?client-id=${CLIENT_ID}&currency=${CURRENCY}&intent=${INTENT}&disable-funding=${DISABLE_FUNDING}`, () => {
+        injectHeadScript(`https://www.paypal.com/sdk/js?client-id=${this.props.public_key?.paypal}&currency=${CURRENCY}&intent=${INTENT}&disable-funding=${DISABLE_FUNDING}`, () => {
             paypal.Buttons({
                 createOrder: (data, actions) => {
                     // This function sets up the details of the transaction, including the amount and line item details.

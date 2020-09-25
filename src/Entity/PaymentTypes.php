@@ -43,7 +43,7 @@ class PaymentTypes
 
     /**
      * @ORM\Column(type="datetime")
-//     * @Serializer\Ignore()
+     * @Serializer\Ignore()
      */
     private $createdAt;
 
