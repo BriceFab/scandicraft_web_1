@@ -5,7 +5,7 @@ import {DYNAMIC_COMPONENTS} from "../../_common/dynamic_component/dynamic_compon
 
 class StepOffres extends Component {
     render() {
-        const {steps_data, current_step} = this.props;
+        const {steps_data, current_step, component_data} = this.props;
 
         const current_payment = steps_data[current_step - 1]?.payment;
         const {dynamic_key} = current_payment;
@@ -19,6 +19,7 @@ class StepOffres extends Component {
                 <h3>Veuillez choisir votre offre</h3>
                 <DynamicComponent
                     dynamic_list={DYNAMIC_COMPONENTS} dynamic_key={dynamic_key}
+                    public_key={component_data?.public_key}
                 />
             </div>
         );

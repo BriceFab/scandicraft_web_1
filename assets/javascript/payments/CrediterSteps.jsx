@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import {STEPS_CONFIG} from "./steps/steps_config";
 import './styles/crediter_steps.module.scss';
 import DynamicComponent from "../_common/dynamic_component/dynamic_component";
-import {CONFIG} from "../_common/config";
+import ErrorComponent from "../_common/dynamic_component/error_component";
+import LoadingComponent from "../_common/dynamic_component/loading_component";
 
 class CrediterSteps extends Component {
     constructor(props) {
@@ -12,17 +13,35 @@ class CrediterSteps extends Component {
         this.state = {
             step: STEPS_CONFIG.MIN_STEP,
             steps_data: {},
+            component_data: null,
         };
 
         this.nextStep = this.nextStep.bind(this);
         this.previousStep = this.previousStep.bind(this);
         this.changeStep = this.changeStep.bind(this);
         this.setStepData = this.setStepData.bind(this);
+    }
 
-        //Set payment keys
-        CONFIG.PAYMENTS.DEDIPASS.PUBLIC_KEY = props.attributes?.dedipass_public_key;
-        CONFIG.PAYMENTS.STRIPE.PUBLIC_KEY = props.attributes?.stripe_public_key;
-        CONFIG.PAYMENTS.PAYPAL.CLIENT_ID = props.attributes?.paypal_public_key;
+    componentDidMount() {
+        window.addEventListener('load', () => {
+            const script_data = document.getElementById(this.props?.attributes?.component_data);
+            if (script_data) {
+                try {
+                    const data = JSON.parse(script_data.innerText);
+                    this.setState({
+                        component_data: data,
+                    });
+                } catch (e) {
+                    this.setState({
+                        component_data: undefined,
+                    });
+                }
+            } else {
+                this.setState({
+                    component_data: undefined,
+                });
+            }
+        })
     }
 
     nextStep() {
@@ -49,7 +68,10 @@ class CrediterSteps extends Component {
     }
 
     render() {
-        const {step, steps_data} = this.state;
+        const {step, steps_data, component_data} = this.state;
+
+        if (component_data === undefined) return <ErrorComponent/>;
+        if (!component_data) return <LoadingComponent/>;
 
         return (
             <div className={"container-fluid"}>
@@ -83,6 +105,7 @@ class CrediterSteps extends Component {
                                 steps_data={steps_data}
                                 load_next_step={this.nextStep}
                                 set_step_data={this.setStepData}
+                                component_data={component_data}
                             />
                         </div>
                     </div>

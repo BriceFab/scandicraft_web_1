@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import {CONFIG} from "../../_common/config";
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import CheckoutForm from "./_stripe/CheckoutForm";
@@ -8,11 +7,11 @@ class PaymentStripe extends PureComponent {
     constructor(props) {
         super(props);
 
-        this.stripePromise = loadStripe(CONFIG.PAYMENTS.STRIPE.PUBLIC_KEY);
+        this.stripePromise = loadStripe(props.public_key?.stripe);
     }
 
     render() {
-        const public_key = CONFIG.PAYMENTS.STRIPE.PUBLIC_KEY;
+        const public_key = this.props.public_key?.stripe;
 
         if (!public_key || !this.stripePromise) {
             console.warn('PaymentStripe missing public_key');
