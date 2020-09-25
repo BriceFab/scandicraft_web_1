@@ -7,6 +7,8 @@ class StepPaymentsChoices extends Component {
 
         this.load_next_step = this.props.load_next_step.bind(this);
         this.set_step_data = this.props.set_step_data.bind(this);
+
+
     }
 
     render() {

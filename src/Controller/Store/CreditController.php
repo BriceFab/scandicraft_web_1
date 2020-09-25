@@ -2,6 +2,7 @@
 
 namespace App\Controller\Store;
 
+use App\Repository\PaymentTypesRepository;
 use App\Service\PaypalService;
 use Stripe\Exception\ApiErrorException;
 use Stripe\PaymentIntent;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Serializer;
 
 class CreditController extends AbstractController
 {
@@ -25,10 +27,16 @@ class CreditController extends AbstractController
 
     /**
      * @Route("/crediter", name="crediter")
+     * @param Serializer $serializer
+     * @param PaymentTypesRepository $paymentTypes
+     * @return Response
      */
-    public function index()
+    public function index(Serializer $serializer, PaymentTypesRepository $paymentTypes)
     {
+        $payment_types_data = $serializer->serialize($paymentTypes->findBy(['enable' => true]), 'json');
+
         return $this->render('store/credit/index.html.twig', [
+            'payment_types' => $payment_types_data,
             'dedipass_public_key' => $this->getParameter('DEDIPASS_PUBLIC_KEY'),
             'stripe_public_key' => $this->getParameter('STRIPE_PUBLIC_KEY'),
             'paypal_public_key' => $this->getParameter('PAYPAL_CLIENT_ID'),

@@ -1,0 +1,40 @@
+easy_admin:
+  entities:
+    <ENTITY>:
+      class: App\Entity\<ENTITY>
+      permissions:
+        list: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+      list:
+        title: "Liste"
+        actions:
+          [
+          { name: "new", label: "Ajouter" },
+          { name: "show", label: "Détail", icon: "search" },
+          { name: "edit", label: "Modifier", icon: "edit" },
+          { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+          { property: "name", label: "Nom" },
+          { property: "enable", label: "Activé ?" },
+          { property: "storeArticles", label: "Articles" },
+          ]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+          { property: "name", label: "Nom" },
+          { property: "enable", label: "Activé ?" },
+          ]
+      show:
+        title: "Détail"
+        fields:
+          [
+          { property: "name", label: "Nom" },
+          { property: "enable", label: "Activé ?" },
+          { property: "storeArticles", label: "Articles" },
+          ]

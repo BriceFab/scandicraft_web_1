@@ -112,6 +112,22 @@ easy_admin:
               permission: "ROLE_MANAGEUR",
             },
           ]
+      - label: "Réseaux sociaux"
+        icon: "network-wired"
+        permission: "ROLE_ADMIN"
+        children:
+          [
+          {
+            entity: "SocialmediaType",
+            label: "Liste",
+            permission: "ROLE_ADMIN",
+          },
+          {
+            entity: "MySocialmedia",
+            label: "ScandiCraft",
+            permission: "ROLE_ADMIN",
+          },
+          ]
       - label: "Votes"
         icon: "check-circle"
         permission: "ROLE_MANAGEUR"
@@ -124,21 +140,16 @@ easy_admin:
         icon: "hands-helping"
         permission: "ROLE_STAFF"
         children: [{ entity: "FAQ", label: "FAQ", permission: "ROLE_STAFF" }]
-      - label: "Réseaux sociaux"
-        icon: "network-wired"
+      - label: "Payments"
+        icon: "money"
         permission: "ROLE_ADMIN"
         children:
           [
-            {
-              entity: "SocialmediaType",
-              label: "Liste",
-              permission: "ROLE_ADMIN",
-            },
-            {
-              entity: "MySocialmedia",
-              label: "ScandiCraft",
-              permission: "ROLE_ADMIN",
-            },
+          {
+            entity: "PaymentTypes",
+            label: "Types",
+            permission: "ROLE_ADMIN",
+          },
           ]
       - label: "Logs"
         icon: "history"
