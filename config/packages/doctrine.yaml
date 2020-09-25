@@ -19,3 +19,5 @@ doctrine:
         dql:
             string_functions:
                 TYPE: App\DQL\TypeFunction
+                MONTH: DoctrineExtensions\Query\Mysql\Month
+                YEAR: DoctrineExtensions\Query\Mysql\Year

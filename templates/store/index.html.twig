@@ -47,15 +47,17 @@
             {% else %}
                 <div class="divider"></div>
                 <p>La boutique ne contient aucune catégorie pour le moment.</p>
-                <p>
-                    Cependant, vous pouvez déjà créditer votre compte <i class="fas fa-money-bill-alt"></i>:
-                    <br/>
-                    <a href="{{ path('crediter') }}" style="color: white;">
-                        <button class="w-button button btn-primary btn-lg no-margin" style="margin-top: 15px;">
-                            Créditer
-                        </button>
-                    </a>
-                </p>
+                {% if payment_types_count > 0 %}
+                    <p>
+                        Cependant, vous pouvez déjà créditer votre compte <i class="fas fa-money-bill-alt"></i>:
+                        <br/>
+                        <a href="{{ path('crediter') }}" style="color: white;">
+                            <button class="w-button button btn-primary btn-lg no-margin" style="margin-top: 15px;">
+                                Créditer
+                            </button>
+                        </a>
+                    </p>
+                {% endif %}
             {% endif %}
 
             {# Articles #}
@@ -112,15 +114,17 @@
                     </div>
                 {% else %}
                     <p>La boutique ne contient aucun article pour le moment.</p>
-                    <p>
-                        Cependant, vous pouvez déjà créditer votre compte <i class="fas fa-money-bill-alt"></i>:
-                        <br/>
-                        <a href="{{ path('crediter') }}" style="color: white;">
-                            <button class="w-button button btn-primary btn-lg no-margin" style="margin-top: 15px;">
-                                Créditer
-                            </button>
-                        </a>
-                    </p>
+                    {% if payment_types_count > 0 %}
+                        <p>
+                            Cependant, vous pouvez déjà créditer votre compte <i class="fas fa-money-bill-alt"></i>:
+                            <br/>
+                            <a href="{{ path('crediter') }}" style="color: white;">
+                                <button class="w-button button btn-primary btn-lg no-margin" style="margin-top: 15px;">
+                                    Créditer
+                                </button>
+                            </a>
+                        </p>
+                    {% endif %}
                 {% endif %}
             {% endif %}
 

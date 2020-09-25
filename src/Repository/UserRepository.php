@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -43,6 +45,37 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->select('count(u.id)')
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function countUsersRegisterThisMonth($year = null, $month = null)
+    {
+        if (is_null($year) && is_null($month)) {
+            $now = new DateTime('now');
+            $month = $now->format('n');
+            $year = $now->format('Y');
+        }
+
+        $qb = $this->createQueryBuilder('u');
+
+        $query = $qb
+            ->select($qb->expr()->count('u'))
+            ->where('YEAR(u.createdAt) = :year')
+            ->andWhere('MONTH(u.createdAt) = :month')
+            ->setParameters([
+                'year' => $year,
+                'month' => $month,
+            ])
+            ->getQuery();
+
+        try {
+            $result = $query->getOneOrNullResult();
+            if (is_array($result) && isset($result[1])) {
+                return $result[1];
+            }
+            return $result;
+        } catch (NonUniqueResultException $e) {
+            return -1;
+        }
     }
 
     // /**
