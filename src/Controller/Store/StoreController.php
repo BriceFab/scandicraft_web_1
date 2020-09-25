@@ -2,6 +2,7 @@
 
 namespace App\Controller\Store;
 
+use App\Repository\PaymentTypesRepository;
 use App\Repository\StoreArticleRepository;
 use App\Repository\StoreCategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,11 +18,12 @@ class StoreController extends AbstractController
      * @param StoreArticleRepository $articlesRepository
      * @return Response
      */
-    public function boutiquePage(StoreCategoryRepository $categoriesRepository, StoreArticleRepository $articlesRepository)
+    public function boutiquePage(StoreCategoryRepository $categoriesRepository, StoreArticleRepository $articlesRepository, PaymentTypesRepository $paymentTypes)
     {
         return $this->render('store/index.html.twig', [
             'categories' => $categoriesRepository->findBy(['enable' => true]),
             'articles' => $articlesRepository->findBy(['enable' => true]),
+            'payment_types_count' => $paymentTypes->count(['enable' => true]),
         ]);
     }
 }

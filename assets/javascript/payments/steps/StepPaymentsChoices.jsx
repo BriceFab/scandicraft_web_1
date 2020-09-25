@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {STEPS_CONFIG} from "./steps_config";
 
 class StepPaymentsChoices extends Component {
     constructor(props) {
@@ -11,12 +10,16 @@ class StepPaymentsChoices extends Component {
 
     render() {
         const {component_data} = this.props;
+        const {payment_types} = component_data;
 
         return (
             <div>
                 <h4 className={'step_payment_title'}>Choissisez votre moyen de paiement</h4>
                 <div className={"step_payments_choices_container"}>
-                    {component_data?.payment_types.map((payment_type, index) => {
+                    {payment_types && payment_types.length === 0 && <p style={{padding: 10}}>
+                        Aucun moyen de paiement n'est actuellement disponible.
+                    </p>}
+                    {payment_types && payment_types.length > 0 && payment_types.map((payment_type, index) => {
                         const {name, help_text} = payment_type;
 
                         return (
