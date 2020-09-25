@@ -1,0 +1,47 @@
+easy_admin:
+  entities:
+    PaymentTypes:
+      class: App\Entity\PaymentTypes
+      permissions:
+        list: ["ROLE_ADMIN"]
+        show: ["ROLE_ADMIN"]
+        edit: ["ROLE_ADMIN"]
+        new: ["ROLE_ADMIN"]
+        delete: ["ROLE_ADMIN"]
+      list:
+        title: "Liste"
+        actions:
+          [
+          { name: "new", label: "Ajouter" },
+          { name: "show", label: "Détail", icon: "search" },
+          { name: "edit", label: "Modifier", icon: "edit" },
+          { name: "delete", label: "Supprimer", icon: "trash" },
+          ]
+        fields:
+          [
+          { property: "name", label: "Nom" },
+          { property: "help_text", label: "Texte d'aide" },
+          { property: "enable", label: "Activé ?" },
+          { property: "createdAt", label: "Créé le" },
+          { property: "createdBy", label: "Créé par" },
+          ]
+      form:
+        title: "Ajouter/Modifier"
+        fields:
+          [
+          { property: "name", label: "Nom" },
+          { property: "help_text", label: "Texte d'aide" },
+          { property: "dynamic_key", label: "Dynamic key (frontend)" },
+          { property: "enable", label: "Activé ?" },
+          ]
+      show:
+        title: "Détail"
+        fields:
+          [
+          { property: "name", label: "Nom" },
+          { property: "help_text", label: "Texte d'aide" },
+          { property: "enable", label: "Activé ?" },
+          { property: "dynamic_key", label: "Dynamic key (frontend)" },
+          { property: "createdAt", label: "Créé le" },
+          { property: "createdBy", label: "Créé par" },
+          ]
