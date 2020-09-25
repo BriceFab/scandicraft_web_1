@@ -6,7 +6,7 @@ use App\Repository\PaymentTypesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-//use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass=PaymentTypesRepository::class)
@@ -17,7 +17,7 @@ class PaymentTypes
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-//     * @Ignore()
+     * @Serializer\Ignore()
      */
     private $id;
 
@@ -43,16 +43,19 @@ class PaymentTypes
 
     /**
      * @ORM\Column(type="datetime")
+//     * @Serializer\Ignore()
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
+     * @Serializer\Ignore()
      */
     private $createdBy;
 
     /**
      * @ORM\OneToMany(targetEntity=PaymentOffers::class, mappedBy="payment_type")
+     * @Serializer\Ignore()
      */
     private $paymentOffers;
 
