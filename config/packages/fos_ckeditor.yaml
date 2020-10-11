@@ -10,3 +10,4 @@ fos_ck_editor:
     configs:
         my_config:
             toolbar: full
+            language: fr
