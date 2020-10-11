@@ -153,6 +153,8 @@ class User implements UserInterface
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
+        $this->credit = 0;
+
         $this->surveys = new ArrayCollection();
         $this->surveyAnswerLists = new ArrayCollection();
         $this->surveyAnswers = new ArrayCollection();

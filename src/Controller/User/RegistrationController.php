@@ -7,6 +7,7 @@ use App\Form\RegistrationFormType;
 use App\Service\JWTService;
 use App\Service\TokenAction;
 use Doctrine\ORM\EntityManagerInterface;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +32,9 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/inscription", name="app_register")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -56,7 +60,7 @@ class RegistrationController extends AbstractController
 
             //Send email
             $this->addFlash('notice', $this->translator->trans('notif.confirm.email', ['email' => $user->getEmail()]));
-            $this->send_mail($user, $this->mailer);
+            $this->send_mail($user);
 
             return $this->redirectToRoute('accueil');
         }
@@ -68,6 +72,9 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/inscription/confirmation/{token}", name="register_confirm")
+     * @param Request $request
+     * @param $token
+     * @return Response
      */
     public function confirmation(Request $request, $token): Response
     {
@@ -88,7 +95,7 @@ class RegistrationController extends AbstractController
     {
         $token = $this->JWTService->generateToken($user, TokenAction::REGISTER_CONFIRMATION, -1);
 
-        $message = (new \Swift_Message('Confirmation compte - ScandiCraft'))
+        $message = (new Swift_Message('Confirmation compte - ScandiCraft'))
             ->setFrom($this->getParameter('mail.sender'))
             ->setTo($user->getEmail())
             ->setBody(
