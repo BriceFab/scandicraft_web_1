@@ -82,6 +82,10 @@ class Rcon
      */
     public function disconnect()
     {
+//        if ($this->socket && is_resource($this->socket)) {
+//            @fclose($this->socket);
+//        }
+
         if ($this->socket) {
             fclose($this->socket);
         }

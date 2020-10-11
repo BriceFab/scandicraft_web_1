@@ -35,7 +35,9 @@ security:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
         main:
-            anonymous: lazy
+            anonymous: true
+            lazy: true
+            stateless: false
             provider: app_user_provider
             guard:
                 authenticators:
