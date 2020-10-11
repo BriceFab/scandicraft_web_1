@@ -5,7 +5,6 @@ namespace App\Controller\Api;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\Exception\JsonException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,8 +31,7 @@ class LauncherController extends AbstractController
     }
 
     /**
-     * @Route("/api/launcher/download", name="launcher_download_files")
-     * @Method("POST")
+     * @Route("/api/launcher/download", name="launcher_download_files", methods={"POST"})
      * @param Request $request
      * @return BinaryFileResponse
      * @throws JsonException
@@ -78,8 +76,7 @@ class LauncherController extends AbstractController
     }
 
     /**
-     * @Route("/api/launcher/checksum", name="launcher_files_checksum")
-     * @Method("GET")
+     * @Route("/api/launcher/checksum", name="launcher_files_checksum", methods={"GET"})
      * @throws JsonException
      */
     public function getChecksum()
@@ -111,6 +108,8 @@ class LauncherController extends AbstractController
 
     /**
      * @Route("/launcher/installer/{os}", name="launcher_installer")
+     * @param $os
+     * @return BinaryFileResponse
      */
     public function downloadInstaller($os)
     {
@@ -138,6 +137,8 @@ class LauncherController extends AbstractController
 
     /**
      * @Route("/launcher/update/{file}", name="launcher_update")
+     * @param $file
+     * @return BinaryFileResponse
      */
     public function updateLauncher($file)
     {
