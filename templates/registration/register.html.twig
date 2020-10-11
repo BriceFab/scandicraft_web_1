@@ -15,11 +15,12 @@
 				<h2>S'inscrire</h2>
 				<div class="divider"></div>
 
+				{{ form_start(registrationForm) }}
+
 				{% include 'form/form_errors.html.twig' with {
 					'form': registrationForm
 				} %}
 
-				{{ form_start(registrationForm) }}
 				<div class="row">
 					<div class="form-group col-12 col-md-6">
 						{{ form_label(registrationForm.username) }}
@@ -40,12 +41,15 @@
 						{{ form_widget(registrationForm.plainPassword.second, { 'attr': {'class': 'w-input'} }) }}
 					</div>
 				</div>
-				{{ form_rest(registrationForm) }}
 				<div class="row">
-					<button type="submit" class="button" name="Submit">
-						{{ 'submit.register'|trans }}
-					</button>
+					{{ form_widget(registrationForm.submit) }}
+{#					<button type="submit" class="button" name="Submit">#}
+{#						{{ 'submit.register'|trans }}#}
+{#					</button>#}
 				</div>
+
+				{{ form_rest(registrationForm) }}
+
 				{{ form_end(registrationForm) }}
 
 			</div>

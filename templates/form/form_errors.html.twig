@@ -1,18 +1,21 @@
 {# Display all form errors #}
 {% if not form.vars.valid %}
-	<div class="bt-alert bt-alert-danger" style="{{ alert_style ? alert_style : '' }}">
+    <div class="bt-alert bt-alert-danger" style="{{ alert_style is defined ? alert_style : '' }}">
         <ul>
             {% for child in form.children %}
-                {# {{ dump(child) }} #}
-                {% for error in child.vars.errors %}
-                    <li>
-                        {% if child.vars.label is not null %}
-                            <b>{{ child.vars.label|trans }}</b>: 
-                        {% endif %}
-                        {{error.message}}
-                    </li>
-                {% endfor %}
+                {% if child.vars.errors is defined %}
+{#                    {{ dump(child) }}#}
+                    {% for error in child.vars.errors %}
+                        <li>
+                            {% if child.vars.label is not null %}
+                                <b>{{ child.vars.label|trans }}</b>:
+                            {% endif %}
+                            {{ error.message }}
+                        </li>
+                    {% endfor %}
+                {% endif %}
             {% endfor %}
         </ul>
+        {{ form_errors(form) }}
     </div>
 {% endif %}
