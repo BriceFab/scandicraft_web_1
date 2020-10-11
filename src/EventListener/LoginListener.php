@@ -66,7 +66,6 @@ class LoginListener
             }
         }
 
-
         // Persist the data to database.
         $this->em->persist($user);
         $this->em->flush();
