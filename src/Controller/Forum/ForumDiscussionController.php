@@ -9,6 +9,8 @@ use App\Form\ForumDiscussionType;
 use App\Repository\ForumDiscussionStatusRepository;
 use App\Service\ScandiCraftService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -36,10 +38,15 @@ class ForumDiscussionController extends ForumController
     }
 
     /**
-     * @Route("/forum/{main_slug}/{sub_slug}/{discussion_slug}", name="forum_show_discussion")
+     * @Route("/forum/{main_slug}/{sub_slug}/{discussion_slug}", name="forum_show_discussion", options={"sitemap"="true", "sitemap_entity_repo"="ForumDiscussion"})
      * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
      * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @ParamConverter("discussion", options={"mapping": {"discussion_slug": "slug"}})
+     * @param Request $request
+     * @param ForumCategory $category
+     * @param ForumSubCategory $subCategory
+     * @param ForumDiscussion $discussion
+     * @return RedirectResponse|Response
      */
     public function showDiscussion(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion)
     {
@@ -55,10 +62,14 @@ class ForumDiscussionController extends ForumController
     }
 
     /**
-     * @Route("/forum/discussion/{main_slug}/{sub_slug}/ajouter", name="forum_new_discussion", methods={"GET", "POST"})
+     * @Route("/forum/discussion/{main_slug}/{sub_slug}/ajouter", name="forum_new_discussion", methods={"GET", "POST"}, options={"sitemap"="true", "sitemap_entity_repo"="ForumDiscussion"})
      * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
      * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param ForumCategory $category
+     * @param ForumSubCategory $subCategory
+     * @return RedirectResponse|Response
      */
     public function newDiscussion(Request $request, ForumCategory $category, ForumSubCategory $subCategory)
     {
@@ -81,6 +92,11 @@ class ForumDiscussionController extends ForumController
      * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @ParamConverter("discussion", options={"mapping": {"discussion_id": "id"}})
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param ForumCategory $category
+     * @param ForumSubCategory $subCategory
+     * @param ForumDiscussion $discussion
+     * @return RedirectResponse|Response
      */
     public function editDiscussion(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion)
     {
@@ -157,6 +173,11 @@ class ForumDiscussionController extends ForumController
      * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @ParamConverter("discussion", options={"mapping": {"discussion_id": "id"}})
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param ForumCategory $category
+     * @param ForumSubCategory $subCategory
+     * @param ForumDiscussion $discussion
+     * @return RedirectResponse
      */
     public function deleteDiscussion(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion)
     {
@@ -179,6 +200,11 @@ class ForumDiscussionController extends ForumController
      * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @ParamConverter("discussion", options={"mapping": {"discussion_id": "id"}})
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param ForumCategory $category
+     * @param ForumSubCategory $subCategory
+     * @param ForumDiscussion $discussion
+     * @return RedirectResponse
      */
     public function cloreDiscussion(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion)
     {

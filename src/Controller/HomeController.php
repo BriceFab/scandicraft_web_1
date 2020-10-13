@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="accueil")
+     * @Route("/", name="accueil", options={"sitemap"="true"})
      * @param SpoilRepository $spoilRepository
      * @param DiscordService $discordService
      * @return Response
@@ -38,7 +38,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/jouer", name="jouer")
+     * @Route("/jouer", name="jouer", options={"sitemap"="true"})
      * @Route("/play")
      * @Route("/join")
      */

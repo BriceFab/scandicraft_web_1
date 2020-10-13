@@ -19,7 +19,8 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/connexion", name="app_login")
+     * @Route("/connexion", name="app_login", options={"sitemap"="true"})
+     * @Route("/login", options={"sitemap"="true"})
      * @param Request $request
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
@@ -44,7 +45,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout", name="app_logout", options={"sitemap"="true"})
      */
     public function logout()
     {

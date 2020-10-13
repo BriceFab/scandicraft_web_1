@@ -18,7 +18,7 @@ class AboutUsController extends AbstractController
     }
 
     /**
-     * @Route("/remerciements", name="remerciements")
+     * @Route("/remerciements", name="remerciements", options={"sitemap"="true"})
      */
     public function showRemerciements()
     {
@@ -27,7 +27,7 @@ class AboutUsController extends AbstractController
     }
 
     /**
-     * @Route("/equipe", name="equipe")
+     * @Route("/equipe", name="equipe", options={"sitemap"="true"})
      */
     public function showEquipe()
     {
@@ -36,7 +36,7 @@ class AboutUsController extends AbstractController
     }
 
     /**
-     * @Route("/presentation", name="presentation")
+     * @Route("/presentation", name="presentation", options={"sitemap"="true"})
      */
     public function showPresentation()
     {

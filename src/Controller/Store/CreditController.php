@@ -26,7 +26,7 @@ class CreditController extends AbstractController
     }
 
     /**
-     * @Route("/crediter", name="crediter")
+     * @Route("/crediter", name="crediter", options={"sitemap"="true"})
      * @param SerializerInterface $serializer
      * @param PaymentTypesRepository $paymentTypes
      * @return Response

@@ -9,6 +9,8 @@ use App\Entity\ForumSubCategory;
 use App\Form\ForumDiscussionAnswerType;
 use App\Service\ScandiCraftService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -63,6 +65,11 @@ class ForumAnswerController extends ForumController
      * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @ParamConverter("discussion", options={"mapping": {"discussion_slug": "slug"}})
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param ForumCategory $category
+     * @param ForumSubCategory $subCategory
+     * @param ForumDiscussion $discussion
+     * @return RedirectResponse
      */
     public function newAnswer(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion)
     {
@@ -98,6 +105,12 @@ class ForumAnswerController extends ForumController
      * @ParamConverter("discussion", options={"mapping": {"discussion_slug": "slug"}})
      * @ParamConverter("answer", options={"mapping": {"answer_id": "id"}})
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param ForumCategory $category
+     * @param ForumSubCategory $subCategory
+     * @param ForumDiscussion $discussion
+     * @param ForumDiscussionAnswer $answer
+     * @return RedirectResponse|Response
      */
     public function editAnswer(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion, ForumDiscussionAnswer $answer)
     {
@@ -144,6 +157,12 @@ class ForumAnswerController extends ForumController
      * @ParamConverter("discussion", options={"mapping": {"discussion_slug": "slug"}})
      * @ParamConverter("answer", options={"mapping": {"answer_id": "id"}})
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param ForumCategory $category
+     * @param ForumSubCategory $subCategory
+     * @param ForumDiscussion $discussion
+     * @param ForumDiscussionAnswer $answer
+     * @return RedirectResponse
      */
     public function deleteAnswer(Request $request, ForumCategory $category, ForumSubCategory $subCategory, ForumDiscussion $discussion, ForumDiscussionAnswer $answer)
     {

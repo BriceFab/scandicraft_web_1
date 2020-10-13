@@ -10,7 +10,9 @@ use App\Repository\SurveyRepository;
 use App\Service\ScandiCraftService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +22,12 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class SurveyController extends AbstractController
 {
     /**
-     * @Route("/sondages", name="sondages")
+     * @Route("/sondages", name="sondages", options={"sitemap"="true"})
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param SurveyRepository $surveyRepository
+     * @param ScandiCraftService $service
+     * @return Response
      */
     public function showSondages(Request $request, PaginatorInterface $paginator, SurveyRepository $surveyRepository, ScandiCraftService $service)
     {
@@ -52,6 +59,10 @@ class SurveyController extends AbstractController
     /**
      * @Route("/post/survey_answer", name="post_survey_answer", methods={"POST"})
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param SurveyRepository $surveyRepository
+     * @return RedirectResponse
      */
     public function postSurveyAnswer(Request $request, EntityManagerInterface $em, SurveyRepository $surveyRepository)
     {
@@ -98,8 +109,10 @@ class SurveyController extends AbstractController
     }
 
     /**
-     * @Route("/sondage/{slug}", name="survey_comments")
+     * @Route("/sondage/{slug}", name="survey_comments", options={"sitemap"="true", "sitemap_entity_repo"="Survey"})
      * @ParamConverter("survey")
+     * @param Survey $survey
+     * @return RedirectResponse|Response
      */
     public function showSondageComments(Survey $survey)
     {

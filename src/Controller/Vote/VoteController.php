@@ -32,7 +32,7 @@ class VoteController extends AbstractController
     }
 
     /**
-     * @Route("/voter", name="voter")
+     * @Route("/voter", name="voter", options={"sitemap"="true"})
      * @param UserVoteRepository $userVoteRepository
      * @param VoteSiteRepository $voteSiteRepository
      * @return Response

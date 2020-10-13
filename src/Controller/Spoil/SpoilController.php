@@ -18,7 +18,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class SpoilController extends AbstractController
 {
     /**
-     * @Route("/spoils", name="spoils")
+     * @Route("/spoils", name="spoils", options={"sitemap"="true"})
+     * @param SpoilRepository $repo
+     * @return HttpFoundationResponse
      */
     public function showSpoils(SpoilRepository $repo)
     {
@@ -28,8 +30,10 @@ class SpoilController extends AbstractController
     }
 
     /**
-     * @Route("/spoil/{id}", name="show_spoil")
-     * @Route("/spoil/{title}/{id}", name="show_spoil_title")
+     * @Route("/spoil/{id}", name="show_spoil", options={"sitemap"="true", "sitemap_entity_repo"="Spoil"})
+     * @Route("/spoil/{title}/{id}", name="show_spoil_title", options={"sitemap"="true", "sitemap_entity_repo"="Spoil"})
+     * @param Spoil $spoil
+     * @return HttpFoundationResponse
      */
     public function showSpoilDetail(Spoil $spoil)
     {

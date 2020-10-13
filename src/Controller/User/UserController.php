@@ -48,7 +48,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/reset_password", name="ask_reset_password")
+     * @Route("/reset_password", name="ask_reset_password", options={"sitemap"="true"})
      * @param Request $request
      * @return RedirectResponse
      */
