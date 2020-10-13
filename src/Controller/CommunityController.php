@@ -17,7 +17,7 @@ class CommunityController extends AbstractController
     }
 
     /**
-     * @Route("/maintenances", name="maintenances")
+     * @Route("/maintenances", name="maintenances", options={"sitemap"="true"})
      */
     public function showMaintenances()
     {

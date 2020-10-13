@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SupportController extends AbstractController
 {
     /**
-     * @Route("/support", name="support")
+     * @Route("/support", name="support", options={"sitemap"="true"})
      */
     public function supportPage()
     {

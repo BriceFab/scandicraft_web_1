@@ -3,16 +3,17 @@
 namespace App\Controller\Forum;
 
 use App\Entity\ForumCategory;
-use App\Entity\ForumDiscussion;
 use App\Entity\ForumSubCategory;
 use JsonException;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
 class ForumMediaController extends ForumController
@@ -22,6 +23,12 @@ class ForumMediaController extends ForumController
      * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
      * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param ForumCategory $category
+     * @param ForumSubCategory $subCategory
+     * @param Security $security
+     * @return JsonResponse|RedirectResponse
+     * @throws JsonException
      */
     public function postImage(Request $request, ForumCategory $category, ForumSubCategory $subCategory, Security $security)
     {

@@ -12,8 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class StoreController extends AbstractController
 {
     /**
-     * @Route("/boutique", name="store")
-     * @Route("/store")
+     * @Route("/boutique", name="store", options={"sitemap"="true"})
+     * @Route("/store", options={"sitemap"="true"})
+     * @Route("/shop", options={"sitemap"="true"})
      * @param StoreCategoryRepository $categoriesRepository
      * @param StoreArticleRepository $articlesRepository
      * @return Response

@@ -31,7 +31,8 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/inscription", name="app_register")
+     * @Route("/inscription", name="app_register", options={"sitemap"="true"})
+     * @Route("/register", options={"sitemap"="true"})
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
