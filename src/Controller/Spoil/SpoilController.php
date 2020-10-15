@@ -30,8 +30,8 @@ class SpoilController extends AbstractController
     }
 
     /**
-     * @Route("/spoil/{id}", name="show_spoil", options={"sitemap"="true", "sitemap_entity_repo"="Spoil"})
-     * @Route("/spoil/{title}/{id}", name="show_spoil_title", options={"sitemap"="true", "sitemap_entity_repo"="Spoil"})
+     * @Route("/spoil/{id}", name="show_spoil", options={"sitemap"="true", "sitemap_options"={"entity_repo"="Spoil"}})
+     * @Route("/spoil/{title}/{id}", name="show_spoil_title", options={"sitemap"="true", "sitemap_options"={"entity_repo"="Spoil"}})
      * @param Spoil $spoil
      * @return HttpFoundationResponse
      */

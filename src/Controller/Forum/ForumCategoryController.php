@@ -44,7 +44,20 @@ class ForumCategoryController extends ForumController
     // }
 
     /**
-     * @Route("/forum/{main_slug}/{sub_slug}", name="forum_show_subcategories", options={"sitemap"="true", "sitemap_entity_repo"="ForumSubCategory"})
+     * @Route(
+     *     "/forum/{main_slug}/{sub_slug}",
+     *     name="forum_show_subcategories",
+     *     options={
+     *          "sitemap"="true",
+     *          "sitemap_options"={
+     *              "entity_repo"="ForumSubCategory",
+     *              "param_guesser"={
+     *                  "main_slug"="getMainSlug",
+     *                  "sub_slug"="getSubSlug",
+     *              }
+     *          }
+     *      }
+     * )
      * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
      * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @param Request $request

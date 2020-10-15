@@ -109,7 +109,7 @@ class SurveyController extends AbstractController
     }
 
     /**
-     * @Route("/sondage/{slug}", name="survey_comments", options={"sitemap"="true", "sitemap_entity_repo"="Survey"})
+     * @Route("/sondage/{slug}", name="survey_comments", options={"sitemap"="true", "sitemap_options"={"entity_repo"="Survey"}})
      * @ParamConverter("survey")
      * @param Survey $survey
      * @return RedirectResponse|Response
