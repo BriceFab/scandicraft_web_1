@@ -38,7 +38,7 @@ class ForumDiscussionController extends ForumController
     }
 
     /**
-     * @Route("/forum/{main_slug}/{sub_slug}/{discussion_slug}", name="forum_show_discussion", options={"sitemap"="true", "sitemap_entity_repo"="ForumDiscussion"})
+     * @Route("/forum/{main_slug}/{sub_slug}/{discussion_slug}", name="forum_show_discussion", options={"sitemap"="true", "sitemap_options"={"entity_repo"="ForumDiscussion"}})
      * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
      * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @ParamConverter("discussion", options={"mapping": {"discussion_slug": "slug"}})
@@ -62,7 +62,7 @@ class ForumDiscussionController extends ForumController
     }
 
     /**
-     * @Route("/forum/discussion/{main_slug}/{sub_slug}/ajouter", name="forum_new_discussion", methods={"GET", "POST"}, options={"sitemap"="true", "sitemap_entity_repo"="ForumDiscussion"})
+     * @Route("/forum/discussion/{main_slug}/{sub_slug}/ajouter", name="forum_new_discussion", methods={"GET", "POST"}, options={"sitemap"="true", "sitemap_options"={"entity_repo"="ForumDiscussion"}})
      * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
      * @ParamConverter("subCategory", options={"mapping": {"sub_slug": "slug"}})
      * @IsGranted("ROLE_USER")
