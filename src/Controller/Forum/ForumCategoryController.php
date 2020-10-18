@@ -49,13 +49,6 @@ class ForumCategoryController extends ForumController
      *     name="forum_show_subcategories",
      *     options={
      *          "sitemap"="true",
-     *          "sitemap_options"={
-     *              "entity_repo"="ForumSubCategory",
-     *              "param_guesser"={
-     *                  "main_slug"="getMainSlug",
-     *                  "sub_slug"="getSubSlug",
-     *              }
-     *          }
      *      }
      * )
      * @ParamConverter("category", options={"mapping": {"main_slug": "slug"}})
